@@ -1,0 +1,19 @@
+{
+  "name": "@chutai/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tipos, eventos do Socket.IO e esquemas de validação usados pelo site e pelo servidor.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  }
+}

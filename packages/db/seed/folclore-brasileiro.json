@@ -1,0 +1,311 @@
+{
+  "slug": "folclore-brasileiro",
+  "name": "Folclore brasileiro",
+  "description": "Saci, Iara, Curupira e outras figuras das lendas de cada canto do país.",
+  "emoji": "🌿",
+  "color": "folha",
+  "visibility": "official",
+  "attributes": [
+    { "key": "forma", "label": "Forma", "type": "text" },
+    { "key": "regiao", "label": "Região mais conhecida", "type": "text" },
+    { "key": "habitat", "label": "Onde aparece", "type": "list" },
+    { "key": "periodo", "label": "Quando aparece", "type": "text" },
+    { "key": "comportamento", "label": "Comportamento", "type": "text" }
+  ],
+  "characters": [
+    {
+      "id": "saci-perere",
+      "name": "Saci-Pererê",
+      "aliases": ["Saci"],
+      "emoji": "🌪️",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Mata", "Casa"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Travesso"
+      }
+    },
+    {
+      "id": "curupira",
+      "name": "Curupira",
+      "emoji": "🔥",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Mata"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Protetor"
+      }
+    },
+    {
+      "id": "iara",
+      "name": "Iara",
+      "aliases": ["Mãe-d'Água", "Uiara"],
+      "emoji": "🧜‍♀️",
+      "values": {
+        "forma": "Híbrido",
+        "regiao": "Norte",
+        "habitat": ["Rio"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Sedutor"
+      }
+    },
+    {
+      "id": "boto",
+      "name": "Boto-cor-de-rosa",
+      "aliases": ["Boto"],
+      "emoji": "🐬",
+      "values": {
+        "forma": "Metamorfo",
+        "regiao": "Norte",
+        "habitat": ["Rio"],
+        "periodo": "Noite",
+        "comportamento": "Sedutor"
+      }
+    },
+    {
+      "id": "boitata",
+      "name": "Boitatá",
+      "emoji": "🐍",
+      "values": {
+        "forma": "Animal",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Mata", "Campo"],
+        "periodo": "Noite",
+        "comportamento": "Protetor"
+      }
+    },
+    {
+      "id": "mula-sem-cabeca",
+      "name": "Mula sem cabeça",
+      "emoji": "🐴",
+      "values": {
+        "forma": "Animal",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Campo"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "lobisomem",
+      "name": "Lobisomem",
+      "emoji": "🐺",
+      "values": {
+        "forma": "Metamorfo",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Mata", "Campo"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "cuca",
+      "name": "Cuca",
+      "emoji": "🧙‍♀️",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Casa"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "mapinguari",
+      "name": "Mapinguari",
+      "emoji": "👁️",
+      "values": {
+        "forma": "Monstro",
+        "regiao": "Norte",
+        "habitat": ["Mata"],
+        "periodo": "Dia",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "caipora",
+      "name": "Caipora",
+      "emoji": "🐗",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Mata"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Protetor"
+      }
+    },
+    {
+      "id": "negrinho-do-pastoreio",
+      "name": "Negrinho do Pastoreio",
+      "emoji": "🐎",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Sul",
+        "habitat": ["Campo"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Protetor"
+      }
+    },
+    {
+      "id": "cabeca-de-cuia",
+      "name": "Cabeça de Cuia",
+      "emoji": "🥥",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Nordeste",
+        "habitat": ["Rio"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "matinta-pereira",
+      "name": "Matinta Pereira",
+      "aliases": ["Matinta Perera"],
+      "emoji": "🦉",
+      "values": {
+        "forma": "Metamorfo",
+        "regiao": "Norte",
+        "habitat": ["Mata", "Casa"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "corpo-seco",
+      "name": "Corpo-seco",
+      "emoji": "🧟",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Sudeste",
+        "habitat": ["Cemitério", "Mata"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "pisadeira",
+      "name": "Pisadeira",
+      "emoji": "👣",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Sudeste",
+        "habitat": ["Casa"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "bicho-papao",
+      "name": "Bicho-papão",
+      "emoji": "👹",
+      "values": {
+        "forma": "Monstro",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Casa"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "homem-do-saco",
+      "name": "Homem do Saco",
+      "aliases": ["Velho do Saco"],
+      "emoji": "🎒",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Todo o Brasil",
+        "habitat": ["Rua"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "comadre-fulozinha",
+      "name": "Comadre Fulozinha",
+      "emoji": "🌸",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Nordeste",
+        "habitat": ["Mata"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Protetor"
+      }
+    },
+    {
+      "id": "anhanga",
+      "name": "Anhangá",
+      "emoji": "🦌",
+      "values": {
+        "forma": "Animal",
+        "regiao": "Norte",
+        "habitat": ["Mata"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Protetor"
+      }
+    },
+    {
+      "id": "romaozinho",
+      "name": "Romãozinho",
+      "emoji": "🪨",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Centro-Oeste",
+        "habitat": ["Casa", "Rua"],
+        "periodo": "Qualquer hora",
+        "comportamento": "Travesso"
+      }
+    },
+    {
+      "id": "cobra-grande",
+      "name": "Cobra Grande",
+      "aliases": ["Boiúna"],
+      "emoji": "🐉",
+      "values": {
+        "forma": "Animal",
+        "regiao": "Norte",
+        "habitat": ["Rio"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "quibungo",
+      "name": "Quibungo",
+      "emoji": "🦍",
+      "values": {
+        "forma": "Monstro",
+        "regiao": "Nordeste",
+        "habitat": ["Mata", "Casa"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "alamoa",
+      "name": "Alamoa",
+      "emoji": "👻",
+      "values": {
+        "forma": "Espírito",
+        "regiao": "Nordeste",
+        "habitat": ["Mar"],
+        "periodo": "Noite",
+        "comportamento": "Sedutor"
+      }
+    },
+    {
+      "id": "bradador",
+      "name": "Bradador",
+      "emoji": "🗣️",
+      "values": {
+        "forma": "Espírito",
+        "regiao": "Sul",
+        "habitat": ["Mata"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+/**
+ * Teste de ponta a ponta: sobe o servidor real numa porta livre, conecta dois
+ * "navegadores" com socket.io-client e joga uma partida inteira.
+ */
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { io as connect, type Socket } from "socket.io-client";
+import type {
+  Ack,
+  ClientToServerEvents,
+  GuessResult,
+  JoinedRoom,
+  RoomState,
+  ServerToClientEvents,
+} from "@chutai/shared";
+import { createRealtimeServer, type RealtimeServer } from "../src/app";
+import { loadConfig } from "../src/config";
+import { containsProfanity } from "../src/lib/profanity";
+import { TokenBucket } from "../src/socket/middleware/rateLimit";
+
+type Client = Socket<ServerToClientEvents, ClientToServerEvents>;
+
+let server: RealtimeServer;
+let url: string;
+const clients: Client[] = [];
+
+beforeAll(async () => {
+  server = await createRealtimeServer(
+    { ...loadConfig({}), databaseUrl: undefined, redisUrl: undefined },
+    { intermissionMs: 200 },
+  );
+  const port = await server.listen(0);
+  url = `http://localhost:${port}`;
+});
+
+afterAll(async () => {
+  for (const client of clients) client.disconnect();
+  await server.close();
+});
+
+function client(): Promise<Client> {
+  return new Promise((resolve) => {
+    const socket: Client = connect(url, { transports: ["websocket"], forceNew: true });
+    clients.push(socket);
+    socket.on("connect", () => resolve(socket));
+  });
+}
+
+function nextState(socket: Client, predicate: (state: RoomState) => boolean): Promise<RoomState> {
+  return new Promise((resolve) => {
+    const handler = (state: RoomState) => {
+      if (!predicate(state)) return;
+      socket.off("room:state", handler);
+      resolve(state);
+    };
+    socket.on("room:state", handler);
+  });
+}
+
+function unwrap<T>(response: Ack<T>): T {
+  if (!response.ok) throw new Error(response.error);
+  return response.data;
+}
+
+describe("servidor de tempo real", () => {
+  it("responde a /health e /themes", async () => {
+    const health = await fetch(`${url}/health`).then((r) => r.json());
+    expect(health).toMatchObject({ ok: true, data: "json", roomStore: "memory" });
+    const themes = (await fetch(`${url}/themes`).then((r) => r.json())) as unknown[];
+    expect(themes.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it("joga uma partida completa com dois jogadores", async () => {
+    const ana = await client();
+    const bia = await client();
+
+    const created = unwrap(
+      await ana.emitWithAck("room:create", {
+        nickname: "Ana",
+        avatar: "🦜",
+        settings: { rounds: 1, roundSeconds: 60, themeSlug: "fauna-brasileira" },
+      }),
+    );
+    expect(created.code).toMatch(/^[A-Z0-9]{6}$/);
+
+    const lobby = nextState(ana, (s) => s.players.length === 2);
+    const joined: JoinedRoom = unwrap(
+      await bia.emitWithAck("room:join", { code: created.code, nickname: "Bia", avatar: "🐆" }),
+    );
+    expect((await lobby).theme.slug).toBe("fauna-brasileira");
+
+    // Bia não é anfitriã: não pode começar.
+    expect(await bia.emitWithAck("game:start")).toMatchObject({ ok: false });
+
+    const started = nextState(bia, (s) => s.phase === "round");
+    unwrap(await ana.emitWithAck("game:start"));
+    await started;
+
+    const room = server.manager.get(created.code)!;
+    const answer = room.peekAnswerForTests()!;
+    const wrong = room.theme.characters.find((c) => c.id !== answer.id)!;
+
+    const miss: GuessResult = unwrap(
+      await bia.emitWithAck("guess:submit", { characterId: wrong.id }),
+    );
+    expect(miss.correct).toBe(false);
+
+    const finished = nextState(ana, (s) => s.phase === "finished");
+    unwrap(await ana.emitWithAck("guess:submit", { characterId: answer.id }));
+    unwrap(await bia.emitWithAck("guess:submit", { characterId: answer.id }));
+    const final = await finished;
+
+    expect(final.standings?.[0]?.nickname).toBe("Ana");
+    expect(final.lastRound?.character.id).toBe(answer.id);
+
+    // Bia "recarrega a página": nova conexão com o token volta como o mesmo jogador.
+    bia.disconnect();
+    const biaAgain = await client();
+    const rejoined = unwrap(
+      await biaAgain.emitWithAck("room:join", {
+        code: created.code,
+        nickname: "Bia",
+        avatar: "🐆",
+        token: joined.token,
+      }),
+    );
+    expect(rejoined.playerId).toBe(joined.playerId);
+  });
+
+  it("recusa dados inválidos com mensagem em português", async () => {
+    const socket = await client();
+    const badNick = await socket.emitWithAck("room:create", { nickname: "A", avatar: "🦜" });
+    expect(badNick).toMatchObject({ ok: false });
+    if (!badNick.ok) expect(badNick.error).toContain("apelido");
+
+    const missing = await socket.emitWithAck("room:join", {
+      code: "ZZZZZZ",
+      nickname: "Caio",
+      avatar: "🐊",
+    });
+    expect(missing).toEqual({ ok: false, error: "Sala não encontrada. Confira o código." });
+
+    const noRoom = await socket.emitWithAck("guess:submit", { characterId: "capivara" });
+    expect(noRoom).toMatchObject({ ok: false });
+  });
+});
+
+describe("utilidades", () => {
+  it("filtro de palavrões não bloqueia palavras inocentes", () => {
+    expect(containsProfanity("Computador")).toBe(false);
+    expect(containsProfanity("Lucas")).toBe(false);
+    expect(containsProfanity("P0rra")).toBe(true);
+  });
+
+  it("balde de fichas limita rajadas", () => {
+    let now = 0;
+    const bucket = new TokenBucket(2, 1, () => now);
+    expect([bucket.take(), bucket.take(), bucket.take()]).toEqual([true, true, false]);
+    now = 1000;
+    expect(bucket.take()).toBe(true);
+  });
+});

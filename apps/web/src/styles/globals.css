@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+
+/*
+ * Identidade do Chutaí: cores de lambe-lambe e festa popular brasileira.
+ * Anil (fundo forte), gema, chiclete e folha (destaques), papel e tinta (leitura).
+ * Uma família só (Archivo variável): larga e pesada nos títulos, normal no texto.
+ */
+@theme {
+  --color-anil: #2338d6;
+  --color-anil-deep: #18249a;
+  --color-anil-soft: #dde2ff;
+  --color-gema: #ffc928;
+  --color-gema-soft: #fff1c2;
+  --color-chiclete: #ff4f9a;
+  --color-chiclete-soft: #ffe0ee;
+  --color-folha: #12a85f;
+  --color-folha-soft: #d6f5e5;
+  --color-laranja: #ff7a1a;
+  --color-pitanga: #e5484d;
+  --color-papel: #f4f5fa;
+  --color-tinta: #16183f;
+  --color-tinta-soft: #4a4d72;
+  --color-linha: #d9dceb;
+
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-carimbo: 4px 4px 0 var(--color-tinta);
+  --shadow-carimbo-sm: 2px 2px 0 var(--color-tinta);
+
+  --animate-flip: flip 0.5s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+  --animate-pop: pop 0.35s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  --animate-shake: shake 0.4s ease-in-out;
+
+  @keyframes flip {
+    0% {
+      transform: perspective(400px) rotateX(90deg);
+      opacity: 0;
+    }
+    100% {
+      transform: perspective(400px) rotateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes pop {
+    0% {
+      transform: scale(0.6);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-6px);
+    }
+    75% {
+      transform: translateX(6px);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: var(--color-papel);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-chiclete);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-gema);
+    color: var(--color-tinta);
+  }
+}
+
+@layer components {
+  /* Títulos: Archivo esticado ao máximo e bem pesado, como cartaz de rua. */
+  .font-display {
+    font-stretch: 125%;
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+  }
+
+  .font-wide {
+    font-stretch: 112%;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,533 @@
+{
+  "slug": "fauna-brasileira",
+  "name": "Fauna brasileira",
+  "description": "Bichos dos seis biomas, da capivara à harpia. Peso é aproximado e vale amarelo se chegar perto.",
+  "emoji": "🦜",
+  "color": "chiclete",
+  "visibility": "official",
+  "attributes": [
+    {
+      "key": "grupo",
+      "label": "Grupo",
+      "type": "text"
+    },
+    {
+      "key": "biomas",
+      "label": "Biomas",
+      "type": "list"
+    },
+    {
+      "key": "alimentacao",
+      "label": "Alimentação",
+      "type": "text"
+    },
+    {
+      "key": "ambiente",
+      "label": "Vive",
+      "type": "text"
+    },
+    {
+      "key": "peso",
+      "label": "Peso adulto",
+      "type": "range",
+      "unit": "kg",
+      "tolerance": 30,
+      "toleranceIsPercent": true
+    }
+  ],
+  "characters": [
+    {
+      "id": "onca-pintada",
+      "name": "Onça-pintada",
+      "aliases": ["Jaguar"],
+      "emoji": "🐆",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Pantanal", "Cerrado", "Mata Atlântica", "Caatinga"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Terrestre",
+        "peso": 90
+      }
+    },
+    {
+      "id": "capivara",
+      "name": "Capivara",
+      "emoji": "🦫",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Cerrado", "Mata Atlântica", "Pantanal", "Pampa"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Terrestre",
+        "peso": 50
+      }
+    },
+    {
+      "id": "lobo-guara",
+      "name": "Lobo-guará",
+      "emoji": "🐺",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Cerrado", "Pantanal"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Terrestre",
+        "peso": 25
+      }
+    },
+    {
+      "id": "tamandua-bandeira",
+      "name": "Tamanduá-bandeira",
+      "emoji": "🐜",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Cerrado", "Pantanal", "Amazônia"],
+        "alimentacao": "Insetívoro",
+        "ambiente": "Terrestre",
+        "peso": 30
+      }
+    },
+    {
+      "id": "bicho-preguica",
+      "name": "Bicho-preguiça",
+      "aliases": ["Preguiça"],
+      "emoji": "🦥",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Mata Atlântica"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Arborícola",
+        "peso": 4.5
+      }
+    },
+    {
+      "id": "anta",
+      "name": "Anta",
+      "emoji": "🐗",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Cerrado", "Pantanal", "Mata Atlântica"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Terrestre",
+        "peso": 250
+      }
+    },
+    {
+      "id": "boto-cor-de-rosa",
+      "name": "Boto-cor-de-rosa",
+      "aliases": ["Boto"],
+      "emoji": "🐬",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 150
+      }
+    },
+    {
+      "id": "peixe-boi-da-amazonia",
+      "name": "Peixe-boi-da-amazônia",
+      "aliases": ["Peixe-boi"],
+      "emoji": "🦭",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Aquático",
+        "peso": 400
+      }
+    },
+    {
+      "id": "mico-leao-dourado",
+      "name": "Mico-leão-dourado",
+      "emoji": "🐒",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Mata Atlântica"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Arborícola",
+        "peso": 0.6
+      }
+    },
+    {
+      "id": "ariranha",
+      "name": "Ariranha",
+      "emoji": "🦦",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 30
+      }
+    },
+    {
+      "id": "tatu-bola",
+      "name": "Tatu-bola",
+      "emoji": "🛡️",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Caatinga", "Cerrado"],
+        "alimentacao": "Insetívoro",
+        "ambiente": "Terrestre",
+        "peso": 1.3
+      }
+    },
+    {
+      "id": "tatu-canastra",
+      "name": "Tatu-canastra",
+      "emoji": "🦔",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Cerrado", "Pantanal", "Amazônia"],
+        "alimentacao": "Insetívoro",
+        "ambiente": "Terrestre",
+        "peso": 30
+      }
+    },
+    {
+      "id": "quati",
+      "name": "Quati",
+      "emoji": "🦝",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Cerrado", "Mata Atlântica", "Pantanal"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Terrestre",
+        "peso": 5
+      }
+    },
+    {
+      "id": "sagui-de-tufo-branco",
+      "name": "Sagui-de-tufo-branco",
+      "aliases": ["Mico", "Sagui"],
+      "emoji": "🐵",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Caatinga", "Mata Atlântica", "Cerrado"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Arborícola",
+        "peso": 0.35
+      }
+    },
+    {
+      "id": "macaco-prego",
+      "name": "Macaco-prego",
+      "emoji": "🙈",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Mata Atlântica", "Cerrado"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Arborícola",
+        "peso": 3
+      }
+    },
+    {
+      "id": "bugio",
+      "name": "Bugio",
+      "aliases": ["Guariba"],
+      "emoji": "🦍",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Mata Atlântica", "Amazônia", "Pampa", "Cerrado"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Arborícola",
+        "peso": 6
+      }
+    },
+    {
+      "id": "cutia",
+      "name": "Cutia",
+      "emoji": "🐹",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Mata Atlântica", "Cerrado"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Terrestre",
+        "peso": 3
+      }
+    },
+    {
+      "id": "veado-campeiro",
+      "name": "Veado-campeiro",
+      "emoji": "🦌",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Cerrado", "Pantanal", "Pampa"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Terrestre",
+        "peso": 35
+      }
+    },
+    {
+      "id": "gato-maracaja",
+      "name": "Gato-maracajá",
+      "emoji": "🐈",
+      "values": {
+        "grupo": "Mamífero",
+        "biomas": ["Amazônia", "Mata Atlântica", "Cerrado", "Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Arborícola",
+        "peso": 3.5
+      }
+    },
+    {
+      "id": "arara-azul",
+      "name": "Arara-azul",
+      "emoji": "🦜",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Pantanal", "Cerrado", "Amazônia"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Aéreo",
+        "peso": 1.3
+      }
+    },
+    {
+      "id": "ararinha-azul",
+      "name": "Ararinha-azul",
+      "emoji": "💙",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Caatinga"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Aéreo",
+        "peso": 0.35
+      }
+    },
+    {
+      "id": "tucano-toco",
+      "name": "Tucano-toco",
+      "aliases": ["Tucano"],
+      "emoji": "🐦",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Cerrado", "Pantanal", "Amazônia", "Mata Atlântica"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Aéreo",
+        "peso": 0.6
+      }
+    },
+    {
+      "id": "harpia",
+      "name": "Harpia",
+      "aliases": ["Gavião-real"],
+      "emoji": "🦅",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Amazônia", "Mata Atlântica"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aéreo",
+        "peso": 7
+      }
+    },
+    {
+      "id": "ema",
+      "name": "Ema",
+      "emoji": "🪶",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Cerrado", "Pantanal", "Pampa", "Caatinga"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Terrestre",
+        "peso": 30
+      }
+    },
+    {
+      "id": "seriema",
+      "name": "Seriema",
+      "emoji": "🐓",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Cerrado", "Caatinga", "Pantanal"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Terrestre",
+        "peso": 1.4
+      }
+    },
+    {
+      "id": "tuiuiu",
+      "name": "Tuiuiú",
+      "aliases": ["Jaburu"],
+      "emoji": "🦩",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aéreo",
+        "peso": 8
+      }
+    },
+    {
+      "id": "sabia-laranjeira",
+      "name": "Sabiá-laranjeira",
+      "aliases": ["Sabiá"],
+      "emoji": "🎶",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Mata Atlântica", "Cerrado", "Pampa", "Caatinga"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Aéreo",
+        "peso": 0.08
+      }
+    },
+    {
+      "id": "quero-quero",
+      "name": "Quero-quero",
+      "emoji": "📣",
+      "values": {
+        "grupo": "Ave",
+        "biomas": ["Amazônia", "Cerrado", "Mata Atlântica", "Pantanal", "Caatinga", "Pampa"],
+        "alimentacao": "Insetívoro",
+        "ambiente": "Aéreo",
+        "peso": 0.3
+      }
+    },
+    {
+      "id": "jacare-do-pantanal",
+      "name": "Jacaré-do-pantanal",
+      "emoji": "🐊",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 50
+      }
+    },
+    {
+      "id": "jacare-acu",
+      "name": "Jacaré-açu",
+      "emoji": "🐲",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Amazônia"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 300
+      }
+    },
+    {
+      "id": "sucuri",
+      "name": "Sucuri",
+      "aliases": ["Anaconda"],
+      "emoji": "🐍",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Amazônia", "Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 70
+      }
+    },
+    {
+      "id": "jiboia",
+      "name": "Jiboia",
+      "emoji": "🪢",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Amazônia", "Mata Atlântica", "Cerrado", "Caatinga", "Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Terrestre",
+        "peso": 10
+      }
+    },
+    {
+      "id": "jabuti-piranga",
+      "name": "Jabuti-piranga",
+      "aliases": ["Jabuti"],
+      "emoji": "🐢",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Cerrado", "Caatinga", "Amazônia"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Terrestre",
+        "peso": 5
+      }
+    },
+    {
+      "id": "tartaruga-da-amazonia",
+      "name": "Tartaruga-da-amazônia",
+      "emoji": "🥚",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Amazônia"],
+        "alimentacao": "Herbívoro",
+        "ambiente": "Aquático",
+        "peso": 25
+      }
+    },
+    {
+      "id": "teiu",
+      "name": "Teiú",
+      "emoji": "🦎",
+      "values": {
+        "grupo": "Réptil",
+        "biomas": ["Cerrado", "Caatinga", "Mata Atlântica", "Pampa", "Pantanal"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Terrestre",
+        "peso": 5
+      }
+    },
+    {
+      "id": "sapo-cururu",
+      "name": "Sapo-cururu",
+      "emoji": "🐸",
+      "values": {
+        "grupo": "Anfíbio",
+        "biomas": ["Amazônia", "Cerrado", "Mata Atlântica", "Pantanal", "Caatinga", "Pampa"],
+        "alimentacao": "Insetívoro",
+        "ambiente": "Terrestre",
+        "peso": 0.5
+      }
+    },
+    {
+      "id": "pirarucu",
+      "name": "Pirarucu",
+      "emoji": "🐟",
+      "values": {
+        "grupo": "Peixe",
+        "biomas": ["Amazônia"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 100
+      }
+    },
+    {
+      "id": "piranha-vermelha",
+      "name": "Piranha-vermelha",
+      "aliases": ["Piranha"],
+      "emoji": "🦷",
+      "values": {
+        "grupo": "Peixe",
+        "biomas": ["Amazônia", "Pantanal"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 1
+      }
+    },
+    {
+      "id": "tambaqui",
+      "name": "Tambaqui",
+      "emoji": "🐠",
+      "values": {
+        "grupo": "Peixe",
+        "biomas": ["Amazônia"],
+        "alimentacao": "Onívoro",
+        "ambiente": "Aquático",
+        "peso": 15
+      }
+    },
+    {
+      "id": "dourado",
+      "name": "Dourado",
+      "emoji": "✨",
+      "values": {
+        "grupo": "Peixe",
+        "biomas": ["Pantanal", "Cerrado", "Mata Atlântica", "Pampa"],
+        "alimentacao": "Carnívoro",
+        "ambiente": "Aquático",
+        "peso": 10
+      }
+    }
+  ]
+}

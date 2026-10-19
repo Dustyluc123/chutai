@@ -1,0 +1,30 @@
+{
+  "name": "@chutai/realtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Servidor de tempo real do Chutaí (Node + Socket.IO). Controla salas, rodadas, palpites e pontos.",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=../../.env src/index.ts",
+    "build": "tsup",
+    "start": "node --env-file-if-exists=../../.env dist/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chutai/db": "workspace:*",
+    "@chutai/game": "workspace:*",
+    "@chutai/shared": "workspace:*",
+    "ioredis": "^5.8.2",
+    "socket.io": "^4.8.4",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "socket.io-client": "^4.8.4",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.6",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

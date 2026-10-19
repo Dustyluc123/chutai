@@ -1,0 +1,707 @@
+{
+  "slug": "lendas-do-futebol",
+  "name": "Lendas do futebol",
+  "description": "Craques aposentados que vestiram a camisa da Seleção, de Friedenreich a Kaká.",
+  "emoji": "⚽",
+  "color": "gema",
+  "visibility": "official",
+  "attributes": [
+    {
+      "key": "posicao",
+      "label": "Posição",
+      "type": "text"
+    },
+    {
+      "key": "regiao",
+      "label": "Região natal",
+      "type": "text"
+    },
+    {
+      "key": "estado",
+      "label": "Estado natal",
+      "type": "text"
+    },
+    {
+      "key": "nascimento",
+      "label": "Nascimento",
+      "type": "number"
+    },
+    {
+      "key": "copas",
+      "label": "Copas do Mundo",
+      "type": "number"
+    },
+    {
+      "key": "decadas",
+      "label": "Décadas na Seleção",
+      "type": "list"
+    }
+  ],
+  "characters": [
+    {
+      "id": "pele",
+      "name": "Pelé",
+      "aliases": ["Rei do Futebol", "Edson Arantes"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "MG",
+        "nascimento": 1940,
+        "copas": 3,
+        "decadas": ["anos 1950", "anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "garrincha",
+      "name": "Garrincha",
+      "aliases": ["Mané Garrincha", "Anjo de Pernas Tortas"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1933,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "didi",
+      "name": "Didi",
+      "aliases": ["Folha Seca"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1928,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "nilton-santos",
+      "name": "Nilton Santos",
+      "aliases": ["Enciclopédia"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1925,
+        "copas": 2,
+        "decadas": ["anos 1940", "anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "djalma-santos",
+      "name": "Djalma Santos",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1929,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "zito",
+      "name": "Zito",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1932,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "vava",
+      "name": "Vavá",
+      "aliases": ["Peito de Aço"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Nordeste",
+        "estado": "PE",
+        "nascimento": 1934,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "gilmar",
+      "name": "Gilmar",
+      "aliases": ["Gylmar dos Santos Neves"],
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1930,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "zagallo",
+      "name": "Zagallo",
+      "aliases": ["Velho Lobo", "Formiguinha"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Nordeste",
+        "estado": "AL",
+        "nascimento": 1931,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "bellini",
+      "name": "Bellini",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Zagueiro",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1930,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "mauro-ramos",
+      "name": "Mauro Ramos",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Zagueiro",
+        "regiao": "Sudeste",
+        "estado": "MG",
+        "nascimento": 1930,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "amarildo",
+      "name": "Amarildo",
+      "aliases": ["Possesso"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1940,
+        "copas": 1,
+        "decadas": ["anos 1960"]
+      }
+    },
+    {
+      "id": "jairzinho",
+      "name": "Jairzinho",
+      "aliases": ["Furacão da Copa"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1944,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "tostao",
+      "name": "Tostão",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "MG",
+        "nascimento": 1947,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "rivellino",
+      "name": "Rivellino",
+      "aliases": ["Patada Atômica"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1946,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "carlos-alberto-torres",
+      "name": "Carlos Alberto Torres",
+      "aliases": ["Capita"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1944,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "gerson",
+      "name": "Gérson",
+      "aliases": ["Canhotinha de Ouro"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1941,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "clodoaldo",
+      "name": "Clodoaldo",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Nordeste",
+        "estado": "SE",
+        "nascimento": 1949,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "felix",
+      "name": "Félix",
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1937,
+        "copas": 1,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "zico",
+      "name": "Zico",
+      "aliases": ["Galinho de Quintino"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1953,
+        "copas": 0,
+        "decadas": ["anos 1970", "anos 1980"]
+      }
+    },
+    {
+      "id": "socrates",
+      "name": "Sócrates",
+      "aliases": ["Doutor"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Norte",
+        "estado": "PA",
+        "nascimento": 1954,
+        "copas": 0,
+        "decadas": ["anos 1970", "anos 1980"]
+      }
+    },
+    {
+      "id": "falcao",
+      "name": "Falcão",
+      "aliases": ["Rei de Roma"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Sul",
+        "estado": "SC",
+        "nascimento": 1953,
+        "copas": 0,
+        "decadas": ["anos 1970", "anos 1980"]
+      }
+    },
+    {
+      "id": "toninho-cerezo",
+      "name": "Toninho Cerezo",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Sudeste",
+        "estado": "MG",
+        "nascimento": 1955,
+        "copas": 0,
+        "decadas": ["anos 1970", "anos 1980"]
+      }
+    },
+    {
+      "id": "junior",
+      "name": "Júnior",
+      "aliases": ["Capacete"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Nordeste",
+        "estado": "PB",
+        "nascimento": 1954,
+        "copas": 0,
+        "decadas": ["anos 1970", "anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "leandro",
+      "name": "Leandro",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1959,
+        "copas": 0,
+        "decadas": ["anos 1980"]
+      }
+    },
+    {
+      "id": "careca",
+      "name": "Careca",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1960,
+        "copas": 0,
+        "decadas": ["anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "branco",
+      "name": "Branco",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sul",
+        "estado": "RS",
+        "nascimento": 1964,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "romario",
+      "name": "Romário",
+      "aliases": ["Baixinho"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1966,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "bebeto",
+      "name": "Bebeto",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Nordeste",
+        "estado": "BA",
+        "nascimento": 1964,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "taffarel",
+      "name": "Taffarel",
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Sul",
+        "estado": "RS",
+        "nascimento": 1966,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "dunga",
+      "name": "Dunga",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Sul",
+        "estado": "RS",
+        "nascimento": 1963,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "aldair",
+      "name": "Aldair",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Zagueiro",
+        "regiao": "Nordeste",
+        "estado": "BA",
+        "nascimento": 1965,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "mauro-silva",
+      "name": "Mauro Silva",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1968,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "cafu",
+      "name": "Cafu",
+      "aliases": ["Pendolino"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1970,
+        "copas": 2,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "roberto-carlos",
+      "name": "Roberto Carlos",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1973,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "ronaldo",
+      "name": "Ronaldo",
+      "aliases": ["Fenômeno", "R9"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1976,
+        "copas": 2,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "rivaldo",
+      "name": "Rivaldo",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Nordeste",
+        "estado": "PE",
+        "nascimento": 1972,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "ronaldinho-gaucho",
+      "name": "Ronaldinho Gaúcho",
+      "aliases": ["Ronaldinho", "R10", "Bruxo"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sul",
+        "estado": "RS",
+        "nascimento": 1980,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "marcos",
+      "name": "Marcos",
+      "aliases": ["São Marcos"],
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1973,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "ze-roberto",
+      "name": "Zé Roberto",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Lateral",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1974,
+        "copas": 0,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "juninho-pernambucano",
+      "name": "Juninho Pernambucano",
+      "aliases": ["Reizinho da Colina"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Nordeste",
+        "estado": "PE",
+        "nascimento": 1975,
+        "copas": 0,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "lucio",
+      "name": "Lúcio",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Zagueiro",
+        "regiao": "Centro-Oeste",
+        "estado": "DF",
+        "nascimento": 1978,
+        "copas": 1,
+        "decadas": ["anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "kaka",
+      "name": "Kaká",
+      "aliases": ["Ricardo Izecson"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Centro-Oeste",
+        "estado": "DF",
+        "nascimento": 1982,
+        "copas": 1,
+        "decadas": ["anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "adriano",
+      "name": "Adriano",
+      "aliases": ["Imperador"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1982,
+        "copas": 0,
+        "decadas": ["anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "leonidas-da-silva",
+      "name": "Leônidas da Silva",
+      "aliases": ["Diamante Negro", "Homem Borracha"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1913,
+        "copas": 0,
+        "decadas": ["anos 1930", "anos 1940"]
+      }
+    },
+    {
+      "id": "friedenreich",
+      "name": "Friedenreich",
+      "aliases": ["El Tigre", "Fried"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1892,
+        "copas": 0,
+        "decadas": ["anos 1910", "anos 1920", "anos 1930"]
+      }
+    },
+    {
+      "id": "ademir-de-menezes",
+      "name": "Ademir de Menezes",
+      "aliases": ["Queixada"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Nordeste",
+        "estado": "PE",
+        "nascimento": 1922,
+        "copas": 0,
+        "decadas": ["anos 1940", "anos 1950"]
+      }
+    },
+    {
+      "id": "zizinho",
+      "name": "Zizinho",
+      "aliases": ["Mestre Ziza"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1921,
+        "copas": 0,
+        "decadas": ["anos 1940", "anos 1950"]
+      }
+    },
+    {
+      "id": "barbosa",
+      "name": "Barbosa",
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1921,
+        "copas": 0,
+        "decadas": ["anos 1940", "anos 1950"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@chutai/game",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Regras puras do jogo: comparação de atributos, pontuação, dicas e sorteio. Sem servidor e sem React.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chutai/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

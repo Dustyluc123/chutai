@@ -1,0 +1,32 @@
+# Serviços para desenvolvimento local. Nenhum é obrigatório para jogar:
+# sem eles, os temas vêm dos JSON e as salas ficam na memória.
+#
+#   docker compose up -d            → sobe o PostgreSQL
+#   docker compose --profile redis up -d   → sobe também o Redis
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: chutai-postgres
+    environment:
+      POSTGRES_USER: chutai
+      POSTGRES_PASSWORD: chutai
+      POSTGRES_DB: chutai
+    ports:
+      - "5432:5432"
+    volumes:
+      - chutai-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chutai"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: chutai-redis
+    profiles: ["redis"]
+    ports:
+      - "6379:6379"
+
+volumes:
+  chutai-postgres:

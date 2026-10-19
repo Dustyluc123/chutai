@@ -1,0 +1,36 @@
+{
+  "name": "chutai",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Chutaí — dle multiplayer em tempo real. Crie uma sala, chame os amigos e descubra o personagem antes de todo mundo.",
+  "author": "Lucas Barreto <lucasbrsantana@gmail.com>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=@chutai/web --filter=@chutai/realtime",
+    "build": "turbo run build",
+    "start": "turbo run start --filter=@chutai/web --filter=@chutai/realtime",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "pnpm --filter @chutai/db generate",
+    "db:migrate": "pnpm --filter @chutai/db migrate",
+    "db:seed": "pnpm --filter @chutai/db seed"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "turbo": "^2.11.9",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.72.0"
+  }
+}

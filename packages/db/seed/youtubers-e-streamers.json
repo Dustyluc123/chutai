@@ -1,0 +1,703 @@
+{
+  "slug": "youtubers-e-streamers",
+  "name": "YouTubers e streamers",
+  "description": "Criadores de conteúdo brasileiros do YouTube, da Twitch e dos podcasts.",
+  "emoji": "📺",
+  "color": "anil",
+  "visibility": "official",
+  "dataUpdatedAt": "2026-10",
+  "attributes": [
+    { "key": "conteudo", "label": "Conteúdo principal", "type": "text" },
+    { "key": "plataforma", "label": "Plataforma principal", "type": "text" },
+    {
+      "key": "inicio",
+      "label": "Começou na internet",
+      "type": "range",
+      "tolerance": 2,
+      "toleranceIsPercent": false
+    },
+    { "key": "estado", "label": "Estado natal", "type": "text" },
+    { "key": "regiao", "label": "Região", "type": "text" },
+    { "key": "nascimento", "label": "Nascimento", "type": "number" }
+  ],
+  "characters": [
+    {
+      "id": "felipe-neto",
+      "name": "Felipe Neto",
+      "image": "/temas/youtubers-e-streamers/felipe-neto.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Felipe_Neto_at_the_Lady_Night_in_2022_(01).png"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1988
+      }
+    },
+    {
+      "id": "luccas-neto",
+      "name": "Luccas Neto",
+      "image": "/temas/youtubers-e-streamers/luccas-neto.webp",
+      "imageCredit": {
+        "author": "Web Summit Rio",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Luccas_Neto_em_2024_(cropped_3x4).jpg"
+      },
+      "emoji": "🧸",
+      "values": {
+        "conteudo": "Infantil",
+        "plataforma": "YouTube",
+        "inicio": 2014,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1992
+      }
+    },
+    {
+      "id": "whindersson-nunes",
+      "name": "Whindersson Nunes",
+      "image": "/temas/youtubers-e-streamers/whindersson-nunes.webp",
+      "imageCredit": {
+        "author": "Chris Tex",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Whindersson_2021.png"
+      },
+      "aliases": ["Whindersson"],
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "Piauí",
+        "regiao": "Nordeste",
+        "nascimento": 1995
+      }
+    },
+    {
+      "id": "casimiro",
+      "name": "Casimiro",
+      "image": "/temas/youtubers-e-streamers/casimiro.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Casimiro.png"
+      },
+      "aliases": ["Cazé", "Casimiro Miguel"],
+      "emoji": "⚽",
+      "values": {
+        "conteudo": "Esporte",
+        "plataforma": "Twitch",
+        "inicio": 2018,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1993
+      }
+    },
+    {
+      "id": "gaules",
+      "name": "Gaules",
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "Twitch",
+        "inicio": 2017,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1983
+      }
+    },
+    {
+      "id": "alanzoka",
+      "name": "Alanzoka",
+      "image": "/temas/youtubers-e-streamers/alanzoka.webp",
+      "imageCredit": {
+        "author": "Patife",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alanzoka_2021.png"
+      },
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "Twitch",
+        "inicio": 2011,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1990
+      }
+    },
+    {
+      "id": "cellbit",
+      "name": "Cellbit",
+      "image": "/temas/youtubers-e-streamers/cellbit.webp",
+      "imageCredit": {
+        "author": "Cellbitos",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cellbit_com_seu_cachorrinho_(Eredin).png"
+      },
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Santa Catarina",
+        "regiao": "Sul",
+        "nascimento": 1997
+      }
+    },
+    {
+      "id": "rezende",
+      "name": "Rezende",
+      "image": "/temas/youtubers-e-streamers/rezende.webp",
+      "imageCredit": {
+        "author": "Leo da Hornet",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pedro_Rezende_2022.png"
+      },
+      "aliases": ["RezendeEvil"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1996
+      }
+    },
+    {
+      "id": "authenticgames",
+      "name": "AuthenticGames",
+      "image": "/temas/youtubers-e-streamers/authenticgames.webp",
+      "imageCredit": {
+        "author": "BaixaMemoria",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Marco_Tulio_AuthenticGames_2017_(cropped).jpg"
+      },
+      "aliases": ["Marco Túlio"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1996
+      }
+    },
+    {
+      "id": "felipe-castanhari",
+      "name": "Felipe Castanhari",
+      "image": "/temas/youtubers-e-streamers/felipe-castanhari.webp",
+      "imageCredit": {
+        "author": "Campus Party Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Felipe_Castanhari_em_2024_(3x4).jpg"
+      },
+      "aliases": ["Nostalgia", "Castanhari"],
+      "emoji": "🔬",
+      "values": {
+        "conteudo": "Ciência",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1989
+      }
+    },
+    {
+      "id": "ibere-thenorio",
+      "name": "Iberê Thenório",
+      "image": "/temas/youtubers-e-streamers/ibere-thenorio.webp",
+      "imageCredit": {
+        "author": "Campus Party Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:CPBR14_(52531831354)_(cropped).jpg"
+      },
+      "aliases": ["Manual do Mundo", "Iberê"],
+      "emoji": "🔬",
+      "values": {
+        "conteudo": "Ciência",
+        "plataforma": "YouTube",
+        "inicio": 2008,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1981
+      }
+    },
+    {
+      "id": "julio-cocielo",
+      "name": "Júlio Cocielo",
+      "image": "/temas/youtubers-e-streamers/julio-cocielo.webp",
+      "imageCredit": {
+        "author": "Tacielo",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:J%C3%BAlio_Cocielo_em_2024.jpg"
+      },
+      "aliases": ["Cocielo"],
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1993
+      }
+    },
+    {
+      "id": "kefera",
+      "name": "Kéfera",
+      "image": "/temas/youtubers-e-streamers/kefera.webp",
+      "imageCredit": {
+        "author": "INTEGRAL TV",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kefera_Buchmann_2025_(cropped).png"
+      },
+      "aliases": ["Kéfera Buchmann", "5inco Minutos"],
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1993
+      }
+    },
+    {
+      "id": "camila-loures",
+      "name": "Camila Loures",
+      "image": "/temas/youtubers-e-streamers/camila-loures.webp",
+      "imageCredit": {
+        "author": "Leo da Hornet",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Camila_Loures_em_2025.png"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2014,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1995
+      }
+    },
+    {
+      "id": "leon-martins",
+      "name": "Leon Martins",
+      "image": "/temas/youtubers-e-streamers/leon-martins.webp",
+      "imageCredit": {
+        "author": "Patife",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leon_Martins_em_2015.jpg"
+      },
+      "aliases": ["Coisa de Nerd", "Leon"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2009,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1983
+      }
+    },
+    {
+      "id": "alexandre-ottoni",
+      "name": "Alexandre Ottoni",
+      "image": "/temas/youtubers-e-streamers/alexandre-ottoni.webp",
+      "imageCredit": {
+        "author": "Campus Party Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alexandre_Ottoni.jpg"
+      },
+      "aliases": ["Jovem Nerd"],
+      "emoji": "🦸",
+      "values": {
+        "conteudo": "Cultura pop",
+        "plataforma": "Podcast",
+        "inicio": 2002,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1979
+      }
+    },
+    {
+      "id": "christian-figueiredo",
+      "name": "Christian Figueiredo",
+      "image": "/temas/youtubers-e-streamers/christian-figueiredo.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Christian_Figueiredo.png"
+      },
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "Santa Catarina",
+        "regiao": "Sul",
+        "nascimento": 1994
+      }
+    },
+    {
+      "id": "bianca-andrade",
+      "name": "Bianca Andrade",
+      "image": "/temas/youtubers-e-streamers/bianca-andrade.webp",
+      "imageCredit": {
+        "author": "Web Summit Rio from Rio de Janeiro, Brazil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Web_Summit_Rio_2025_-_1251_(54487944998).jpg"
+      },
+      "aliases": ["Boca Rosa"],
+      "emoji": "💄",
+      "values": {
+        "conteudo": "Beleza",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1994
+      }
+    },
+    {
+      "id": "nobru",
+      "name": "Nobru",
+      "image": "/temas/youtubers-e-streamers/nobru.webp",
+      "imageCredit": {
+        "author": "Cortes PODDELAS [OFICIAL]",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Nobru_no_PodDelas_2026.png"
+      },
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2016,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 2001
+      }
+    },
+    {
+      "id": "enaldinho",
+      "name": "Enaldinho",
+      "image": "/temas/youtubers-e-streamers/enaldinho.webp",
+      "imageCredit": {
+        "author": "Brenner Mariano",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Enaldinho_2022.png"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1998
+      }
+    },
+    {
+      "id": "luba",
+      "name": "Luba",
+      "image": "/temas/youtubers-e-streamers/luba.webp",
+      "imageCredit": {
+        "author": "Kim RosaCuca",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Luba-2017.png"
+      },
+      "aliases": ["LubaTV"],
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "Santa Catarina",
+        "regiao": "Sul",
+        "nascimento": 1990
+      }
+    },
+    {
+      "id": "t3ddy",
+      "name": "T3ddy",
+      "image": "/temas/youtubers-e-streamers/t3ddy.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:T3ddy_em_2019.jpg"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1994
+      }
+    },
+    {
+      "id": "pedro-loos",
+      "name": "Pedro Loos",
+      "image": "/temas/youtubers-e-streamers/pedro-loos.webp",
+      "imageCredit": {
+        "author": "ONU Brasil",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pedro_Loos_2021_2.png"
+      },
+      "aliases": ["Ciência Todo Dia"],
+      "emoji": "🔬",
+      "values": {
+        "conteudo": "Ciência",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Santa Catarina",
+        "regiao": "Sul",
+        "nascimento": 1996
+      }
+    },
+    {
+      "id": "peter-jordan",
+      "name": "Peter Jordan",
+      "image": "/temas/youtubers-e-streamers/peter-jordan.webp",
+      "imageCredit": {
+        "author": "O Bolseiro",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Peter_Jordan_Ei_Nerd_-_2024_(cropped).png"
+      },
+      "aliases": ["Ei Nerd"],
+      "emoji": "🦸",
+      "values": {
+        "conteudo": "Cultura pop",
+        "plataforma": "YouTube",
+        "inicio": 2013,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1977
+      }
+    },
+    {
+      "id": "lord-vinheteiro",
+      "name": "Lord Vinheteiro",
+      "image": "/temas/youtubers-e-streamers/lord-vinheteiro.webp",
+      "imageCredit": {
+        "author": "ShortsDoCast",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Vinheteiro_2026_ShortsdoCast_Side.png"
+      },
+      "aliases": ["Vinheteiro"],
+      "emoji": "🎹",
+      "values": {
+        "conteudo": "Música",
+        "plataforma": "YouTube",
+        "inicio": 2008,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1980
+      }
+    },
+    {
+      "id": "paulinho-o-loko",
+      "name": "Paulinho o Loko",
+      "image": "/temas/youtubers-e-streamers/paulinho-o-loko.webp",
+      "imageCredit": {
+        "author": "Calebe Clips",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:PaulinhoLoko2025.png"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2015,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 2001
+      }
+    },
+    {
+      "id": "davy-jones",
+      "name": "Davy Jones",
+      "aliases": ["Gameplayrj"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1988
+      }
+    },
+    {
+      "id": "coringa",
+      "name": "Coringa",
+      "image": "/temas/youtubers-e-streamers/coringa.webp",
+      "imageCredit": {
+        "author": "Metheoro",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Coringa_Victor_2024.jpg"
+      },
+      "aliases": ["Loud Coringa"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2019,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1997
+      }
+    },
+    {
+      "id": "viih-tube",
+      "name": "Viih Tube",
+      "image": "/temas/youtubers-e-streamers/viih-tube.webp",
+      "imageCredit": {
+        "author": "Cortes PODDELAS [OFICIAL]",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Viih_Tube_2026.png"
+      },
+      "emoji": "📹",
+      "values": {
+        "conteudo": "Vlog",
+        "plataforma": "YouTube",
+        "inicio": 2013,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 2000
+      }
+    },
+    {
+      "id": "felca",
+      "name": "Felca",
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1998
+      }
+    },
+    {
+      "id": "lucas-lira",
+      "name": "Lucas Lira",
+      "image": "/temas/youtubers-e-streamers/lucas-lira.webp",
+      "imageCredit": {
+        "author": "Lucas Lira",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lucas_Lira.png"
+      },
+      "aliases": ["Invento na Hora"],
+      "emoji": "📹",
+      "values": {
+        "conteudo": "Vlog",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Distrito Federal",
+        "regiao": "Centro-Oeste",
+        "nascimento": 1994
+      }
+    },
+    {
+      "id": "nath-financas",
+      "name": "Nath Finanças",
+      "image": "/temas/youtubers-e-streamers/nath-financas.webp",
+      "imageCredit": {
+        "author": "Anna Deise Lopes",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Nath_Finan%C3%A7as_-_Cr%C3%A9dito_da_Foto-_Afroafeto_por_Gabriella_Maria.jpg"
+      },
+      "emoji": "💰",
+      "values": {
+        "conteudo": "Finanças",
+        "plataforma": "YouTube",
+        "inicio": 2019,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1998
+      }
+    },
+    {
+      "id": "rato-borrachudo",
+      "name": "Rato Borrachudo",
+      "image": "/temas/youtubers-e-streamers/rato-borrachudo.webp",
+      "imageCredit": {
+        "author": "Campus Party Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:CPBSB6_(53643091018).jpg"
+      },
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2008,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1987
+      }
+    },
+    {
+      "id": "fred-bruno",
+      "name": "Fred Bruno",
+      "image": "/temas/youtubers-e-streamers/fred-bruno.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fred_Desimpedidos_-_BBB_A_Elimina%C3%A7%C3%A3o_2023.png"
+      },
+      "aliases": ["Fred", "Desimpedidos"],
+      "emoji": "⚽",
+      "values": {
+        "conteudo": "Esporte",
+        "plataforma": "YouTube",
+        "inicio": 2014,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1989
+      }
+    }
+  ]
+}

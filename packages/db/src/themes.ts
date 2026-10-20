@@ -9,9 +9,11 @@ import futebol from "../seed/lendas-do-futebol.json" with { type: "json" };
 import fauna from "../seed/fauna-brasileira.json" with { type: "json" };
 import musica from "../seed/musica-brasileira.json" with { type: "json" };
 import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
+import youtubers from "../seed/youtubers-e-streamers.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
 export const OFFICIAL_THEMES: readonly Theme[] = [
+  youtubers,
   musica,
   futebolAtual,
   folclore,

@@ -26,6 +26,7 @@ function attach(socket: IoSocket, room: Room, player: PlayerState): JoinedRoom {
   room.setConnected(player.id, true);
   socket.emit("room:state", room.toPublicState());
   socket.emit("you:state", room.privateState(player.id));
+  socket.emit("room:characters", room.characterOptions());
   // Modo Imagem: quem entra ou volta no meio da rodada recebe a imagem do seu nível.
   room.sendRoundImage(player.id);
   return { code: room.code, playerId: player.id, token: player.token };

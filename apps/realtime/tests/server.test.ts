@@ -145,9 +145,14 @@ describe("servidor de tempo real", () => {
         settings: { rounds: 1, roundSeconds: 60, themeSlug: "fauna-brasileira", mode: "image" },
       }),
     );
+    const biaOptions = new Promise<unknown[]>((resolve) => bia.once("room:characters", resolve));
     unwrap(
       await bia.emitWithAck("room:join", { code: created.code, nickname: "Bia", avatar: "🐆" }),
     );
+    // O autocompletar chega pelo servidor, sem imagem e sem emoji.
+    const options = await biaOptions;
+    expect(options.length).toBeGreaterThan(0);
+    expect(JSON.stringify(options)).not.toMatch(/\/temas\/|"emoji"|"image"/);
 
     // Tudo que a Bia recebe até o fim da rodada (menos os bytes das imagens).
     const biaEvents: string[] = [];

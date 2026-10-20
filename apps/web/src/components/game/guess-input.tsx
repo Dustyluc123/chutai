@@ -15,6 +15,11 @@ interface GuessInputProps {
   disabled?: boolean;
   placeholder?: string;
   autoFocus?: boolean;
+  /**
+   * false no modo Imagem: só o nome, sem imagem nem emoji (a miniatura entregaria a resposta).
+   * Padrão: true.
+   */
+  showPictures?: boolean;
 }
 
 /**
@@ -28,6 +33,7 @@ export function GuessInput({
   disabled,
   placeholder = "Digite um nome…",
   autoFocus,
+  showPictures = true,
 }: GuessInputProps) {
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -138,13 +144,15 @@ export function GuessInput({
                   index === active ? "bg-gema" : "hover:bg-papel",
                 )}
               >
-                <CharacterPicture
-                  name={option.name}
-                  image={option.image}
-                  emoji={option.emoji}
-                  size="md"
-                  decorative
-                />
+                {showPictures ? (
+                  <CharacterPicture
+                    name={option.name}
+                    image={option.image}
+                    emoji={option.emoji}
+                    size="md"
+                    decorative
+                  />
+                ) : null}
                 <span className="font-semibold">{option.name}</span>
                 {option.aliases.length ? (
                   <span className="truncate text-sm text-tinta-soft">

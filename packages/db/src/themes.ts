@@ -3,13 +3,25 @@
  * Este arquivo não depende de banco: pode ser usado em qualquer lugar.
  */
 import type { CharacterOption, Theme, ThemeSummary } from "@chutai/shared";
-import { supportsImageMode } from "@chutai/game";
+import { imageModeAvailability } from "@chutai/game";
 import folclore from "../seed/folclore-brasileiro.json" with { type: "json" };
 import futebol from "../seed/lendas-do-futebol.json" with { type: "json" };
 import fauna from "../seed/fauna-brasileira.json" with { type: "json" };
+import musica from "../seed/musica-brasileira.json" with { type: "json" };
+import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
+import youtubers from "../seed/youtubers-e-streamers.json" with { type: "json" };
+import famososTv from "../seed/famosos-da-tv.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
-export const OFFICIAL_THEMES: readonly Theme[] = [folclore, futebol, fauna] as Theme[];
+export const OFFICIAL_THEMES: readonly Theme[] = [
+  youtubers,
+  musica,
+  futebolAtual,
+  famososTv,
+  folclore,
+  futebol,
+  fauna,
+] as Theme[];
 
 export function toThemeSummary(theme: Theme): ThemeSummary {
   return {
@@ -20,7 +32,8 @@ export function toThemeSummary(theme: Theme): ThemeSummary {
     color: theme.color,
     visibility: theme.visibility,
     characterCount: theme.characters.length,
-    imageModeAvailable: supportsImageMode(theme.characters),
+    imageMode: imageModeAvailability(theme.characters),
+    imageCharacterCount: theme.characters.filter((character) => !!character.image).length,
     attributes: theme.attributes.map(({ key, label }) => ({ key, label })),
   };
 }
@@ -58,6 +71,9 @@ export function validateTheme(theme: Theme): string[] {
   const problems: string[] = [];
   if (theme.attributes.length < 2) problems.push("O tema precisa de pelo menos 2 atributos.");
   if (theme.characters.length < 5) problems.push("O tema precisa de pelo menos 5 personagens.");
+  if (theme.dataUpdatedAt !== undefined && !/^\d{4}-(0[1-9]|1[0-2])$/.test(theme.dataUpdatedAt)) {
+    problems.push("dataUpdatedAt precisa estar no formato AAAA-MM (ex.: 2026-10).");
+  }
 
   const attributeKeys = new Set(theme.attributes.map((attr) => attr.key));
   const ids = new Set<string>();

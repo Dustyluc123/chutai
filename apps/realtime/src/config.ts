@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url";
+
 /** Configuração lida das variáveis de ambiente (veja o .env.example na raiz). */
 function number(value: string | undefined, fallback: number): number {
   const parsed = Number(value);
@@ -18,7 +20,19 @@ export interface Config {
    * para gerar as versões borradas do modo Imagem.
    */
   assetsBaseUrl: string;
+  /**
+   * Pasta com as imagens dos temas oficiais (a `public` do site). O servidor lê dali primeiro e
+   * só busca por HTTP (assetsBaseUrl) o que não encontrar no disco.
+   */
+  assetsDir: string;
 }
+
+/**
+ * apps/web/public, calculado a partir deste arquivo. Funciona em desenvolvimento
+ * (apps/realtime/src/config.ts) e no build (apps/realtime/dist/index.js): os dois estão
+ * na mesma profundidade.
+ */
+const DEFAULT_ASSETS_DIR = fileURLToPath(new URL("../../web/public/", import.meta.url));
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
   return {
@@ -32,5 +46,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     disconnectGraceMs: number(env.DISCONNECT_GRACE_SECONDS, 20) * 1000,
     emptyRoomTtlMs: number(env.EMPTY_ROOM_MINUTES, 10) * 60_000,
     assetsBaseUrl: env.ASSETS_BASE_URL || "http://localhost:3000",
+    assetsDir: env.ASSETS_DIR || DEFAULT_ASSETS_DIR,
   };
 }

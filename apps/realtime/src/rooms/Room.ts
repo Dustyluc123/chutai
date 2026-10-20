@@ -6,6 +6,7 @@
 import { randomUUID } from "node:crypto";
 import type {
   Character,
+  CharacterOption,
   FinalStanding,
   GuessResult,
   HintReveal,
@@ -31,9 +32,10 @@ import {
   drawCharacter,
   formatValue,
   imageLevel,
+  imageModeCharacters,
   supportsImageMode,
 } from "@chutai/game";
-import { toThemeSummary, type MatchRecord } from "@chutai/db";
+import { toCharacterOptions, toThemeSummary, type MatchRecord } from "@chutai/db";
 import { GameError } from "../lib/errors";
 
 export interface PlayerState {
@@ -241,9 +243,10 @@ export class Room {
     const nextTheme = theme ?? this.theme;
     if (changes.mode === "image" && !supportsImageMode(nextTheme.characters)) {
       throw new GameError(
-        "O modo Imagem precisa de um tema em que todos os personagens têm imagem.",
+        "O modo Imagem precisa de um tema em que pelo menos 75% dos personagens (e no mínimo 10) têm imagem.",
       );
     }
+    const before = `${this.theme.slug}:${this.settings.mode}`;
     this.theme = nextTheme;
     // Trocar para um tema sem todas as imagens volta o modo para Clássico.
     this.settings = this.normalizeMode({
@@ -252,6 +255,30 @@ export class Room {
       themeSlug: this.theme.slug,
     });
     this.changed();
+    // Tema ou modo novo: a lista do autocompletar muda para todo mundo.
+    if (`${this.theme.slug}:${this.settings.mode}` !== before) {
+      this.emitter.broadcast("room:characters", this.characterOptions());
+    }
+  }
+
+  /**
+   * Lista para o autocompletar. No modo Imagem vai sem imagem e sem emoji:
+   * com as miniaturas, bastaria comparar com a imagem borrada.
+   */
+  characterOptions(): CharacterOption[] {
+    const options = toCharacterOptions({ ...this.theme, characters: this.playableCharacters });
+    if (this.settings.mode !== "image") return options;
+    return options.map(({ id, name, aliases }) => ({ id, name, aliases }));
+  }
+
+  /**
+   * Personagens desta partida: no modo Imagem, só os que têm imagem (modo parcial deixa os
+   * outros de fora do sorteio e do autocompletar). O servidor decide; o navegador só recebe a lista.
+   */
+  get playableCharacters(): Character[] {
+    return this.settings.mode === "image"
+      ? imageModeCharacters(this.theme.characters)
+      : this.theme.characters;
   }
 
   get imageModeAvailable(): boolean {
@@ -301,7 +328,7 @@ export class Room {
 
   private startRound(number: number): void {
     this.cancelTimer?.();
-    const character = drawCharacter(this.theme.characters, this.usedCharacterIds, this.random);
+    const character = drawCharacter(this.playableCharacters, this.usedCharacterIds, this.random);
     this.usedCharacterIds.add(character.id);
 
     const startedAt = this.now();
@@ -397,6 +424,9 @@ export class Room {
 
     const guessed = this.theme.characters.find((character) => character.id === characterId);
     if (!guessed) throw new GameError("Esse personagem não faz parte do tema.");
+    if (!this.playableCharacters.some((character) => character.id === characterId)) {
+      throw new GameError("Esse personagem não está nesta partida.");
+    }
     if (state.guesses.some((item) => item.characterId === characterId)) {
       throw new GameError("Você já chutou esse personagem.");
     }
@@ -411,8 +441,8 @@ export class Room {
     const result: GuessResult = {
       characterId: guessed.id,
       characterName: guessed.name,
-      emoji: guessed.emoji,
-      image: guessed.image,
+      // No modo Imagem, nem imagem nem emoji nos palpites (seriam dica para quem vê a lista).
+      ...(imageMode ? {} : { emoji: guessed.emoji, image: guessed.image }),
       feedback,
       correct,
       guessNumber: state.guesses.length + 1,

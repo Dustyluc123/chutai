@@ -3,7 +3,13 @@ import { describe, expect, it } from "vitest";
 import sharp from "sharp";
 import { MAX_ROUND_IMAGE_LEVEL } from "@chutai/game";
 import type { Character } from "@chutai/shared";
-import { ROUND_IMAGE_SIZE, RoundImageService } from "../src/services/roundImageService";
+import { existsSync } from "node:fs";
+import { loadConfig } from "../src/config";
+import {
+  ROUND_IMAGE_SIZE,
+  RoundImageService,
+  diskImageLoader,
+} from "../src/services/roundImageService";
 
 const character: Character = {
   id: "capivara",
@@ -76,6 +82,38 @@ describe("RoundImageService", () => {
     }
   });
 
+  it("começa ampliado perto do centro e vai afastando o zoom", async () => {
+    // Imagem branca com uma moldura preta grossa: ampliada no centro, a moldura some.
+    const framed = await sharp({
+      create: { width: 400, height: 400, channels: 3, background: "#000000" },
+    })
+      .composite([
+        {
+          input: await sharp({
+            create: { width: 240, height: 240, channels: 3, background: "#ffffff" },
+          })
+            .png()
+            .toBuffer(),
+          left: 80,
+          top: 80,
+        },
+      ])
+      .png()
+      .toBuffer();
+    // random 0,5: ponto do zoom bem no centro, sem espelho e sem mudar o tom.
+    const service = new RoundImageService(
+      async () => framed,
+      () => 0.5,
+    );
+    const levels = await service.render(character);
+    const brightness = await Promise.all(
+      levels.map(async (level) => (await sharp(level).stats()).channels[0]!.mean),
+    );
+    expect(brightness[0]!).toBeGreaterThan(240); // só o miolo branco
+    expect(brightness.at(-1)!).toBeLessThan(200); // a imagem inteira, com a moldura
+    expect(brightness[0]!).toBeGreaterThan(brightness.at(-1)!);
+  });
+
   it("disfarça cada rodada de um jeito diferente", async () => {
     const source = await sourceImage();
     let seed = 0;
@@ -98,5 +136,31 @@ describe("RoundImageService", () => {
     await service.render(character);
     expect(loads).toBe(1);
     await expect(service.render({ ...character, image: undefined })).rejects.toThrow();
+  });
+});
+
+describe("diskImageLoader", () => {
+  const { assetsDir } = loadConfig({});
+  const fallback = async (image: string) => Buffer.from(`http:${image}`);
+  const load = diskImageLoader(assetsDir, fallback);
+
+  it("a pasta padrão aponta para as imagens do site", () => {
+    expect(existsSync(`${assetsDir}/temas/fauna-brasileira/capivara.webp`)).toBe(true);
+  });
+
+  it("lê do disco as imagens dos temas oficiais", async () => {
+    const bytes = await load("/temas/fauna-brasileira/capivara.webp");
+    expect((await sharp(bytes).metadata()).format).toBe("webp");
+  });
+
+  it("o que não está no disco, e URLs completas, vão para a busca por HTTP", async () => {
+    expect((await load("/temas/nao-existe.webp")).toString()).toBe("http:/temas/nao-existe.webp");
+    expect((await load("https://cdn.exemplo.com/a.webp")).toString()).toBe(
+      "http:https://cdn.exemplo.com/a.webp",
+    );
+  });
+
+  it("nunca lê fora da pasta de imagens", async () => {
+    await expect(load("/../../package.json")).rejects.toThrow("inválido");
   });
 });

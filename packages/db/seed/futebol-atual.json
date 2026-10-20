@@ -1,0 +1,840 @@
+{
+  "slug": "futebol-atual",
+  "name": "Futebol brasileiro atual",
+  "description": "Jogadores em atividade: estrelas da Seleção e craques do Brasileirão.",
+  "emoji": "🏟️",
+  "color": "folha",
+  "visibility": "official",
+  "dataUpdatedAt": "2026-10",
+  "attributes": [
+    { "key": "posicao", "label": "Posição", "type": "text" },
+    { "key": "clube", "label": "Clube atual", "type": "text" },
+    { "key": "liga", "label": "Liga atual", "type": "text" },
+    { "key": "natal", "label": "Estado ou país natal", "type": "text" },
+    { "key": "nascimento", "label": "Nascimento", "type": "number" },
+    { "key": "selecao", "label": "Já jogou pela seleção principal", "type": "text" }
+  ],
+  "characters": [
+    {
+      "id": "vinicius-junior",
+      "name": "Vinícius Júnior",
+      "image": "/temas/futebol-atual/vinicius-junior.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Vin%C3%ADcius_J%C3%BAnior_Brazil_V_Morocco_13_June_2026-207_(cropped).jpg"
+      },
+      "aliases": ["Vini Jr.", "Vini"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Real Madrid",
+        "liga": "La Liga",
+        "natal": "Rio de Janeiro",
+        "nascimento": 2000,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "rodrygo",
+      "name": "Rodrygo",
+      "image": "/temas/futebol-atual/rodrygo.webp",
+      "imageCredit": {
+        "author": "Junta de Andalucía",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rodrygo_2023_(cropped).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Real Madrid",
+        "liga": "La Liga",
+        "natal": "São Paulo",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "raphinha",
+      "name": "Raphinha",
+      "image": "/temas/futebol-atual/raphinha.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Raphinha_Brazil_V_Morocco_13_June_2026-133_(cropped).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Barcelona",
+        "liga": "La Liga",
+        "natal": "Rio Grande do Sul",
+        "nascimento": 1996,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "neymar",
+      "name": "Neymar",
+      "image": "/temas/futebol-atual/neymar.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Neymar_Junior_Brazil_V_Morocco_13_June_2026-40.jpg"
+      },
+      "aliases": ["Neymar Jr."],
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Santos",
+        "liga": "Brasileirão",
+        "natal": "São Paulo",
+        "nascimento": 1992,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "alisson",
+      "name": "Alisson",
+      "image": "/temas/futebol-atual/alisson.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alisson_Becker_Brazil_V_Morocco_13_June_2026-117_(cropped).jpg"
+      },
+      "aliases": ["Alisson Becker"],
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Liverpool",
+        "liga": "Premier League",
+        "natal": "Rio Grande do Sul",
+        "nascimento": 1992,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "ederson",
+      "name": "Ederson",
+      "image": "/temas/futebol-atual/ederson.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ederson_Brazil_V_Morocco_13_June_2026-14_(cropped).jpg"
+      },
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Fenerbahçe",
+        "liga": "Liga turca",
+        "natal": "São Paulo",
+        "nascimento": 1993,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "marquinhos",
+      "name": "Marquinhos",
+      "image": "/temas/futebol-atual/marquinhos.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Marquinhos_Brazil_V_Morocco_13_June_2026-153.jpg"
+      },
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "PSG",
+        "liga": "Ligue 1",
+        "natal": "São Paulo",
+        "nascimento": 1994,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "gabriel-magalhaes",
+      "name": "Gabriel Magalhães",
+      "image": "/temas/futebol-atual/gabriel-magalhaes.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Magalhaes_Brazil_V_Morocco_13_June_2026-132_(cropped).jpg"
+      },
+      "aliases": ["Gabriel"],
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "Arsenal",
+        "liga": "Premier League",
+        "natal": "São Paulo",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "eder-militao",
+      "name": "Éder Militão",
+      "image": "/temas/futebol-atual/eder-militao.webp",
+      "imageCredit": {
+        "author": "Real Madrid",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Eder_Militao_2021.jpg"
+      },
+      "aliases": ["Militão"],
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "Real Madrid",
+        "liga": "La Liga",
+        "natal": "São Paulo",
+        "nascimento": 1998,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "bruno-guimaraes",
+      "name": "Bruno Guimarães",
+      "image": "/temas/futebol-atual/bruno-guimaraes.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bruno_Guimaraes_Brazil_V_Morocco_13_June_2026-78_(cropped).jpg"
+      },
+      "emoji": "🧱",
+      "values": {
+        "posicao": "Volante",
+        "clube": "Arsenal",
+        "liga": "Premier League",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "casemiro",
+      "name": "Casemiro",
+      "image": "/temas/futebol-atual/casemiro.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Casemiro_Brazil_V_Morocco_13_June_2026-76_(cropped).jpg"
+      },
+      "emoji": "🧱",
+      "values": {
+        "posicao": "Volante",
+        "clube": "Inter Miami",
+        "liga": "MLS",
+        "natal": "São Paulo",
+        "nascimento": 1992,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "endrick",
+      "name": "Endrick",
+      "image": "/temas/futebol-atual/endrick.webp",
+      "imageCredit": {
+        "author": "YantsImages",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Team_Brazil_at_2026_FIFA_World_Cup_by_YantsImages_(Endrick).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Real Madrid",
+        "liga": "La Liga",
+        "natal": "Distrito Federal",
+        "nascimento": 2006,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "estevao",
+      "name": "Estêvão",
+      "image": "/temas/futebol-atual/estevao.webp",
+      "imageCredit": {
+        "author": "NullReason",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Estevao-Palmeiras-Liverpool-abr24_(cropped).jpg"
+      },
+      "aliases": ["Messinho"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Chelsea",
+        "liga": "Premier League",
+        "natal": "São Paulo",
+        "nascimento": 2007,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "gabriel-martinelli",
+      "name": "Gabriel Martinelli",
+      "image": "/temas/futebol-atual/gabriel-martinelli.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Martinelli_Brazil_V_Morocco_13_June_2026-144.jpg"
+      },
+      "aliases": ["Martinelli"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Al-Hilal",
+        "liga": "Liga saudita",
+        "natal": "São Paulo",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "richarlison",
+      "name": "Richarlison",
+      "image": "/temas/futebol-atual/richarlison.webp",
+      "imageCredit": {
+        "author": "Assembleia Legislativa do Espírito Santo",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Richarlison_%C3%A9_homenageado_na_ALES_(10.July.2019)_12_(cropped2).jpg"
+      },
+      "aliases": ["Pombo"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Tottenham",
+        "liga": "Premier League",
+        "natal": "Espírito Santo",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "joao-pedro",
+      "name": "João Pedro",
+      "image": "/temas/futebol-atual/joao-pedro.webp",
+      "imageCredit": {
+        "author": "Martineide30",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Joao_Pedro_holder_Chelsea_drakt_2025.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Chelsea",
+        "liga": "Premier League",
+        "natal": "São Paulo",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "matheus-cunha",
+      "name": "Matheus Cunha",
+      "image": "/temas/futebol-atual/matheus-cunha.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Matheus_Cunha_Brazil_V_Morocco_13_June_2026-178_(cropped).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Manchester United",
+        "liga": "Premier League",
+        "natal": "Paraíba",
+        "nascimento": 1999,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "bremer",
+      "name": "Bremer",
+      "image": "/temas/futebol-atual/bremer.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bremer_Brazil_V_Morocco_13_June_2026-143_(cropped).jpg"
+      },
+      "aliases": ["Gleison Bremer"],
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "Juventus",
+        "liga": "Serie A italiana",
+        "natal": "Bahia",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "savinho",
+      "name": "Savinho",
+      "image": "/temas/futebol-atual/savinho.webp",
+      "imageCredit": {
+        "author": "Equipos de fútbol",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Manchester_City_2025_06_26_Juventus_(cropped).jpg"
+      },
+      "aliases": ["Sávio"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Tottenham",
+        "liga": "Premier League",
+        "natal": "Espírito Santo",
+        "nascimento": 2004,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "luiz-henrique",
+      "name": "Luiz Henrique",
+      "image": "/temas/futebol-atual/luiz-henrique.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Luiz_Henrique_Brazil_V_Morocco_13_June_2026-147.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Zenit",
+        "liga": "Liga russa",
+        "natal": "Rio de Janeiro",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "igor-jesus",
+      "name": "Igor Jesus",
+      "image": "/temas/futebol-atual/igor-jesus.webp",
+      "imageCredit": {
+        "author": "Timmy96",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Igor_Jesus_22122025_(1)_(Igor_Jesus).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Nottingham Forest",
+        "liga": "Premier League",
+        "natal": "Mato Grosso",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "wesley",
+      "name": "Wesley",
+      "aliases": ["Wesley França"],
+      "emoji": "🏃",
+      "values": {
+        "posicao": "Lateral",
+        "clube": "Roma",
+        "liga": "Serie A italiana",
+        "natal": "Maranhão",
+        "nascimento": 2003,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "vanderson",
+      "name": "Vanderson",
+      "image": "/temas/futebol-atual/vanderson.webp",
+      "imageCredit": {
+        "author": "Paté kroute",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Vanderson_asse_asm_2425.png"
+      },
+      "emoji": "🏃",
+      "values": {
+        "posicao": "Lateral",
+        "clube": "Monaco",
+        "liga": "Ligue 1",
+        "natal": "Mato Grosso",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "danilo",
+      "name": "Danilo",
+      "image": "/temas/futebol-atual/danilo.webp",
+      "imageCredit": {
+        "author": "YantsImages",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Danilo_and_Bilal_El_Khannouss_at_2026_FIFA_World_Cup_by_YantsImages_(cropped).jpg"
+      },
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "Flamengo",
+        "liga": "Brasileirão",
+        "natal": "Minas Gerais",
+        "nascimento": 1991,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "alex-sandro",
+      "name": "Alex Sandro",
+      "image": "/temas/futebol-atual/alex-sandro.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alex_Sandro_Brazil_V_Morocco_13_June_2026-68.jpg"
+      },
+      "emoji": "🏃",
+      "values": {
+        "posicao": "Lateral",
+        "clube": "Flamengo",
+        "liga": "Brasileirão",
+        "natal": "São Paulo",
+        "nascimento": 1991,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "hulk",
+      "name": "Hulk",
+      "image": "/temas/futebol-atual/hulk.webp",
+      "imageCredit": {
+        "author": "Вячеслав Евдокимов",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Spar-Zen2015_(3).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Fluminense",
+        "liga": "Brasileirão",
+        "natal": "Paraíba",
+        "nascimento": 1986,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "lucas-moura",
+      "name": "Lucas Moura",
+      "image": "/temas/futebol-atual/lucas-moura.webp",
+      "imageCredit": {
+        "author": "Steffen Prößdorf",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2020-03-10_Fu%C3%9Fball,_M%C3%A4nner,_UEFA_Champions_League_Achtelfinale,_RB_Leipzig_-_Tottenham_Hotspur_1DX_3703_by_Stepro.jpg"
+      },
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "São Paulo",
+        "liga": "Brasileirão",
+        "natal": "São Paulo",
+        "nascimento": 1992,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "pedro",
+      "name": "Pedro",
+      "image": "/temas/futebol-atual/pedro.webp",
+      "imageCredit": {
+        "author": "Wilfredor",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:2025-02-18_Pedro_Guilherme_Abreu_dos_Santos.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Flamengo",
+        "liga": "Brasileirão",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "gabigol",
+      "name": "Gabigol",
+      "image": "/temas/futebol-atual/gabigol.webp",
+      "imageCredit": {
+        "author": "Arthur Miranda",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Barbosa_2022.jpg"
+      },
+      "aliases": ["Gabriel Barbosa"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Santos",
+        "liga": "Brasileirão",
+        "natal": "São Paulo",
+        "nascimento": 1996,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "vitor-roque",
+      "name": "Vitor Roque",
+      "image": "/temas/futebol-atual/vitor-roque.webp",
+      "imageCredit": {
+        "author": "NullReason",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Vitor-Roque-Palmeiras-Jacuipense-abr26-2.jpg"
+      },
+      "aliases": ["Tigrinho"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Palmeiras",
+        "liga": "Brasileirão",
+        "natal": "Minas Gerais",
+        "nascimento": 2005,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "yuri-alberto",
+      "name": "Yuri Alberto",
+      "image": "/temas/futebol-atual/yuri-alberto.webp",
+      "imageCredit": {
+        "author": "Felipematoslima",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Yuri_Alberto_celebra_gol_contra_o_Palmeiras_em_vit%C3%B3ria_de_2_x_0_pelo_campeonato_brasileiro_2024.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Corinthians",
+        "liga": "Brasileirão",
+        "natal": "São Paulo",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "kaio-jorge",
+      "name": "Kaio Jorge",
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Cruzeiro",
+        "liga": "Brasileirão",
+        "natal": "Pernambuco",
+        "nascimento": 2002,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "cassio",
+      "name": "Cássio",
+      "image": "/temas/futebol-atual/cassio.webp",
+      "imageCredit": {
+        "author": "Soccer Digital",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:C%C3%A1ssio_2022.jpg"
+      },
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Cruzeiro",
+        "liga": "Brasileirão",
+        "natal": "Rio Grande do Sul",
+        "nascimento": 1987,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "fabio",
+      "name": "Fábio",
+      "image": "/temas/futebol-atual/fabio.webp",
+      "imageCredit": {
+        "author": "Danielcuei.",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:F%C3%A1bio_Deivson_Lopes_Maciel_of_Cruzeiro_EC_(cropped).jpg"
+      },
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Fluminense",
+        "liga": "Brasileirão",
+        "natal": "Mato Grosso",
+        "nascimento": 1980,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "thiago-silva",
+      "name": "Thiago Silva",
+      "image": "/temas/futebol-atual/thiago-silva.webp",
+      "imageCredit": {
+        "author": "محمد امین انصاری",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2021_FIFA_Club_World_Cup_Final_-_14.jpg_(non-blurred_version)_(Thiago_Silva_em_2021).jpg"
+      },
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "Fluminense",
+        "liga": "Brasileirão",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1984,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "arrascaeta",
+      "name": "Arrascaeta",
+      "image": "/temas/futebol-atual/arrascaeta.webp",
+      "imageCredit": {
+        "author": "Ailura",
+        "license": "CC BY-SA 3.0 at",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/at/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Giorgian_De_Arrascaeta_20171114_AUT_URU_4546_(cropped).jpg"
+      },
+      "aliases": ["De Arrascaeta"],
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Flamengo",
+        "liga": "Brasileirão",
+        "natal": "Uruguai",
+        "nascimento": 1994,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "gustavo-gomez",
+      "name": "Gustavo Gómez",
+      "image": "/temas/futebol-atual/gustavo-gomez.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gustavo_Gomez_France_v_Paraguay_4_July_2026-029.jpg"
+      },
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "Palmeiras",
+        "liga": "Brasileirão",
+        "natal": "Paraguai",
+        "nascimento": 1993,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "memphis",
+      "name": "Memphis Depay",
+      "image": "/temas/futebol-atual/memphis.webp",
+      "imageCredit": {
+        "author": "Derivative work: Joe Sins",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Memphis_Depay_2019.jpg"
+      },
+      "aliases": ["Memphis"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Corinthians",
+        "liga": "Brasileirão",
+        "natal": "Holanda",
+        "nascimento": 1994,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "calleri",
+      "name": "Calleri",
+      "image": "/temas/futebol-atual/calleri.webp",
+      "imageCredit": {
+        "author": "SOCCER DIGITAL",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Calleri_(cropped).jpg"
+      },
+      "aliases": ["Jonathan Calleri"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "São Paulo",
+        "liga": "Brasileirão",
+        "natal": "Argentina",
+        "nascimento": 1993,
+        "selecao": "Não"
+      }
+    },
+    {
+      "id": "gerson",
+      "name": "Gerson",
+      "image": "/temas/futebol-atual/gerson.webp",
+      "imageCredit": {
+        "author": "Константин Золин",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:1354783_sPICT_(cropped).jpg"
+      },
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Cruzeiro",
+        "liga": "Brasileirão",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "raphael-veiga",
+      "name": "Raphael Veiga",
+      "image": "/temas/futebol-atual/raphael-veiga.webp",
+      "imageCredit": {
+        "author": "NullReason",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Raphael-Veiga-Palmeiras-Criciuma-sep24_(cropped)-2.jpg"
+      },
+      "aliases": ["Veiga"],
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Palmeiras",
+        "liga": "Brasileirão",
+        "natal": "São Paulo",
+        "nascimento": 1995,
+        "selecao": "Sim"
+      }
+    }
+  ]
+}

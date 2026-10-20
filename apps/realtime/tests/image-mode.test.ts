@@ -6,7 +6,15 @@
 import { describe, expect, it } from "vitest";
 import { IMAGE_MODE, MAX_ROUND_IMAGE_LEVEL } from "@chutai/game";
 import type { RoundImage } from "@chutai/shared";
-import { createTestRoom, fakeRenderer, flush, imageTheme, theme, wrongCharacter } from "./helpers";
+import {
+  createTestRoom,
+  fakeRenderer,
+  flush,
+  imageTheme,
+  partialTheme,
+  theme,
+  wrongCharacter,
+} from "./helpers";
 
 function imageRoom(overrides = {}) {
   const ctx = createTestRoom(
@@ -33,7 +41,7 @@ function imagesSent(sent: { to: string; event: string; args: unknown[] }[]) {
 }
 
 describe("modo Imagem: regras da sala", () => {
-  it("só pode ser escolhido em tema com imagem para todos os personagens", () => {
+  it("não pode ser escolhido em tema com menos de 75% de imagens", () => {
     const { room } = createTestRoom({}, { theme });
     const ana = room.addPlayer("Ana", "🦜");
     expect(() => room.updateSettings(ana.id, { mode: "image" })).toThrow("modo Imagem");
@@ -143,6 +151,42 @@ describe("modo Imagem: nitidez por jogador", () => {
   });
 });
 
+describe("modo Imagem: sem imagem nas opções", () => {
+  it("o autocompletar não traz imagem nem emoji", () => {
+    const { room } = imageRoom();
+    const options = room.characterOptions();
+    expect(options.length).toBe(imageTheme.characters.length);
+    for (const option of options) {
+      expect(option).not.toHaveProperty("image");
+      expect(option).not.toHaveProperty("emoji");
+    }
+  });
+
+  it("no Clássico as opções continuam com imagem e emoji", () => {
+    const { room } = createTestRoom({}, { theme: imageTheme });
+    expect(room.characterOptions().every((option) => option.image && option.emoji)).toBe(true);
+  });
+
+  it("os palpites também vêm sem imagem e sem emoji", async () => {
+    const { room, ana } = imageRoom();
+    room.start(ana.id);
+    await flush();
+    const result = room.guess(ana.id, wrongCharacter(room).id);
+    expect(result).not.toHaveProperty("image");
+    expect(result).not.toHaveProperty("emoji");
+    expect(JSON.stringify(room.privateState(ana.id))).not.toContain("/temas/");
+  });
+
+  it("trocar o modo manda a lista nova para a sala inteira", () => {
+    const { room, sent } = createTestRoom({}, { theme: imageTheme });
+    const ana = room.addPlayer("Ana", "🦜");
+    room.updateSettings(ana.id, { mode: "image" });
+    const update = sent.filter((item) => item.event === "room:characters").at(-1);
+    expect(update?.to).toBe("all");
+    expect(JSON.stringify(update?.args)).not.toContain("/temas/");
+  });
+});
+
 describe("modo Imagem: nada vaza", () => {
   it("estado público, estado privado e eventos não identificam a resposta", async () => {
     const { room, sent, ana, bia } = imageRoom();
@@ -201,5 +245,73 @@ describe("modo Imagem: nada vaza", () => {
     room.guess(ana.id, room.peekAnswerForTests()!.id);
     // 500 + 500 (tempo cheio) − 80 (1 chute extra) + 100 (primeiro)
     expect(room.players.get(ana.id)!.score).toBe(1000 + 100 - IMAGE_MODE.perExtraGuess);
+  });
+});
+
+describe("modo Imagem parcial", () => {
+  const withoutImage = partialTheme.characters.filter((c) => !c.image);
+
+  function partialRoom() {
+    const ctx = createTestRoom(
+      { mode: "image", rounds: 10 },
+      { theme: partialTheme, renderRoundImages: fakeRenderer },
+    );
+    const ana = ctx.room.addPlayer("Ana", "🦜");
+    return { ...ctx, ana };
+  }
+
+  it("pode ser escolhido em tema com 75% ou mais de imagens", () => {
+    expect(withoutImage.length).toBeGreaterThan(0);
+    const { room } = partialRoom();
+    expect(room.settings.mode).toBe("image");
+    expect(room.toPublicState().theme).toMatchObject({
+      imageMode: "partial",
+      imageCharacterCount: partialTheme.characters.length - withoutImage.length,
+    });
+  });
+
+  it("quem não tem imagem fica fora do autocompletar", () => {
+    const { room } = partialRoom();
+    const ids = room.characterOptions().map((option) => option.id);
+    expect(ids).toHaveLength(partialTheme.characters.length - withoutImage.length);
+    for (const character of withoutImage) expect(ids).not.toContain(character.id);
+  });
+
+  it("quem não tem imagem nunca é sorteado", async () => {
+    // random que varia, para sortear personagens diferentes ao longo de 10 rodadas.
+    // Tema pequeno (10 com imagem, 2 sem): sem a regra, 10 rodadas sorteariam quase
+    // certamente alguém sem imagem.
+    const small = {
+      ...partialTheme,
+      characters: [...partialTheme.characters.filter((c) => c.image).slice(0, 10), ...withoutImage],
+    };
+    let seed = 0.37;
+    const { room, clock } = createTestRoom(
+      { mode: "image", rounds: 10, roundSeconds: 30 },
+      {
+        theme: small,
+        renderRoundImages: fakeRenderer,
+        random: () => (seed = (seed * 7.13 + 0.29) % 1),
+      },
+    );
+    const ana = room.addPlayer("Ana", "🦜");
+    room.start(ana.id);
+    for (let round = 1; round <= 10; round++) {
+      await flush();
+      expect(room.peekAnswerForTests()!.image, `rodada ${round}`).toBeDefined();
+      clock.advance(30_000 + 3_000);
+    }
+  });
+
+  it("chutar quem ficou de fora é recusado", async () => {
+    const { room, ana } = partialRoom();
+    room.start(ana.id);
+    await flush();
+    expect(() => room.guess(ana.id, withoutImage[0]!.id)).toThrow("não está nesta partida");
+  });
+
+  it("no Clássico do mesmo tema todo mundo continua no jogo", () => {
+    const { room } = createTestRoom({}, { theme: partialTheme });
+    expect(room.characterOptions()).toHaveLength(partialTheme.characters.length);
   });
 });

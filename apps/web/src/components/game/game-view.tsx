@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PartyPopper } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
-import { useCharacterOptions } from "@/hooks/useCharacterOptions";
 import type { UseRoom } from "@/hooks/useRoom";
 import { LiveScoreboard } from "@/components/scoreboard/live-scoreboard";
 import { RoundReveal } from "@/components/scoreboard/round-reveal";
@@ -22,7 +21,7 @@ interface GameViewProps {
 
 /** Tela da partida: cronômetro, campo de palpite, tabuleiro e placar ao vivo. */
 export function GameView({ state, room }: GameViewProps) {
-  const { options } = useCharacterOptions(state.theme.slug);
+  const options = room.characters;
   const me = room.me;
   const meId = room.session?.playerId;
   const guesses = useMemo(() => me?.guesses ?? [], [me?.guesses]);
@@ -45,10 +44,20 @@ export function GameView({ state, room }: GameViewProps) {
     <div className="flex flex-1 flex-col">
       <div className="border-b-2 border-tinta bg-white">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:gap-6 sm:px-6">
-          <p className="font-display shrink-0 text-2xl">
-            Rodada {roundNumber}
-            <span className="text-tinta-soft"> / {state.settings.rounds}</span>
-          </p>
+          <div className="flex shrink-0 items-center gap-3">
+            <p className="font-display text-2xl">
+              Rodada {roundNumber}
+              <span className="text-tinta-soft"> / {state.settings.rounds}</span>
+            </p>
+            {imageMode && state.theme.imageMode === "partial" ? (
+              <span
+                title={`Só os ${state.theme.imageCharacterCount} personagens com imagem estão nesta partida.`}
+                className="rounded-full border-2 border-tinta bg-gema-soft px-2.5 py-0.5 text-xs font-bold"
+              >
+                Imagem parcial
+              </span>
+            ) : null}
+          </div>
           <div className="flex-1">
             {inRound ? (
               <RoundTimer
@@ -100,6 +109,7 @@ export function GameView({ state, room }: GameViewProps) {
                 <GuessInput
                   options={options}
                   guessedIds={guessedIds}
+                  showPictures={!imageMode}
                   autoFocus
                   onGuess={async (id) => {
                     await room.actions.guess(id);
@@ -120,6 +130,7 @@ export function GameView({ state, room }: GameViewProps) {
             state.phase === "round" || guesses.length ? (
               <GuessList
                 guesses={guesses}
+                showPictures={false}
                 emptyMessage="Quem é? Chute pelo nome. Cada erro deixa a imagem um pouco mais nítida."
               />
             ) : null

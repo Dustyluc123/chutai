@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { StartPanel } from "@/components/home/start-panel";
 import { DemoBoard } from "@/components/home/demo-board";
 import { ThemePoster } from "@/components/home/theme-poster";
+import { THEME_COLORS } from "@/lib/colors";
+import { cn } from "@/lib/cn";
 import { Tile } from "@/components/game/tile";
 import { getTheme, listThemes } from "@/lib/themes";
 
@@ -50,8 +52,18 @@ const LEGEND: { title: string; text: string; label: string; feedback: AttributeF
   },
 ];
 
+/** Temas em destaque na página inicial (os mais conhecidos). Os outros aparecem em lista. */
+const FEATURED_SLUGS = ["youtubers-e-streamers", "musica-brasileira", "futebol-atual"];
+
 export default async function HomePage() {
   const themes = await listThemes();
+  const featured = FEATURED_SLUGS.flatMap((slug) => themes.filter((t) => t.slug === slug));
+  // Se algum destaque não existir, completa com os primeiros temas da lista.
+  for (const theme of themes) {
+    if (featured.length >= 3) break;
+    if (!featured.includes(theme)) featured.push(theme);
+  }
+  const others = themes.filter((theme) => !featured.includes(theme));
   const folclore = await getTheme("folclore-brasileiro");
 
   return (
@@ -99,20 +111,54 @@ export default async function HomePage() {
       >
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <h2 id="temas-titulo" className="font-display text-4xl sm:text-5xl">
-            Três temas para começar
+            Escolha um tema
           </h2>
           <Link
             href="/temas"
             className="font-semibold text-anil underline-offset-4 hover:underline"
           >
-            Ver todos os temas
+            Ver todos os {themes.length} temas
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
-          {themes.map((theme) => (
+          {featured.map((theme) => (
             <ThemePoster key={theme.slug} theme={theme} />
           ))}
         </div>
+        {others.length ? (
+          <div className="mt-8 flex flex-col gap-3">
+            <h3 className="text-sm font-semibold text-tinta-soft">Mais temas</h3>
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {others.map((theme) => {
+                const color = THEME_COLORS[theme.color];
+                return (
+                  <li key={theme.slug}>
+                    <Link
+                      href={`/temas/${theme.slug}`}
+                      className="flex items-center gap-3 rounded-2xl border-2 border-tinta bg-white p-3 hover:-translate-y-px hover:shadow-carimbo-sm"
+                    >
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "flex size-11 shrink-0 items-center justify-center rounded-xl border-2 border-tinta text-2xl",
+                          color.bg,
+                        )}
+                      >
+                        {theme.emoji}
+                      </span>
+                      <span className="flex min-w-0 flex-col">
+                        <span className="truncate font-bold">{theme.name}</span>
+                        <span className="text-sm text-tinta-soft">
+                          {theme.characterCount} personagens
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
       </section>
 
       <section

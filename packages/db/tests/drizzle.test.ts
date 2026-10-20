@@ -6,7 +6,7 @@
 import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
-import { count } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 import { beforeAll, describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -82,6 +82,24 @@ describe("imagens dos temas oficiais", () => {
   });
 });
 
+describe("validateTheme: data dos dados", () => {
+  const base = OFFICIAL_THEMES[0]!;
+  it("aceita AAAA-MM e recusa outros formatos", () => {
+    expect(validateTheme({ ...base, dataUpdatedAt: "2026-10" })).toEqual([]);
+    for (const value of ["2026-13", "10/2026", "2026-1", "outubro"]) {
+      expect(validateTheme({ ...base, dataUpdatedAt: value }), value).not.toEqual([]);
+    }
+  });
+
+  it("vai e volta do PostgreSQL", async () => {
+    await upsertTheme(db, { ...base, slug: "tema-com-data", dataUpdatedAt: "2026-10" });
+    const loaded = await new DrizzleThemeRepository(db).getTheme("tema-com-data");
+    expect(loaded?.dataUpdatedAt).toBe("2026-10");
+    // Não deixa o tema de teste no banco (os outros testes contam os temas).
+    await db.delete(schema.themes).where(eq(schema.themes.slug, "tema-com-data"));
+  });
+});
+
 describe("validateTheme: imagens", () => {
   const base = OFFICIAL_THEMES.find((t) => t.slug === "fauna-brasileira")!;
   const withCharacter = (patch: Partial<Theme["characters"][number]>) => ({
@@ -142,10 +160,14 @@ describe("DrizzleThemeRepository", () => {
     expect(loaded!.characters.filter((c) => c.image)).toHaveLength(expected);
   });
 
-  it("só a fauna tem imagem para todos os personagens (modo Imagem)", async () => {
+  it("calcula o modo Imagem de cada tema (normal, parcial ou indisponível)", async () => {
     const summaries = await new DrizzleThemeRepository(db).listThemes();
-    const available = summaries.filter((t) => t.imageModeAvailable).map((t) => t.slug);
-    expect(available).toEqual(["fauna-brasileira"]);
+    const modes = Object.fromEntries(summaries.map((t) => [t.slug, t.imageMode]));
+    expect(modes).toMatchObject({
+      "fauna-brasileira": "full",
+      "lendas-do-futebol": "partial",
+      "folclore-brasileiro": "none",
+    });
   });
 
   it("rodar o seed de novo não duplica nada", async () => {

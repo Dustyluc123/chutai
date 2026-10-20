@@ -1,0 +1,794 @@
+{
+  "slug": "musica-brasileira",
+  "name": "Música brasileira",
+  "description": "Cantores, cantoras, duplas e grupos do sertanejo à MPB, do funk ao rap.",
+  "emoji": "🎤",
+  "color": "chiclete",
+  "visibility": "official",
+  "dataUpdatedAt": "2026-10",
+  "attributes": [
+    { "key": "genero", "label": "Gênero principal", "type": "text" },
+    { "key": "formato", "label": "Formato", "type": "text" },
+    { "key": "estado", "label": "Estado de origem", "type": "text" },
+    { "key": "regiao", "label": "Região", "type": "text" },
+    {
+      "key": "inicio",
+      "label": "Início da carreira",
+      "type": "range",
+      "tolerance": 5,
+      "toleranceIsPercent": false
+    }
+  ],
+  "characters": [
+    {
+      "id": "anitta",
+      "name": "Anitta",
+      "image": "/temas/musica-brasileira/anitta.webp",
+      "imageCredit": {
+        "author": "Attractive Mindset",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Anitta_for_Attractive_Mindset_podcast_02.jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 2010
+      }
+    },
+    {
+      "id": "ivete-sangalo",
+      "name": "Ivete Sangalo",
+      "image": "/temas/musica-brasileira/ivete-sangalo.webp",
+      "imageCredit": {
+        "author": "Web Summit Rio from Rio de Janeiro, Brazil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ivete_Sangalo_SAM_0058_(54481946217)_(cropped).jpg"
+      },
+      "aliases": ["Ivete"],
+      "emoji": "🎺",
+      "values": {
+        "genero": "Axé",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1993
+      }
+    },
+    {
+      "id": "luan-santana",
+      "name": "Luan Santana",
+      "image": "/temas/musica-brasileira/luan-santana.webp",
+      "imageCredit": {
+        "author": "Raresinais",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2Z9A7852.jpg"
+      },
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Solo",
+        "estado": "Mato Grosso do Sul",
+        "regiao": "Centro-Oeste",
+        "inicio": 2009
+      }
+    },
+    {
+      "id": "ludmilla",
+      "name": "Ludmilla",
+      "image": "/temas/musica-brasileira/ludmilla.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ludmilla_-_TVZ_2024_(1).png"
+      },
+      "aliases": ["MC Beyoncé"],
+      "emoji": "🔊",
+      "values": {
+        "genero": "Funk",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 2012
+      }
+    },
+    {
+      "id": "pabllo-vittar",
+      "name": "Pabllo Vittar",
+      "image": "/temas/musica-brasileira/pabllo-vittar.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pabllo_Vittar_-_TVZ_2024_(1).png"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "Maranhão",
+        "regiao": "Nordeste",
+        "inicio": 2015
+      }
+    },
+    {
+      "id": "iza",
+      "name": "IZA",
+      "image": "/temas/musica-brasileira/iza.webp",
+      "imageCredit": {
+        "author": "Adjoajo",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:IZA_is_a_Brazilian_singer,_songwriter_and_dancer.jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 2016
+      }
+    },
+    {
+      "id": "gloria-groove",
+      "name": "Gloria Groove",
+      "image": "/temas/musica-brasileira/gloria-groove.webp",
+      "imageCredit": {
+        "author": "Festival Sensacional",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:35_230624_-_Giselle_Dietze_-_SENSA_-_165_(53011436168)_(cropped).jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 2002
+      }
+    },
+    {
+      "id": "marisa-monte",
+      "name": "Marisa Monte",
+      "image": "/temas/musica-brasileira/marisa-monte.webp",
+      "imageCredit": {
+        "author": "TSE - Tribunal Superior Eleitoral",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Marisa_Monte_TSE_2025.jpg"
+      },
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1985
+      }
+    },
+    {
+      "id": "caetano-veloso",
+      "name": "Caetano Veloso",
+      "image": "/temas/musica-brasileira/caetano-veloso.webp",
+      "imageCredit": {
+        "author": "Secretaría de Cultura Ciudad de México from México",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Caetano_Veloso_(cropped).jpg"
+      },
+      "aliases": ["Caetano"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1967
+      }
+    },
+    {
+      "id": "gilberto-gil",
+      "name": "Gilberto Gil",
+      "image": "/temas/musica-brasileira/gilberto-gil.webp",
+      "imageCredit": {
+        "author": "Ricardo Stuckert / PR",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:22.05.2026_-_Gilberto_Gil_(cropped).jpg"
+      },
+      "aliases": ["Gil"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1965
+      }
+    },
+    {
+      "id": "chico-buarque",
+      "name": "Chico Buarque",
+      "image": "/temas/musica-brasileira/chico-buarque.webp",
+      "imageCredit": {
+        "author": "Palácio do Planalto from Brasilia, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chico_Buarque_in_2023.jpg"
+      },
+      "aliases": ["Chico"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1962
+      }
+    },
+    {
+      "id": "djavan",
+      "name": "Djavan",
+      "image": "/temas/musica-brasileira/djavan.webp",
+      "imageCredit": {
+        "author": "Tsaorin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Djavan_San_Javier_Jazz_2023_26_(cropped).jpg"
+      },
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Alagoas",
+        "regiao": "Nordeste",
+        "inicio": 1967
+      }
+    },
+    {
+      "id": "roberto-carlos",
+      "name": "Roberto Carlos",
+      "image": "/temas/musica-brasileira/roberto-carlos.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia from São Paulo, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Roberto_Carlos_Credicard_Hall_(42626066250).jpg"
+      },
+      "aliases": ["O Rei"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Espírito Santo",
+        "regiao": "Sudeste",
+        "inicio": 1959
+      }
+    },
+    {
+      "id": "zeca-pagodinho",
+      "name": "Zeca Pagodinho",
+      "image": "/temas/musica-brasileira/zeca-pagodinho.webp",
+      "imageCredit": {
+        "author": "Governo do Estado de São Paulo",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Abertura_do_Carnaval_2024_(53519886801)_(cropped).jpg"
+      },
+      "aliases": ["Zeca"],
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1980
+      }
+    },
+    {
+      "id": "seu-jorge",
+      "name": "Seu Jorge",
+      "image": "/temas/musica-brasileira/seu-jorge.webp",
+      "imageCredit": {
+        "author": "Renan Katayama",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:26_-_Seu_Jorge-002_(17133102915).jpg"
+      },
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1998
+      }
+    },
+    {
+      "id": "jorge-ben-jor",
+      "name": "Jorge Ben Jor",
+      "image": "/temas/musica-brasileira/jorge-ben-jor.webp",
+      "imageCredit": {
+        "author": "Luan Torreira",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jorge_Ben_Jor_at_Live_Earth.jpg"
+      },
+      "aliases": ["Jorge Ben"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1963
+      }
+    },
+    {
+      "id": "milton-nascimento",
+      "name": "Milton Nascimento",
+      "image": "/temas/musica-brasileira/milton-nascimento.webp",
+      "imageCredit": {
+        "author": "Lula Oficial",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Milton_Nascimento,_October_2022.jpg"
+      },
+      "aliases": ["Bituca"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1962
+      }
+    },
+    {
+      "id": "maria-bethania",
+      "name": "Maria Bethânia",
+      "image": "/temas/musica-brasileira/maria-bethania.webp",
+      "imageCredit": {
+        "author": "Lula Oficial",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:04.10.2025_-_Show_Maria_Bethania_em_S%C3%A3o_Paulo_(54834138366)_(cropped).jpg"
+      },
+      "aliases": ["Bethânia"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1964
+      }
+    },
+    {
+      "id": "ney-matogrosso",
+      "name": "Ney Matogrosso",
+      "image": "/temas/musica-brasileira/ney-matogrosso.webp",
+      "imageCredit": {
+        "author": "25º Prêmio da Música Brasileira",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:25o_Premio_da_Musica_Brasileira_(14003644597)_(cropped).jpg"
+      },
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Mato Grosso do Sul",
+        "regiao": "Centro-Oeste",
+        "inicio": 1971
+      }
+    },
+    {
+      "id": "lulu-santos",
+      "name": "Lulu Santos",
+      "image": "/temas/musica-brasileira/lulu-santos.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia from São Paulo, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lulu_Santos_Tom_Brasil_(45615278041).jpg"
+      },
+      "aliases": ["Lulu"],
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1973
+      }
+    },
+    {
+      "id": "henrique-e-juliano",
+      "name": "Henrique & Juliano",
+      "image": "/temas/musica-brasileira/henrique-e-juliano.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia from São Paulo, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Henrique_%26_Juliano_-_Citibank_Hall_(38306450541).jpg"
+      },
+      "aliases": ["Henrique e Juliano"],
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Dupla",
+        "estado": "Tocantins",
+        "regiao": "Norte",
+        "inicio": 2008
+      }
+    },
+    {
+      "id": "jorge-e-mateus",
+      "name": "Jorge & Mateus",
+      "image": "/temas/musica-brasileira/jorge-e-mateus.webp",
+      "imageCredit": {
+        "author": "Renato Cipriano",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Show_Jorge_e_Mateus_-_Villa_Country_-_27039561752.jpg"
+      },
+      "aliases": ["Jorge e Mateus"],
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Dupla",
+        "estado": "Goiás",
+        "regiao": "Centro-Oeste",
+        "inicio": 2005
+      }
+    },
+    {
+      "id": "maiara-e-maraisa",
+      "name": "Maiara & Maraisa",
+      "image": "/temas/musica-brasileira/maiara-e-maraisa.webp",
+      "imageCredit": {
+        "author": "Tv Meu Sertanejo",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Maiara_%26_Maraisa_2024.jpg"
+      },
+      "aliases": ["Maiara e Maraisa"],
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Dupla",
+        "estado": "Mato Grosso",
+        "regiao": "Centro-Oeste",
+        "inicio": 1992
+      }
+    },
+    {
+      "id": "ze-neto-e-cristiano",
+      "name": "Zé Neto & Cristiano",
+      "image": "/temas/musica-brasileira/ze-neto-e-cristiano.webp",
+      "imageCredit": {
+        "author": "BrunoGuedes1",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Ze_Neto_e_Cristiano_2026.png"
+      },
+      "aliases": ["Zé Neto e Cristiano"],
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Dupla",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 2011
+      }
+    },
+    {
+      "id": "chitaozinho-e-xororo",
+      "name": "Chitãozinho & Xororó",
+      "image": "/temas/musica-brasileira/chitaozinho-e-xororo.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia from São Paulo, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chit%C3%A3ozinho_%26_Xoror%C3%B3_-_Tom_Brasil_(36014882534).jpg"
+      },
+      "aliases": ["Chitãozinho e Xororó"],
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Dupla",
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "inicio": 1969
+      }
+    },
+    {
+      "id": "thiaguinho",
+      "name": "Thiaguinho",
+      "image": "/temas/musica-brasileira/thiaguinho.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Thiaguinho_Pr%C3%AAmio_Multishow_2022.png"
+      },
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Solo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 2002
+      }
+    },
+    {
+      "id": "pericles",
+      "name": "Péricles",
+      "image": "/temas/musica-brasileira/pericles.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:P%C3%A9ricles_-_Lady_Night_-_2025.jpg"
+      },
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Solo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 1986
+      }
+    },
+    {
+      "id": "sorriso-maroto",
+      "name": "Sorriso Maroto",
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Grupo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1997
+      }
+    },
+    {
+      "id": "jao",
+      "name": "Jão",
+      "image": "/temas/musica-brasileira/jao.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:J%C3%A3o_Lollapalooza_Brazil_2022_(03).png"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 2016
+      }
+    },
+    {
+      "id": "vitor-kley",
+      "name": "Vitor Kley",
+      "image": "/temas/musica-brasileira/vitor-kley.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia from São Paulo, Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:NAVE_-_Vitor_Kley_Espa%C3%A7o_das_Am%C3%A9ricas_(47510950942)_(cropped).jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "inicio": 2009
+      }
+    },
+    {
+      "id": "anavitoria",
+      "name": "Anavitória",
+      "image": "/temas/musica-brasileira/anavitoria.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia from São Paulo, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Festival_NOVABRASIL_18_Allianz_Parque_(30678685837).jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Dupla",
+        "estado": "Tocantins",
+        "regiao": "Norte",
+        "inicio": 2014
+      }
+    },
+    {
+      "id": "emicida",
+      "name": "Emicida",
+      "image": "/temas/musica-brasileira/emicida.webp",
+      "imageCredit": {
+        "author": "Festival Sensacional. Foto: Bruno Figueiredo / Área de Serviço",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Emicida_Festival_Sensacional_2020_(cropped).jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "genero": "Rap",
+        "formato": "Solo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 2005
+      }
+    },
+    {
+      "id": "racionais-mcs",
+      "name": "Racionais MC's",
+      "image": "/temas/musica-brasileira/racionais-mcs.webp",
+      "imageCredit": {
+        "author": "Mumu Silva",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Racionais_MCs_na_Virada_Cultural.jpg"
+      },
+      "aliases": ["Racionais"],
+      "emoji": "🎙️",
+      "values": {
+        "genero": "Rap",
+        "formato": "Grupo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 1988
+      }
+    },
+    {
+      "id": "matue",
+      "name": "Matuê",
+      "image": "/temas/musica-brasileira/matue.webp",
+      "imageCredit": {
+        "author": "Arnaldo Jovem",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Doode_Teto_e_Matue_(cropped).jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "genero": "Rap",
+        "formato": "Solo",
+        "estado": "Ceará",
+        "regiao": "Nordeste",
+        "inicio": 2015
+      }
+    },
+    {
+      "id": "ana-castela",
+      "name": "Ana Castela",
+      "image": "/temas/musica-brasileira/ana-castela.webp",
+      "imageCredit": {
+        "author": "Igor Jacinto/Vice Governadoria",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Ana_Castela_-_Ver%C3%A3o_Maior_Paran%C3%A1_2026_(cropped)_2.jpg"
+      },
+      "aliases": ["Boiadeira"],
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Solo",
+        "estado": "Mato Grosso do Sul",
+        "regiao": "Centro-Oeste",
+        "inicio": 2021
+      }
+    },
+    {
+      "id": "luisa-sonza",
+      "name": "Luísa Sonza",
+      "image": "/temas/musica-brasileira/luisa-sonza.webp",
+      "imageCredit": {
+        "author": "Judeilton",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:LuisaSonza_Gisele.jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "inicio": 2005
+      }
+    },
+    {
+      "id": "pitty",
+      "name": "Pitty",
+      "image": "/temas/musica-brasileira/pitty.webp",
+      "imageCredit": {
+        "author": "Prefeitura de Olinda",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2024-02-11_Carnaval_de_Olinda_2024,_Polo_Erasto_Vasconcelos_(53539987540)_(cropped).jpg"
+      },
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1997
+      }
+    },
+    {
+      "id": "alok",
+      "name": "Alok",
+      "image": "/temas/musica-brasileira/alok.webp",
+      "imageCredit": {
+        "author": "Lucas Gavi",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alok_Tomorrowland_Winter_2025.jpg"
+      },
+      "emoji": "🎧",
+      "values": {
+        "genero": "Eletrônica",
+        "formato": "Solo",
+        "estado": "Goiás",
+        "regiao": "Centro-Oeste",
+        "inicio": 2004
+      }
+    },
+    {
+      "id": "wesley-safadao",
+      "name": "Wesley Safadão",
+      "image": "/temas/musica-brasileira/wesley-safadao.webp",
+      "imageCredit": {
+        "author": "Teca Lamboglia",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wesley_Safad%C3%A3o_Citibank_Hall_2017_(36674588052)_(cropped).jpg"
+      },
+      "aliases": ["Safadão"],
+      "emoji": "🪗",
+      "values": {
+        "genero": "Forró",
+        "formato": "Solo",
+        "estado": "Ceará",
+        "regiao": "Nordeste",
+        "inicio": 2003
+      }
+    },
+    {
+      "id": "daniela-mercury",
+      "name": "Daniela Mercury",
+      "image": "/temas/musica-brasileira/daniela-mercury.webp",
+      "imageCredit": {
+        "author": "Embaixada dos EUA - Brasil",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:2024-08-21_EUA_e_Irlanda_recebem_Ex-presidente_Mary_Robinson,_07_(Daniela_Mercury).jpg"
+      },
+      "emoji": "🎺",
+      "values": {
+        "genero": "Axé",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1989
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "themes" ADD COLUMN "data_updated_at" text;

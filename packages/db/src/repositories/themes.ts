@@ -7,7 +7,7 @@ import type {
   ThemeSummary,
   ThemeVisibility,
 } from "@chutai/shared";
-import { supportsImageMode } from "@chutai/game";
+import { imageModeAvailability } from "@chutai/game";
 import { OFFICIAL_THEMES, toThemeSummary } from "../themes";
 import { characterValues, characters, themeAttributes, themes } from "../schema";
 import type { Database, ThemeRepository } from "./types";
@@ -68,7 +68,8 @@ export class DrizzleThemeRepository implements ThemeRepository {
         color: row.color as ThemeColor,
         visibility: row.visibility as ThemeVisibility,
         characterCount: themeCharacters.length,
-        imageModeAvailable: supportsImageMode(themeCharacters),
+        imageMode: imageModeAvailability(themeCharacters),
+        imageCharacterCount: themeCharacters.filter((c) => !!c.image).length,
         attributes: attributeRows
           .filter((attr) => attr.themeId === row.id)
           .map((attr) => ({ key: attr.key, label: attr.label })),
@@ -111,6 +112,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
       emoji: row.emoji,
       color: row.color as ThemeColor,
       visibility: row.visibility as ThemeVisibility,
+      ...(row.dataUpdatedAt ? { dataUpdatedAt: row.dataUpdatedAt } : {}),
       attributes: attributeRows.map((attr) => ({
         key: attr.key,
         label: attr.label,
@@ -153,6 +155,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
         color: theme.color,
         visibility: theme.visibility,
         moderationStatus: theme.visibility === "official" ? "approved" : "pending",
+        dataUpdatedAt: theme.dataUpdatedAt ?? null,
       })
       .onConflictDoUpdate({
         target: themes.slug,
@@ -162,6 +165,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
           emoji: theme.emoji,
           color: theme.color,
           visibility: theme.visibility,
+          dataUpdatedAt: theme.dataUpdatedAt ?? null,
         },
       })
       .returning({ id: themes.id });

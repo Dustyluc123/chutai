@@ -1,0 +1,602 @@
+{
+  "slug": "famosos-da-tv",
+  "name": "Famosos da TV",
+  "description": "Apresentadores, jornalistas, atores e atrizes da televisão brasileira.",
+  "emoji": "📡",
+  "color": "laranja",
+  "visibility": "official",
+  "dataUpdatedAt": "2026-10",
+  "attributes": [
+    { "key": "funcao", "label": "Mais conhecido como", "type": "text" },
+    { "key": "estado", "label": "Estado natal", "type": "text" },
+    { "key": "regiao", "label": "Região", "type": "text" },
+    { "key": "nascimento", "label": "Nascimento", "type": "number" },
+    {
+      "key": "inicio",
+      "label": "Início da carreira",
+      "type": "range",
+      "tolerance": 5,
+      "toleranceIsPercent": false
+    }
+  ],
+  "characters": [
+    {
+      "id": "luciano-huck",
+      "name": "Luciano Huck",
+      "image": "/temas/famosos-da-tv/luciano-huck.webp",
+      "imageCredit": {
+        "author": "Romério Cunha",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Luciano_Huck_in_April_2019.jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1971,
+        "inicio": 1995
+      }
+    },
+    {
+      "id": "ana-maria-braga",
+      "name": "Ana Maria Braga",
+      "image": "/temas/famosos-da-tv/ana-maria-braga.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ana_Maria_Braga_in_2019_01.jpg"
+      },
+      "aliases": ["Ana Maria"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1949,
+        "inicio": 1974
+      }
+    },
+    {
+      "id": "xuxa",
+      "name": "Xuxa",
+      "image": "/temas/famosos-da-tv/xuxa.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Xuxa_no_Bar_do_Gog%C3%B3_em_2024.png"
+      },
+      "aliases": ["Xuxa Meneghel"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "nascimento": 1963,
+        "inicio": 1982
+      }
+    },
+    {
+      "id": "angelica",
+      "name": "Angélica",
+      "image": "/temas/famosos-da-tv/angelica.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ang%C3%A9lica_-_Lady_Night_2024.png"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1973,
+        "inicio": 1982
+      }
+    },
+    {
+      "id": "eliana",
+      "name": "Eliana",
+      "image": "/temas/famosos-da-tv/eliana.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Eliana_2018.jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1972,
+        "inicio": 1991
+      }
+    },
+    {
+      "id": "fausto-silva",
+      "name": "Faustão",
+      "image": "/temas/famosos-da-tv/fausto-silva.webp",
+      "imageCredit": {
+        "author": "Sérgio (Savaman) Savarese",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Faustosilva.jpg"
+      },
+      "aliases": ["Fausto Silva"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1950,
+        "inicio": 1964
+      }
+    },
+    {
+      "id": "serginho-groisman",
+      "name": "Serginho Groisman",
+      "image": "/temas/famosos-da-tv/serginho-groisman.webp",
+      "imageCredit": {
+        "author": "amigosdaarte",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:2023-07-17_Pr%C3%AAmio_APCA_2023,_026_(cropped).jpg"
+      },
+      "aliases": ["Serginho"],
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1950,
+        "inicio": 1987
+      }
+    },
+    {
+      "id": "marcos-mion",
+      "name": "Marcos Mion",
+      "image": "/temas/famosos-da-tv/marcos-mion.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Marcos_Mion_2021.jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1979,
+        "inicio": 1999
+      }
+    },
+    {
+      "id": "tata-werneck",
+      "name": "Tatá Werneck",
+      "image": "/temas/famosos-da-tv/tata-werneck.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tat%C3%A1_Werneck_at_Lady_Night_in_2023.jpg"
+      },
+      "aliases": ["Tatá"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1983,
+        "inicio": 1994
+      }
+    },
+    {
+      "id": "fatima-bernardes",
+      "name": "Fátima Bernardes",
+      "image": "/temas/famosos-da-tv/fatima-bernardes.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:F%C3%A1tima_Bernardes_no_Lady_Night_5_(cropped).png"
+      },
+      "aliases": ["Fátima"],
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1962,
+        "inicio": 1985
+      }
+    },
+    {
+      "id": "william-bonner",
+      "name": "William Bonner",
+      "image": "/temas/famosos-da-tv/william-bonner.webp",
+      "imageCredit": {
+        "author": "Leo Cabral",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:William_Bonner_em_agosto_de_2018_(cropped).jpg"
+      },
+      "aliases": ["Bonner"],
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1963,
+        "inicio": 1983
+      }
+    },
+    {
+      "id": "patricia-poeta",
+      "name": "Patrícia Poeta",
+      "image": "/temas/famosos-da-tv/patricia-poeta.webp",
+      "imageCredit": {
+        "author": "BemDevassa",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Patr%C3%ADcia_Poeta_001_(cropped).jpg"
+      },
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "nascimento": 1976,
+        "inicio": 1998
+      }
+    },
+    {
+      "id": "rodrigo-faro",
+      "name": "Rodrigo Faro",
+      "image": "/temas/famosos-da-tv/rodrigo-faro.webp",
+      "imageCredit": {
+        "author": "Baptista Miranda",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rodrigo_Faro_2022.png"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1973,
+        "inicio": 1987
+      }
+    },
+    {
+      "id": "celso-portiolli",
+      "name": "Celso Portiolli",
+      "image": "/temas/famosos-da-tv/celso-portiolli.webp",
+      "imageCredit": {
+        "author": "SBT Interior",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Celso_Portiolli_2021.jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1967,
+        "inicio": 1984
+      }
+    },
+    {
+      "id": "ratinho",
+      "name": "Ratinho",
+      "image": "/temas/famosos-da-tv/ratinho.webp",
+      "imageCredit": {
+        "author": "Sérgio Savarese",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Carlos_Roberto_Massa.jpg"
+      },
+      "aliases": ["Carlos Massa"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1956,
+        "inicio": 1991
+      }
+    },
+    {
+      "id": "sabrina-sato",
+      "name": "Sabrina Sato",
+      "image": "/temas/famosos-da-tv/sabrina-sato.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sabrina_Sato_at_the_Lady_Night_in_2022_(02).png"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1981,
+        "inicio": 2003
+      }
+    },
+    {
+      "id": "fernanda-montenegro",
+      "name": "Fernanda Montenegro",
+      "image": "/temas/famosos-da-tv/fernanda-montenegro.webp",
+      "imageCredit": {
+        "author": "https://www.youtube.com/@globoplaynovelas Globoplay Novelas]",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fernanda_Montenegro_em_2023.png"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1929,
+        "inicio": 1945
+      }
+    },
+    {
+      "id": "tony-ramos",
+      "name": "Tony Ramos",
+      "image": "/temas/famosos-da-tv/tony-ramos.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tony_Ramos.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1948,
+        "inicio": 1964
+      }
+    },
+    {
+      "id": "lazaro-ramos",
+      "name": "Lázaro Ramos",
+      "image": "/temas/famosos-da-tv/lazaro-ramos.webp",
+      "imageCredit": {
+        "author": "Fronteiras do Pensamento",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2025-05-31_Entrevista_com_L%C3%A1zaro_Ramos_e_Marcelo_Tas_(54563533052)_(cropped)_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1978,
+        "inicio": 1994
+      }
+    },
+    {
+      "id": "tais-araujo",
+      "name": "Taís Araújo",
+      "image": "/temas/famosos-da-tv/tais-araujo.webp",
+      "imageCredit": {
+        "author": "Senado Federal",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:100_anos_do_Grupo_Globo_e_60_anos_da_Rede_Globo_20_(Ta%C3%ADs_Ara%C3%BAjo)_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1978,
+        "inicio": 1995
+      }
+    },
+    {
+      "id": "regina-case",
+      "name": "Regina Casé",
+      "image": "/temas/famosos-da-tv/regina-case.webp",
+      "imageCredit": {
+        "author": "bahianoticias",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Regina_Cas%C3%A9_at_Reis_e_Ratos_VIP_premiere_in_February_2012.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1954,
+        "inicio": 1970
+      }
+    },
+    {
+      "id": "bruna-marquezine",
+      "name": "Bruna Marquezine",
+      "image": "/temas/famosos-da-tv/bruna-marquezine.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bruna_Marquezine_2025.png"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1995,
+        "inicio": 2000
+      }
+    },
+    {
+      "id": "paolla-oliveira",
+      "name": "Paolla Oliveira",
+      "image": "/temas/famosos-da-tv/paolla-oliveira.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paolla_Oliveira.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1982,
+        "inicio": 1999
+      }
+    },
+    {
+      "id": "juliana-paes",
+      "name": "Juliana Paes",
+      "image": "/temas/famosos-da-tv/juliana-paes.webp",
+      "imageCredit": {
+        "author": "Renan Katayama",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:9_-_Juliana_Paes-003_(16925722197)_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1979,
+        "inicio": 1998
+      }
+    },
+    {
+      "id": "reynaldo-gianecchini",
+      "name": "Reynaldo Gianecchini",
+      "image": "/temas/famosos-da-tv/reynaldo-gianecchini.webp",
+      "imageCredit": {
+        "author": "25º Prêmio da Música Brasileira",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Reynaldo_Gianecchini,_2014_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1972,
+        "inicio": 1991
+      }
+    },
+    {
+      "id": "caua-reymond",
+      "name": "Cauã Reymond",
+      "image": "/temas/famosos-da-tv/caua-reymond.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cau%C3%A3_Reymond_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1980,
+        "inicio": 2002
+      }
+    },
+    {
+      "id": "gloria-pires",
+      "name": "Glória Pires",
+      "image": "/temas/famosos-da-tv/gloria-pires.webp",
+      "imageCredit": {
+        "author": "VIVA",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gl%C3%B3ria_Pires2019.jpg"
+      },
+      "aliases": ["Glória"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1963,
+        "inicio": 1968
+      }
+    },
+    {
+      "id": "selton-mello",
+      "name": "Selton Mello",
+      "image": "/temas/famosos-da-tv/selton-mello.webp",
+      "imageCredit": {
+        "author": "Harald Krichel",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Selton_Mello-68515_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1972,
+        "inicio": 1981
+      }
+    },
+    {
+      "id": "wagner-moura",
+      "name": "Wagner Moura",
+      "image": "/temas/famosos-da-tv/wagner-moura.webp",
+      "imageCredit": {
+        "author": "Harald Krichel",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wagner_Moura-6546_(3x4).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1976,
+        "inicio": 1996
+      }
+    },
+    {
+      "id": "fernanda-torres",
+      "name": "Fernanda Torres",
+      "image": "/temas/famosos-da-tv/fernanda-torres.webp",
+      "imageCredit": {
+        "author": "LucaFazPhoto",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fernanda_Torres_at_82nd_Venice_International_Film_Festival-7_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1965,
+        "inicio": 1979
+      }
+    }
+  ]
+}

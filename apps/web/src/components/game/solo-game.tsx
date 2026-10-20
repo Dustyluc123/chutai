@@ -8,8 +8,12 @@ import {
   drawCharacter,
   formatValue,
   MAX_ROUND_IMAGE_LEVEL,
+  drawZoomCenter,
   imageLevel,
+  imageModeAvailability,
+  imageModeCharacters,
   supportsImageMode,
+  type ZoomCenter,
 } from "@chutai/game";
 import { Button } from "@/components/ui/button";
 import { CharacterPicture } from "@/components/ui/character-picture";
@@ -29,10 +33,24 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const [mode, setMode] = useState<GameMode>("classic");
   const imageAvailable = supportsImageMode(theme.characters);
   const imageMode = mode === "image" && imageAvailable;
+  const [zoomCenter, setZoomCenter] = useState<ZoomCenter>({ x: 0.5, y: 0.5 });
+  // No modo Imagem, o autocompletar mostra só o nome (a miniatura entregaria a resposta).
+  const partial = imageMode && imageModeAvailability(theme.characters) === "partial";
+  // Personagens do jogo: no modo Imagem, só quem tem imagem (no parcial, os outros ficam de fora).
+  const poolFor = (value: GameMode) =>
+    value === "image" && imageAvailable ? imageModeCharacters(theme.characters) : theme.characters;
+  const visibleOptions = useMemo(() => {
+    if (!imageMode) return options;
+    const ids = new Set(imageModeCharacters(theme.characters).map((c) => c.id));
+    return options
+      .filter((option) => ids.has(option.id))
+      .map(({ id, name, aliases }) => ({ id, name, aliases }));
+  }, [imageMode, options, theme.characters]);
 
   // Sorteio só no navegador (evita diferença entre servidor e cliente na hidratação).
   useEffect(() => {
     setAnswer(drawCharacter(theme.characters, new Set()));
+    setZoomCenter(drawZoomCenter());
   }, [theme]);
 
   const guessedIds = useMemo(() => new Set(guesses.map((g) => g.characterId)), [guesses]);
@@ -52,8 +70,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
       {
         characterId: character.id,
         characterName: character.name,
-        emoji: character.emoji,
-        image: character.image,
+        ...(imageMode ? {} : { emoji: character.emoji, image: character.image }),
         feedback: imageMode ? [] : compareCharacters(character, answer, theme.attributes),
         correct: character.id === answer.id,
         guessNumber: current.length + 1,
@@ -61,18 +78,19 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     ]);
   }
 
-  function next() {
+  function next(value: GameMode = mode) {
     if (!answer) return;
     const used = new Set(played).add(answer.id);
     setPlayed(used);
-    setAnswer(drawCharacter(theme.characters, used));
+    setAnswer(drawCharacter(poolFor(value), used));
+    setZoomCenter(drawZoomCenter());
     setGuesses([]);
     setRevealed(false);
   }
 
   function changeMode(value: GameMode) {
     setMode(value);
-    next();
+    next(value);
   }
 
   return (
@@ -90,7 +108,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
               <Eye aria-hidden className="size-4" /> Desistir
             </Button>
           ) : null}
-          <Button variant="secondary" onClick={next} disabled={!answer}>
+          <Button variant="secondary" onClick={() => next()} disabled={!answer}>
             <Shuffle aria-hidden className="size-4" /> Outro personagem
           </Button>
         </div>
@@ -108,11 +126,22 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
         />
       ) : null}
 
+      {partial ? (
+        <p
+          role="status"
+          className="rounded-2xl border-2 border-gema bg-gema-soft px-3 py-2 text-sm font-semibold"
+        >
+          Modo Imagem parcial: {imageModeCharacters(theme.characters).length} de{" "}
+          {theme.characters.length} personagens têm imagem. Os outros ficam de fora.
+        </p>
+      ) : null}
+
       {imageMode && answer?.image && !finished ? (
         <div className="aspect-square w-full max-w-[300px] self-center overflow-hidden rounded-3xl border-2 border-tinta bg-anil-soft shadow-carimbo">
           <PixelatedImage
             src={answer.image}
             level={level}
+            center={zoomCenter}
             label={`Imagem misteriosa do personagem, borrada. Nitidez ${level + 1} de ${MAX_ROUND_IMAGE_LEVEL + 1}.`}
           />
         </div>
@@ -150,12 +179,13 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
                 .join(". ")}
             </p>
           </div>
-          <Button onClick={next}>Jogar de novo</Button>
+          <Button onClick={() => next()}>Jogar de novo</Button>
         </section>
       ) : (
         <GuessInput
-          options={options}
+          options={visibleOptions}
           guessedIds={guessedIds}
+          showPictures={!imageMode}
           onGuess={guess}
           disabled={!answer}
           autoFocus
@@ -165,6 +195,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
       {imageMode ? (
         <GuessList
           guesses={guesses}
+          showPictures={false}
           emptyMessage="Quem é? Chute pelo nome. Cada erro deixa a imagem um pouco mais nítida."
         />
       ) : (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { AUTHOR } from "@/components/layout/site-footer";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { getTheme, listThemes } from "@/lib/themes";
 
@@ -45,6 +46,13 @@ export default async function CreditsPage() {
             </a>{" "}
             e têm licença livre (domínio público, CC0, CC BY ou CC BY-SA). Foram recortadas e
             reduzidas, e as versões modificadas seguem a licença da original. Obrigado a cada autor.
+          </p>
+          <p className="max-w-[64ch] text-tinta-soft">
+            Quem aparece no site e quiser ser removido pode pedir pelo e-mail{" "}
+            <a href={`mailto:${AUTHOR.email}`} className="font-semibold text-tinta underline">
+              {AUTHOR.email}
+            </a>
+            . A remoção é feita sem burocracia.
           </p>
         </div>
 

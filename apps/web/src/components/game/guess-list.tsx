@@ -8,10 +8,17 @@ interface GuessListProps {
   guesses: GuessResult[];
   emptyMessage?: string;
   className?: string;
+  /** false no modo Imagem: só o nome, sem imagem nem emoji. Padrão: true. */
+  showPictures?: boolean;
 }
 
 /** Modo Imagem: só a lista de chutes (sem atributos), com quem acertou em verde. */
-export function GuessList({ guesses, emptyMessage, className }: GuessListProps) {
+export function GuessList({
+  guesses,
+  emptyMessage,
+  className,
+  showPictures = true,
+}: GuessListProps) {
   if (guesses.length === 0) {
     return emptyMessage ? (
       <p
@@ -31,18 +38,21 @@ export function GuessList({ guesses, emptyMessage, className }: GuessListProps) 
         <li
           key={guess.characterId}
           className={cn(
-            "flex items-center gap-2 rounded-xl border-2 py-1 pr-3 pl-1",
+            "flex items-center gap-2 rounded-xl border-2 py-1 pr-3",
+            showPictures ? "pl-1" : "py-1.5 pl-3",
             guess.correct ? "border-folha bg-folha-soft" : "border-tinta bg-white",
             index === 0 && "animate-pop",
           )}
         >
-          <CharacterPicture
-            name={guess.characterName}
-            image={guess.image}
-            emoji={guess.emoji}
-            size="sm"
-            decorative
-          />
+          {showPictures ? (
+            <CharacterPicture
+              name={guess.characterName}
+              image={guess.image}
+              emoji={guess.emoji}
+              size="sm"
+              decorative
+            />
+          ) : null}
           <span className="text-sm font-semibold">{guess.characterName}</span>
           {guess.correct ? (
             <Check aria-label="acertou" className="size-4 text-folha" strokeWidth={3} />

@@ -100,7 +100,11 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
                   <span className="font-semibold">{theme.name}</span>
                   <span className="text-sm text-tinta-soft">
                     {theme.characterCount} personagens
-                    {theme.imageModeAvailable ? " · tem modo Imagem" : ""}
+                    {theme.imageMode === "full"
+                      ? " · tem modo Imagem"
+                      : theme.imageMode === "partial"
+                        ? " · tem modo Imagem parcial"
+                        : ""}
                   </span>
                 </span>
               </label>
@@ -114,7 +118,7 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
         <div className="grid gap-2 sm:grid-cols-2">
           {MODES.map(({ value, label, description, Icon }) => {
             const selected = settings.mode === value;
-            const unavailable = value === "image" && !theme.imageModeAvailable;
+            const unavailable = value === "image" && theme.imageMode === "none";
             const reasonId = `modo-${value}-motivo`;
             return (
               <label
@@ -142,7 +146,7 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
                   <span className="font-semibold">{label}</span>
                   <span id={reasonId} className="text-sm text-tinta-soft">
                     {unavailable
-                      ? "Indisponível neste tema: nem todos os personagens têm imagem."
+                      ? "Indisponível neste tema: menos de 75% dos personagens têm imagem."
                       : description}
                   </span>
                 </span>
@@ -150,6 +154,15 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
             );
           })}
         </div>
+        {settings.mode === "image" && theme.imageMode === "partial" ? (
+          <p
+            role="status"
+            className="mt-1 rounded-2xl border-2 border-gema bg-gema-soft px-3 py-2.5 text-sm font-semibold"
+          >
+            Modo Imagem parcial: {theme.imageCharacterCount} de {theme.characterCount} personagens
+            têm imagem. Os outros ficam de fora desta partida.
+          </p>
+        ) : null}
       </fieldset>
 
       <OptionGroup

@@ -6,6 +6,10 @@
 </p>
 
 <p align="center">
+  <strong>Jogue agora: <a href="https://chutai-bay.vercel.app">chutai-bay.vercel.app</a></strong>
+</p>
+
+<p align="center">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white" />
   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white" />
   <img alt="Socket.IO" src="https://img.shields.io/badge/Socket.IO-4.8-010101?logo=socketdotio&logoColor=white" />
@@ -342,14 +346,14 @@ pnpm test
 
 O passo a passo completo, para quem nunca fez deploy, está em [`docs/DEPLOY.md`](docs/DEPLOY.md). Resumo:
 
-| Peça                         | Onde             | Observação                                                                                                                                                       |
-| ---------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tempo real (`apps/realtime`) | Railway          | Configurado pelo `railway.json` (build, start e `/health`). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
-| Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                      |
-| PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                            |
-| Redis                        | Upstash          | Opcional                                                                                                                                                         |
+| Peça                         | Onde             | Observação                                                                                                                                                                                |
+| ---------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tempo real (`apps/realtime`) | Railway          | Build, start, `/health` e watch paths preenchidos à mão no painel (valores no guia). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
+| Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                                               |
+| PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                                                     |
+| Redis                        | Upstash          | Opcional                                                                                                                                                                                  |
 
-Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site em `CORS_ORIGIN`.
+Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site (o de **Domains**, `https://chutai-bay.vercel.app`) em `CORS_ORIGIN`. Os deploys de preview da Vercel não conectam ao servidor, porque o endereço deles não está no `CORS_ORIGIN`; é esperado.
 
 ## Criar um tema
 
@@ -394,7 +398,7 @@ Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `tem
 - [x] **Fase 2** — Multiplayer: salas, lobby, rodadas com cronômetro, placar ao vivo, pódio e reconexão
 - [x] **Fase 2.5** — Imagem de cada personagem (licença livre, com créditos) e modo de jogo Imagem
 - [x] **Fase 2.6** — Modo Imagem parcial, opções sem imagem no modo Imagem, quatro temas brasileiros com pessoas reais e projeto pronto para o deploy ([`docs/DEPLOY.md`](docs/DEPLOY.md))
-- [ ] **Fase 3** — Lançamento: colocar no ar seguindo o `docs/DEPLOY.md`, domínio, monitoramento de erros (Sentry) e testes com grupos de amigos
+- [ ] **Fase 3** — Lançamento: no ar em [chutai-bay.vercel.app](https://chutai-bay.vercel.app); faltam domínio próprio, monitoramento de erros (Sentry) e testes com grupos de amigos
 - [ ] **Fase 4** — Comunidade: login com Google e Discord, editor de temas com upload de imagens, moderação e salas públicas
 - [ ] **Fase 5** — Crescimento: modo streamer (chat da Twitch contra o streamer), modo emoji, plano premium
 

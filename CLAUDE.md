@@ -32,7 +32,7 @@ Env vars are read from the root `.env` (see `.env.example`); none are required l
 
 Theme images: `pnpm images:fetch` downloads the files listed in `packages/db/seed/image-sources.json` from Wikimedia Commons, rejects non-free licenses, writes `apps/web/public/temas/<slug>/<id>.webp`, fills `image`/`imageCredit` in the theme JSON and regenerates `CREDITOS.md`. Downloads are cached in `packages/db/.cache/` (gitignored).
 
-Deploy: realtime on Railway (`railway.json` at the repo root, Node 22 via `.nvmrc`), web on Vercel (Root Directory `apps/web`). Step by step in `docs/DEPLOY.md`.
+Deploy (live: site https://chutai-bay.vercel.app, realtime https://chutairealtime-production.up.railway.app): realtime on Railway, configured by hand in the dashboard (no `railway.json`; build/start/healthcheck/watch paths are listed in `docs/DEPLOY.md`), Node 22 via `.nvmrc`; web on Vercel (Root Directory `apps/web`). Vercel preview deploys can't reach the realtime server (not in `CORS_ORIGIN`) — expected. A Railway deploy drops all in-memory rooms.
 
 ## Architecture
 

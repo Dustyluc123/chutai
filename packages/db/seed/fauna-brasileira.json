@@ -39,6 +39,7 @@
     {
       "id": "onca-pintada",
       "name": "Onça-pintada",
+      "image": "/temas/fauna-brasileira/onca-pintada.webp",
       "aliases": ["Jaguar"],
       "emoji": "🐆",
       "values": {
@@ -52,6 +53,7 @@
     {
       "id": "capivara",
       "name": "Capivara",
+      "image": "/temas/fauna-brasileira/capivara.webp",
       "emoji": "🦫",
       "values": {
         "grupo": "Mamífero",
@@ -64,6 +66,7 @@
     {
       "id": "lobo-guara",
       "name": "Lobo-guará",
+      "image": "/temas/fauna-brasileira/lobo-guara.webp",
       "emoji": "🐺",
       "values": {
         "grupo": "Mamífero",
@@ -76,6 +79,7 @@
     {
       "id": "tamandua-bandeira",
       "name": "Tamanduá-bandeira",
+      "image": "/temas/fauna-brasileira/tamandua-bandeira.webp",
       "emoji": "🐜",
       "values": {
         "grupo": "Mamífero",
@@ -88,6 +92,7 @@
     {
       "id": "bicho-preguica",
       "name": "Bicho-preguiça",
+      "image": "/temas/fauna-brasileira/bicho-preguica.webp",
       "aliases": ["Preguiça"],
       "emoji": "🦥",
       "values": {
@@ -101,6 +106,7 @@
     {
       "id": "anta",
       "name": "Anta",
+      "image": "/temas/fauna-brasileira/anta.webp",
       "emoji": "🐗",
       "values": {
         "grupo": "Mamífero",
@@ -113,6 +119,7 @@
     {
       "id": "boto-cor-de-rosa",
       "name": "Boto-cor-de-rosa",
+      "image": "/temas/fauna-brasileira/boto-cor-de-rosa.webp",
       "aliases": ["Boto"],
       "emoji": "🐬",
       "values": {
@@ -126,6 +133,7 @@
     {
       "id": "peixe-boi-da-amazonia",
       "name": "Peixe-boi-da-amazônia",
+      "image": "/temas/fauna-brasileira/peixe-boi-da-amazonia.webp",
       "aliases": ["Peixe-boi"],
       "emoji": "🦭",
       "values": {
@@ -139,6 +147,7 @@
     {
       "id": "mico-leao-dourado",
       "name": "Mico-leão-dourado",
+      "image": "/temas/fauna-brasileira/mico-leao-dourado.webp",
       "emoji": "🐒",
       "values": {
         "grupo": "Mamífero",
@@ -151,6 +160,7 @@
     {
       "id": "ariranha",
       "name": "Ariranha",
+      "image": "/temas/fauna-brasileira/ariranha.webp",
       "emoji": "🦦",
       "values": {
         "grupo": "Mamífero",
@@ -163,6 +173,7 @@
     {
       "id": "tatu-bola",
       "name": "Tatu-bola",
+      "image": "/temas/fauna-brasileira/tatu-bola.webp",
       "emoji": "🛡️",
       "values": {
         "grupo": "Mamífero",
@@ -175,6 +186,7 @@
     {
       "id": "tatu-canastra",
       "name": "Tatu-canastra",
+      "image": "/temas/fauna-brasileira/tatu-canastra.webp",
       "emoji": "🦔",
       "values": {
         "grupo": "Mamífero",
@@ -187,6 +199,7 @@
     {
       "id": "quati",
       "name": "Quati",
+      "image": "/temas/fauna-brasileira/quati.webp",
       "emoji": "🦝",
       "values": {
         "grupo": "Mamífero",
@@ -199,6 +212,7 @@
     {
       "id": "sagui-de-tufo-branco",
       "name": "Sagui-de-tufo-branco",
+      "image": "/temas/fauna-brasileira/sagui-de-tufo-branco.webp",
       "aliases": ["Mico", "Sagui"],
       "emoji": "🐵",
       "values": {
@@ -212,6 +226,7 @@
     {
       "id": "macaco-prego",
       "name": "Macaco-prego",
+      "image": "/temas/fauna-brasileira/macaco-prego.webp",
       "emoji": "🙈",
       "values": {
         "grupo": "Mamífero",
@@ -224,6 +239,7 @@
     {
       "id": "bugio",
       "name": "Bugio",
+      "image": "/temas/fauna-brasileira/bugio.webp",
       "aliases": ["Guariba"],
       "emoji": "🦍",
       "values": {
@@ -237,6 +253,7 @@
     {
       "id": "cutia",
       "name": "Cutia",
+      "image": "/temas/fauna-brasileira/cutia.webp",
       "emoji": "🐹",
       "values": {
         "grupo": "Mamífero",
@@ -249,6 +266,7 @@
     {
       "id": "veado-campeiro",
       "name": "Veado-campeiro",
+      "image": "/temas/fauna-brasileira/veado-campeiro.webp",
       "emoji": "🦌",
       "values": {
         "grupo": "Mamífero",
@@ -261,6 +279,7 @@
     {
       "id": "gato-maracaja",
       "name": "Gato-maracajá",
+      "image": "/temas/fauna-brasileira/gato-maracaja.webp",
       "emoji": "🐈",
       "values": {
         "grupo": "Mamífero",
@@ -273,6 +292,7 @@
     {
       "id": "arara-azul",
       "name": "Arara-azul",
+      "image": "/temas/fauna-brasileira/arara-azul.webp",
       "emoji": "🦜",
       "values": {
         "grupo": "Ave",
@@ -285,6 +305,7 @@
     {
       "id": "ararinha-azul",
       "name": "Ararinha-azul",
+      "image": "/temas/fauna-brasileira/ararinha-azul.webp",
       "emoji": "💙",
       "values": {
         "grupo": "Ave",
@@ -297,6 +318,7 @@
     {
       "id": "tucano-toco",
       "name": "Tucano-toco",
+      "image": "/temas/fauna-brasileira/tucano-toco.webp",
       "aliases": ["Tucano"],
       "emoji": "🐦",
       "values": {
@@ -310,6 +332,7 @@
     {
       "id": "harpia",
       "name": "Harpia",
+      "image": "/temas/fauna-brasileira/harpia.webp",
       "aliases": ["Gavião-real"],
       "emoji": "🦅",
       "values": {
@@ -323,6 +346,7 @@
     {
       "id": "ema",
       "name": "Ema",
+      "image": "/temas/fauna-brasileira/ema.webp",
       "emoji": "🪶",
       "values": {
         "grupo": "Ave",
@@ -335,6 +359,7 @@
     {
       "id": "seriema",
       "name": "Seriema",
+      "image": "/temas/fauna-brasileira/seriema.webp",
       "emoji": "🐓",
       "values": {
         "grupo": "Ave",
@@ -347,6 +372,7 @@
     {
       "id": "tuiuiu",
       "name": "Tuiuiú",
+      "image": "/temas/fauna-brasileira/tuiuiu.webp",
       "aliases": ["Jaburu"],
       "emoji": "🦩",
       "values": {
@@ -360,6 +386,7 @@
     {
       "id": "sabia-laranjeira",
       "name": "Sabiá-laranjeira",
+      "image": "/temas/fauna-brasileira/sabia-laranjeira.webp",
       "aliases": ["Sabiá"],
       "emoji": "🎶",
       "values": {
@@ -373,6 +400,7 @@
     {
       "id": "quero-quero",
       "name": "Quero-quero",
+      "image": "/temas/fauna-brasileira/quero-quero.webp",
       "emoji": "📣",
       "values": {
         "grupo": "Ave",
@@ -385,6 +413,7 @@
     {
       "id": "jacare-do-pantanal",
       "name": "Jacaré-do-pantanal",
+      "image": "/temas/fauna-brasileira/jacare-do-pantanal.webp",
       "emoji": "🐊",
       "values": {
         "grupo": "Réptil",
@@ -397,6 +426,7 @@
     {
       "id": "jacare-acu",
       "name": "Jacaré-açu",
+      "image": "/temas/fauna-brasileira/jacare-acu.webp",
       "emoji": "🐲",
       "values": {
         "grupo": "Réptil",
@@ -409,6 +439,7 @@
     {
       "id": "sucuri",
       "name": "Sucuri",
+      "image": "/temas/fauna-brasileira/sucuri.webp",
       "aliases": ["Anaconda"],
       "emoji": "🐍",
       "values": {
@@ -422,6 +453,7 @@
     {
       "id": "jiboia",
       "name": "Jiboia",
+      "image": "/temas/fauna-brasileira/jiboia.webp",
       "emoji": "🪢",
       "values": {
         "grupo": "Réptil",
@@ -434,6 +466,7 @@
     {
       "id": "jabuti-piranga",
       "name": "Jabuti-piranga",
+      "image": "/temas/fauna-brasileira/jabuti-piranga.webp",
       "aliases": ["Jabuti"],
       "emoji": "🐢",
       "values": {
@@ -447,6 +480,7 @@
     {
       "id": "tartaruga-da-amazonia",
       "name": "Tartaruga-da-amazônia",
+      "image": "/temas/fauna-brasileira/tartaruga-da-amazonia.webp",
       "emoji": "🥚",
       "values": {
         "grupo": "Réptil",
@@ -459,6 +493,7 @@
     {
       "id": "teiu",
       "name": "Teiú",
+      "image": "/temas/fauna-brasileira/teiu.webp",
       "emoji": "🦎",
       "values": {
         "grupo": "Réptil",
@@ -471,6 +506,7 @@
     {
       "id": "sapo-cururu",
       "name": "Sapo-cururu",
+      "image": "/temas/fauna-brasileira/sapo-cururu.webp",
       "emoji": "🐸",
       "values": {
         "grupo": "Anfíbio",
@@ -483,6 +519,7 @@
     {
       "id": "pirarucu",
       "name": "Pirarucu",
+      "image": "/temas/fauna-brasileira/pirarucu.webp",
       "emoji": "🐟",
       "values": {
         "grupo": "Peixe",
@@ -495,6 +532,7 @@
     {
       "id": "piranha-vermelha",
       "name": "Piranha-vermelha",
+      "image": "/temas/fauna-brasileira/piranha-vermelha.webp",
       "aliases": ["Piranha"],
       "emoji": "🦷",
       "values": {
@@ -508,6 +546,7 @@
     {
       "id": "tambaqui",
       "name": "Tambaqui",
+      "image": "/temas/fauna-brasileira/tambaqui.webp",
       "emoji": "🐠",
       "values": {
         "grupo": "Peixe",
@@ -520,6 +559,7 @@
     {
       "id": "dourado",
       "name": "Dourado",
+      "image": "/temas/fauna-brasileira/dourado.webp",
       "emoji": "✨",
       "values": {
         "grupo": "Peixe",

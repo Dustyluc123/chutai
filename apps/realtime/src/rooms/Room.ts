@@ -310,6 +310,7 @@ export class Room {
       characterId: guessed.id,
       characterName: guessed.name,
       emoji: guessed.emoji,
+      image: guessed.image,
       feedback,
       correct,
       guessNumber: state.guesses.length + 1,
@@ -385,6 +386,7 @@ export class Room {
         id: round.character.id,
         name: round.character.name,
         emoji: round.character.emoji,
+        image: round.character.image,
         values: this.theme.attributes.map((attr) => ({
           key: attr.key,
           label: attr.label,

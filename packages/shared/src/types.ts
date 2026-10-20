@@ -37,8 +37,13 @@ export interface Character {
   name: string;
   /** Outros nomes aceitos no autocompletar (ex.: "Fenômeno" → Ronaldo). */
   aliases?: string[];
-  /** Emoji usado como avatar do personagem (os temas oficiais não usam imagens). */
+  /** Emoji usado como avatar do personagem quando não há imagem. */
   emoji?: string;
+  /**
+   * Imagem do personagem: caminho no site (ex.: "/temas/fauna-brasileira/capivara.webp")
+   * ou URL completa (para temas da comunidade, no futuro). Sem imagem, o site mostra o emoji.
+   */
+  image?: string;
   values: Record<string, AttributeValue>;
 }
 
@@ -75,6 +80,7 @@ export interface CharacterOption {
   name: string;
   aliases: string[];
   emoji?: string;
+  image?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -98,6 +104,7 @@ export interface GuessResult {
   characterId: string;
   characterName: string;
   emoji?: string;
+  image?: string;
   feedback: AttributeFeedback[];
   correct: boolean;
   /** 1 para o primeiro chute da rodada, 2 para o segundo... */
@@ -166,6 +173,8 @@ export interface CharacterReveal {
   id: string;
   name: string;
   emoji?: string;
+  /** Só é enviada depois que a rodada termina. */
+  image?: string;
   values: { key: string; label: string; display: string }[];
 }
 

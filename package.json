@@ -20,7 +20,8 @@
     "format:check": "prettier --check .",
     "db:generate": "pnpm --filter @chutai/db generate",
     "db:migrate": "pnpm --filter @chutai/db migrate",
-    "db:seed": "pnpm --filter @chutai/db seed"
+    "db:seed": "pnpm --filter @chutai/db seed",
+    "images:fetch": "pnpm --filter @chutai/db images:fetch"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

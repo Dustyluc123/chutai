@@ -2,6 +2,7 @@
 
 import type { PublicPlayer, RoundSummary } from "@chutai/shared";
 import { Avatar } from "@/components/ui/avatar";
+import { CharacterPicture } from "@/components/ui/character-picture";
 import { useCountdown } from "@/hooks/useCountdown";
 import { cn } from "@/lib/cn";
 
@@ -33,9 +34,13 @@ export function RoundReveal({
       className="animate-pop overflow-hidden rounded-3xl border-2 border-tinta bg-white shadow-carimbo"
     >
       <div className="flex flex-col gap-4 bg-anil px-5 py-6 text-white sm:flex-row sm:items-center sm:gap-6 sm:px-8">
-        <span aria-hidden className="text-6xl leading-none sm:text-7xl">
-          {summary.character.emoji ?? "❔"}
-        </span>
+        <CharacterPicture
+          name={summary.character.name}
+          image={summary.character.image}
+          emoji={summary.character.emoji}
+          size="xl"
+          className="border-white"
+        />
         <div className="flex flex-col gap-1">
           <p className="text-sm font-semibold text-white/75">
             Rodada {summary.number}: o personagem era

@@ -41,6 +41,7 @@
     {
       "id": "pele",
       "name": "Pelé",
+      "image": "/temas/lendas-do-futebol/pele.webp",
       "aliases": ["Rei do Futebol", "Edson Arantes"],
       "emoji": "⚽",
       "values": {
@@ -55,6 +56,7 @@
     {
       "id": "garrincha",
       "name": "Garrincha",
+      "image": "/temas/lendas-do-futebol/garrincha.webp",
       "aliases": ["Mané Garrincha", "Anjo de Pernas Tortas"],
       "emoji": "⚽",
       "values": {
@@ -69,6 +71,7 @@
     {
       "id": "didi",
       "name": "Didi",
+      "image": "/temas/lendas-do-futebol/didi.webp",
       "aliases": ["Folha Seca"],
       "emoji": "⚽",
       "values": {
@@ -83,6 +86,7 @@
     {
       "id": "nilton-santos",
       "name": "Nilton Santos",
+      "image": "/temas/lendas-do-futebol/nilton-santos.webp",
       "aliases": ["Enciclopédia"],
       "emoji": "⚽",
       "values": {
@@ -97,6 +101,7 @@
     {
       "id": "djalma-santos",
       "name": "Djalma Santos",
+      "image": "/temas/lendas-do-futebol/djalma-santos.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -110,6 +115,7 @@
     {
       "id": "zito",
       "name": "Zito",
+      "image": "/temas/lendas-do-futebol/zito.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -123,6 +129,7 @@
     {
       "id": "vava",
       "name": "Vavá",
+      "image": "/temas/lendas-do-futebol/vava.webp",
       "aliases": ["Peito de Aço"],
       "emoji": "⚽",
       "values": {
@@ -137,6 +144,7 @@
     {
       "id": "gilmar",
       "name": "Gilmar",
+      "image": "/temas/lendas-do-futebol/gilmar.webp",
       "aliases": ["Gylmar dos Santos Neves"],
       "emoji": "🧤",
       "values": {
@@ -151,6 +159,7 @@
     {
       "id": "zagallo",
       "name": "Zagallo",
+      "image": "/temas/lendas-do-futebol/zagallo.webp",
       "aliases": ["Velho Lobo", "Formiguinha"],
       "emoji": "⚽",
       "values": {
@@ -165,6 +174,7 @@
     {
       "id": "bellini",
       "name": "Bellini",
+      "image": "/temas/lendas-do-futebol/bellini.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -178,6 +188,7 @@
     {
       "id": "mauro-ramos",
       "name": "Mauro Ramos",
+      "image": "/temas/lendas-do-futebol/mauro-ramos.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -191,6 +202,7 @@
     {
       "id": "amarildo",
       "name": "Amarildo",
+      "image": "/temas/lendas-do-futebol/amarildo.webp",
       "aliases": ["Possesso"],
       "emoji": "⚽",
       "values": {
@@ -205,6 +217,7 @@
     {
       "id": "jairzinho",
       "name": "Jairzinho",
+      "image": "/temas/lendas-do-futebol/jairzinho.webp",
       "aliases": ["Furacão da Copa"],
       "emoji": "⚽",
       "values": {
@@ -219,6 +232,7 @@
     {
       "id": "tostao",
       "name": "Tostão",
+      "image": "/temas/lendas-do-futebol/tostao.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Atacante",
@@ -232,6 +246,7 @@
     {
       "id": "rivellino",
       "name": "Rivellino",
+      "image": "/temas/lendas-do-futebol/rivellino.webp",
       "aliases": ["Patada Atômica"],
       "emoji": "⚽",
       "values": {
@@ -246,6 +261,7 @@
     {
       "id": "carlos-alberto-torres",
       "name": "Carlos Alberto Torres",
+      "image": "/temas/lendas-do-futebol/carlos-alberto-torres.webp",
       "aliases": ["Capita"],
       "emoji": "⚽",
       "values": {
@@ -260,6 +276,7 @@
     {
       "id": "gerson",
       "name": "Gérson",
+      "image": "/temas/lendas-do-futebol/gerson.webp",
       "aliases": ["Canhotinha de Ouro"],
       "emoji": "⚽",
       "values": {
@@ -274,6 +291,7 @@
     {
       "id": "clodoaldo",
       "name": "Clodoaldo",
+      "image": "/temas/lendas-do-futebol/clodoaldo.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -287,6 +305,7 @@
     {
       "id": "felix",
       "name": "Félix",
+      "image": "/temas/lendas-do-futebol/felix.webp",
       "emoji": "🧤",
       "values": {
         "posicao": "Goleiro",
@@ -300,6 +319,7 @@
     {
       "id": "zico",
       "name": "Zico",
+      "image": "/temas/lendas-do-futebol/zico.webp",
       "aliases": ["Galinho de Quintino"],
       "emoji": "⚽",
       "values": {
@@ -314,6 +334,7 @@
     {
       "id": "socrates",
       "name": "Sócrates",
+      "image": "/temas/lendas-do-futebol/socrates.webp",
       "aliases": ["Doutor"],
       "emoji": "⚽",
       "values": {
@@ -328,6 +349,7 @@
     {
       "id": "falcao",
       "name": "Falcão",
+      "image": "/temas/lendas-do-futebol/falcao.webp",
       "aliases": ["Rei de Roma"],
       "emoji": "⚽",
       "values": {
@@ -342,6 +364,7 @@
     {
       "id": "toninho-cerezo",
       "name": "Toninho Cerezo",
+      "image": "/temas/lendas-do-futebol/toninho-cerezo.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -355,6 +378,7 @@
     {
       "id": "junior",
       "name": "Júnior",
+      "image": "/temas/lendas-do-futebol/junior.webp",
       "aliases": ["Capacete"],
       "emoji": "⚽",
       "values": {
@@ -382,6 +406,7 @@
     {
       "id": "careca",
       "name": "Careca",
+      "image": "/temas/lendas-do-futebol/careca.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Atacante",
@@ -395,6 +420,7 @@
     {
       "id": "branco",
       "name": "Branco",
+      "image": "/temas/lendas-do-futebol/branco.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -408,6 +434,7 @@
     {
       "id": "romario",
       "name": "Romário",
+      "image": "/temas/lendas-do-futebol/romario.webp",
       "aliases": ["Baixinho"],
       "emoji": "⚽",
       "values": {
@@ -422,6 +449,7 @@
     {
       "id": "bebeto",
       "name": "Bebeto",
+      "image": "/temas/lendas-do-futebol/bebeto.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Atacante",
@@ -435,6 +463,7 @@
     {
       "id": "taffarel",
       "name": "Taffarel",
+      "image": "/temas/lendas-do-futebol/taffarel.webp",
       "emoji": "🧤",
       "values": {
         "posicao": "Goleiro",
@@ -448,6 +477,7 @@
     {
       "id": "dunga",
       "name": "Dunga",
+      "image": "/temas/lendas-do-futebol/dunga.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -461,6 +491,7 @@
     {
       "id": "aldair",
       "name": "Aldair",
+      "image": "/temas/lendas-do-futebol/aldair.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -474,6 +505,7 @@
     {
       "id": "mauro-silva",
       "name": "Mauro Silva",
+      "image": "/temas/lendas-do-futebol/mauro-silva.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -487,6 +519,7 @@
     {
       "id": "cafu",
       "name": "Cafu",
+      "image": "/temas/lendas-do-futebol/cafu.webp",
       "aliases": ["Pendolino"],
       "emoji": "⚽",
       "values": {
@@ -501,6 +534,7 @@
     {
       "id": "roberto-carlos",
       "name": "Roberto Carlos",
+      "image": "/temas/lendas-do-futebol/roberto-carlos.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -514,6 +548,7 @@
     {
       "id": "ronaldo",
       "name": "Ronaldo",
+      "image": "/temas/lendas-do-futebol/ronaldo.webp",
       "aliases": ["Fenômeno", "R9"],
       "emoji": "⚽",
       "values": {
@@ -528,6 +563,7 @@
     {
       "id": "rivaldo",
       "name": "Rivaldo",
+      "image": "/temas/lendas-do-futebol/rivaldo.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Meia",
@@ -541,6 +577,7 @@
     {
       "id": "ronaldinho-gaucho",
       "name": "Ronaldinho Gaúcho",
+      "image": "/temas/lendas-do-futebol/ronaldinho-gaucho.webp",
       "aliases": ["Ronaldinho", "R10", "Bruxo"],
       "emoji": "⚽",
       "values": {
@@ -569,6 +606,7 @@
     {
       "id": "ze-roberto",
       "name": "Zé Roberto",
+      "image": "/temas/lendas-do-futebol/ze-roberto.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -582,6 +620,7 @@
     {
       "id": "juninho-pernambucano",
       "name": "Juninho Pernambucano",
+      "image": "/temas/lendas-do-futebol/juninho-pernambucano.webp",
       "aliases": ["Reizinho da Colina"],
       "emoji": "⚽",
       "values": {
@@ -596,6 +635,7 @@
     {
       "id": "lucio",
       "name": "Lúcio",
+      "image": "/temas/lendas-do-futebol/lucio.webp",
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -609,6 +649,7 @@
     {
       "id": "kaka",
       "name": "Kaká",
+      "image": "/temas/lendas-do-futebol/kaka.webp",
       "aliases": ["Ricardo Izecson"],
       "emoji": "⚽",
       "values": {
@@ -623,6 +664,7 @@
     {
       "id": "adriano",
       "name": "Adriano",
+      "image": "/temas/lendas-do-futebol/adriano.webp",
       "aliases": ["Imperador"],
       "emoji": "⚽",
       "values": {
@@ -637,6 +679,7 @@
     {
       "id": "leonidas-da-silva",
       "name": "Leônidas da Silva",
+      "image": "/temas/lendas-do-futebol/leonidas-da-silva.webp",
       "aliases": ["Diamante Negro", "Homem Borracha"],
       "emoji": "⚽",
       "values": {
@@ -651,6 +694,7 @@
     {
       "id": "friedenreich",
       "name": "Friedenreich",
+      "image": "/temas/lendas-do-futebol/friedenreich.webp",
       "aliases": ["El Tigre", "Fried"],
       "emoji": "⚽",
       "values": {
@@ -665,6 +709,7 @@
     {
       "id": "ademir-de-menezes",
       "name": "Ademir de Menezes",
+      "image": "/temas/lendas-do-futebol/ademir-de-menezes.webp",
       "aliases": ["Queixada"],
       "emoji": "⚽",
       "values": {
@@ -679,6 +724,7 @@
     {
       "id": "zizinho",
       "name": "Zizinho",
+      "image": "/temas/lendas-do-futebol/zizinho.webp",
       "aliases": ["Mestre Ziza"],
       "emoji": "⚽",
       "values": {
@@ -693,6 +739,7 @@
     {
       "id": "barbosa",
       "name": "Barbosa",
+      "image": "/temas/lendas-do-futebol/barbosa.webp",
       "emoji": "🧤",
       "values": {
         "posicao": "Goleiro",

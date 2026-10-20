@@ -8,6 +8,7 @@ import { drizzle } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { count } from "drizzle-orm";
 import { beforeAll, describe, expect, it } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import type { Theme } from "@chutai/shared";
 import * as schema from "../src/schema";
@@ -49,6 +50,38 @@ describe("temas oficiais", () => {
   });
 });
 
+describe("imagens dos temas oficiais", () => {
+  const publicDir = fileURLToPath(new URL("../../../apps/web/public", import.meta.url));
+  const credits = JSON.parse(readFileSync(`${publicDir}/temas/creditos.json`, "utf8")) as {
+    image: string;
+    license: string;
+    author: string;
+    source: string;
+  }[];
+  const withImage = OFFICIAL_THEMES.flatMap((theme) =>
+    theme.characters.filter((c) => c.image).map((c) => ({ theme, character: c })),
+  );
+
+  it("seguem o caminho /temas/<slug>/<id>.webp e o arquivo existe", () => {
+    expect(withImage.length).toBeGreaterThan(0);
+    for (const { theme, character } of withImage) {
+      expect(character.image).toBe(`/temas/${theme.slug}/${character.id}.webp`);
+      expect(existsSync(`${publicDir}${character.image}`), character.image).toBe(true);
+    }
+  });
+
+  it("cada imagem tem crédito com licença livre, e cada crédito tem imagem", () => {
+    const images = new Set(withImage.map(({ character }) => character.image));
+    for (const credit of credits) {
+      expect(images.has(credit.image), credit.image).toBe(true);
+      expect(credit.license).toMatch(/^(domínio público|pd|cc0|cc by(-sa)? \d)/i);
+      expect(credit.author).not.toBe("");
+      expect(credit.source).toMatch(/^https:\/\/commons\.wikimedia\.org\//);
+    }
+    expect(new Set(credits.map((credit) => credit.image))).toEqual(images);
+  });
+});
+
 describe("DrizzleThemeRepository", () => {
   it("lista os mesmos temas que o repositório JSON", async () => {
     const fromDb = await new DrizzleThemeRepository(db).listThemes();
@@ -63,6 +96,13 @@ describe("DrizzleThemeRepository", () => {
       expect(loaded).not.toBeNull();
       expect(normalize(loaded!)).toEqual(normalize(theme));
     }
+  });
+
+  it("guarda e devolve a imagem dos personagens", async () => {
+    const theme = OFFICIAL_THEMES.find((t) => t.characters.some((c) => c.image))!;
+    const loaded = await new DrizzleThemeRepository(db).getTheme(theme.slug);
+    const expected = theme.characters.filter((c) => c.image).length;
+    expect(loaded!.characters.filter((c) => c.image)).toHaveLength(expected);
   });
 
   it("rodar o seed de novo não duplica nada", async () => {

@@ -32,6 +32,9 @@ export function SiteFooter() {
           <Link href="/criar-tema" className="text-tinta-soft hover:text-tinta">
             Criar um tema
           </Link>
+          <Link href="/creditos" className="text-tinta-soft hover:text-tinta">
+            Créditos das imagens
+          </Link>
         </nav>
 
         <div className="flex flex-col gap-2 text-sm">

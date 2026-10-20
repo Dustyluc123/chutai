@@ -31,6 +31,7 @@ export function toCharacterOptions(theme: Theme): CharacterOption[] {
       name: character.name,
       aliases: character.aliases ?? [],
       emoji: character.emoji,
+      image: character.image,
     }))
     .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
 }

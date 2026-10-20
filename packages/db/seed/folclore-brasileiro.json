@@ -16,6 +16,7 @@
     {
       "id": "saci-perere",
       "name": "Saci-Pererê",
+      "image": "/temas/folclore-brasileiro/saci-perere.webp",
       "aliases": ["Saci"],
       "emoji": "🌪️",
       "values": {
@@ -41,6 +42,7 @@
     {
       "id": "iara",
       "name": "Iara",
+      "image": "/temas/folclore-brasileiro/iara.webp",
       "aliases": ["Mãe-d'Água", "Uiara"],
       "emoji": "🧜‍♀️",
       "values": {
@@ -54,6 +56,7 @@
     {
       "id": "boto",
       "name": "Boto-cor-de-rosa",
+      "image": "/temas/folclore-brasileiro/boto.webp",
       "aliases": ["Boto"],
       "emoji": "🐬",
       "values": {
@@ -67,6 +70,7 @@
     {
       "id": "boitata",
       "name": "Boitatá",
+      "image": "/temas/folclore-brasileiro/boitata.webp",
       "emoji": "🐍",
       "values": {
         "forma": "Animal",
@@ -79,6 +83,7 @@
     {
       "id": "mula-sem-cabeca",
       "name": "Mula sem cabeça",
+      "image": "/temas/folclore-brasileiro/mula-sem-cabeca.webp",
       "emoji": "🐴",
       "values": {
         "forma": "Animal",
@@ -91,6 +96,7 @@
     {
       "id": "lobisomem",
       "name": "Lobisomem",
+      "image": "/temas/folclore-brasileiro/lobisomem.webp",
       "emoji": "🐺",
       "values": {
         "forma": "Metamorfo",
@@ -115,6 +121,7 @@
     {
       "id": "mapinguari",
       "name": "Mapinguari",
+      "image": "/temas/folclore-brasileiro/mapinguari.webp",
       "emoji": "👁️",
       "values": {
         "forma": "Monstro",
@@ -127,6 +134,7 @@
     {
       "id": "caipora",
       "name": "Caipora",
+      "image": "/temas/folclore-brasileiro/caipora.webp",
       "emoji": "🐗",
       "values": {
         "forma": "Humanoide",
@@ -139,6 +147,7 @@
     {
       "id": "negrinho-do-pastoreio",
       "name": "Negrinho do Pastoreio",
+      "image": "/temas/folclore-brasileiro/negrinho-do-pastoreio.webp",
       "emoji": "🐎",
       "values": {
         "forma": "Humanoide",
@@ -151,6 +160,7 @@
     {
       "id": "cabeca-de-cuia",
       "name": "Cabeça de Cuia",
+      "image": "/temas/folclore-brasileiro/cabeca-de-cuia.webp",
       "emoji": "🥥",
       "values": {
         "forma": "Humanoide",
@@ -163,6 +173,7 @@
     {
       "id": "matinta-pereira",
       "name": "Matinta Pereira",
+      "image": "/temas/folclore-brasileiro/matinta-pereira.webp",
       "aliases": ["Matinta Perera"],
       "emoji": "🦉",
       "values": {
@@ -200,6 +211,7 @@
     {
       "id": "bicho-papao",
       "name": "Bicho-papão",
+      "image": "/temas/folclore-brasileiro/bicho-papao.webp",
       "emoji": "👹",
       "values": {
         "forma": "Monstro",
@@ -212,6 +224,7 @@
     {
       "id": "homem-do-saco",
       "name": "Homem do Saco",
+      "image": "/temas/folclore-brasileiro/homem-do-saco.webp",
       "aliases": ["Velho do Saco"],
       "emoji": "🎒",
       "values": {
@@ -225,6 +238,7 @@
     {
       "id": "comadre-fulozinha",
       "name": "Comadre Fulozinha",
+      "image": "/temas/folclore-brasileiro/comadre-fulozinha.webp",
       "emoji": "🌸",
       "values": {
         "forma": "Humanoide",
@@ -237,6 +251,7 @@
     {
       "id": "anhanga",
       "name": "Anhangá",
+      "image": "/temas/folclore-brasileiro/anhanga.webp",
       "emoji": "🦌",
       "values": {
         "forma": "Animal",
@@ -261,6 +276,7 @@
     {
       "id": "cobra-grande",
       "name": "Cobra Grande",
+      "image": "/temas/folclore-brasileiro/cobra-grande.webp",
       "aliases": ["Boiúna"],
       "emoji": "🐉",
       "values": {

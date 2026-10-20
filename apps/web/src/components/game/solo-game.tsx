@@ -5,6 +5,7 @@ import { Eye, PartyPopper, Shuffle } from "lucide-react";
 import type { Character, CharacterOption, GuessResult, Theme } from "@chutai/shared";
 import { compareCharacters, drawCharacter, formatValue } from "@chutai/game";
 import { Button } from "@/components/ui/button";
+import { CharacterPicture } from "@/components/ui/character-picture";
 import { GuessBoard } from "./guess-board";
 import { GuessInput } from "./guess-input";
 import { Legend } from "./legend";
@@ -35,6 +36,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
         characterId: character.id,
         characterName: character.name,
         emoji: character.emoji,
+        image: character.image,
         feedback: compareCharacters(character, answer, theme.attributes),
         correct: character.id === answer.id,
         guessNumber: current.length + 1,
@@ -80,9 +82,12 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             (solved ? "border-folha bg-folha-soft" : "border-tinta bg-white")
           }
         >
-          <span aria-hidden className="text-6xl leading-none">
-            {answer.emoji}
-          </span>
+          <CharacterPicture
+            name={answer.name}
+            image={answer.image}
+            emoji={answer.emoji}
+            size="xl"
+          />
           <div className="flex flex-1 flex-col gap-1">
             <p className="flex items-center gap-2 font-semibold">
               {solved ? (

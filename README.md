@@ -12,7 +12,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-54_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-57_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -81,6 +81,8 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
+- [x] Imagem de cada personagem no autocompletar, no tabuleiro, na revelação, no treino e na página do tema; sem imagem, aparece o emoji
+- [x] Imagens só com licença livre (Wikimedia Commons), com autor e licença de cada uma na página [/creditos](apps/web/public/temas/CREDITOS.md)
 - [x] Segurança: servidor autoritativo, validação com Zod, limite de ações por segundo e filtro de apelidos
 - [x] Banco de dados (PostgreSQL + Drizzle) e Redis **já programados e testados**, prontos para ligar
 
@@ -150,6 +152,7 @@ Princípios que guiaram o código:
 chutai/
 ├── apps/
 │   ├── web/                         # Site em Next.js
+│   │   ├── public/temas/            # Imagens dos personagens (<slug>/<id>.webp) e créditos
 │   │   └── src/
 │   │       ├── app/                 # Rotas: início, sala/[codigo], temas, treino, criar-tema, api/
 │   │       ├── components/
@@ -185,7 +188,8 @@ chutai/
 │       ├── src/schema.ts            # Tabelas (Drizzle)
 │       ├── src/repositories/        # JSON (hoje) e PostgreSQL (futuro), mesma interface
 │       ├── migrations/              # SQL gerado pelo drizzle-kit
-│       ├── seed/                    # Temas oficiais em JSON + script que carrega no banco
+│       ├── seed/                    # Temas oficiais em JSON, origem das imagens e script que carrega no banco
+│       ├── scripts/                 # fetch-images.ts: baixa as imagens do Commons e gera os créditos
 │       └── tests/                   # Testes com PostgreSQL de verdade em memória (PGlite)
 │
 ├── docs/screenshots/                # Imagens deste README
@@ -222,18 +226,19 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 
 ### Scripts
 
-| Comando            | O que faz                                                                      |
-| ------------------ | ------------------------------------------------------------------------------ |
-| `pnpm dev`         | Site (porta 3000) e servidor de tempo real (porta 3001) com recarga automática |
-| `pnpm build`       | Gera as versões de produção                                                    |
-| `pnpm start`       | Roda as versões de produção                                                    |
-| `pnpm test`        | Todos os testes                                                                |
-| `pnpm typecheck`   | Confere os tipos de todos os pacotes                                           |
-| `pnpm lint`        | ESLint                                                                         |
-| `pnpm format`      | Formata o código com Prettier                                                  |
-| `pnpm db:generate` | Gera migração SQL a partir do schema (não precisa de banco)                    |
-| `pnpm db:migrate`  | Aplica as migrações no banco de `DATABASE_URL`                                 |
-| `pnpm db:seed`     | Carrega os temas oficiais no banco                                             |
+| Comando             | O que faz                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `pnpm dev`          | Site (porta 3000) e servidor de tempo real (porta 3001) com recarga automática        |
+| `pnpm build`        | Gera as versões de produção                                                           |
+| `pnpm start`        | Roda as versões de produção                                                           |
+| `pnpm test`         | Todos os testes                                                                       |
+| `pnpm typecheck`    | Confere os tipos de todos os pacotes                                                  |
+| `pnpm lint`         | ESLint                                                                                |
+| `pnpm format`       | Formata o código com Prettier                                                         |
+| `pnpm db:generate`  | Gera migração SQL a partir do schema (não precisa de banco)                           |
+| `pnpm db:migrate`   | Aplica as migrações no banco de `DATABASE_URL`                                        |
+| `pnpm db:seed`      | Carrega os temas oficiais no banco                                                    |
+| `pnpm images:fetch` | Baixa as imagens dos temas do Wikimedia Commons, confere a licença e gera os créditos |
 
 ### Variáveis de ambiente
 
@@ -310,7 +315,7 @@ pnpm test
 | ------------------ | -----: | --------------------------------------------------------------------------------------------------------------------------- |
 | `@chutai/game`     |     29 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento                                    |
 | `@chutai/realtime` |     19 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião) e **uma partida inteira com dois clientes Socket.IO reais** |
-| `@chutai/db`       |      6 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas                                     |
+| `@chutai/db`       |      9 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens e créditos                 |
 
 ## Deploy
 
@@ -350,6 +355,8 @@ Temas são arquivos JSON em [`packages/db/seed`](packages/db/seed). Cada um defi
   ]
 }
 ```
+
+Cada personagem pode ter um campo `image` com o caminho da imagem (ex.: `/temas/minha-turma/ana.webp`, dentro de `apps/web/public`). Para os temas oficiais, as imagens vêm do Wikimedia Commons: escolha o arquivo em `packages/db/seed/image-sources.json` e rode `pnpm images:fetch`, que confere a licença, reduz a imagem e atualiza os créditos.
 
 O tema também precisa de um campo `emoji` com o ícone que aparece no site, e cada personagem pode ter o seu (sem imagem, é ele que aparece no tabuleiro). Os temas oficiais servem de modelo.
 

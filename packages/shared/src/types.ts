@@ -71,6 +71,11 @@ export interface Theme {
   emoji: string;
   color: ThemeColor;
   visibility: ThemeVisibility;
+  /**
+   * Mês em que os dados foram conferidos ("AAAA-MM"), para temas com dados que mudam
+   * (clube atual, inscritos...). A página do tema mostra "Dados de outubro de 2026".
+   */
+  dataUpdatedAt?: string;
   attributes: ThemeAttribute[];
   characters: Character[];
 }

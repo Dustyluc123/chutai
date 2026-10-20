@@ -15,6 +15,13 @@
       "when": 1792470917997,
       "tag": "0001_creditos_das_imagens",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792510754996,
+      "tag": "0002_data_dos_dados",
+      "breakpoints": true
     }
   ]
 }

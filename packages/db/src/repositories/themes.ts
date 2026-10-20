@@ -112,6 +112,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
       emoji: row.emoji,
       color: row.color as ThemeColor,
       visibility: row.visibility as ThemeVisibility,
+      ...(row.dataUpdatedAt ? { dataUpdatedAt: row.dataUpdatedAt } : {}),
       attributes: attributeRows.map((attr) => ({
         key: attr.key,
         label: attr.label,
@@ -154,6 +155,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
         color: theme.color,
         visibility: theme.visibility,
         moderationStatus: theme.visibility === "official" ? "approved" : "pending",
+        dataUpdatedAt: theme.dataUpdatedAt ?? null,
       })
       .onConflictDoUpdate({
         target: themes.slug,
@@ -163,6 +165,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
           emoji: theme.emoji,
           color: theme.color,
           visibility: theme.visibility,
+          dataUpdatedAt: theme.dataUpdatedAt ?? null,
         },
       })
       .returning({ id: themes.id });

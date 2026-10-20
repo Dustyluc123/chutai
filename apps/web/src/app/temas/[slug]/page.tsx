@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { THEME_COLORS } from "@/lib/colors";
 import { cn } from "@/lib/cn";
+import { formatDataMonth } from "@/lib/format";
 import { getTheme, listThemes } from "@/lib/themes";
 
 interface PageProps {
@@ -40,6 +41,7 @@ export default async function ThemePage({ params }: PageProps) {
   if (!theme || theme.visibility === "private") notFound();
   const color = THEME_COLORS[theme.color];
   const characters = [...theme.characters].sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+  const dataMonth = formatDataMonth(theme.dataUpdatedAt);
 
   return (
     <>
@@ -52,6 +54,12 @@ export default async function ThemePage({ params }: PageProps) {
             </span>
             <h1 className="font-display text-5xl sm:text-6xl">{theme.name}</h1>
             <p className="max-w-[56ch] text-lg font-medium opacity-90">{theme.description}</p>
+            {dataMonth ? (
+              <p className="text-sm font-semibold opacity-80">
+                Dados de {dataMonth}. Clubes, números e outras informações podem ter mudado desde
+                então.
+              </p>
+            ) : null}
           </div>
           <div className="flex flex-wrap gap-2">
             <a

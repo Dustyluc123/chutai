@@ -59,6 +59,9 @@ export function validateTheme(theme: Theme): string[] {
   const problems: string[] = [];
   if (theme.attributes.length < 2) problems.push("O tema precisa de pelo menos 2 atributos.");
   if (theme.characters.length < 5) problems.push("O tema precisa de pelo menos 5 personagens.");
+  if (theme.dataUpdatedAt !== undefined && !/^\d{4}-(0[1-9]|1[0-2])$/.test(theme.dataUpdatedAt)) {
+    problems.push("dataUpdatedAt precisa estar no formato AAAA-MM (ex.: 2026-10).");
+  }
 
   const attributeKeys = new Set(theme.attributes.map((attr) => attr.key));
   const ids = new Set<string>();

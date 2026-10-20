@@ -4,8 +4,10 @@ import type { MatchRecord } from "@chutai/db";
 import { Room, type RoomDeps, type RoomEmitter } from "../src/rooms/Room";
 
 export const theme: Theme = OFFICIAL_THEMES[0]!;
-/** Tema com imagem para todos os personagens (o único que aceita o modo Imagem). */
+/** Tema com imagem para todos os personagens (modo Imagem normal). */
 export const imageTheme: Theme = OFFICIAL_THEMES.find((t) => t.slug === "fauna-brasileira")!;
+/** Tema com imagem para quase todos (47 de 49): modo Imagem parcial. */
+export const partialTheme: Theme = OFFICIAL_THEMES.find((t) => t.slug === "lendas-do-futebol")!;
 
 /** Gerador falso: cada nível vira um buffer com o texto "nivel-N", fácil de conferir. */
 export const fakeRenderer = async () =>
@@ -48,7 +50,11 @@ type Sent = { to: "all" | string; event: keyof ServerToClientEvents; args: unkno
 
 export function createTestRoom(
   overrides: Partial<Room["settings"]> = {},
-  options: { theme?: Theme; renderRoundImages?: RoomDeps["renderRoundImages"] } = {},
+  options: {
+    theme?: Theme;
+    renderRoundImages?: RoomDeps["renderRoundImages"];
+    random?: () => number;
+  } = {},
 ) {
   const roomTheme = options.theme ?? theme;
   const clock = new FakeClock();
@@ -74,7 +80,7 @@ export function createTestRoom(
       emitter,
       now: clock.now,
       schedule: clock.schedule,
-      random: () => 0,
+      random: options.random ?? (() => 0),
       disconnectGraceMs: 5_000,
       intermissionMs: 3_000,
       onFinished: (record) => finished.push(record),
@@ -87,5 +93,5 @@ export function createTestRoom(
 /** Um personagem do tema que NÃO é a resposta atual. */
 export function wrongCharacter(room: Room, skip: string[] = []) {
   const answer = room.peekAnswerForTests()!;
-  return room.theme.characters.find((c) => c.id !== answer.id && !skip.includes(c.id))!;
+  return room.playableCharacters.find((c) => c.id !== answer.id && !skip.includes(c.id))!;
 }

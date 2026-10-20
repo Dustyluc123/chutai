@@ -142,10 +142,14 @@ describe("DrizzleThemeRepository", () => {
     expect(loaded!.characters.filter((c) => c.image)).toHaveLength(expected);
   });
 
-  it("só a fauna tem imagem para todos os personagens (modo Imagem)", async () => {
+  it("calcula o modo Imagem de cada tema (normal, parcial ou indisponível)", async () => {
     const summaries = await new DrizzleThemeRepository(db).listThemes();
-    const available = summaries.filter((t) => t.imageModeAvailable).map((t) => t.slug);
-    expect(available).toEqual(["fauna-brasileira"]);
+    const modes = Object.fromEntries(summaries.map((t) => [t.slug, t.imageMode]));
+    expect(modes).toMatchObject({
+      "fauna-brasileira": "full",
+      "lendas-do-futebol": "partial",
+      "folclore-brasileiro": "none",
+    });
   });
 
   it("rodar o seed de novo não duplica nada", async () => {

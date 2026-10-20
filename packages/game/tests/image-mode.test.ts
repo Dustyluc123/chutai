@@ -6,6 +6,8 @@ import {
   imageEffect,
   zoomWindow,
   imageLevel,
+  imageModeAvailability,
+  imageModeCharacters,
   supportsImageMode,
 } from "../src/image-mode";
 import { computeRoundPoints } from "../src/scoring";
@@ -52,11 +54,46 @@ describe("imageEffect", () => {
   });
 });
 
-describe("supportsImageMode", () => {
-  it("só aceita temas em que todos os personagens têm imagem", () => {
-    expect(supportsImageMode([{ image: "/a.webp" }, { image: "/b.webp" }])).toBe(true);
-    expect(supportsImageMode([{ image: "/a.webp" }, {}])).toBe(false);
+/** Tema de mentira com `withImage` personagens com imagem e `without` sem. */
+const fakeTheme = (withImage: number, without: number) => [
+  ...Array.from({ length: withImage }, (_, i) => ({ image: `/t/${i}.webp` })),
+  ...Array.from({ length: without }, () => ({})),
+];
+
+describe("imageModeAvailability", () => {
+  it("100% com imagem: modo Imagem normal", () => {
+    expect(imageModeAvailability(fakeTheme(40, 0))).toBe("full");
+  });
+
+  it("de 75% a 99%: modo Imagem parcial", () => {
+    expect(imageModeAvailability(fakeTheme(30, 10))).toBe("partial"); // 75% exatos
+    expect(imageModeAvailability(fakeTheme(47, 2))).toBe("partial");
+  });
+
+  it("abaixo de 75%: indisponível", () => {
+    expect(imageModeAvailability(fakeTheme(29, 11))).toBe("none");
+    expect(imageModeAvailability(fakeTheme(16, 8))).toBe("none");
+  });
+
+  it("precisa de pelo menos 10 personagens com imagem, mesmo com 100%", () => {
+    expect(imageModeAvailability(fakeTheme(9, 0))).toBe("none");
+    expect(imageModeAvailability(fakeTheme(10, 0))).toBe("full");
+    expect(imageModeAvailability(fakeTheme(9, 1))).toBe("none");
+  });
+
+  it("tema vazio não tem modo Imagem", () => {
+    expect(imageModeAvailability([])).toBe("none");
     expect(supportsImageMode([])).toBe(false);
+  });
+
+  it("supportsImageMode aceita o normal e o parcial", () => {
+    expect(supportsImageMode(fakeTheme(40, 0))).toBe(true);
+    expect(supportsImageMode(fakeTheme(36, 4))).toBe(true);
+    expect(supportsImageMode(fakeTheme(20, 20))).toBe(false);
+  });
+
+  it("no modo Imagem só entram os personagens com imagem", () => {
+    expect(imageModeCharacters(fakeTheme(3, 2))).toHaveLength(3);
   });
 });
 

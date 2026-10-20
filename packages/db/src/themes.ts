@@ -3,7 +3,7 @@
  * Este arquivo não depende de banco: pode ser usado em qualquer lugar.
  */
 import type { CharacterOption, Theme, ThemeSummary } from "@chutai/shared";
-import { supportsImageMode } from "@chutai/game";
+import { imageModeAvailability } from "@chutai/game";
 import folclore from "../seed/folclore-brasileiro.json" with { type: "json" };
 import futebol from "../seed/lendas-do-futebol.json" with { type: "json" };
 import fauna from "../seed/fauna-brasileira.json" with { type: "json" };
@@ -20,7 +20,8 @@ export function toThemeSummary(theme: Theme): ThemeSummary {
     color: theme.color,
     visibility: theme.visibility,
     characterCount: theme.characters.length,
-    imageModeAvailable: supportsImageMode(theme.characters),
+    imageMode: imageModeAvailability(theme.characters),
+    imageCharacterCount: theme.characters.filter((character) => !!character.image).length,
     attributes: theme.attributes.map(({ key, label }) => ({ key, label })),
   };
 }

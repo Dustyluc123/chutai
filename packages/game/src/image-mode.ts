@@ -1,4 +1,4 @@
-import type { Character } from "@chutai/shared";
+import type { Character, ImageModeAvailability } from "@chutai/shared";
 import { IMAGE_MODE } from "./config";
 
 /** Maior nível que um jogador pode alcançar durante a rodada (o nítido fica para a revelação). */
@@ -21,9 +21,32 @@ export function imageLevel({ wrongGuesses, hintsUsed }: ImageLevelInput): number
   return Math.min(MAX_ROUND_IMAGE_LEVEL, Math.floor(raw));
 }
 
-/** O modo Imagem só funciona se todos os personagens do tema tiverem imagem. */
+/**
+ * Diz se o modo Imagem pode ser usado num tema:
+ * - full: todos os personagens têm imagem;
+ * - partial: pelo menos IMAGE_MODE.partialMinShare (75%) têm, e no mínimo
+ *   IMAGE_MODE.partialMinCount (10);
+ * - none: menos que isso.
+ */
+export function imageModeAvailability(
+  characters: readonly Pick<Character, "image">[],
+): ImageModeAvailability {
+  const withImage = characters.filter((character) => !!character.image).length;
+  if (characters.length === 0 || withImage < IMAGE_MODE.partialMinCount) return "none";
+  if (withImage === characters.length) return "full";
+  return withImage / characters.length >= IMAGE_MODE.partialMinShare ? "partial" : "none";
+}
+
+/** true quando o modo Imagem pode ser escolhido (normal ou parcial). */
 export function supportsImageMode(characters: readonly Pick<Character, "image">[]): boolean {
-  return characters.length > 0 && characters.every((character) => !!character.image);
+  return imageModeAvailability(characters) !== "none";
+}
+
+/** Personagens que entram numa partida do modo Imagem: só os que têm imagem. */
+export function imageModeCharacters<T extends Pick<Character, "image">>(
+  characters: readonly T[],
+): T[] {
+  return characters.filter((character) => !!character.image);
 }
 
 /** Efeito (zoom, redução e desfoque) de um nível. Lança erro para níveis fora da faixa da rodada. */

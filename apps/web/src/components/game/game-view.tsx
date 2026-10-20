@@ -44,10 +44,20 @@ export function GameView({ state, room }: GameViewProps) {
     <div className="flex flex-1 flex-col">
       <div className="border-b-2 border-tinta bg-white">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:gap-6 sm:px-6">
-          <p className="font-display shrink-0 text-2xl">
-            Rodada {roundNumber}
-            <span className="text-tinta-soft"> / {state.settings.rounds}</span>
-          </p>
+          <div className="flex shrink-0 items-center gap-3">
+            <p className="font-display text-2xl">
+              Rodada {roundNumber}
+              <span className="text-tinta-soft"> / {state.settings.rounds}</span>
+            </p>
+            {imageMode && state.theme.imageMode === "partial" ? (
+              <span
+                title={`Só os ${state.theme.imageCharacterCount} personagens com imagem estão nesta partida.`}
+                className="rounded-full border-2 border-tinta bg-gema-soft px-2.5 py-0.5 text-xs font-bold"
+              >
+                Imagem parcial
+              </span>
+            ) : null}
+          </div>
           <div className="flex-1">
             {inRound ? (
               <RoundTimer

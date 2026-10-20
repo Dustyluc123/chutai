@@ -30,6 +30,13 @@ export const HINTS = {
  * durante a rodada o jogador chega no máximo ao 4, e a imagem nítida só aparece na revelação.
  */
 export const IMAGE_MODE = {
+  /**
+   * Modo Imagem parcial: liberado quando pelo menos esta fração dos personagens tem imagem...
+   * (os que não têm ficam de fora do sorteio e do autocompletar da partida)
+   */
+  partialMinShare: 0.75,
+  /** ...e existem pelo menos estes personagens com imagem. */
+  partialMinCount: 10,
   /** Total de níveis, contando o nítido. */
   levels: 6,
   /** Níveis ganhos por chute errado. */

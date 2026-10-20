@@ -7,7 +7,7 @@ import type {
   ThemeSummary,
   ThemeVisibility,
 } from "@chutai/shared";
-import { supportsImageMode } from "@chutai/game";
+import { imageModeAvailability } from "@chutai/game";
 import { OFFICIAL_THEMES, toThemeSummary } from "../themes";
 import { characterValues, characters, themeAttributes, themes } from "../schema";
 import type { Database, ThemeRepository } from "./types";
@@ -68,7 +68,8 @@ export class DrizzleThemeRepository implements ThemeRepository {
         color: row.color as ThemeColor,
         visibility: row.visibility as ThemeVisibility,
         characterCount: themeCharacters.length,
-        imageModeAvailable: supportsImageMode(themeCharacters),
+        imageMode: imageModeAvailability(themeCharacters),
+        imageCharacterCount: themeCharacters.filter((c) => !!c.image).length,
         attributes: attributeRows
           .filter((attr) => attr.themeId === row.id)
           .map((attr) => ({ key: attr.key, label: attr.label })),

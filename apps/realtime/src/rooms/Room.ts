@@ -32,6 +32,7 @@ import {
   drawCharacter,
   formatValue,
   imageLevel,
+  imageModeCharacters,
   supportsImageMode,
 } from "@chutai/game";
 import { toCharacterOptions, toThemeSummary, type MatchRecord } from "@chutai/db";
@@ -242,7 +243,7 @@ export class Room {
     const nextTheme = theme ?? this.theme;
     if (changes.mode === "image" && !supportsImageMode(nextTheme.characters)) {
       throw new GameError(
-        "O modo Imagem precisa de um tema em que todos os personagens têm imagem.",
+        "O modo Imagem precisa de um tema em que pelo menos 75% dos personagens (e no mínimo 10) têm imagem.",
       );
     }
     const before = `${this.theme.slug}:${this.settings.mode}`;
@@ -265,9 +266,19 @@ export class Room {
    * com as miniaturas, bastaria comparar com a imagem borrada.
    */
   characterOptions(): CharacterOption[] {
-    const options = toCharacterOptions(this.theme);
+    const options = toCharacterOptions({ ...this.theme, characters: this.playableCharacters });
     if (this.settings.mode !== "image") return options;
     return options.map(({ id, name, aliases }) => ({ id, name, aliases }));
+  }
+
+  /**
+   * Personagens desta partida: no modo Imagem, só os que têm imagem (modo parcial deixa os
+   * outros de fora do sorteio e do autocompletar). O servidor decide; o navegador só recebe a lista.
+   */
+  get playableCharacters(): Character[] {
+    return this.settings.mode === "image"
+      ? imageModeCharacters(this.theme.characters)
+      : this.theme.characters;
   }
 
   get imageModeAvailable(): boolean {
@@ -317,7 +328,7 @@ export class Room {
 
   private startRound(number: number): void {
     this.cancelTimer?.();
-    const character = drawCharacter(this.theme.characters, this.usedCharacterIds, this.random);
+    const character = drawCharacter(this.playableCharacters, this.usedCharacterIds, this.random);
     this.usedCharacterIds.add(character.id);
 
     const startedAt = this.now();
@@ -413,6 +424,9 @@ export class Room {
 
     const guessed = this.theme.characters.find((character) => character.id === characterId);
     if (!guessed) throw new GameError("Esse personagem não faz parte do tema.");
+    if (!this.playableCharacters.some((character) => character.id === characterId)) {
+      throw new GameError("Esse personagem não está nesta partida.");
+    }
     if (state.guesses.some((item) => item.characterId === characterId)) {
       throw new GameError("Você já chutou esse personagem.");
     }

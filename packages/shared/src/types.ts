@@ -75,6 +75,13 @@ export interface Theme {
   characters: Character[];
 }
 
+/**
+ * full    → todos os personagens têm imagem: modo Imagem normal
+ * partial → pelo menos 75% (e no mínimo 10) têm: modo Imagem parcial, sem os que não têm imagem
+ * none    → modo Imagem indisponível
+ */
+export type ImageModeAvailability = "full" | "partial" | "none";
+
 export interface ThemeSummary {
   slug: string;
   name: string;
@@ -83,8 +90,10 @@ export interface ThemeSummary {
   color: ThemeColor;
   visibility: ThemeVisibility;
   characterCount: number;
-  /** true quando TODOS os personagens têm imagem: só assim o modo Imagem pode ser escolhido. */
-  imageModeAvailable: boolean;
+  /** Se o modo Imagem pode ser escolhido neste tema (ver ImageModeAvailability). */
+  imageMode: ImageModeAvailability;
+  /** Quantos personagens têm imagem. */
+  imageCharacterCount: number;
   attributes: Pick<ThemeAttribute, "key" | "label">[];
 }
 

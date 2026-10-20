@@ -10,6 +10,8 @@ import {
   MAX_ROUND_IMAGE_LEVEL,
   drawZoomCenter,
   imageLevel,
+  imageModeAvailability,
+  imageModeCharacters,
   supportsImageMode,
   type ZoomCenter,
 } from "@chutai/game";
@@ -33,10 +35,17 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const imageMode = mode === "image" && imageAvailable;
   const [zoomCenter, setZoomCenter] = useState<ZoomCenter>({ x: 0.5, y: 0.5 });
   // No modo Imagem, o autocompletar mostra só o nome (a miniatura entregaria a resposta).
-  const visibleOptions = useMemo(
-    () => (imageMode ? options.map(({ id, name, aliases }) => ({ id, name, aliases })) : options),
-    [imageMode, options],
-  );
+  const partial = imageMode && imageModeAvailability(theme.characters) === "partial";
+  // Personagens do jogo: no modo Imagem, só quem tem imagem (no parcial, os outros ficam de fora).
+  const poolFor = (value: GameMode) =>
+    value === "image" && imageAvailable ? imageModeCharacters(theme.characters) : theme.characters;
+  const visibleOptions = useMemo(() => {
+    if (!imageMode) return options;
+    const ids = new Set(imageModeCharacters(theme.characters).map((c) => c.id));
+    return options
+      .filter((option) => ids.has(option.id))
+      .map(({ id, name, aliases }) => ({ id, name, aliases }));
+  }, [imageMode, options, theme.characters]);
 
   // Sorteio só no navegador (evita diferença entre servidor e cliente na hidratação).
   useEffect(() => {
@@ -69,11 +78,11 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     ]);
   }
 
-  function next() {
+  function next(value: GameMode = mode) {
     if (!answer) return;
     const used = new Set(played).add(answer.id);
     setPlayed(used);
-    setAnswer(drawCharacter(theme.characters, used));
+    setAnswer(drawCharacter(poolFor(value), used));
     setZoomCenter(drawZoomCenter());
     setGuesses([]);
     setRevealed(false);
@@ -81,7 +90,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
 
   function changeMode(value: GameMode) {
     setMode(value);
-    next();
+    next(value);
   }
 
   return (
@@ -99,7 +108,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
               <Eye aria-hidden className="size-4" /> Desistir
             </Button>
           ) : null}
-          <Button variant="secondary" onClick={next} disabled={!answer}>
+          <Button variant="secondary" onClick={() => next()} disabled={!answer}>
             <Shuffle aria-hidden className="size-4" /> Outro personagem
           </Button>
         </div>
@@ -115,6 +124,16 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
           ]}
           onChange={changeMode}
         />
+      ) : null}
+
+      {partial ? (
+        <p
+          role="status"
+          className="rounded-2xl border-2 border-gema bg-gema-soft px-3 py-2 text-sm font-semibold"
+        >
+          Modo Imagem parcial: {imageModeCharacters(theme.characters).length} de{" "}
+          {theme.characters.length} personagens têm imagem. Os outros ficam de fora.
+        </p>
       ) : null}
 
       {imageMode && answer?.image && !finished ? (
@@ -160,7 +179,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
                 .join(". ")}
             </p>
           </div>
-          <Button onClick={next}>Jogar de novo</Button>
+          <Button onClick={() => next()}>Jogar de novo</Button>
         </section>
       ) : (
         <GuessInput

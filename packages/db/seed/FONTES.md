@@ -143,3 +143,40 @@ Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do C
 | Nath Finanças        | [Wikipédia](https://pt.wikipedia.org/wiki/Nath_Finan%C3%A7as), [Wikidata](https://www.wikidata.org/wiki/Q115011771)                                                                                    |
 | Rato Borrachudo      | [Wikipédia](https://pt.wikipedia.org/wiki/Rato_Borrachudo), [Wikidata](https://www.wikidata.org/wiki/Q123586839)                                                                                       |
 | Fred Bruno           | [Wikipédia](https://pt.wikipedia.org/wiki/Fred_Bruno), [Wikidata](https://www.wikidata.org/wiki/Q97179057)                                                                                             |
+
+## Famosos da TV
+
+Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descrição do artigo (apresentação, atuação ou jornalismo). Estado natal e nascimento: caixa de informações, conferidos no Wikidata. Início da carreira: período em atividade do artigo; sem ele, o Wikidata ou o primeiro parágrafo (Ratinho: estreia na TV, em 1991). A emissora atual ficou de fora: muitos artistas trabalham sem contrato fixo e o dado não pôde ser confirmado para todos.
+
+| Personagem           | Fontes                                                                                                                           |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Luciano Huck         | [Wikipédia](https://pt.wikipedia.org/wiki/Luciano_Huck), [Wikidata](https://www.wikidata.org/wiki/Q3329376)                      |
+| Ana Maria Braga      | [Wikipédia](https://pt.wikipedia.org/wiki/Ana_Maria_Braga), [Wikidata](https://www.wikidata.org/wiki/Q1789267)                   |
+| Xuxa                 | [Wikipédia](https://pt.wikipedia.org/wiki/Xuxa), [Wikidata](https://www.wikidata.org/wiki/Q275939)                               |
+| Angélica             | [Wikipédia](https://pt.wikipedia.org/wiki/Ang%C3%A9lica_%28apresentadora%29), [Wikidata](https://www.wikidata.org/wiki/Q2883785) |
+| Eliana               | [Wikipédia](https://pt.wikipedia.org/wiki/Eliana), [Wikidata](https://www.wikidata.org/wiki/Q658889)                             |
+| Faustão              | [Wikipédia](https://pt.wikipedia.org/wiki/Faust%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q1790996)                      |
+| Serginho Groisman    | [Wikipédia](https://pt.wikipedia.org/wiki/Serginho_Groisman), [Wikidata](https://www.wikidata.org/wiki/Q3714816)                 |
+| Marcos Mion          | [Wikipédia](https://pt.wikipedia.org/wiki/Marcos_Mion), [Wikidata](https://www.wikidata.org/wiki/Q6757894)                       |
+| Tatá Werneck         | [Wikipédia](https://pt.wikipedia.org/wiki/Tat%C3%A1_Werneck), [Wikidata](https://www.wikidata.org/wiki/Q6598039)                 |
+| Fátima Bernardes     | [Wikipédia](https://pt.wikipedia.org/wiki/F%C3%A1tima_Bernardes), [Wikidata](https://www.wikidata.org/wiki/Q18315)               |
+| William Bonner       | [Wikipédia](https://pt.wikipedia.org/wiki/William_Bonner), [Wikidata](https://www.wikidata.org/wiki/Q18314)                      |
+| Patrícia Poeta       | [Wikipédia](https://pt.wikipedia.org/wiki/Patr%C3%ADcia_Poeta), [Wikidata](https://www.wikidata.org/wiki/Q3370128)               |
+| Rodrigo Faro         | [Wikipédia](https://pt.wikipedia.org/wiki/Rodrigo_Faro), [Wikidata](https://www.wikidata.org/wiki/Q7357329)                      |
+| Celso Portiolli      | [Wikipédia](https://pt.wikipedia.org/wiki/Celso_Portiolli), [Wikidata](https://www.wikidata.org/wiki/Q16337138)                  |
+| Ratinho              | [Wikipédia](https://pt.wikipedia.org/wiki/Ratinho), [Wikidata](https://www.wikidata.org/wiki/Q10357563)                          |
+| Sabrina Sato         | [Wikipédia](https://pt.wikipedia.org/wiki/Sabrina_Sato), [Wikidata](https://www.wikidata.org/wiki/Q871204)                       |
+| Fernanda Montenegro  | [Wikipédia](https://pt.wikipedia.org/wiki/Fernanda_Montenegro), [Wikidata](https://www.wikidata.org/wiki/Q335455)                |
+| Tony Ramos           | [Wikipédia](https://pt.wikipedia.org/wiki/Tony_Ramos), [Wikidata](https://www.wikidata.org/wiki/Q954355)                         |
+| Lázaro Ramos         | [Wikipédia](https://pt.wikipedia.org/wiki/L%C3%A1zaro_Ramos), [Wikidata](https://www.wikidata.org/wiki/Q2750612)                 |
+| Taís Araújo          | [Wikipédia](https://pt.wikipedia.org/wiki/Ta%C3%ADs_Ara%C3%BAjo), [Wikidata](https://www.wikidata.org/wiki/Q2732423)             |
+| Regina Casé          | [Wikipédia](https://pt.wikipedia.org/wiki/Regina_Cas%C3%A9), [Wikidata](https://www.wikidata.org/wiki/Q1797422)                  |
+| Bruna Marquezine     | [Wikipédia](https://pt.wikipedia.org/wiki/Bruna_Marquezine), [Wikidata](https://www.wikidata.org/wiki/Q4281880)                  |
+| Paolla Oliveira      | [Wikipédia](https://pt.wikipedia.org/wiki/Paolla_Oliveira), [Wikidata](https://www.wikidata.org/wiki/Q3140534)                   |
+| Juliana Paes         | [Wikipédia](https://pt.wikipedia.org/wiki/Juliana_Paes), [Wikidata](https://www.wikidata.org/wiki/Q466954)                       |
+| Reynaldo Gianecchini | [Wikipédia](https://pt.wikipedia.org/wiki/Reynaldo_Gianecchini), [Wikidata](https://www.wikidata.org/wiki/Q2345358)              |
+| Cauã Reymond         | [Wikipédia](https://pt.wikipedia.org/wiki/Cau%C3%A3_Reymond), [Wikidata](https://www.wikidata.org/wiki/Q5054732)                 |
+| Glória Pires         | [Wikipédia](https://pt.wikipedia.org/wiki/Gl%C3%B3ria_Pires), [Wikidata](https://www.wikidata.org/wiki/Q149389)                  |
+| Selton Mello         | [Wikipédia](https://pt.wikipedia.org/wiki/Selton_Mello), [Wikidata](https://www.wikidata.org/wiki/Q4289700)                      |
+| Wagner Moura         | [Wikipédia](https://pt.wikipedia.org/wiki/Wagner_Moura), [Wikidata](https://www.wikidata.org/wiki/Q922503)                       |
+| Fernanda Torres      | [Wikipédia](https://pt.wikipedia.org/wiki/Fernanda_Torres), [Wikidata](https://www.wikidata.org/wiki/Q465907)                    |

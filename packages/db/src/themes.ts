@@ -10,12 +10,14 @@ import fauna from "../seed/fauna-brasileira.json" with { type: "json" };
 import musica from "../seed/musica-brasileira.json" with { type: "json" };
 import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
 import youtubers from "../seed/youtubers-e-streamers.json" with { type: "json" };
+import famososTv from "../seed/famosos-da-tv.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
 export const OFFICIAL_THEMES: readonly Theme[] = [
   youtubers,
   musica,
   futebolAtual,
+  famososTv,
   folclore,
   futebol,
   fauna,

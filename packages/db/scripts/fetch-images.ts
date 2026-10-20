@@ -98,6 +98,10 @@ async function commonsInfo(files: string[]): Promise<Map<string, CommonsInfo>> {
  */
 const CROP_POSITION: Record<string, string | number> = {
   "lendas-do-futebol": "top",
+  "musica-brasileira": "top",
+  "futebol-atual": "top",
+  "youtubers-e-streamers": "top",
+  "famosos-da-tv": "top",
 };
 
 /** Recorta para quadrado e converte para WebP. */

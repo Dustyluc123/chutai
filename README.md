@@ -11,6 +11,7 @@
   <img alt="Socket.IO" src="https://img.shields.io/badge/Socket.IO-4.8-010101?logo=socketdotio&logoColor=white" />
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
+  <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
   <img alt="Testes" src="https://img.shields.io/badge/testes-54_passando-12a85f" />
 </p>
 
@@ -45,11 +46,11 @@ Jogos "dle" (Wordle, Loldle e companhia) são divertidos, mas quase sempre solit
 
 O projeto foi pensado para o público brasileiro, com temas nacionais desde o lançamento:
 
-| Tema                   | Personagens | O que cada palpite compara                                            |
-| ---------------------- | ----------: | --------------------------------------------------------------------- |
-| 🌿 Folclore brasileiro |          24 | Forma, região, onde aparece, quando aparece, comportamento            |
-| ⚽ Lendas do futebol   |          49 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção |
-| 🦜 Fauna brasileira    |          40 | Grupo, biomas, alimentação, onde vive, peso                           |
+| Tema                | Personagens | O que cada palpite compara                                            |
+| ------------------- | ----------: | --------------------------------------------------------------------- |
+| Folclore brasileiro |          24 | Forma, região, onde aparece, quando aparece, comportamento            |
+| Lendas do futebol   |          49 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção |
+| Fauna brasileira    |          40 | Grupo, biomas, alimentação, onde vive, peso                           |
 
 ## Como se joga
 
@@ -57,12 +58,12 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 2. **Chame a galera.** Mande o código de 6 caracteres ou o link. Ninguém precisa de cadastro.
 3. **Chute.** Cada palpite mostra, atributo por atributo, o que bate com o personagem secreto:
 
-| Cor          | Significado                                                 |
-| ------------ | ----------------------------------------------------------- |
-| 🟩 Verde     | Igual ao do personagem secreto                              |
-| 🟨 Amarelo   | Tem algo em comum (numa lista) ou chegou perto (num número) |
-| 🟥 Vermelho  | Diferente                                                   |
-| ⬆️ / ⬇️ Seta | Em números, aponta para onde está a resposta                |
+| Cor                          | Significado                                                 |
+| ---------------------------- | ----------------------------------------------------------- |
+| Verde                        | Igual ao do personagem secreto                              |
+| Amarelo                      | Tem algo em comum (numa lista) ou chegou perto (num número) |
+| Vermelho                     | Diferente                                                   |
+| Seta para cima ou para baixo | Em números, mostra se a resposta é maior ou menor           |
 
 Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 
@@ -331,7 +332,6 @@ Temas são arquivos JSON em [`packages/db/seed`](packages/db/seed). Cada um defi
   "slug": "minha-turma",
   "name": "Minha turma",
   "description": "O dle da galera do trabalho.",
-  "emoji": "🎉",
   "color": "anil",
   "visibility": "public",
   "attributes": [
@@ -345,12 +345,13 @@ Temas são arquivos JSON em [`packages/db/seed`](packages/db/seed). Cada um defi
       "id": "ana",
       "name": "Ana",
       "aliases": ["Aninha"],
-      "emoji": "🏐",
       "values": { "cidade": "Recife", "hobbies": ["vôlei", "games"], "idade": 24, "altura": 168 }
     }
   ]
 }
 ```
+
+O tema também precisa de um campo `emoji` com o ícone que aparece no site, e cada personagem pode ter o seu (sem imagem, é ele que aparece no tabuleiro). Os temas oficiais servem de modelo.
 
 Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `temas oficiais estão todos consistentes` avisa se faltar algum valor.
 
@@ -369,8 +370,8 @@ Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `tem
 
 Sou **Lucas Barreto**, desenvolvedor. Criei o Chutaí para praticar desenvolvimento full stack de ponta a ponta: tempo real com WebSocket, arquitetura em monorepo, modelagem de banco, testes automatizados e uma interface com identidade própria.
 
-- 💼 LinkedIn: [linkedin.com/in/lucas-barreto-santana-67aa932b6](https://www.linkedin.com/in/lucas-barreto-santana-67aa932b6/)
-- ✉️ E-mail: [lucasbrsantana@gmail.com](mailto:lucasbrsantana@gmail.com)
+- LinkedIn: [linkedin.com/in/lucas-barreto-santana-67aa932b6](https://www.linkedin.com/in/lucas-barreto-santana-67aa932b6/)
+- E-mail: [lucasbrsantana@gmail.com](mailto:lucasbrsantana@gmail.com)
 
 Gostou do projeto, achou um bug ou tem ideia de tema? Abra uma issue ou me chame no LinkedIn.
 

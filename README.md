@@ -12,7 +12,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-57_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-86_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -54,9 +54,11 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 
 ## Como se joga
 
-1. **Crie a sala.** Escolha apelido, avatar e tema. Rodadas, tempo e dicas são ajustados no lobby.
+1. **Crie a sala.** Escolha apelido, avatar e tema. Modo de jogo, rodadas, tempo e dicas são ajustados no lobby.
 2. **Chame a galera.** Mande o código de 6 caracteres ou o link. Ninguém precisa de cadastro.
-3. **Chute.** Cada palpite mostra, atributo por atributo, o que bate com o personagem secreto:
+3. **Chute.** Há dois modos, escolhidos pelo anfitrião.
+
+**Clássico.** Cada palpite mostra, atributo por atributo, o que bate com o personagem secreto:
 
 | Cor                          | Significado                                                 |
 | ---------------------------- | ----------------------------------------------------------- |
@@ -64,6 +66,8 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 | Amarelo                      | Tem algo em comum (numa lista) ou chegou perto (num número) |
 | Vermelho                     | Diferente                                                   |
 | Seta para cima ou para baixo | Em números, mostra se a resposta é maior ou menor           |
+
+**Imagem.** Aparece a imagem do personagem secreto bem borrada e pixelada. Cada chute errado e cada dica deixam a imagem um pouco mais nítida, em 5 níveis; a imagem nítida só aparece na revelação. Disponível nos temas em que todos os personagens têm imagem (hoje, a fauna).
 
 Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 
@@ -75,7 +79,8 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Rodadas com cronômetro controlado pelo servidor
 - [x] Autocompletar acessível (teclado e leitor de tela) que ignora acentos e aceita apelidos ("Fenômeno" → Ronaldo)
 - [x] Tabuleiro com peças que viram uma de cada vez, setas para números e tolerância para valores aproximados
-- [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou, nunca o personagem
+- [x] Dois modos de jogo: **Clássico** (atributos coloridos) e **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica)
+- [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou (ou, no modo Imagem, a nitidez de cada um), nunca o personagem
 - [x] Dicas (revelar atributo, primeira letra) liberadas depois de 3 chutes, custando pontos
 - [x] Revelação do personagem ao fim de cada rodada, pódio final e "jogar de novo"
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos
@@ -128,6 +133,7 @@ Princípios que guiaram o código:
 - **Regras do jogo isoladas.** `packages/game` é TypeScript puro, sem servidor nem React. Site e servidor usam as mesmas funções, e trocar o servidor por Bun ou Go no futuro não exige reescrever as regras.
 - **Contrato tipado.** Os eventos do Socket.IO estão descritos em `packages/shared/src/events.ts`; um evento com nome ou formato errado vira erro de compilação nos dois lados.
 - **Repositórios trocáveis.** Site e servidor pedem temas a uma interface (`ThemeRepository`). Hoje a implementação lê JSON; com `DATABASE_URL`, passa a ler o PostgreSQL sozinha.
+- **Modo Imagem sem trapaça.** Borrar com CSS não protege nada: o navegador teria a imagem nítida e a URL dela, que contém o id do personagem. O servidor de tempo real baixa a imagem original, aplica um disfarce sorteado a cada rodada (espelho, recorte, tom) e gera com `sharp` as versões degradadas. Cada jogador recebe pelo Socket.IO só os bytes do nível que alcançou, sem nome de arquivo nem metadados; o navegador não tem como pedir outro nível.
 - **A sala não conhece o Socket.IO.** `Room.ts` recebe intenções e fala com o mundo por um `emitter`, o que permite testar uma partida inteira com relógio falso.
 
 ## Tecnologias
@@ -242,13 +248,14 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 
 ### Variáveis de ambiente
 
-| Variável                   | Padrão                  | Para quê                                              |
-| -------------------------- | ----------------------- | ----------------------------------------------------- |
-| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real    |
-| `PORT`                     | `3001`                  | Porta do servidor de tempo real                       |
-| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula) |
-| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON        |
-| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória      |
+| Variável                   | Padrão                  | Para quê                                                             |
+| -------------------------- | ----------------------- | -------------------------------------------------------------------- |
+| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                   |
+| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                      |
+| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                |
+| `ASSETS_BASE_URL`          | `http://localhost:3000` | De onde o servidor de tempo real baixa as imagens para o modo Imagem |
+| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                       |
+| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                     |
 
 ## Banco de dados e Redis (preparados para o futuro)
 
@@ -279,21 +286,22 @@ Guarda um retrato de cada sala. Se o servidor reiniciar (um deploy, por exemplo)
 
 Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/src/events.ts).
 
-| Evento                                   | Direção               | Para quê                                            |
-| ---------------------------------------- | --------------------- | --------------------------------------------------- |
-| `room:create`                            | navegador → servidor  | Criar sala (quem cria vira anfitrião)               |
-| `room:join`                              | navegador → servidor  | Entrar pelo código; com token, reconecta            |
-| `room:update-settings`                   | anfitrião → servidor  | Mudar tema, rodadas, tempo, dicas                   |
-| `room:kick`                              | anfitrião → servidor  | Expulsar jogador                                    |
-| `game:start`                             | anfitrião → servidor  | Começar a partida                                   |
-| `guess:submit`                           | navegador → servidor  | Chutar; a resposta volta com os atributos coloridos |
-| `hint:request`                           | navegador → servidor  | Pedir dica                                          |
-| `game:restart`                           | anfitrião → servidor  | Voltar ao lobby depois do pódio                     |
-| `room:state`                             | servidor → todos      | Fonte da verdade: jogadores, fase, placar           |
-| `you:state`                              | servidor → um jogador | Seus palpites e dicas (ex.: depois de reconectar)   |
-| `player:progress`                        | servidor → todos      | Progresso sem spoiler                               |
-| `player:solved`                          | servidor → todos      | "Fulano acertou!"                                   |
-| `round:start` / `round:end` / `game:end` | servidor → todos      | Início, revelação e fim                             |
+| Evento                                   | Direção               | Para quê                                                              |
+| ---------------------------------------- | --------------------- | --------------------------------------------------------------------- |
+| `room:create`                            | navegador → servidor  | Criar sala (quem cria vira anfitrião)                                 |
+| `room:join`                              | navegador → servidor  | Entrar pelo código; com token, reconecta                              |
+| `room:update-settings`                   | anfitrião → servidor  | Mudar tema, modo, rodadas, tempo, dicas                               |
+| `room:kick`                              | anfitrião → servidor  | Expulsar jogador                                                      |
+| `game:start`                             | anfitrião → servidor  | Começar a partida                                                     |
+| `guess:submit`                           | navegador → servidor  | Chutar; a resposta volta com os atributos coloridos                   |
+| `hint:request`                           | navegador → servidor  | Pedir dica                                                            |
+| `game:restart`                           | anfitrião → servidor  | Voltar ao lobby depois do pódio                                       |
+| `room:state`                             | servidor → todos      | Fonte da verdade: jogadores, fase, placar                             |
+| `you:state`                              | servidor → um jogador | Seus palpites e dicas (ex.: depois de reconectar)                     |
+| `player:progress`                        | servidor → todos      | Progresso sem spoiler                                                 |
+| `player:solved`                          | servidor → todos      | "Fulano acertou!"                                                     |
+| `round:start` / `round:end` / `game:end` | servidor → todos      | Início, revelação e fim                                               |
+| `round:image`                            | servidor → um jogador | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou |
 
 ## Pontuação
 
@@ -303,7 +311,7 @@ Só quem acerta pontua:
 pontos = max(100, 500 + 500 × (tempo restante ÷ tempo total) − 40 × (chutes − 1) − 150 × dicas) + bônus
 ```
 
-Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou com 60 de 90 segundos restantes, no 4º chute, sem dica, primeiro da sala: 500 + 333 − 120 + 100 = **813 pontos**. Todos os números ficam em [`packages/game/src/config.ts`](packages/game/src/config.ts) para ajustar depois de testar com os amigos.
+Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou com 60 de 90 segundos restantes, no 4º chute, sem dica, primeiro da sala: 500 + 333 − 120 + 100 = **813 pontos**. No modo Imagem, cada chute extra custa 80 em vez de 40, porque chutar errado também deixa a imagem mais nítida. Todos os números ficam em [`packages/game/src/config.ts`](packages/game/src/config.ts) para ajustar depois de testar com os amigos.
 
 ## Testes
 
@@ -311,11 +319,11 @@ Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou 
 pnpm test
 ```
 
-| Pacote             | Testes | O que cobrem                                                                                                                |
-| ------------------ | -----: | --------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     29 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento                                    |
-| `@chutai/realtime` |     19 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião) e **uma partida inteira com dois clientes Socket.IO reais** |
-| `@chutai/db`       |      9 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens e créditos                 |
+| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                         |
+| ------------------ | -----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@chutai/game`     |     37 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis do modo Imagem                                                                                                                                      |
+| `@chutai/realtime` |     39 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião), modo Imagem (ninguém recebe um nível acima do que alcançou, nada vaza no estado público), geração das imagens com `sharp` e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/db`       |     10 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens e créditos                                                                                                                                          |
 
 ## Deploy
 
@@ -326,7 +334,7 @@ pnpm test
 | PostgreSQL                   | Neon ou Supabase          | Opcional                                                                                                                          |
 | Redis                        | Upstash                   | Opcional                                                                                                                          |
 
-No servidor de tempo real, ajuste `CORS_ORIGIN` para o domínio do site.
+No servidor de tempo real, ajuste `CORS_ORIGIN` e `ASSETS_BASE_URL` para o domínio do site. O `sharp` (usado no modo Imagem) fica fora do `dist/index.js` e é instalado junto com as dependências.
 
 ## Criar um tema
 

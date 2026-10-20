@@ -21,6 +21,7 @@ import type {
   Theme,
 } from "@chutai/shared";
 import {
+  MAX_ROUND_IMAGE_LEVEL,
   TIMING,
   buildHint,
   canRequestHint,
@@ -29,6 +30,8 @@ import {
   countCorrect,
   drawCharacter,
   formatValue,
+  imageLevel,
+  supportsImageMode,
 } from "@chutai/game";
 import { toThemeSummary, type MatchRecord } from "@chutai/db";
 import { GameError } from "../lib/errors";
@@ -60,6 +63,9 @@ interface ActiveRound {
   endsAt: number;
   players: Map<string, RoundPlayer>;
   solveCount: number;
+  /** Modo Imagem: versões degradadas da imagem secreta, uma por nível (geradas em segundo plano). */
+  images?: Uint8Array[];
+  imageStatus?: "loading" | "ready" | "error";
 }
 
 type EventName = keyof ServerToClientEvents;
@@ -83,6 +89,10 @@ export interface RoomDeps {
   onFinished?: (record: MatchRecord) => void;
   /** Chamado quando o estado muda (para salvar retrato no Redis, por exemplo). */
   onChange?: (room: Room) => void;
+  /** Modo Imagem: gera as versões degradadas da imagem do personagem, do nível 0 ao máximo. */
+  renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
+  /** Chamado se não der para gerar as imagens de uma rodada (para registrar no log). */
+  onImageError?: (error: unknown, character: Character) => void;
 }
 
 const defaultSchedule = (fn: () => void, ms: number) => {
@@ -116,11 +126,13 @@ export class Room {
   private readonly intermissionMs: number;
   private readonly onFinished?: (record: MatchRecord) => void;
   private readonly onChange?: (room: Room) => void;
+  private readonly renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
+  private readonly onImageError?: (error: unknown, character: Character) => void;
 
   constructor(code: string, theme: Theme, settings: RoomSettings, deps: RoomDeps) {
     this.code = code;
     this.theme = theme;
-    this.settings = { ...settings, themeSlug: theme.slug };
+    this.settings = this.normalizeMode({ ...settings, themeSlug: theme.slug });
     this.emitter = deps.emitter;
     this.now = deps.now ?? Date.now;
     this.schedule = deps.schedule ?? defaultSchedule;
@@ -129,6 +141,8 @@ export class Room {
     this.intermissionMs = deps.intermissionMs ?? TIMING.intermissionSeconds * 1000;
     this.onFinished = deps.onFinished;
     this.onChange = deps.onChange;
+    this.renderRoundImages = deps.renderRoundImages;
+    this.onImageError = deps.onImageError;
     this.createdAt = this.now();
   }
 
@@ -224,9 +238,29 @@ export class Room {
     if (changes.maxPlayers !== undefined && changes.maxPlayers < this.players.size) {
       throw new GameError("Já tem mais jogadores na sala do que esse limite.");
     }
-    if (theme) this.theme = theme;
-    this.settings = { ...this.settings, ...changes, themeSlug: this.theme.slug };
+    const nextTheme = theme ?? this.theme;
+    if (changes.mode === "image" && !supportsImageMode(nextTheme.characters)) {
+      throw new GameError(
+        "O modo Imagem precisa de um tema em que todos os personagens têm imagem.",
+      );
+    }
+    this.theme = nextTheme;
+    // Trocar para um tema sem todas as imagens volta o modo para Clássico.
+    this.settings = this.normalizeMode({
+      ...this.settings,
+      ...changes,
+      themeSlug: this.theme.slug,
+    });
     this.changed();
+  }
+
+  get imageModeAvailable(): boolean {
+    return supportsImageMode(this.theme.characters);
+  }
+
+  private normalizeMode(settings: RoomSettings): RoomSettings {
+    const mode = settings.mode === "image" && this.imageModeAvailable ? "image" : "classic";
+    return { ...settings, mode };
   }
 
   // -------------------------------------------------------------------------
@@ -272,14 +306,77 @@ export class Room {
 
     const startedAt = this.now();
     const endsAt = startedAt + this.settings.roundSeconds * 1000;
-    this.round = { number, character, startedAt, endsAt, players: new Map(), solveCount: 0 };
+    const round: ActiveRound = {
+      number,
+      character,
+      startedAt,
+      endsAt,
+      players: new Map(),
+      solveCount: 0,
+    };
+    this.round = round;
     this.phase = "round";
     this.intermissionEndsAt = undefined;
     this.cancelTimer = this.schedule(() => this.endRound(), endsAt - startedAt);
+    if (this.settings.mode === "image") this.prepareImages(round);
 
     this.emitter.broadcast("round:start", { number, endsAt });
     for (const player of this.players.values()) this.sendPrivate(player.id);
     this.changed();
+  }
+
+  /** Gera as imagens em segundo plano e entrega o nível 0 para todos quando ficarem prontas. */
+  private prepareImages(round: ActiveRound): void {
+    round.imageStatus = "loading";
+    const render = this.renderRoundImages;
+    const job = render
+      ? render(round.character)
+      : Promise.reject(new Error("Sem gerador de imagens configurado."));
+    job
+      .then((images) => {
+        if (this.round !== round || this.phase !== "round") return;
+        if (images.length < MAX_ROUND_IMAGE_LEVEL + 1) throw new Error("Faltam níveis de imagem.");
+        round.images = images;
+        round.imageStatus = "ready";
+        for (const player of this.players.values()) {
+          this.sendRoundImage(player.id);
+          this.sendPrivate(player.id);
+        }
+      })
+      .catch((error: unknown) => {
+        if (this.round !== round) return;
+        round.imageStatus = "error";
+        this.onImageError?.(error, round.character);
+        for (const player of this.players.values()) this.sendPrivate(player.id);
+      });
+  }
+
+  /** Nível de nitidez que o jogador alcançou nesta rodada (só faz sentido no modo Imagem). */
+  private imageLevelOf(state: RoundPlayer | undefined): number {
+    return imageLevel({
+      wrongGuesses: state?.guesses.filter((guess) => !guess.correct).length ?? 0,
+      hintsUsed: state?.hints.length ?? 0,
+    });
+  }
+
+  /**
+   * Manda para UM jogador a imagem do nível que ele alcançou. O servidor decide o nível:
+   * o navegador não tem como pedir outro, e nada disso vai para a sala inteira.
+   */
+  sendRoundImage(playerId: string): void {
+    const round = this.round;
+    if (this.settings.mode !== "image" || this.phase !== "round" || !round?.images) return;
+    if (!this.players.has(playerId)) return;
+    const level = this.imageLevelOf(round.players.get(playerId));
+    const data = round.images[level];
+    if (!data) return;
+    this.emitter.toPlayer(playerId, "round:image", {
+      round: round.number,
+      level,
+      maxLevel: MAX_ROUND_IMAGE_LEVEL,
+      mimeType: "image/webp",
+      data,
+    });
   }
 
   private roundPlayer(playerId: string): RoundPlayer {
@@ -304,7 +401,12 @@ export class Room {
       throw new GameError("Você já chutou esse personagem.");
     }
 
-    const feedback = compareCharacters(guessed, round.character, this.theme.attributes);
+    const imageMode = this.settings.mode === "image";
+    const levelBefore = this.imageLevelOf(state);
+    // No modo Imagem não há atributos coloridos: o palpite só diz se acertou.
+    const feedback = imageMode
+      ? []
+      : compareCharacters(guessed, round.character, this.theme.attributes);
     const correct = guessed.id === round.character.id;
     const result: GuessResult = {
       characterId: guessed.id,
@@ -329,6 +431,7 @@ export class Room {
         guesses: state.guesses.length,
         hintsUsed: state.hints.length,
         solveRank: state.solveRank,
+        mode: this.settings.mode,
       });
       player.score += state.points;
       this.emitter.broadcast("player:solved", {
@@ -338,6 +441,7 @@ export class Room {
       });
     }
 
+    if (imageMode && this.imageLevelOf(state) !== levelBefore) this.sendRoundImage(playerId);
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
     this.changed();
     if (correct) this.endRoundIfEveryoneSolved();
@@ -357,7 +461,11 @@ export class Room {
     if (!check.allowed) throw new GameError(check.reason);
 
     const hint = buildHint(type, round.character, this.theme.attributes, state.guesses);
+    const levelBefore = this.imageLevelOf(state);
     state.hints.push(hint);
+    if (this.settings.mode === "image" && this.imageLevelOf(state) !== levelBefore) {
+      this.sendRoundImage(playerId);
+    }
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
     this.changed();
     return hint;
@@ -379,6 +487,7 @@ export class Room {
     const round = this.round;
     if (!round || this.phase !== "round") return;
     this.cancelTimer?.();
+    round.images = undefined;
 
     const summary: RoundSummary = {
       number: round.number,
@@ -502,6 +611,8 @@ export class Room {
       solved: state?.solvedAt !== undefined,
       solveRank: state?.solveRank,
       hintsUsed: state?.hints.length ?? 0,
+      // O nível sai dos chutes e dicas, que já são públicos: não revela nada novo.
+      ...(this.settings.mode === "image" ? { imageLevel: this.imageLevelOf(state) } : {}),
     };
   }
 
@@ -542,12 +653,22 @@ export class Room {
   }
 
   privateState(playerId: string): PrivateState {
-    const state = this.phase === "round" ? this.round?.players.get(playerId) : undefined;
+    const inRound = this.phase === "round" ? this.round : undefined;
+    const state = inRound?.players.get(playerId);
     return {
       playerId,
       guesses: state?.guesses ?? [],
       hints: state?.hints ?? [],
       solved: state?.solvedAt !== undefined,
+      ...(inRound && this.settings.mode === "image"
+        ? {
+            image: {
+              level: this.imageLevelOf(state),
+              maxLevel: MAX_ROUND_IMAGE_LEVEL,
+              status: inRound.imageStatus ?? "loading",
+            },
+          }
+        : {}),
     };
   }
 

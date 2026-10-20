@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Image as ImageIcon, LayoutGrid } from "lucide-react";
 import {
   ROUND_SECONDS_OPTIONS,
   ROUNDS_OPTIONS,
+  type GameMode,
   type RoomSettings,
   type ThemeSummary,
 } from "@chutai/shared";
@@ -14,12 +16,34 @@ import { cn } from "@/lib/cn";
 
 interface SettingsPanelProps {
   settings: RoomSettings;
+  /** Tema atual da sala (vem do servidor): diz se o modo Imagem está disponível. */
+  theme: ThemeSummary;
   editable: boolean;
   onChange: (changes: Partial<RoomSettings>) => void;
 }
 
 /** Regras da partida. Só o anfitrião mexe; os outros veem as mesmas opções travadas. */
-export function SettingsPanel({ settings, editable, onChange }: SettingsPanelProps) {
+const MODES: {
+  value: GameMode;
+  label: string;
+  description: string;
+  Icon: typeof LayoutGrid;
+}[] = [
+  {
+    value: "classic",
+    label: "Clássico",
+    description: "Cada chute mostra os atributos coloridos.",
+    Icon: LayoutGrid,
+  },
+  {
+    value: "image",
+    label: "Imagem",
+    description: "A imagem começa borrada e fica mais nítida a cada erro ou dica.",
+    Icon: ImageIcon,
+  },
+];
+
+export function SettingsPanel({ settings, theme, editable, onChange }: SettingsPanelProps) {
   const [themes, setThemes] = useState<ThemeSummary[]>([]);
 
   useEffect(() => {
@@ -76,6 +100,50 @@ export function SettingsPanel({ settings, editable, onChange }: SettingsPanelPro
                   <span className="font-semibold">{theme.name}</span>
                   <span className="text-sm text-tinta-soft">
                     {theme.characterCount} personagens
+                    {theme.imageModeAvailable ? " · tem modo Imagem" : ""}
+                  </span>
+                </span>
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <fieldset disabled={!editable} className="flex flex-col gap-2">
+        <legend className="mb-1.5 text-sm font-semibold">Modo de jogo</legend>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {MODES.map(({ value, label, description, Icon }) => {
+            const selected = settings.mode === value;
+            const unavailable = value === "image" && !theme.imageModeAvailable;
+            const reasonId = `modo-${value}-motivo`;
+            return (
+              <label
+                key={value}
+                className={cn(
+                  "flex cursor-pointer gap-3 rounded-2xl border-2 p-3 transition-colors",
+                  "has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-chiclete",
+                  selected ? "border-tinta bg-papel" : "border-linha hover:border-tinta/40",
+                  !editable && "cursor-default",
+                  !editable && !selected && "hidden",
+                  unavailable && "cursor-not-allowed opacity-60 hover:border-linha",
+                )}
+              >
+                <input
+                  type="radio"
+                  name="modo"
+                  className="sr-only"
+                  checked={selected}
+                  disabled={unavailable}
+                  aria-describedby={reasonId}
+                  onChange={() => onChange({ mode: value })}
+                />
+                <Icon aria-hidden className="mt-0.5 size-5 shrink-0" />
+                <span className="flex flex-col gap-0.5">
+                  <span className="font-semibold">{label}</span>
+                  <span id={reasonId} className="text-sm text-tinta-soft">
+                    {unavailable
+                      ? "Indisponível neste tema: nem todos os personagens têm imagem."
+                      : description}
                   </span>
                 </span>
               </label>

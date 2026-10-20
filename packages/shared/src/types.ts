@@ -71,6 +71,8 @@ export interface ThemeSummary {
   color: ThemeColor;
   visibility: ThemeVisibility;
   characterCount: number;
+  /** true quando TODOS os personagens têm imagem: só assim o modo Imagem pode ser escolhido. */
+  imageModeAvailable: boolean;
   attributes: Pick<ThemeAttribute, "key" | "label">[];
 }
 
@@ -123,8 +125,15 @@ export interface HintReveal {
 // Salas
 // ---------------------------------------------------------------------------
 
+/**
+ * classic → cada palpite mostra os atributos coloridos
+ * image   → aparece a imagem borrada do personagem, mais nítida a cada chute errado ou dica
+ */
+export type GameMode = "classic" | "image";
+
 export interface RoomSettings {
   themeSlug: string;
+  mode: GameMode;
   rounds: number;
   roundSeconds: number;
   hintsEnabled: boolean;
@@ -158,6 +167,8 @@ export interface PlayerProgress {
   /** 1 = primeiro a acertar. */
   solveRank?: number;
   hintsUsed: number;
+  /** Só no modo Imagem: nível de nitidez que o jogador já alcançou (0 = o mais borrado). */
+  imageLevel?: number;
 }
 
 export interface RoundPublic {
@@ -225,6 +236,26 @@ export interface PrivateState {
   guesses: GuessResult[];
   hints: HintReveal[];
   solved: boolean;
+  /** Só no modo Imagem, durante a rodada. Os bytes chegam pelo evento `round:image`. */
+  image?: {
+    level: number;
+    maxLevel: number;
+    status: "loading" | "ready" | "error";
+  };
+}
+
+/**
+ * Uma versão degradada da imagem secreta, enviada só para o jogador que alcançou aquele nível.
+ * Não há URL nem nome de arquivo: só os bytes, sem metadados, gerados de novo a cada rodada.
+ */
+export interface RoundImage {
+  round: number;
+  level: number;
+  /** Maior nível possível durante a rodada (a imagem nítida só aparece na revelação). */
+  maxLevel: number;
+  mimeType: "image/webp";
+  /** Buffer no servidor; ArrayBuffer no navegador. */
+  data: Uint8Array | ArrayBuffer;
 }
 
 // ---------------------------------------------------------------------------

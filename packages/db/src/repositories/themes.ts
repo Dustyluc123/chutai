@@ -7,6 +7,7 @@ import type {
   ThemeSummary,
   ThemeVisibility,
 } from "@chutai/shared";
+import { supportsImageMode } from "@chutai/game";
 import { OFFICIAL_THEMES, toThemeSummary } from "../themes";
 import { characterValues, characters, themeAttributes, themes } from "../schema";
 import type { Database, ThemeRepository } from "./types";
@@ -51,22 +52,28 @@ export class DrizzleThemeRepository implements ThemeRepository {
       .where(inArray(themeAttributes.themeId, themeIds))
       .orderBy(asc(themeAttributes.position));
     const characterRows = await this.db
-      .select({ id: characters.id, themeId: characters.themeId })
+      .select({ id: characters.id, themeId: characters.themeId, image: characters.imageUrl })
       .from(characters)
       .where(inArray(characters.themeId, themeIds));
 
-    return rows.map((row) => ({
-      slug: row.slug,
-      name: row.name,
-      description: row.description,
-      emoji: row.emoji,
-      color: row.color as ThemeColor,
-      visibility: row.visibility as ThemeVisibility,
-      characterCount: characterRows.filter((c) => c.themeId === row.id).length,
-      attributes: attributeRows
-        .filter((attr) => attr.themeId === row.id)
-        .map((attr) => ({ key: attr.key, label: attr.label })),
-    }));
+    return rows.map((row) => {
+      const themeCharacters = characterRows
+        .filter((c) => c.themeId === row.id)
+        .map((c) => ({ image: c.image ?? undefined }));
+      return {
+        slug: row.slug,
+        name: row.name,
+        description: row.description,
+        emoji: row.emoji,
+        color: row.color as ThemeColor,
+        visibility: row.visibility as ThemeVisibility,
+        characterCount: themeCharacters.length,
+        imageModeAvailable: supportsImageMode(themeCharacters),
+        attributes: attributeRows
+          .filter((attr) => attr.themeId === row.id)
+          .map((attr) => ({ key: attr.key, label: attr.label })),
+      };
+    });
   }
 
   async getTheme(slug: string): Promise<Theme | null> {

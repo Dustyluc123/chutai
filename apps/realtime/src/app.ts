@@ -9,6 +9,7 @@ import type { Config } from "./config";
 import { RoomManager } from "./rooms/RoomManager";
 import { createRoomStore } from "./rooms/store";
 import { MatchService } from "./services/matchService";
+import { RoundImageService, httpImageLoader, type ImageLoader } from "./services/roundImageService";
 import { ThemeService } from "./services/themeService";
 import { registerSocketHandlers } from "./socket";
 import { playerChannel, roomChannel, type IoServer } from "./socket/types";
@@ -25,12 +26,19 @@ export interface RealtimeServer {
 
 export async function createRealtimeServer(
   config: Config,
-  options: { intermissionMs?: number } = {},
+  options: {
+    intermissionMs?: number;
+    /** Troca o jeito de buscar as imagens originais (os testes leem do disco). */
+    imageLoader?: ImageLoader;
+  } = {},
 ): Promise<RealtimeServer> {
   const repositories = await createRepositories(config.databaseUrl);
   const store = await createRoomStore(config.redisUrl);
   const themes = new ThemeService(repositories.themes);
   const matches = new MatchService(repositories.matches);
+  const roundImages = new RoundImageService(
+    options.imageLoader ?? httpImageLoader(config.assetsBaseUrl),
+  );
 
   const startedAt = Date.now();
   // O gerenciador depende do Socket.IO, que depende do servidor HTTP: guardamos a referência aqui.
@@ -78,6 +86,7 @@ export async function createRealtimeServer(
     store,
     matches,
     themes,
+    roundImages,
     emitterFor,
     disconnectGraceMs: config.disconnectGraceMs,
     emptyRoomTtlMs: config.emptyRoomTtlMs,

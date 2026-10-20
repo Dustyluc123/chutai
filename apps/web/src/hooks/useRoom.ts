@@ -1,7 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { HintType, JoinedRoom, PrivateState, RoomSettings, RoomState } from "@chutai/shared";
+import type {
+  HintType,
+  JoinedRoom,
+  PrivateState,
+  RoomSettings,
+  RoomState,
+  RoundImage,
+} from "@chutai/shared";
 import { getSocket, unwrap, waitForConnection } from "@/lib/socket";
 import {
   clearRoomSession,
@@ -21,6 +28,15 @@ export type RoomStatus =
   | "kicked"
   | "offline"; // servidor fora do ar
 
+/** Imagem secreta do modo Imagem, já no nível que este jogador alcançou. */
+export interface MysteryImageState {
+  round: number;
+  level: number;
+  maxLevel: number;
+  /** URL local (blob:) criada a partir dos bytes recebidos; não diz nada sobre o personagem. */
+  url: string;
+}
+
 /**
  * Toda a conversa com o servidor de tempo real para uma sala.
  * O componente só lê `state`/`me` e chama as ações; o servidor decide o resto.
@@ -35,6 +51,8 @@ export function useRoom(code: string) {
   const [error, setError] = useState<string | null>(null);
   const [connected, setConnected] = useState(true);
   const [serverOffset, setServerOffset] = useState(0);
+  const [roundImage, setRoundImage] = useState<MysteryImageState | null>(null);
+  const imageUrlRef = useRef<string | null>(null);
   const sessionRef = useRef<JoinedRoom | null>(null);
   const profileRef = useRef<Profile | null>(null);
 
@@ -75,6 +93,12 @@ export function useRoom(code: string) {
       setState(next);
     };
     const onPrivate = (next: PrivateState) => setMe(next);
+    const onImage = (image: RoundImage) => {
+      const url = URL.createObjectURL(new Blob([image.data as BlobPart], { type: image.mimeType }));
+      if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
+      imageUrlRef.current = url;
+      setRoundImage({ round: image.round, level: image.level, maxLevel: image.maxLevel, url });
+    };
     const onSolved = ({
       playerId,
       nickname,
@@ -103,6 +127,7 @@ export function useRoom(code: string) {
 
     socket.on("room:state", onState);
     socket.on("you:state", onPrivate);
+    socket.on("round:image", onImage);
     socket.on("player:solved", onSolved);
     socket.on("room:kicked", onKicked);
     socket.on("connect", onConnect);
@@ -130,6 +155,9 @@ export function useRoom(code: string) {
     return () => {
       socket.off("room:state", onState);
       socket.off("you:state", onPrivate);
+      socket.off("round:image", onImage);
+      if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
+      imageUrlRef.current = null;
       socket.off("player:solved", onSolved);
       socket.off("room:kicked", onKicked);
       socket.off("connect", onConnect);
@@ -196,6 +224,11 @@ export function useRoom(code: string) {
     error,
     connected,
     serverOffset,
+    /** Só vale para a rodada atual; numa rodada nova, espere a imagem dela chegar. */
+    roundImage:
+      roundImage && state?.phase === "round" && state.round?.number === roundImage.round
+        ? roundImage
+        : null,
     enter,
     actions,
     isHost: !!state && !!session && state.hostId === session.playerId,

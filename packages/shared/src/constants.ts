@@ -35,6 +35,7 @@ export const LIMITS = {
 
 export const DEFAULT_SETTINGS: RoomSettings = {
   themeSlug: "folclore-brasileiro",
+  mode: "classic",
   rounds: 5,
   roundSeconds: 90,
   hintsEnabled: true,

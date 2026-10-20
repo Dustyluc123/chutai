@@ -2,12 +2,22 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Eye, PartyPopper, Shuffle } from "lucide-react";
-import type { Character, CharacterOption, GuessResult, Theme } from "@chutai/shared";
-import { compareCharacters, drawCharacter, formatValue } from "@chutai/game";
+import type { Character, CharacterOption, GameMode, GuessResult, Theme } from "@chutai/shared";
+import {
+  compareCharacters,
+  drawCharacter,
+  formatValue,
+  MAX_ROUND_IMAGE_LEVEL,
+  imageLevel,
+  supportsImageMode,
+} from "@chutai/game";
 import { Button } from "@/components/ui/button";
 import { CharacterPicture } from "@/components/ui/character-picture";
+import { OptionGroup } from "@/components/ui/option-group";
 import { GuessBoard } from "./guess-board";
 import { GuessInput } from "./guess-input";
+import { GuessList } from "./guess-list";
+import { PixelatedImage } from "./pixelated-image";
 import { Legend } from "./legend";
 
 /** Treino individual: sorteia um personagem e deixa chutar sem limite de tempo. */
@@ -16,6 +26,9 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const [guesses, setGuesses] = useState<GuessResult[]>([]);
   const [revealed, setRevealed] = useState(false);
   const [played, setPlayed] = useState<Set<string>>(new Set());
+  const [mode, setMode] = useState<GameMode>("classic");
+  const imageAvailable = supportsImageMode(theme.characters);
+  const imageMode = mode === "image" && imageAvailable;
 
   // Sorteio só no navegador (evita diferença entre servidor e cliente na hidratação).
   useEffect(() => {
@@ -25,6 +38,10 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const guessedIds = useMemo(() => new Set(guesses.map((g) => g.characterId)), [guesses]);
   const solved = guesses.some((g) => g.correct);
   const finished = solved || revealed;
+  const level = imageLevel({
+    wrongGuesses: guesses.filter((g) => !g.correct).length,
+    hintsUsed: 0,
+  });
 
   function guess(id: string) {
     if (!answer) return;
@@ -37,7 +54,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
         characterName: character.name,
         emoji: character.emoji,
         image: character.image,
-        feedback: compareCharacters(character, answer, theme.attributes),
+        feedback: imageMode ? [] : compareCharacters(character, answer, theme.attributes),
         correct: character.id === answer.id,
         guessNumber: current.length + 1,
       },
@@ -51,6 +68,11 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     setAnswer(drawCharacter(theme.characters, used));
     setGuesses([]);
     setRevealed(false);
+  }
+
+  function changeMode(value: GameMode) {
+    setMode(value);
+    next();
   }
 
   return (
@@ -73,6 +95,28 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
           </Button>
         </div>
       </div>
+
+      {imageAvailable ? (
+        <OptionGroup
+          label="Modo"
+          value={mode}
+          options={[
+            { value: "classic", label: "Clássico" },
+            { value: "image", label: "Imagem" },
+          ]}
+          onChange={changeMode}
+        />
+      ) : null}
+
+      {imageMode && answer?.image && !finished ? (
+        <div className="aspect-square w-full max-w-[300px] self-center overflow-hidden rounded-3xl border-2 border-tinta bg-anil-soft shadow-carimbo">
+          <PixelatedImage
+            src={answer.image}
+            level={level}
+            label={`Imagem misteriosa do personagem, borrada. Nitidez ${level + 1} de ${MAX_ROUND_IMAGE_LEVEL + 1}.`}
+          />
+        </div>
+      ) : null}
 
       {finished && answer ? (
         <section
@@ -118,13 +162,22 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
         />
       )}
 
-      <GuessBoard
-        attributes={theme.attributes}
-        guesses={guesses}
-        animateLatest
-        emptyMessage="Chute qualquer personagem para começar. As cores mostram o que bate com o personagem secreto."
-      />
-      <Legend />
+      {imageMode ? (
+        <GuessList
+          guesses={guesses}
+          emptyMessage="Quem é? Chute pelo nome. Cada erro deixa a imagem um pouco mais nítida."
+        />
+      ) : (
+        <>
+          <GuessBoard
+            attributes={theme.attributes}
+            guesses={guesses}
+            animateLatest
+            emptyMessage="Chute qualquer personagem para começar. As cores mostram o que bate com o personagem secreto."
+          />
+          <Legend />
+        </>
+      )}
     </>
   );
 }

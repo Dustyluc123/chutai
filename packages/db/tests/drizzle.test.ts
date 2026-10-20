@@ -105,6 +105,12 @@ describe("DrizzleThemeRepository", () => {
     expect(loaded!.characters.filter((c) => c.image)).toHaveLength(expected);
   });
 
+  it("só a fauna tem imagem para todos os personagens (modo Imagem)", async () => {
+    const summaries = await new DrizzleThemeRepository(db).listThemes();
+    const available = summaries.filter((t) => t.imageModeAvailable).map((t) => t.slug);
+    expect(available).toEqual(["fauna-brasileira"]);
+  });
+
   it("rodar o seed de novo não duplica nada", async () => {
     const theme = OFFICIAL_THEMES[0]!;
     await upsertTheme(db, theme);
@@ -127,6 +133,7 @@ describe("DrizzleMatchRepository", () => {
       finishedAt: new Date("2026-10-19T20:10:00Z"),
       settings: {
         themeSlug: "folclore-brasileiro",
+        mode: "classic",
         rounds: 1,
         roundSeconds: 90,
         hintsEnabled: true,

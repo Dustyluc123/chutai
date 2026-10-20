@@ -8,9 +8,16 @@ import folclore from "../seed/folclore-brasileiro.json" with { type: "json" };
 import futebol from "../seed/lendas-do-futebol.json" with { type: "json" };
 import fauna from "../seed/fauna-brasileira.json" with { type: "json" };
 import musica from "../seed/musica-brasileira.json" with { type: "json" };
+import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
-export const OFFICIAL_THEMES: readonly Theme[] = [musica, folclore, futebol, fauna] as Theme[];
+export const OFFICIAL_THEMES: readonly Theme[] = [
+  musica,
+  futebolAtual,
+  folclore,
+  futebol,
+  fauna,
+] as Theme[];
 
 export function toThemeSummary(theme: Theme): ThemeSummary {
   return {

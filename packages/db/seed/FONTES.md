@@ -54,3 +54,51 @@ Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir
 | Alok                 | [Wikipédia](https://pt.wikipedia.org/wiki/Alok)                                                                                |
 | Wesley Safadão       | [Wikipédia](https://pt.wikipedia.org/wiki/Wesley_Safad%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q18379958)            |
 | Daniela Mercury      | [Wikipédia](https://pt.wikipedia.org/wiki/Daniela_Mercury), [Wikidata](https://www.wikidata.org/wiki/Q465927)                  |
+
+## Futebol brasileiro atual
+
+Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a data da última atualização do clube). Liga atual: liga do clube atual (os clubes brasileiros estão na Série A de 2026). Estado ou país natal: local de nascimento, conferido no Wikidata. Seleção principal: se o jogador já atuou pela seleção principal do seu país (não conta base). Saíram da lista original, por envolvimento recente em casos de apostas: Bruno Henrique e Lucas Paquetá; entraram Gerson e Raphael Veiga.
+
+| Personagem         | Fontes                                                                                                                                   |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Vinícius Júnior    | [Wikipédia](https://pt.wikipedia.org/wiki/Vin%C3%ADcius_J%C3%BAnior), [Wikidata](https://www.wikidata.org/wiki/Q28973866)                |
+| Rodrygo            | [Wikipédia](https://pt.wikipedia.org/wiki/Rodrygo), [Wikidata](https://www.wikidata.org/wiki/Q42728914)                                  |
+| Raphinha           | [Wikipédia](https://pt.wikipedia.org/wiki/Raphinha), [Wikidata](https://www.wikidata.org/wiki/Q28861547)                                 |
+| Neymar             | [Wikipédia](https://pt.wikipedia.org/wiki/Neymar), [Wikidata](https://www.wikidata.org/wiki/Q142794)                                     |
+| Alisson            | [Wikipédia](https://pt.wikipedia.org/wiki/Alisson_Becker), [Wikidata](https://www.wikidata.org/wiki/Q18237361)                           |
+| Ederson            | [Wikipédia](https://pt.wikipedia.org/wiki/Ederson_Moraes), [Wikidata](https://www.wikidata.org/wiki/Q17074511)                           |
+| Marquinhos         | [Wikipédia](https://pt.wikipedia.org/wiki/Marcos_Ao%C3%A1s_Corr%C3%AAa), [Wikidata](https://www.wikidata.org/wiki/Q39230)                |
+| Gabriel Magalhães  | [Wikipédia](https://pt.wikipedia.org/wiki/Gabriel_Magalh%C3%A3es), [Wikidata](https://www.wikidata.org/wiki/Q25175970)                   |
+| Éder Militão       | [Wikipédia](https://pt.wikipedia.org/wiki/%C3%89der_Milit%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q29950055)                   |
+| Bruno Guimarães    | [Wikipédia](https://pt.wikipedia.org/wiki/Bruno_Guimar%C3%A3es), [Wikidata](https://www.wikidata.org/wiki/Q58323172)                     |
+| Casemiro           | [Wikipédia](https://pt.wikipedia.org/wiki/Casemiro), [Wikidata](https://www.wikidata.org/wiki/Q616664)                                   |
+| Endrick            | [Wikipédia](https://pt.wikipedia.org/wiki/Endrick), [Wikidata](https://www.wikidata.org/wiki/Q110644260)                                 |
+| Estêvão            | [Wikipédia](https://pt.wikipedia.org/wiki/Est%C3%AAv%C3%A3o_Willian), [Wikidata](https://www.wikidata.org/wiki/Q115332579)               |
+| Gabriel Martinelli | [Wikipédia](https://pt.wikipedia.org/wiki/Gabriel_Martinelli), [Wikidata](https://www.wikidata.org/wiki/Q61460651)                       |
+| Richarlison        | [Wikipédia](https://pt.wikipedia.org/wiki/Richarlison), [Wikidata](https://www.wikidata.org/wiki/Q20806743)                              |
+| João Pedro         | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_Pedro_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q64005114)        |
+| Matheus Cunha      | [Wikipédia](https://pt.wikipedia.org/wiki/Matheus_Cunha), [Wikidata](https://www.wikidata.org/wiki/Q35831063)                            |
+| Bremer             | [Wikipédia](https://pt.wikipedia.org/wiki/Bremer), [Wikidata](https://www.wikidata.org/wiki/Q38693097)                                   |
+| Savinho            | [Wikipédia](https://pt.wikipedia.org/wiki/Savinho), [Wikidata](https://www.wikidata.org/wiki/Q99485542)                                  |
+| Luiz Henrique      | [Wikipédia](https://pt.wikipedia.org/wiki/Luiz_Henrique_%28futebolista%2C_2001%29), [Wikidata](https://www.wikidata.org/wiki/Q101764291) |
+| Igor Jesus         | [Wikipédia](https://pt.wikipedia.org/wiki/Igor_Jesus), [Wikidata](https://www.wikidata.org/wiki/Q65030995)                               |
+| Wesley             | [Wikipédia](https://pt.wikipedia.org/wiki/Wesley_Fran%C3%A7a), [Wikidata](https://www.wikidata.org/wiki/Q110882542)                      |
+| Vanderson          | [Wikipédia](https://pt.wikipedia.org/wiki/Vanderson_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q105473333)             |
+| Danilo             | [Wikipédia](https://pt.wikipedia.org/wiki/Danilo_Luiz_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q437329)                       |
+| Alex Sandro        | [Wikipédia](https://pt.wikipedia.org/wiki/Alex_Sandro), [Wikidata](https://www.wikidata.org/wiki/Q551192)                                |
+| Hulk               | [Wikipédia](https://pt.wikipedia.org/wiki/Hulk_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q62786)                      |
+| Lucas Moura        | [Wikipédia](https://pt.wikipedia.org/wiki/Lucas_Moura), [Wikidata](https://www.wikidata.org/wiki/Q312886)                                |
+| Pedro              | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_Guilherme_Abreu_dos_Santos), [Wikidata](https://www.wikidata.org/wiki/Q47491410)         |
+| Gabigol            | [Wikipédia](https://pt.wikipedia.org/wiki/Gabigol), [Wikidata](https://www.wikidata.org/wiki/Q13646572)                                  |
+| Vitor Roque        | [Wikipédia](https://pt.wikipedia.org/wiki/Vitor_Roque), [Wikidata](https://www.wikidata.org/wiki/Q111016177)                             |
+| Yuri Alberto       | [Wikipédia](https://pt.wikipedia.org/wiki/Yuri_Alberto), [Wikidata](https://www.wikidata.org/wiki/Q43252427)                             |
+| Kaio Jorge         | [Wikipédia](https://pt.wikipedia.org/wiki/Kaio_Jorge), [Wikidata](https://www.wikidata.org/wiki/Q56876908)                               |
+| Cássio             | [Wikipédia](https://pt.wikipedia.org/wiki/C%C3%A1ssio_Ramos), [Wikidata](https://www.wikidata.org/wiki/Q920039)                          |
+| Fábio              | [Wikipédia](https://pt.wikipedia.org/wiki/F%C3%A1bio_Deivson_Lopes_Maciel), [Wikidata](https://www.wikidata.org/wiki/Q677923)            |
+| Thiago Silva       | [Wikipédia](https://pt.wikipedia.org/wiki/Thiago_Silva), [Wikidata](https://www.wikidata.org/wiki/Q210453)                               |
+| Arrascaeta         | [Wikipédia](https://pt.wikipedia.org/wiki/Giorgian_de_Arrascaeta), [Wikidata](https://www.wikidata.org/wiki/Q13578003)                   |
+| Gustavo Gómez      | [Wikipédia](https://pt.wikipedia.org/wiki/Gustavo_G%C3%B3mez), [Wikidata](https://www.wikidata.org/wiki/Q1033783)                        |
+| Memphis Depay      | [Wikipédia](https://pt.wikipedia.org/wiki/Memphis_Depay), [Wikidata](https://www.wikidata.org/wiki/Q1894)                                |
+| Calleri            | [Wikipédia](https://pt.wikipedia.org/wiki/Jonathan_Calleri), [Wikidata](https://www.wikidata.org/wiki/Q16298050)                         |
+| Gerson             | [Wikipédia](https://pt.wikipedia.org/wiki/Gerson_Santos_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q18617137)                   |
+| Raphael Veiga      | [Wikipédia](https://pt.wikipedia.org/wiki/Raphael_Veiga), [Wikidata](https://www.wikidata.org/wiki/Q27443365)                            |

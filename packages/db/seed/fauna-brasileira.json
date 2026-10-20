@@ -40,6 +40,12 @@
       "id": "onca-pintada",
       "name": "Onça-pintada",
       "image": "/temas/fauna-brasileira/onca-pintada.webp",
+      "imageCredit": {
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jaguar_(Panthera_onca_palustris)_female_Piquiri_River_2.JPG"
+      },
       "aliases": ["Jaguar"],
       "emoji": "🐆",
       "values": {
@@ -54,6 +60,12 @@
       "id": "capivara",
       "name": "Capivara",
       "image": "/temas/fauna-brasileira/capivara.webp",
+      "imageCredit": {
+        "author": "Wilfredor",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Hydrochoeris_hydrochaeris_in_Brazil_in_Petr%C3%B3polis,_Rio_de_Janeiro,_Brazil_09.jpg"
+      },
       "emoji": "🦫",
       "values": {
         "grupo": "Mamífero",
@@ -67,6 +79,12 @@
       "id": "lobo-guara",
       "name": "Lobo-guará",
       "image": "/temas/fauna-brasileira/lobo-guara.webp",
+      "imageCredit": {
+        "author": "Jonathan Wilkins",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lobo_Guar%C3%A1_andando.jpg"
+      },
       "emoji": "🐺",
       "values": {
         "grupo": "Mamífero",
@@ -80,6 +98,12 @@
       "id": "tamandua-bandeira",
       "name": "Tamanduá-bandeira",
       "image": "/temas/fauna-brasileira/tamandua-bandeira.webp",
+      "imageCredit": {
+        "author": "Malene Thyssen",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Myresluger2.jpg"
+      },
       "emoji": "🐜",
       "values": {
         "grupo": "Mamífero",
@@ -93,6 +117,11 @@
       "id": "bicho-preguica",
       "name": "Bicho-preguiça",
       "image": "/temas/fauna-brasileira/bicho-preguica.webp",
+      "imageCredit": {
+        "author": "Stefan Laube (Tauchgurke)",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bradypus.jpg"
+      },
       "aliases": ["Preguiça"],
       "emoji": "🦥",
       "values": {
@@ -107,6 +136,12 @@
       "id": "anta",
       "name": "Anta",
       "image": "/temas/fauna-brasileira/anta.webp",
+      "imageCredit": {
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:South_American_tapir_(Tapirus_terrestris).JPG"
+      },
       "emoji": "🐗",
       "values": {
         "grupo": "Mamífero",
@@ -120,6 +155,12 @@
       "id": "boto-cor-de-rosa",
       "name": "Boto-cor-de-rosa",
       "image": "/temas/fauna-brasileira/boto-cor-de-rosa.webp",
+      "imageCredit": {
+        "author": "Oceancetaceen",
+        "license": "CC BY-SA 2.0 de",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/de/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Amazonas-Flussdelfin_Orinoko3.jpg"
+      },
       "aliases": ["Boto"],
       "emoji": "🐬",
       "values": {
@@ -134,6 +175,12 @@
       "id": "peixe-boi-da-amazonia",
       "name": "Peixe-boi-da-amazônia",
       "image": "/temas/fauna-brasileira/peixe-boi-da-amazonia.webp",
+      "imageCredit": {
+        "author": "Fábia Luna/ICMBioCMA",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Trichechus_inunguis_(Peixe-boi_amaz%C3%B4nico)_por_F%C3%A1bia_Luna_ICMBioCMA.png"
+      },
       "aliases": ["Peixe-boi"],
       "emoji": "🦭",
       "values": {
@@ -148,6 +195,12 @@
       "id": "mico-leao-dourado",
       "name": "Mico-leão-dourado",
       "image": "/temas/fauna-brasileira/mico-leao-dourado.webp",
+      "imageCredit": {
+        "author": "Daderot",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Leontopithecus_rosalia_-_Copenhagen_Zoo_-_DSC09082.JPG"
+      },
       "emoji": "🐒",
       "values": {
         "grupo": "Mamífero",
@@ -161,6 +214,12 @@
       "id": "ariranha",
       "name": "Ariranha",
       "image": "/temas/fauna-brasileira/ariranha.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "CC BY-SA 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Giantotter.jpg"
+      },
       "emoji": "🦦",
       "values": {
         "grupo": "Mamífero",
@@ -174,6 +233,11 @@
       "id": "tatu-bola",
       "name": "Tatu-bola",
       "image": "/temas/fauna-brasileira/tatu-bola.webp",
+      "imageCredit": {
+        "author": "Frank E. Beddard",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Cambridge_Natural_History_Mammalia_Fig_103.jpg"
+      },
       "emoji": "🛡️",
       "values": {
         "grupo": "Mamífero",
@@ -187,6 +251,12 @@
       "id": "tatu-canastra",
       "name": "Tatu-canastra",
       "image": "/temas/fauna-brasileira/tatu-canastra.webp",
+      "imageCredit": {
+        "author": "Guillaume Delaitre",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Priodontes_maximus_at_R%C3%A9gina.jpg"
+      },
       "emoji": "🦔",
       "values": {
         "grupo": "Mamífero",
@@ -200,6 +270,12 @@
       "id": "quati",
       "name": "Quati",
       "image": "/temas/fauna-brasileira/quati.webp",
+      "imageCredit": {
+        "author": "Luna04 at French Wikipedia",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Coati2.jpg"
+      },
       "emoji": "🦝",
       "values": {
         "grupo": "Mamífero",
@@ -213,6 +289,12 @@
       "id": "sagui-de-tufo-branco",
       "name": "Sagui-de-tufo-branco",
       "image": "/temas/fauna-brasileira/sagui-de-tufo-branco.webp",
+      "imageCredit": {
+        "author": "Raimond Spekking",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Wei%C3%9Fb%C3%BCschelaffe_(Callithrix_jacchus).jpg"
+      },
       "aliases": ["Mico", "Sagui"],
       "emoji": "🐵",
       "values": {
@@ -227,6 +309,12 @@
       "id": "macaco-prego",
       "name": "Macaco-prego",
       "image": "/temas/fauna-brasileira/macaco-prego.webp",
+      "imageCredit": {
+        "author": "Diego Persano",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cebus_nigritus_cucullatus_(Black_capuchin_-_southern_form).jpg"
+      },
       "emoji": "🙈",
       "values": {
         "grupo": "Mamífero",
@@ -240,6 +328,12 @@
       "id": "bugio",
       "name": "Bugio",
       "image": "/temas/fauna-brasileira/bugio.webp",
+      "imageCredit": {
+        "author": "Peter Schoen",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Brown_Howler_Monkey_6.jpg"
+      },
       "aliases": ["Guariba"],
       "emoji": "🦍",
       "values": {
@@ -254,6 +348,12 @@
       "id": "cutia",
       "name": "Cutia",
       "image": "/temas/fauna-brasileira/cutia.webp",
+      "imageCredit": {
+        "author": "Abujoy",
+        "license": "CC BY-SA 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Agouti_Azarae.JPG"
+      },
       "emoji": "🐹",
       "values": {
         "grupo": "Mamífero",
@@ -267,6 +367,12 @@
       "id": "veado-campeiro",
       "name": "Veado-campeiro",
       "image": "/temas/fauna-brasileira/veado-campeiro.webp",
+      "imageCredit": {
+        "author": "Fabio Rage",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:O._bezoarticus_buck.jpg"
+      },
       "emoji": "🦌",
       "values": {
         "grupo": "Mamífero",
@@ -280,6 +386,11 @@
       "id": "gato-maracaja",
       "name": "Gato-maracajá",
       "image": "/temas/fauna-brasileira/gato-maracaja.webp",
+      "imageCredit": {
+        "author": "Geigy",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Tika2009Jan24.jpg"
+      },
       "emoji": "🐈",
       "values": {
         "grupo": "Mamífero",
@@ -293,6 +404,12 @@
       "id": "arara-azul",
       "name": "Arara-azul",
       "image": "/temas/fauna-brasileira/arara-azul.webp",
+      "imageCredit": {
+        "author": "Leonardo Ramos",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Arara_Azul_no_Pantanal.jpg"
+      },
       "emoji": "🦜",
       "values": {
         "grupo": "Ave",
@@ -306,6 +423,11 @@
       "id": "ararinha-azul",
       "name": "Ararinha-azul",
       "image": "/temas/fauna-brasileira/ararinha-azul.webp",
+      "imageCredit": {
+        "author": "Joseph Smit",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:AraSpixiSmit.jpg"
+      },
       "emoji": "💙",
       "values": {
         "grupo": "Ave",
@@ -319,6 +441,12 @@
       "id": "tucano-toco",
       "name": "Tucano-toco",
       "image": "/temas/fauna-brasileira/tucano-toco.webp",
+      "imageCredit": {
+        "author": "Giles Laurent",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:006_Toco_toucan_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg"
+      },
       "aliases": ["Tucano"],
       "emoji": "🐦",
       "values": {
@@ -333,6 +461,12 @@
       "id": "harpia",
       "name": "Harpia",
       "image": "/temas/fauna-brasileira/harpia.webp",
+      "imageCredit": {
+        "author": "http://www.birdphotos.com",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Harpia_harpyja_001_800.jpg"
+      },
       "aliases": ["Gavião-real"],
       "emoji": "🦅",
       "values": {
@@ -347,6 +481,12 @@
       "id": "ema",
       "name": "Ema",
       "image": "/temas/fauna-brasileira/ema.webp",
+      "imageCredit": {
+        "author": "Rufus46",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Nandu_Rhea_americana_Tierpark_Hellabrunn-1.jpg"
+      },
       "emoji": "🪶",
       "values": {
         "grupo": "Ave",
@@ -360,6 +500,12 @@
       "id": "seriema",
       "name": "Seriema",
       "image": "/temas/fauna-brasileira/seriema.webp",
+      "imageCredit": {
+        "author": "Otávio Nogueira",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pedreira-19_(41407614112).jpg"
+      },
       "emoji": "🐓",
       "values": {
         "grupo": "Ave",
@@ -373,6 +519,12 @@
       "id": "tuiuiu",
       "name": "Tuiuiú",
       "image": "/temas/fauna-brasileira/tuiuiu.webp",
+      "imageCredit": {
+        "author": "Joao Carlos Medau from Campinas, Brazil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tuiui%C3%BA_(8496798280).jpg"
+      },
       "aliases": ["Jaburu"],
       "emoji": "🦩",
       "values": {
@@ -387,6 +539,12 @@
       "id": "sabia-laranjeira",
       "name": "Sabiá-laranjeira",
       "image": "/temas/fauna-brasileira/sabia-laranjeira.webp",
+      "imageCredit": {
+        "author": "Eurico Zimbres",
+        "license": "CC BY-SA 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+        "source": "https://commons.wikimedia.org/wiki/File:Sabi%C3%A1_laranjeira.JPG"
+      },
       "aliases": ["Sabiá"],
       "emoji": "🎶",
       "values": {
@@ -401,6 +559,12 @@
       "id": "quero-quero",
       "name": "Quero-quero",
       "image": "/temas/fauna-brasileira/quero-quero.webp",
+      "imageCredit": {
+        "author": "Kingfisher-Sapphire",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Southern_Lapwing_-_Indaiatuba,_SP,_BR.jpg"
+      },
       "emoji": "📣",
       "values": {
         "grupo": "Ave",
@@ -414,6 +578,12 @@
       "id": "jacare-do-pantanal",
       "name": "Jacaré-do-pantanal",
       "image": "/temas/fauna-brasileira/jacare-do-pantanal.webp",
+      "imageCredit": {
+        "author": "Andreas Trepte",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Brillenkaiman_Caiman_yacare.jpg"
+      },
       "emoji": "🐊",
       "values": {
         "grupo": "Réptil",
@@ -427,6 +597,12 @@
       "id": "jacare-acu",
       "name": "Jacaré-açu",
       "image": "/temas/fauna-brasileira/jacare-acu.webp",
+      "imageCredit": {
+        "author": "Rigelus",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Melanosuchus_niger_in_Moscow_zoo.jpg"
+      },
       "emoji": "🐲",
       "values": {
         "grupo": "Réptil",
@@ -440,6 +616,12 @@
       "id": "sucuri",
       "name": "Sucuri",
       "image": "/temas/fauna-brasileira/sucuri.webp",
+      "imageCredit": {
+        "author": "MKAMPIS",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Sucuri_verde.jpg"
+      },
       "aliases": ["Anaconda"],
       "emoji": "🐍",
       "values": {
@@ -454,6 +636,12 @@
       "id": "jiboia",
       "name": "Jiboia",
       "image": "/temas/fauna-brasileira/jiboia.webp",
+      "imageCredit": {
+        "author": "Cezar Paes",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Boaconstrictor.jpg"
+      },
       "emoji": "🪢",
       "values": {
         "grupo": "Réptil",
@@ -467,6 +655,12 @@
       "id": "jabuti-piranga",
       "name": "Jabuti-piranga",
       "image": "/temas/fauna-brasileira/jabuti-piranga.webp",
+      "imageCredit": {
+        "author": "Bjoertvedt",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Geochelone_carbonaria_IMG_4978.jpg"
+      },
       "aliases": ["Jabuti"],
       "emoji": "🐢",
       "values": {
@@ -481,6 +675,12 @@
       "id": "tartaruga-da-amazonia",
       "name": "Tartaruga-da-amazônia",
       "image": "/temas/fauna-brasileira/tartaruga-da-amazonia.webp",
+      "imageCredit": {
+        "author": "Whaldener Endo",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Podocnemis_expansa_INPA.jpg"
+      },
       "emoji": "🥚",
       "values": {
         "grupo": "Réptil",
@@ -494,6 +694,12 @@
       "id": "teiu",
       "name": "Teiú",
       "image": "/temas/fauna-brasileira/teiu.webp",
+      "imageCredit": {
+        "author": "Leonardo Palermo Gentile",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Trilha_Betari,_por_Leonardo_Palermo_Gentile_03.jpg"
+      },
       "emoji": "🦎",
       "values": {
         "grupo": "Réptil",
@@ -507,6 +713,12 @@
       "id": "sapo-cururu",
       "name": "Sapo-cururu",
       "image": "/temas/fauna-brasileira/sapo-cururu.webp",
+      "imageCredit": {
+        "author": "Thomaz de Carvalho Callado",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rhinella_diptycha_-_Thomaz_de_Carvalho_Callado_-_601318199.jpeg"
+      },
       "emoji": "🐸",
       "values": {
         "grupo": "Anfíbio",
@@ -520,6 +732,12 @@
       "id": "pirarucu",
       "name": "Pirarucu",
       "image": "/temas/fauna-brasileira/pirarucu.webp",
+      "imageCredit": {
+        "author": "Shizhao",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Arapaima_gigas_at_Beijing_aquarium.JPG"
+      },
       "emoji": "🐟",
       "values": {
         "grupo": "Peixe",
@@ -533,6 +751,12 @@
       "id": "piranha-vermelha",
       "name": "Piranha-vermelha",
       "image": "/temas/fauna-brasileira/piranha-vermelha.webp",
+      "imageCredit": {
+        "author": "Luc Viatour",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Piranha_Luc_Viatour.jpg"
+      },
       "aliases": ["Piranha"],
       "emoji": "🦷",
       "values": {
@@ -547,6 +771,12 @@
       "id": "tambaqui",
       "name": "Tambaqui",
       "image": "/temas/fauna-brasileira/tambaqui.webp",
+      "imageCredit": {
+        "author": "w_endo",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Colossoma_macropomum_205143907.jpg"
+      },
       "emoji": "🐠",
       "values": {
         "grupo": "Peixe",
@@ -560,6 +790,12 @@
       "id": "dourado",
       "name": "Dourado",
       "image": "/temas/fauna-brasileira/dourado.webp",
+      "imageCredit": {
+        "author": "David Morimoto (treez44est)",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dourado(Salminus_brasiliensis)emBonito.jpg"
+      },
       "emoji": "✨",
       "values": {
         "grupo": "Peixe",

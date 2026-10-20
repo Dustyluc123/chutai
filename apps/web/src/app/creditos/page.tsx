@@ -2,31 +2,27 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { CharacterPicture } from "@/components/ui/character-picture";
-// Gerado por `pnpm images:fetch` a partir das informações do Wikimedia Commons.
-import creditsJson from "../../../public/temas/creditos.json";
+import { getTheme, listThemes } from "@/lib/themes";
 
 export const metadata: Metadata = {
   title: "Créditos das imagens",
   description: "Autores e licenças das imagens dos personagens do Chutaí.",
 };
 
-interface ImageCredit {
-  theme: string;
-  characterId: string;
-  characterName: string;
-  image: string;
-  file: string;
-  author: string;
-  license: string;
-  licenseUrl?: string;
-  source: string;
-}
-
-const credits = creditsJson as ImageCredit[];
-
 /** Página de créditos: autor, licença e link do original de cada imagem. */
-export default function CreditsPage() {
-  const themes = [...new Set(credits.map((credit) => credit.theme))];
+export default async function CreditsPage() {
+  // Os créditos ficam em cada personagem (campo imageCredit), no JSON ou no banco.
+  const summaries = await listThemes();
+  const themes = (await Promise.all(summaries.map((summary) => getTheme(summary.slug))))
+    .filter((theme) => theme !== null)
+    .map((theme) => ({
+      slug: theme.slug,
+      name: theme.name,
+      characters: theme.characters
+        .filter((character) => character.image && character.imageCredit)
+        .sort((a, b) => a.name.localeCompare(b.name, "pt-BR")),
+    }))
+    .filter((theme) => theme.characters.length > 0);
 
   return (
     <>
@@ -53,55 +49,59 @@ export default function CreditsPage() {
         </div>
 
         {themes.map((theme) => {
-          const items = credits.filter((credit) => credit.theme === theme);
-          const headingId = `tema-${items[0]?.image.split("/")[2] ?? theme}`;
+          const headingId = `tema-${theme.slug}`;
           return (
-            <section key={theme} aria-labelledby={headingId} className="flex flex-col gap-4">
+            <section key={theme.slug} aria-labelledby={headingId} className="flex flex-col gap-4">
               <h2 id={headingId} className="font-display text-3xl">
-                {theme}
+                {theme.name}
               </h2>
               <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((credit) => (
-                  <li
-                    key={credit.image}
-                    className="flex gap-3 rounded-2xl border-2 border-tinta bg-white p-3"
-                  >
-                    <CharacterPicture
-                      name={credit.characterName}
-                      image={credit.image}
-                      size="lg"
-                      decorative
-                    />
-                    <div className="flex min-w-0 flex-col gap-0.5 text-sm">
-                      <span className="font-bold">{credit.characterName}</span>
-                      <span className="truncate text-tinta-soft" title={credit.author}>
-                        {credit.author}
-                      </span>
-                      <span className="flex flex-wrap gap-x-3">
-                        {credit.licenseUrl ? (
-                          <a
-                            href={credit.licenseUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="font-semibold underline"
-                          >
-                            {credit.license}
-                          </a>
-                        ) : (
-                          <span className="font-semibold">{credit.license}</span>
-                        )}
-                        <a
-                          href={credit.source}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-tinta-soft underline hover:text-tinta"
-                        >
-                          Original<span className="sr-only"> de {credit.characterName}</span>
-                        </a>
-                      </span>
-                    </div>
-                  </li>
-                ))}
+                {theme.characters.map((character) => {
+                  const credit = character.imageCredit!;
+                  return (
+                    <li
+                      key={character.id}
+                      className="flex gap-3 rounded-2xl border-2 border-tinta bg-white p-3"
+                    >
+                      <CharacterPicture
+                        name={character.name}
+                        image={character.image}
+                        size="lg"
+                        decorative
+                      />
+                      <div className="flex min-w-0 flex-col gap-0.5 text-sm">
+                        <span className="font-bold">{character.name}</span>
+                        <span className="truncate text-tinta-soft" title={credit.author}>
+                          {credit.author}
+                        </span>
+                        <span className="flex flex-wrap gap-x-3">
+                          {credit.licenseUrl ? (
+                            <a
+                              href={credit.licenseUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-semibold underline"
+                            >
+                              {credit.license}
+                            </a>
+                          ) : (
+                            <span className="font-semibold">{credit.license}</span>
+                          )}
+                          {credit.source ? (
+                            <a
+                              href={credit.source}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-tinta-soft underline hover:text-tinta"
+                            >
+                              Original<span className="sr-only"> de {character.name}</span>
+                            </a>
+                          ) : null}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
           );

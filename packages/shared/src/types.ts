@@ -32,6 +32,16 @@ export interface ThemeAttribute {
 
 export type AttributeValue = string | number | string[];
 
+/** De onde veio a imagem de um personagem e sob qual licença (para os créditos). */
+export interface ImageCredit {
+  author: string;
+  /** Nome curto da licença, ex.: "CC BY-SA 4.0" ou "Domínio público". */
+  license: string;
+  licenseUrl?: string;
+  /** Página do original (ex.: o arquivo no Wikimedia Commons). */
+  source?: string;
+}
+
 export interface Character {
   id: string;
   name: string;
@@ -44,6 +54,8 @@ export interface Character {
    * ou URL completa (para temas da comunidade, no futuro). Sem imagem, o site mostra o emoji.
    */
   image?: string;
+  /** Autor e licença da imagem. Viaja junto com o personagem (JSON, banco e, no futuro, uploads). */
+  imageCredit?: ImageCredit;
   values: Record<string, AttributeValue>;
 }
 

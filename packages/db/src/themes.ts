@@ -38,6 +38,21 @@ export function toCharacterOptions(theme: Theme): CharacterOption[] {
     .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
 }
 
+/**
+ * Formato aceito para `image`: caminho no próprio site ("/temas/<slug>/<id>.webp")
+ * ou URL https (armazenamento de imagens da comunidade, no futuro). Só formatos de imagem.
+ */
+const IMAGE_PATH = /^(\/(?!\/)|https:\/\/)[^\s?#]+\.(webp|png|jpe?g|avif)$/i;
+
+/** Diz o que há de errado com o campo `image` de um personagem (ou null se estiver certo). */
+export function imageProblem(image: string): string | null {
+  if (image.includes("..")) return "o caminho da imagem não pode ter “..”";
+  if (!IMAGE_PATH.test(image)) {
+    return "a imagem precisa ser um caminho do site (/...) ou uma URL https, terminando em .webp, .png, .jpg ou .avif";
+  }
+  return null;
+}
+
 /** Confere se um tema está consistente antes de usar ou salvar. Devolve a lista de problemas. */
 export function validateTheme(theme: Theme): string[] {
   const problems: string[] = [];
@@ -49,6 +64,17 @@ export function validateTheme(theme: Theme): string[] {
   for (const character of theme.characters) {
     if (ids.has(character.id)) problems.push(`Personagem repetido: ${character.id}`);
     ids.add(character.id);
+    if (character.image !== undefined) {
+      const problem = imageProblem(character.image);
+      if (problem) problems.push(`${character.name}: ${problem}.`);
+    }
+    if (character.imageCredit) {
+      if (!character.imageCredit.author.trim() || !character.imageCredit.license.trim()) {
+        problems.push(`${character.name}: o crédito da imagem precisa de autor e licença.`);
+      }
+      if (!character.image)
+        problems.push(`${character.name}: tem crédito de imagem, mas não tem imagem.`);
+    }
     for (const key of attributeKeys) {
       if (character.values[key] === undefined) {
         problems.push(`${character.name} não tem valor para "${key}".`);

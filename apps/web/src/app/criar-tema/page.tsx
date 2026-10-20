@@ -20,6 +20,7 @@ const EXAMPLE = `{
     {
       "id": "ana",
       "name": "Ana",
+      "image": "/temas/minha-turma/ana.webp",
       "values": { "cidade": "Recife", "hobbies": ["vôlei", "games"], "idade": 24 }
     }
   ]
@@ -33,6 +34,10 @@ const STEPS = [
   {
     title: "Cadastre os personagens",
     text: "Pelo menos 5, cada um com um valor para cada atributo. Apelidos ajudam o autocompletar.",
+  },
+  {
+    title: "Suba a imagem de cada personagem",
+    text: "A imagem aparece no autocompletar, no tabuleiro e na revelação. Com imagem para todos, o tema também pode ser jogado no modo Imagem. Só vale imagem sua ou com licença livre, e cada uma passa por moderação.",
   },
   {
     title: "Use só na sua sala ou publique",
@@ -57,7 +62,7 @@ export default function CreateThemePage() {
             <h1 className="font-display text-5xl sm:text-6xl">Crie o seu tema</h1>
             <p className="max-w-[52ch] text-lg text-tinta-soft">
               Logo dá para montar um dle da sua turma, da sua série favorita ou dos jogadores do seu
-              time, e jogar com quem quiser.
+              time, subir a imagem de cada personagem e jogar com quem quiser.
             </p>
           </div>
           <ol className="flex flex-col gap-6">
@@ -91,7 +96,9 @@ export default function CreateThemePage() {
           <p className="text-sm text-tinta-soft">
             Enquanto o editor não chega, temas novos podem ser enviados como arquivo JSON neste
             formato (veja os oficiais em{" "}
-            <code className="rounded bg-white px-1">packages/db/seed</code>).
+            <code className="rounded bg-white px-1">packages/db/seed</code>). O upload das imagens
+            vai chegar junto com o editor; por enquanto, o campo{" "}
+            <code className="rounded bg-white px-1">image</code> aponta para um arquivo do site.
           </p>
           <pre className="overflow-x-auto rounded-2xl border-2 border-tinta bg-tinta p-5 text-sm leading-relaxed text-gema-soft">
             <code>{EXAMPLE}</code>

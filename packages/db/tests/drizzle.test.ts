@@ -52,12 +52,6 @@ describe("temas oficiais", () => {
 
 describe("imagens dos temas oficiais", () => {
   const publicDir = fileURLToPath(new URL("../../../apps/web/public", import.meta.url));
-  const credits = JSON.parse(readFileSync(`${publicDir}/temas/creditos.json`, "utf8")) as {
-    image: string;
-    license: string;
-    author: string;
-    source: string;
-  }[];
   const withImage = OFFICIAL_THEMES.flatMap((theme) =>
     theme.characters.filter((c) => c.image).map((c) => ({ theme, character: c })),
   );
@@ -70,15 +64,58 @@ describe("imagens dos temas oficiais", () => {
     }
   });
 
-  it("cada imagem tem crédito com licença livre, e cada crédito tem imagem", () => {
-    const images = new Set(withImage.map(({ character }) => character.image));
-    for (const credit of credits) {
-      expect(images.has(credit.image), credit.image).toBe(true);
-      expect(credit.license).toMatch(/^(domínio público|pd|cc0|cc by(-sa)? \d)/i);
-      expect(credit.author).not.toBe("");
-      expect(credit.source).toMatch(/^https:\/\/commons\.wikimedia\.org\//);
+  it("cada imagem tem crédito com licença livre e link para o original", () => {
+    for (const { character } of withImage) {
+      const credit = character.imageCredit;
+      expect(credit, character.id).toBeDefined();
+      expect(credit!.license).toMatch(/^(domínio público|pd|cc0|cc by(-sa)? \d)/i);
+      expect(credit!.author).not.toBe("");
+      expect(credit!.source).toMatch(/^https:\/\/commons\.wikimedia\.org\//);
     }
-    expect(new Set(credits.map((credit) => credit.image))).toEqual(images);
+  });
+
+  it("o CREDITOS.md lista todas as imagens", () => {
+    const markdown = readFileSync(`${publicDir}/temas/CREDITOS.md`, "utf8");
+    for (const { character } of withImage) {
+      expect(markdown, character.id).toContain(character.imageCredit!.source!);
+    }
+  });
+});
+
+describe("validateTheme: imagens", () => {
+  const base = OFFICIAL_THEMES.find((t) => t.slug === "fauna-brasileira")!;
+  const withCharacter = (patch: Partial<Theme["characters"][number]>) => ({
+    ...base,
+    characters: [{ ...base.characters[0]!, ...patch }, ...base.characters.slice(1)],
+  });
+
+  it("aceita caminho do site e URL https de imagem", () => {
+    expect(validateTheme(withCharacter({ image: "/temas/x/y.webp" }))).toEqual([]);
+    expect(validateTheme(withCharacter({ image: "https://cdn.exemplo.com/a/b.png" }))).toEqual([]);
+  });
+
+  it("recusa caminhos estranhos, http, outros formatos e “..”", () => {
+    for (const image of [
+      "temas/x.webp",
+      "//outro-site.com/x.webp",
+      "http://cdn.exemplo.com/x.webp",
+      "/temas/x.svg",
+      "/temas/../segredo.webp",
+      "/temas/x.webp?v=1",
+    ]) {
+      expect(validateTheme(withCharacter({ image })), image).not.toEqual([]);
+    }
+  });
+
+  it("crédito precisa de autor e licença, e de uma imagem", () => {
+    expect(
+      validateTheme(withCharacter({ imageCredit: { author: "", license: "CC0" } })),
+    ).not.toEqual([]);
+    expect(
+      validateTheme(
+        withCharacter({ image: undefined, imageCredit: { author: "Ana", license: "CC0" } }),
+      ),
+    ).not.toEqual([]);
   });
 });
 

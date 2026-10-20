@@ -21,7 +21,7 @@ import {
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
-import type { AttributeValue, RoomSettings } from "@chutai/shared";
+import type { AttributeValue, ImageCredit, RoomSettings } from "@chutai/shared";
 
 export const visibilityEnum = pgEnum("theme_visibility", ["official", "public", "private"]);
 export const moderationEnum = pgEnum("moderation_status", ["pending", "approved", "rejected"]);
@@ -104,6 +104,8 @@ export const characters = pgTable(
       .default(sql`'{}'::text[]`),
     emoji: text("emoji"),
     imageUrl: text("image_url"),
+    /** Autor e licença da imagem (temas oficiais: Wikimedia Commons; no futuro, uploads). */
+    imageCredit: jsonb("image_credit").$type<ImageCredit>(),
   },
   (table) => [uniqueIndex("characters_theme_external_idx").on(table.themeId, table.externalId)],
 );

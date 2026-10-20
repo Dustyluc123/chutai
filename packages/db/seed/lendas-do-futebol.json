@@ -42,6 +42,11 @@
       "id": "pele",
       "name": "Pelé",
       "image": "/temas/lendas-do-futebol/pele.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Pele_con_brasil_(cropped).jpg"
+      },
       "aliases": ["Rei do Futebol", "Edson Arantes"],
       "emoji": "⚽",
       "values": {
@@ -57,6 +62,11 @@
       "id": "garrincha",
       "name": "Garrincha",
       "image": "/temas/lendas-do-futebol/garrincha.webp",
+      "imageCredit": {
+        "author": "El Gráfico",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:MFdSantos-Garrincha_(cropped).jpg"
+      },
       "aliases": ["Mané Garrincha", "Anjo de Pernas Tortas"],
       "emoji": "⚽",
       "values": {
@@ -72,6 +82,11 @@
       "id": "didi",
       "name": "Didi",
       "image": "/temas/lendas-do-futebol/didi.webp",
+      "imageCredit": {
+        "author": "Emilio Ronchini (Mondadori Publishers)",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Waldir_Pereira_1958.jpg"
+      },
       "aliases": ["Folha Seca"],
       "emoji": "⚽",
       "values": {
@@ -87,6 +102,11 @@
       "id": "nilton-santos",
       "name": "Nilton Santos",
       "image": "/temas/lendas-do-futebol/nilton-santos.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Nilton_Santos_2_(1956).tif"
+      },
       "aliases": ["Enciclopédia"],
       "emoji": "⚽",
       "values": {
@@ -102,6 +122,12 @@
       "id": "djalma-santos",
       "name": "Djalma Santos",
       "image": "/temas/lendas-do-futebol/djalma-santos.webp",
+      "imageCredit": {
+        "author": "Fabio Rodrigues Pozzebom",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Djalma_Santos.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -116,6 +142,12 @@
       "id": "zito",
       "name": "Zito",
       "image": "/temas/lendas-do-futebol/zito.webp",
+      "imageCredit": {
+        "author": "Fabio Rodrigues Pozzebom/ABr",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Zito_2008.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -130,6 +162,11 @@
       "id": "vava",
       "name": "Vavá",
       "image": "/temas/lendas-do-futebol/vava.webp",
+      "imageCredit": {
+        "author": "Panini",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Vav%C3%A1_en_1962.jpg"
+      },
       "aliases": ["Peito de Aço"],
       "emoji": "⚽",
       "values": {
@@ -145,6 +182,11 @@
       "id": "gilmar",
       "name": "Gilmar",
       "image": "/temas/lendas-do-futebol/gilmar.webp",
+      "imageCredit": {
+        "author": "Aftonbladet photo",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Gilmar_(cropped).jpg"
+      },
       "aliases": ["Gylmar dos Santos Neves"],
       "emoji": "🧤",
       "values": {
@@ -160,6 +202,12 @@
       "id": "zagallo",
       "name": "Zagallo",
       "image": "/temas/lendas-do-futebol/zagallo.webp",
+      "imageCredit": {
+        "author": "Wilson Dias/ABr",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Zagallo_and_Lula_and_Parreira_(cropped).jpg"
+      },
       "aliases": ["Velho Lobo", "Formiguinha"],
       "emoji": "⚽",
       "values": {
@@ -175,6 +223,12 @@
       "id": "bellini",
       "name": "Bellini",
       "image": "/temas/lendas-do-futebol/bellini.webp",
+      "imageCredit": {
+        "author": "Fabio Rodrigues Pozzebom/ABr",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Hilderaldo_Bellini.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -189,6 +243,11 @@
       "id": "mauro-ramos",
       "name": "Mauro Ramos",
       "image": "/temas/lendas-do-futebol/mauro-ramos.webp",
+      "imageCredit": {
+        "author": "Edizioni Astra, Milano (chiusura 1986)",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Mauro_Ramos_en_1962.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -203,6 +262,11 @@
       "id": "amarildo",
       "name": "Amarildo",
       "image": "/temas/lendas-do-futebol/amarildo.webp",
+      "imageCredit": {
+        "author": "Panini",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Amarildo_en_1965_au_Milan_AC.jpg"
+      },
       "aliases": ["Possesso"],
       "emoji": "⚽",
       "values": {
@@ -218,6 +282,11 @@
       "id": "jairzinho",
       "name": "Jairzinho",
       "image": "/temas/lendas-do-futebol/jairzinho.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Jairzinho_1970s.jpg"
+      },
       "aliases": ["Furacão da Copa"],
       "emoji": "⚽",
       "values": {
@@ -233,6 +302,11 @@
       "id": "tostao",
       "name": "Tostão",
       "image": "/temas/lendas-do-futebol/tostao.webp",
+      "imageCredit": {
+        "author": "Panini",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Tost%C3%A3o_(Eduardo_Gon%C3%A7alves_de_Andrade,_1970).jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Atacante",
@@ -247,6 +321,12 @@
       "id": "rivellino",
       "name": "Rivellino",
       "image": "/temas/lendas-do-futebol/rivellino.webp",
+      "imageCredit": {
+        "author": "Mídia promocional do programa Caminhos da Reportagem, TV Brasil.",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Rivelino_tvbrasil.jpg"
+      },
       "aliases": ["Patada Atômica"],
       "emoji": "⚽",
       "values": {
@@ -262,6 +342,11 @@
       "id": "carlos-alberto-torres",
       "name": "Carlos Alberto Torres",
       "image": "/temas/lendas-do-futebol/carlos-alberto-torres.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Carlos_Alberto_1970_(cropped).jpg"
+      },
       "aliases": ["Capita"],
       "emoji": "⚽",
       "values": {
@@ -277,6 +362,12 @@
       "id": "gerson",
       "name": "Gérson",
       "image": "/temas/lendas-do-futebol/gerson.webp",
+      "imageCredit": {
+        "author": "Christophe95",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:G%C3%A9rson_de_Oliveira_Nunes_2008.jpg"
+      },
       "aliases": ["Canhotinha de Ouro"],
       "emoji": "⚽",
       "values": {
@@ -292,6 +383,12 @@
       "id": "clodoaldo",
       "name": "Clodoaldo",
       "image": "/temas/lendas-do-futebol/clodoaldo.webp",
+      "imageCredit": {
+        "author": "Valter Campanato/ABr",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Clodoaldo_2013.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -306,6 +403,11 @@
       "id": "felix",
       "name": "Félix",
       "image": "/temas/lendas-do-futebol/felix.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:F%C3%A9lix_1970_World_Cup_(cropped).jpg"
+      },
       "emoji": "🧤",
       "values": {
         "posicao": "Goleiro",
@@ -320,6 +422,12 @@
       "id": "zico",
       "name": "Zico",
       "image": "/temas/lendas-do-futebol/zico.webp",
+      "imageCredit": {
+        "author": "Doha Stadium Plus Qatar",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Zico_2012_3.jpg"
+      },
       "aliases": ["Galinho de Quintino"],
       "emoji": "⚽",
       "values": {
@@ -335,6 +443,12 @@
       "id": "socrates",
       "name": "Sócrates",
       "image": "/temas/lendas-do-futebol/socrates.webp",
+      "imageCredit": {
+        "author": "Foto U. Dettmar/ABr.",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Socrates87660.jpg"
+      },
       "aliases": ["Doutor"],
       "emoji": "⚽",
       "values": {
@@ -350,6 +464,11 @@
       "id": "falcao",
       "name": "Falcão",
       "image": "/temas/lendas-do-futebol/falcao.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Paulo_Roberto_Falc%C3%A3o,_Roma_1983-84.jpg"
+      },
       "aliases": ["Rei de Roma"],
       "emoji": "⚽",
       "values": {
@@ -365,6 +484,11 @@
       "id": "toninho-cerezo",
       "name": "Toninho Cerezo",
       "image": "/temas/lendas-do-futebol/toninho-cerezo.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Toninho_cerezo_in_1982.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -379,6 +503,12 @@
       "id": "junior",
       "name": "Júnior",
       "image": "/temas/lendas-do-futebol/junior.webp",
+      "imageCredit": {
+        "author": "Wiki0096",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leovegildo_Lins_Gama_J%C3%BAnior_2022.jpg"
+      },
       "aliases": ["Capacete"],
       "emoji": "⚽",
       "values": {
@@ -407,6 +537,12 @@
       "id": "careca",
       "name": "Careca",
       "image": "/temas/lendas-do-futebol/careca.webp",
+      "imageCredit": {
+        "author": "NullReason",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Careca-2023.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Atacante",
@@ -421,6 +557,11 @@
       "id": "branco",
       "name": "Branco",
       "image": "/temas/lendas-do-futebol/branco.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Branco_-_Brescia_Calcio_1986-87.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -435,6 +576,12 @@
       "id": "romario",
       "name": "Romário",
       "image": "/temas/lendas-do-futebol/romario.webp",
+      "imageCredit": {
+        "author": "Agência Senado from Brasilia, Brazil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Senadores_da_57%C2%AA_Legislatura_(52689451805).jpg"
+      },
       "aliases": ["Baixinho"],
       "emoji": "⚽",
       "values": {
@@ -450,6 +597,12 @@
       "id": "bebeto",
       "name": "Bebeto",
       "image": "/temas/lendas-do-futebol/bebeto.webp",
+      "imageCredit": {
+        "author": "Sergio Savarese from Sao Paulo City / Ipiranga, Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Bebeto_brazil_(cropped).jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Atacante",
@@ -464,6 +617,12 @@
       "id": "taffarel",
       "name": "Taffarel",
       "image": "/temas/lendas-do-futebol/taffarel.webp",
+      "imageCredit": {
+        "author": "Кирилл Венедиктов",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Taffarel_2018.png"
+      },
       "emoji": "🧤",
       "values": {
         "posicao": "Goleiro",
@@ -478,6 +637,12 @@
       "id": "dunga",
       "name": "Dunga",
       "image": "/temas/lendas-do-futebol/dunga.webp",
+      "imageCredit": {
+        "author": "Aécio Neves from Brasília, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Aecio_Neves_e_Dunga_-_17-06-2008_(8368243127)_(cropped).jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -492,6 +657,12 @@
       "id": "aldair",
       "name": "Aldair",
       "image": "/temas/lendas-do-futebol/aldair.webp",
+      "imageCredit": {
+        "author": "Christophe95",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Aldair.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -506,6 +677,12 @@
       "id": "mauro-silva",
       "name": "Mauro Silva",
       "image": "/temas/lendas-do-futebol/mauro-silva.webp",
+      "imageCredit": {
+        "author": "Refivagert",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Maurosilva.png"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Volante",
@@ -520,6 +697,12 @@
       "id": "cafu",
       "name": "Cafu",
       "image": "/temas/lendas-do-futebol/cafu.webp",
+      "imageCredit": {
+        "author": "Palácio do Planalto from Brasilia, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:14_06_2019_Abertura_da_Copa_Am%C3%A9rica_Brasil_2019_(48064408836)_(cropped).jpg"
+      },
       "aliases": ["Pendolino"],
       "emoji": "⚽",
       "values": {
@@ -535,6 +718,12 @@
       "id": "roberto-carlos",
       "name": "Roberto Carlos",
       "image": "/temas/lendas-do-futebol/roberto-carlos.webp",
+      "imageCredit": {
+        "author": "Web Summit",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:LS3_1288_(53332367864)_(cropped).jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -549,6 +738,12 @@
       "id": "ronaldo",
       "name": "Ronaldo",
       "image": "/temas/lendas-do-futebol/ronaldo.webp",
+      "imageCredit": {
+        "author": "Lula Oficial",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:12.12.2025_%E2%80%93_Cerim%C3%B4nia_de_lan%C3%A7amento_do_SBT_News_-_54980664160_(cropped2).jpg"
+      },
       "aliases": ["Fenômeno", "R9"],
       "emoji": "⚽",
       "values": {
@@ -564,6 +759,12 @@
       "id": "rivaldo",
       "name": "Rivaldo",
       "image": "/temas/lendas-do-futebol/rivaldo.webp",
+      "imageCredit": {
+        "author": "w:User:Nursultan12",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rivaldo_bunyodkor_2010.jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Meia",
@@ -578,6 +779,12 @@
       "id": "ronaldinho-gaucho",
       "name": "Ronaldinho Gaúcho",
       "image": "/temas/lendas-do-futebol/ronaldinho-gaucho.webp",
+      "imageCredit": {
+        "author": "Web Summit",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2019_-_Press_conferences_-_Day_1_ENX_6950_(49019873887)_(cropped).jpg"
+      },
       "aliases": ["Ronaldinho", "R10", "Bruxo"],
       "emoji": "⚽",
       "values": {
@@ -607,6 +814,12 @@
       "id": "ze-roberto",
       "name": "Zé Roberto",
       "image": "/temas/lendas-do-futebol/ze-roberto.webp",
+      "imageCredit": {
+        "author": "Agencia de Noticias ANDES",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:ZE_ROBERTO-PALMEIRAS_(34911500643)_(cropped).jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Lateral",
@@ -621,6 +834,12 @@
       "id": "juninho-pernambucano",
       "name": "Juninho Pernambucano",
       "image": "/temas/lendas-do-futebol/juninho-pernambucano.webp",
+      "imageCredit": {
+        "author": "TV Brasil",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Juninho_Pernambucano.JPG"
+      },
       "aliases": ["Reizinho da Colina"],
       "emoji": "⚽",
       "values": {
@@ -636,6 +855,12 @@
       "id": "lucio",
       "name": "Lúcio",
       "image": "/temas/lendas-do-futebol/lucio.webp",
+      "imageCredit": {
+        "author": "Palácio do Planalto from Brasilia, Brasil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lucio_2019_(cropped).jpg"
+      },
       "emoji": "⚽",
       "values": {
         "posicao": "Zagueiro",
@@ -650,6 +875,12 @@
       "id": "kaka",
       "name": "Kaká",
       "image": "/temas/lendas-do-futebol/kaka.webp",
+      "imageCredit": {
+        "author": "Евгений Асмолов",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Kak%C3%A1_visited_Stadium_St._Petersburg.jpg"
+      },
       "aliases": ["Ricardo Izecson"],
       "emoji": "⚽",
       "values": {
@@ -665,6 +896,12 @@
       "id": "adriano",
       "name": "Adriano",
       "image": "/temas/lendas-do-futebol/adriano.webp",
+      "imageCredit": {
+        "author": "José Cruz/A Br",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Adriano_2009_(cropped).jpg"
+      },
       "aliases": ["Imperador"],
       "emoji": "⚽",
       "values": {
@@ -680,6 +917,11 @@
       "id": "leonidas-da-silva",
       "name": "Leônidas da Silva",
       "image": "/temas/lendas-do-futebol/leonidas-da-silva.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Leonidas_dasilva.jpg"
+      },
       "aliases": ["Diamante Negro", "Homem Borracha"],
       "emoji": "⚽",
       "values": {
@@ -695,6 +937,11 @@
       "id": "friedenreich",
       "name": "Friedenreich",
       "image": "/temas/lendas-do-futebol/friedenreich.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Arthur_friedenreich.jpg"
+      },
       "aliases": ["El Tigre", "Fried"],
       "emoji": "⚽",
       "values": {
@@ -710,6 +957,11 @@
       "id": "ademir-de-menezes",
       "name": "Ademir de Menezes",
       "image": "/temas/lendas-do-futebol/ademir-de-menezes.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Ademir_Marques_de_Menezes.png"
+      },
       "aliases": ["Queixada"],
       "emoji": "⚽",
       "values": {
@@ -725,6 +977,11 @@
       "id": "zizinho",
       "name": "Zizinho",
       "image": "/temas/lendas-do-futebol/zizinho.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Zizinho,_Fundo_Correio_da_Manh%C3%A3_-_2.tif"
+      },
       "aliases": ["Mestre Ziza"],
       "emoji": "⚽",
       "values": {
@@ -740,6 +997,11 @@
       "id": "barbosa",
       "name": "Barbosa",
       "image": "/temas/lendas-do-futebol/barbosa.webp",
+      "imageCredit": {
+        "author": "Imagem pertencente ao acervo do C.R. Vasco da Gama, autor não informado.",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Vasco45_barbosa.jpg"
+      },
       "emoji": "🧤",
       "values": {
         "posicao": "Goleiro",

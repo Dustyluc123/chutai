@@ -126,6 +126,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
         aliases: character.aliases,
         ...(character.emoji ? { emoji: character.emoji } : {}),
         ...(character.imageUrl ? { image: character.imageUrl } : {}),
+        ...(character.imageCredit ? { imageCredit: character.imageCredit } : {}),
         values: Object.fromEntries(
           valueRows
             .filter((value) => value.characterId === character.id)
@@ -197,6 +198,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
           aliases: character.aliases ?? [],
           emoji: character.emoji ?? null,
           imageUrl: character.image ?? null,
+          imageCredit: character.imageCredit ?? null,
         })),
       )
       .returning({ id: characters.id, externalId: characters.externalId });

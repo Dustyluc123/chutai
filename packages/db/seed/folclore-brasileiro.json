@@ -17,6 +17,11 @@
       "id": "saci-perere",
       "name": "Saci-Pererê",
       "image": "/temas/folclore-brasileiro/saci-perere.webp",
+      "imageCredit": {
+        "author": "Monteiro Lobato",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Saci_Perer%C3%AA.jpg"
+      },
       "aliases": ["Saci"],
       "emoji": "🌪️",
       "values": {
@@ -43,6 +48,11 @@
       "id": "iara",
       "name": "Iara",
       "image": "/temas/folclore-brasileiro/iara.webp",
+      "imageCredit": {
+        "author": "Newton Cavalcanti",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:01_-_Divulga%C3%A7%C3%A3o_de_Lendas_Brasileiras_-_Iara.jpg"
+      },
       "aliases": ["Mãe-d'Água", "Uiara"],
       "emoji": "🧜‍♀️",
       "values": {
@@ -57,6 +67,12 @@
       "id": "boto",
       "name": "Boto-cor-de-rosa",
       "image": "/temas/folclore-brasileiro/boto.webp",
+      "imageCredit": {
+        "author": "Mônica Imbuzeiro",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:O_boto.jpg"
+      },
       "aliases": ["Boto"],
       "emoji": "🐬",
       "values": {
@@ -71,6 +87,12 @@
       "id": "boitata",
       "name": "Boitatá",
       "image": "/temas/folclore-brasileiro/boitata.webp",
+      "imageCredit": {
+        "author": "The ponta cabeça",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Boitat%C3%A1.jpg"
+      },
       "emoji": "🐍",
       "values": {
         "forma": "Animal",
@@ -84,6 +106,11 @@
       "id": "mula-sem-cabeca",
       "name": "Mula sem cabeça",
       "image": "/temas/folclore-brasileiro/mula-sem-cabeca.webp",
+      "imageCredit": {
+        "author": "OrsettoGommoso2",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Mulasemcabeca.JPG"
+      },
       "emoji": "🐴",
       "values": {
         "forma": "Animal",
@@ -97,6 +124,11 @@
       "id": "lobisomem",
       "name": "Lobisomem",
       "image": "/temas/folclore-brasileiro/lobisomem.webp",
+      "imageCredit": {
+        "author": "Mont Sudbury",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:WeirdTalesv36n2pg038_The_Werewolf_Howls.png"
+      },
       "emoji": "🐺",
       "values": {
         "forma": "Metamorfo",
@@ -122,6 +154,12 @@
       "id": "mapinguari",
       "name": "Mapinguari",
       "image": "/temas/folclore-brasileiro/mapinguari.webp",
+      "imageCredit": {
+        "author": "Lauro Iyambae (@Aptix_4p0clix)",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:MAPINGUARI_(cropped).png"
+      },
       "emoji": "👁️",
       "values": {
         "forma": "Monstro",
@@ -135,6 +173,12 @@
       "id": "caipora",
       "name": "Caipora",
       "image": "/temas/folclore-brasileiro/caipora.webp",
+      "imageCredit": {
+        "author": "Jakared",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Caipora.jpg"
+      },
       "emoji": "🐗",
       "values": {
         "forma": "Humanoide",
@@ -148,6 +192,11 @@
       "id": "negrinho-do-pastoreio",
       "name": "Negrinho do Pastoreio",
       "image": "/temas/folclore-brasileiro/negrinho-do-pastoreio.webp",
+      "imageCredit": {
+        "author": "Newton Cavalcanti",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:01_-_Divulga%C3%A7%C3%A3o_de_Lendas_Brasileiras_-_Negrinho.jpg"
+      },
       "emoji": "🐎",
       "values": {
         "forma": "Humanoide",
@@ -161,6 +210,11 @@
       "id": "cabeca-de-cuia",
       "name": "Cabeça de Cuia",
       "image": "/temas/folclore-brasileiro/cabeca-de-cuia.webp",
+      "imageCredit": {
+        "author": "Sullank",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Cabe%C3%A7a_de_cuia.jpg"
+      },
       "emoji": "🥥",
       "values": {
         "forma": "Humanoide",
@@ -174,6 +228,12 @@
       "id": "matinta-pereira",
       "name": "Matinta Pereira",
       "image": "/temas/folclore-brasileiro/matinta-pereira.webp",
+      "imageCredit": {
+        "author": "Victor Maya",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Matinta_Perera.png"
+      },
       "aliases": ["Matinta Perera"],
       "emoji": "🦉",
       "values": {
@@ -212,6 +272,12 @@
       "id": "bicho-papao",
       "name": "Bicho-papão",
       "image": "/temas/folclore-brasileiro/bicho-papao.webp",
+      "imageCredit": {
+        "author": "Francisco de Goya",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Francisco_de_Goya,_Que_viene_el_coco_(Here_Comes_the_Bogey-Man),_published_1799,_NGA_7459.jpg"
+      },
       "emoji": "👹",
       "values": {
         "forma": "Monstro",
@@ -225,6 +291,11 @@
       "id": "homem-do-saco",
       "name": "Homem do Saco",
       "image": "/temas/folclore-brasileiro/homem-do-saco.webp",
+      "imageCredit": {
+        "author": "Abraham Bach the Elder",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Der_Mann_mit_dem_Sack.jpg"
+      },
       "aliases": ["Velho do Saco"],
       "emoji": "🎒",
       "values": {
@@ -239,6 +310,12 @@
       "id": "comadre-fulozinha",
       "name": "Comadre Fulozinha",
       "image": "/temas/folclore-brasileiro/comadre-fulozinha.webp",
+      "imageCredit": {
+        "author": "Lalfulano123",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Cumadre_Fulozinha.jpg"
+      },
       "emoji": "🌸",
       "values": {
         "forma": "Humanoide",
@@ -252,6 +329,11 @@
       "id": "anhanga",
       "name": "Anhangá",
       "image": "/temas/folclore-brasileiro/anhanga.webp",
+      "imageCredit": {
+        "author": "Jean de Léry",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Lery(1580)-p235-Aygnan.jpg"
+      },
       "emoji": "🦌",
       "values": {
         "forma": "Animal",
@@ -277,6 +359,12 @@
       "id": "cobra-grande",
       "name": "Cobra Grande",
       "image": "/temas/folclore-brasileiro/cobra-grande.webp",
+      "imageCredit": {
+        "author": "Joaoguilherme92",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alegoriaboiuna.jpg"
+      },
       "aliases": ["Boiúna"],
       "emoji": "🐉",
       "values": {

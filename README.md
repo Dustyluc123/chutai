@@ -12,7 +12,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-86_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-90_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -323,7 +323,7 @@ pnpm test
 | ------------------ | -----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@chutai/game`     |     37 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis do modo Imagem                                                                                                                                      |
 | `@chutai/realtime` |     39 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião), modo Imagem (ninguém recebe um nível acima do que alcançou, nada vaza no estado público), geração das imagens com `sharp` e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/db`       |     10 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens e créditos                                                                                                                                          |
+| `@chutai/db`       |     14 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens e créditos                                                                                                                                          |
 
 ## Deploy
 
@@ -364,7 +364,7 @@ Temas são arquivos JSON em [`packages/db/seed`](packages/db/seed). Cada um defi
 }
 ```
 
-Cada personagem pode ter um campo `image` com o caminho da imagem (ex.: `/temas/minha-turma/ana.webp`, dentro de `apps/web/public`). Para os temas oficiais, as imagens vêm do Wikimedia Commons: escolha o arquivo em `packages/db/seed/image-sources.json` e rode `pnpm images:fetch`, que confere a licença, reduz a imagem e atualiza os créditos.
+Cada personagem pode ter um campo `image` com o caminho da imagem (ex.: `/temas/minha-turma/ana.webp`, dentro de `apps/web/public`). Junto vai o campo `imageCredit` (autor, licença e link do original), que alimenta a página de créditos e é gravado no banco. Para os temas oficiais, as imagens vêm do Wikimedia Commons: escolha o arquivo em `packages/db/seed/image-sources.json` e rode `pnpm images:fetch`, que confere a licença, reduz a imagem e preenche `image` e `imageCredit`. O `validateTheme` recusa imagens fora do formato (caminho do site ou URL https, em .webp, .png, .jpg ou .avif).
 
 O tema também precisa de um campo `emoji` com o ícone que aparece no site, e cada personagem pode ter o seu (sem imagem, é ele que aparece no tabuleiro). Os temas oficiais servem de modelo.
 
@@ -377,9 +377,10 @@ Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `tem
 - [x] **Fase 0** — Monorepo, TypeScript, ESLint, Prettier, Docker e primeiros temas
 - [x] **Fase 1** — Regras do jogo testadas e modo treino individual
 - [x] **Fase 2** — Multiplayer: salas, lobby, rodadas com cronômetro, placar ao vivo, pódio e reconexão
+- [x] **Fase 2.5** — Imagem de cada personagem (licença livre, com créditos) e modo de jogo Imagem
 - [ ] **Fase 3** — Lançamento: deploy, domínio, monitoramento de erros (Sentry) e testes com grupos de amigos
-- [ ] **Fase 4** — Comunidade: login com Google e Discord, editor de temas, moderação e salas públicas
-- [ ] **Fase 5** — Crescimento: modo streamer (chat da Twitch contra o streamer), modos de imagem e emoji, plano premium
+- [ ] **Fase 4** — Comunidade: login com Google e Discord, editor de temas com upload de imagens, moderação e salas públicas
+- [ ] **Fase 5** — Crescimento: modo streamer (chat da Twitch contra o streamer), modo emoji, plano premium
 
 ## Sobre mim
 

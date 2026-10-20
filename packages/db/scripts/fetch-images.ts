@@ -8,8 +8,8 @@
  * 2. Confere a licença de cada arquivo na API do Commons. Só aceita domínio público,
  *    CC0, CC BY e CC BY-SA; qualquer outra licença faz o personagem ficar sem imagem.
  * 3. Recorta e reduz para 300×300 em WebP e grava em `apps/web/public/temas/<slug>/<id>.webp`.
- * 4. Gera `apps/web/public/temas/creditos.json` (lido pela página /creditos) e `CREDITOS.md`.
- * 5. Atualiza o campo `image` de cada personagem nos JSON dos temas.
+ * 4. Atualiza os campos `image` e `imageCredit` de cada personagem nos JSON dos temas
+ *    (a página /creditos lê dali) e gera `apps/web/public/temas/CREDITOS.md`.
  *
  * Precisa de internet. Rodar de novo é seguro: tudo é regravado a partir do manifesto.
  */
@@ -17,6 +17,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import type { ImageCredit } from "@chutai/shared";
 
 const ROOT = fileURLToPath(new URL("../../../", import.meta.url));
 const SEED_DIR = `${ROOT}packages/db/seed`;
@@ -30,7 +31,8 @@ export const IMAGE_SIZE = 300;
 /** Licenças aceitas, pelo nome curto que o Commons usa. */
 const ALLOWED = [/^public domain$/i, /^pd/i, /^cc0/i, /^cc by(-sa)? \d/i];
 
-export interface ImageCredit {
+/** Uma linha do CREDITOS.md. */
+interface CreditRow extends ImageCredit {
   theme: string;
   characterId: string;
   characterName: string;
@@ -38,10 +40,6 @@ export interface ImageCredit {
   image: string;
   /** Título do arquivo no Commons. */
   file: string;
-  author: string;
-  license: string;
-  licenseUrl?: string;
-  /** Página do arquivo no Commons. */
   source: string;
 }
 
@@ -115,11 +113,28 @@ async function toWebp(bytes: Buffer, slug: string): Promise<Buffer> {
 }
 
 /**
- * Coloca (ou tira) a linha `"image": ...` de cada personagem sem reformatar o resto do JSON,
- * que segue o estilo compacto escrito à mão.
+ * Coloca (ou tira) os campos `image` e `imageCredit` de cada personagem sem reformatar
+ * o resto do JSON, que segue o estilo compacto escrito à mão.
  */
-function setImageFields(json: string, images: Map<string, string>): string {
-  const lines = json.split("\n").filter((line) => !/^\s*"image": /.test(line));
+function setImageFields(
+  json: string,
+  images: Map<string, { image: string; credit: ImageCredit }>,
+): string {
+  const lines: string[] = [];
+  let skippingCredit = false;
+  for (const line of json.split("\n")) {
+    if (skippingCredit) {
+      if (/^\s*\},?$/.test(line)) skippingCredit = false;
+      continue;
+    }
+    if (/^\s*"imageCredit": \{$/.test(line)) {
+      skippingCredit = true;
+      continue;
+    }
+    if (/^\s*"image": /.test(line)) continue;
+    lines.push(line);
+  }
+
   const out: string[] = [];
   let currentId: string | undefined;
   for (const line of lines) {
@@ -127,15 +142,22 @@ function setImageFields(json: string, images: Map<string, string>): string {
     const id = /^\s*"id": "([^"]+)",?$/.exec(line);
     if (id) currentId = id[1];
     const name = /^(\s*)"name": /.exec(line);
-    if (name && currentId && images.has(currentId)) {
-      out.push(`${name[1]}"image": "${images.get(currentId)}",`);
+    const entry = currentId ? images.get(currentId) : undefined;
+    if (name && entry) {
+      const indent = name[1] ?? "";
+      out.push(`${indent}"image": ${JSON.stringify(entry.image)},`);
+      const credit = JSON.stringify(entry.credit, null, 2).split("\n");
+      credit.forEach((creditLine, index) => {
+        const prefix = index === 0 ? `${indent}"imageCredit": ` : indent;
+        out.push(`${prefix}${creditLine}${index === credit.length - 1 ? "," : ""}`);
+      });
       currentId = undefined;
     }
   }
   return out.join("\n");
 }
 
-function creditsMarkdown(credits: ImageCredit[]): string {
+function creditsMarkdown(credits: CreditRow[]): string {
   const escape = (text: string) => text.replace(/\|/g, "\\|");
   const sections = [...new Set(credits.map((c) => c.theme))].map((theme) => {
     const rows = credits
@@ -210,13 +232,13 @@ interface ThemeResult {
   slug: string;
   themePath: string;
   themeJson: string;
-  images: Map<string, string>;
+  images: Map<string, { image: string; credit: ImageCredit }>;
   files: Map<string, Buffer>;
 }
 
 async function main() {
   const manifest = JSON.parse(await readFile(`${SEED_DIR}/image-sources.json`, "utf8")) as Manifest;
-  const credits: ImageCredit[] = [];
+  const credits: CreditRow[] = [];
   const missing: string[] = [];
   const results: ThemeResult[] = [];
 
@@ -249,18 +271,22 @@ async function main() {
       const original = await downloadOriginal(image.thumburl ?? image.url, file);
       const path = `/temas/${slug}/${character.id}.webp`;
       result.files.set(`${character.id}.webp`, await toWebp(original, slug));
-      result.images.set(character.id, path);
 
       const licenseUrl = stripHtml(meta.LicenseUrl?.value);
+      const credit: ImageCredit = {
+        author: cleanAuthor(meta.Artist?.value ?? ""),
+        license: /^public domain$/i.test(license) ? "Domínio público" : license,
+        ...(licenseUrl ? { licenseUrl } : {}),
+        source: image.descriptionurl,
+      };
+      result.images.set(character.id, { image: path, credit });
       credits.push({
+        ...credit,
         theme: theme.name,
         characterId: character.id,
         characterName: character.name,
         image: path,
         file: page.title,
-        author: cleanAuthor(meta.Artist?.value ?? ""),
-        license: /^public domain$/i.test(license) ? "Domínio público" : license,
-        ...(licenseUrl ? { licenseUrl } : {}),
         source: image.descriptionurl,
       });
       console.log(`ok  ${slug}/${character.id} (${license})`);
@@ -276,7 +302,6 @@ async function main() {
     for (const [name, bytes] of result.files) await writeFile(`${dir}/${name}`, bytes);
     await writeFile(result.themePath, setImageFields(result.themeJson, result.images));
   }
-  await writeFile(`${PUBLIC_DIR}/creditos.json`, `${JSON.stringify(credits, null, 2)}\n`);
   await writeFile(`${PUBLIC_DIR}/CREDITOS.md`, creditsMarkdown(credits));
 
   console.log(`\n${credits.length} imagens gravadas.`);

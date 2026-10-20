@@ -233,6 +233,19 @@ export interface RoundSummary {
   results: RoundPlayerResult[];
 }
 
+/**
+ * Dados públicos de uma sala para a prévia do link (WhatsApp, redes).
+ * Vem da rota HTTP `GET /rooms/:codigo/preview`. Nunca tem nada da rodada.
+ */
+export interface RoomPreview {
+  code: string;
+  host: { nickname: string; avatar: string } | null;
+  theme: { name: string; emoji: string };
+  players: number;
+  maxPlayers: number;
+  phase: RoomPhase;
+}
+
 export interface FinalStanding {
   playerId: string;
   nickname: string;

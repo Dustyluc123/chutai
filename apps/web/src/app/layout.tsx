@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "@/styles/globals.css";
+import { SITE_URL } from "@/lib/site";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
+  // Links absolutos nas prévias (og:image etc.). Na Vercel: NEXT_PUBLIC_SITE_URL.
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Chutaí — adivinhe o personagem antes dos seus amigos",
     template: "%s · Chutaí",
@@ -20,7 +23,9 @@ export const metadata: Metadata = {
     description: "Adivinhe o personagem antes dos seus amigos. Dle multiplayer em tempo real.",
     locale: "pt_BR",
     type: "website",
+    siteName: "Chutaí",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

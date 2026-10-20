@@ -54,6 +54,12 @@ Abandoned rooms: if nobody is connected for `ROOM_LIFECYCLE.abandonedSeconds` (6
 
 Server → client flow: `room:state` is the source of truth broadcast to everyone; `you:state` is per-player private state (guesses, hints); `player:progress` is spoiler-free progress. Full event table is in README.md.
 
+## Link previews (Open Graph)
+
+- `apps/web/src/app/opengraph-image.tsx` (site default) and `app/sala/[codigo]/opengraph-image.tsx` (room card) use `ImageResponse`. Room data comes from the realtime read-only route `GET /rooms/:codigo/preview` (`Room.toPreview()`: host nickname/avatar, theme, player count, limit, phase — never anything from the round; rate-limited per IP) via `lib/room-preview.ts` (2 s timeout, `null` → generic "Essa sala já acabou" card).
+- Shared pieces in `apps/web/src/lib/og/`: static Archivo TTFs in `src/assets/og` (OFL; the site's variable woff2 doesn't work in `ImageResponse`), brand components, and emojis as Twemoji `<img>` data URIs fetched with a timeout. **Never put emoji characters as text in an `ImageResponse`** (it would fetch them itself and fail the whole image if the CDN is down); if the fetch fails the image renders without the emoji. `ogText` strips glyphs the fonts don't have.
+- `metadataBase` comes from `NEXT_PUBLIC_SITE_URL` (`lib/site.ts`).
+
 ## Image mode (rules that must keep holding)
 
 - Settings have `mode: "classic" | "image"`. Availability comes from `imageModeAvailability` in `packages/game/src/image-mode.ts`: `full` (100% of characters have an image), `partial` (≥ `IMAGE_MODE.partialMinShare` = 75% **and** ≥ `IMAGE_MODE.partialMinCount` = 10 with image) or `none`. In image mode the server's `Room.playableCharacters` keeps only characters with an image: the draw, the accepted guesses and the autocomplete list all come from it.

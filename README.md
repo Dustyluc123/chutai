@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-135_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-140_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -84,6 +84,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 ## Funcionalidades
 
 - [x] Salas privadas com código de 6 caracteres e link de convite (copiar ou compartilhar)
+- [x] Prévia bonita do link da sala no WhatsApp e nas redes: quem chamou, tema, jogadores e código (imagem gerada com `ImageResponse`)
 - [x] Entrar como convidado, só com apelido e avatar
 - [x] Lobby com lista de jogadores, vagas, regras editáveis pelo anfitrião e botão de expulsar
 - [x] Rodadas com cronômetro controlado pelo servidor
@@ -267,6 +268,7 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 | Variável                   | Padrão                  | Para quê                                                            |
 | -------------------------- | ----------------------- | ------------------------------------------------------------------- |
 | `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                  |
+| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar  |
 | `PORT`                     | `3001`                  | Porta do servidor de tempo real                                     |
 | `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)               |
 | `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem |
@@ -321,6 +323,14 @@ Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/
 | `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                 |
 | `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                 |
 
+### Rotas HTTP do servidor de tempo real
+
+| Rota                         | Para quê                                                                                                                          |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /health`                | Saúde do servidor                                                                                                                 |
+| `GET /themes`                | Lista de temas                                                                                                                    |
+| `GET /rooms/:codigo/preview` | Prévia do link: só dados públicos (apelido e avatar do anfitrião, tema, jogadores, limite e fase). Nada da rodada. Limite por IP. |
+
 ## Pontuação
 
 Só quem acerta pontua:
@@ -340,8 +350,8 @@ pnpm test
 | Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------ | -----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
-| `@chutai/realtime` |     66 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/web`      |      7 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji) e contagem regressiva                                                                                                                                                                                                                                                                                                |
+| `@chutai/realtime` |     67 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/web`      |     11 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva e emojis das imagens geradas (sem CDN, a imagem sai sem emoji)                                                                                                                                                                                                                                  |
 | `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
 
 ## Deploy

@@ -6,6 +6,8 @@ import { existsSync } from "node:fs";
 import { createServer, type Server as HttpServer } from "node:http";
 import { Server } from "socket.io";
 import { createRepositories } from "@chutai/db";
+import { roomCodeSchema } from "@chutai/shared";
+import { HttpRateLimiter } from "./lib/httpRateLimit";
 import type { Config } from "./config";
 import { RoomManager } from "./rooms/RoomManager";
 import { createRoomStore } from "./rooms/store";
@@ -49,6 +51,9 @@ export async function createRealtimeServer(
   const assetsOnDisk = existsSync(config.assetsDir);
 
   const startedAt = Date.now();
+  // Prévia do link: quem gera é o site (servidor da Vercel) quando alguém cola o link num app.
+  // Um limite folgado por IP basta para impedir varredura de códigos.
+  const previewLimiter = new HttpRateLimiter(30, 1);
   // O gerenciador depende do Socket.IO, que depende do servidor HTTP: guardamos a referência aqui.
   const ref: { manager?: RoomManager } = {};
 
@@ -74,6 +79,25 @@ export async function createRealtimeServer(
     }
     if (req.url === "/themes") {
       res.end(JSON.stringify(await themes.list()));
+      return;
+    }
+    const preview = /^\/rooms\/([^/?#]+)\/preview(?:\?.*)?$/.exec(req.url ?? "");
+    if (preview && req.method === "GET") {
+      res.setHeader("Cache-Control", "no-store");
+      if (!previewLimiter.allow(req)) {
+        res.statusCode = 429;
+        res.end(JSON.stringify({ ok: false, error: "Muitas requisições. Tente de novo já já." }));
+        return;
+      }
+      // O código só tem letras e números: nada para decodificar (e nada de exceção com % solto).
+      const code = roomCodeSchema.safeParse(preview[1]);
+      const room = code.success ? ref.manager?.get(code.data) : undefined;
+      if (!room) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ ok: false, error: "Sala não encontrada." }));
+        return;
+      }
+      res.end(JSON.stringify(room.toPreview()));
       return;
     }
     res.statusCode = 404;

@@ -205,6 +205,54 @@ describe("servidor de tempo real", () => {
     expect((await finished).lastRound?.character.image).toBe(answer.image);
   });
 
+  it("prévia do link: só dados públicos da sala, 404 sem sala e limite por IP", async () => {
+    const ana = await client();
+    const created = unwrap(
+      await ana.emitWithAck("room:create", {
+        nickname: "Lucas",
+        avatar: "⚽",
+        settings: { rounds: 1, roundSeconds: 60, themeSlug: "futebol-atual", maxPlayers: 8 },
+      }),
+    );
+    // Usa um IP próprio para não dividir o limite com os outros testes.
+    const headers = { "x-forwarded-for": "203.0.113.7" };
+    const response = await fetch(`${url}/rooms/${created.code.toLowerCase()}/preview`, { headers });
+    expect(response.status).toBe(200);
+    const preview = await response.json();
+    expect(preview).toEqual({
+      code: created.code,
+      host: { nickname: "Lucas", avatar: "⚽" },
+      theme: { name: "Futebol brasileiro atual", emoji: expect.any(String) },
+      players: 1,
+      maxPlayers: 8,
+      phase: "lobby",
+    });
+    // Nada de token, ids de jogador ou da rodada.
+    expect(JSON.stringify(preview)).not.toMatch(/token|playerId|character|answer/i);
+
+    // Durante a partida, a prévia continua sem nada da rodada.
+    const started = nextState(ana, (s) => s.phase === "round");
+    unwrap(await ana.emitWithAck("game:start"));
+    await started;
+    const answer = server.manager.get(created.code)!.peekAnswerForTests()!;
+    const during = await fetch(`${url}/rooms/${created.code}/preview`, { headers }).then((r) =>
+      r.text(),
+    );
+    expect(during).not.toContain(answer.id);
+    expect(during).not.toContain(answer.name);
+
+    expect((await fetch(`${url}/rooms/ZZZZZZ/preview`, { headers })).status).toBe(404);
+    expect((await fetch(`${url}/rooms/%E0%A4%A/preview`, { headers })).status).toBe(404);
+
+    const flood = { "x-forwarded-for": "203.0.113.99" };
+    const statuses = await Promise.all(
+      Array.from({ length: 40 }, () =>
+        fetch(`${url}/rooms/ZZZZZZ/preview`, { headers: flood }).then((r) => r.status),
+      ),
+    );
+    expect(statuses).toContain(429);
+  });
+
   it("recusa dados inválidos com mensagem em português", async () => {
     const socket = await client();
     const badNick = await socket.emitWithAck("room:create", { nickname: "A", avatar: "🦜" });

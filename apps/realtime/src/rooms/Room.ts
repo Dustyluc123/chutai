@@ -15,6 +15,7 @@ import type {
   PrivateState,
   PublicPlayer,
   RoomPhase,
+  RoomPreview,
   RoomSettings,
   RoomState,
   RoundSummary,
@@ -764,6 +765,19 @@ export class Room {
       countdownEndsAt: this.phase === "countdown" ? this.countdownEndsAt : undefined,
       standings: this.phase === "finished" ? this.standings : undefined,
       serverNow: this.now(),
+    };
+  }
+
+  /** Só o que pode aparecer na prévia pública do link: nada da rodada, nada de token. */
+  toPreview(): RoomPreview {
+    const host = this.players.get(this.hostId);
+    return {
+      code: this.code,
+      host: host ? { nickname: host.nickname, avatar: host.avatar } : null,
+      theme: { name: this.theme.name, emoji: this.theme.emoji },
+      players: this.players.size,
+      maxPlayers: this.settings.maxPlayers,
+      phase: this.phase,
     };
   }
 

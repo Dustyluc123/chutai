@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PartyPopper } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
+import { TIMING } from "@chutai/game";
 import type { UseRoom } from "@/hooks/useRoom";
 import { LiveScoreboard } from "@/components/scoreboard/live-scoreboard";
 import { RoundReveal } from "@/components/scoreboard/round-reveal";
@@ -13,6 +14,7 @@ import { MysteryImage } from "./mystery-image";
 import { HintBar } from "./hint-bar";
 import { Legend } from "./legend";
 import { RoundTimer } from "./round-timer";
+import { BetweenRoundsCountdown, GoFlash } from "./countdown";
 
 interface GameViewProps {
   state: RoomState;
@@ -42,6 +44,21 @@ export function GameView({ state, room }: GameViewProps) {
 
   return (
     <div className="flex flex-1 flex-col">
+      {state.phase === "intermission" ? (
+        <BetweenRoundsCountdown
+          endsAt={state.intermissionEndsAt}
+          serverOffset={room.serverOffset}
+          from={TIMING.betweenRoundsCountdownSeconds}
+          nextRound={roundNumber + 1}
+        />
+      ) : null}
+      {inRound ? (
+        <GoFlash
+          roundNumber={state.round!.number}
+          startedAt={state.round!.startedAt}
+          serverOffset={room.serverOffset}
+        />
+      ) : null}
       <div className="border-b-2 border-tinta bg-white">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:gap-6 sm:px-6">
           <div className="flex shrink-0 items-center gap-3">

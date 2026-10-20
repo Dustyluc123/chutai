@@ -9,6 +9,7 @@ import { JoinCard } from "@/components/lobby/join-card";
 import { LobbyView } from "@/components/lobby/lobby-view";
 import { GameView } from "@/components/game/game-view";
 import { FinalView } from "@/components/scoreboard/final-view";
+import { StartCountdown } from "@/components/game/countdown";
 import { Button } from "@/components/ui/button";
 
 /** Escolhe o que mostrar na sala conforme a fase: entrar, lobby, partida ou pódio. */
@@ -30,7 +31,9 @@ export function RoomScreen({ code }: { code: string }) {
         ? "Lobby"
         : state.phase === "finished"
           ? "Fim de jogo"
-          : `Rodada ${state.round?.number ?? state.lastRound?.number}`;
+          : state.phase === "countdown"
+            ? "Começando"
+            : `Rodada ${state.round?.number ?? state.lastRound?.number}`;
     document.title = `${phase} · Sala ${code} · Chutaí`;
   }, [state, code]);
 
@@ -46,6 +49,14 @@ export function RoomScreen({ code }: { code: string }) {
         />
         <main id="conteudo" className="flex flex-1 flex-col">
           {state.phase === "lobby" ? <LobbyView state={state} room={room} /> : null}
+          {state.phase === "countdown" && state.countdownEndsAt ? (
+            <StartCountdown
+              endsAt={state.countdownEndsAt}
+              serverOffset={room.serverOffset}
+              themeName={state.theme.name}
+              themeEmoji={state.theme.emoji}
+            />
+          ) : null}
           {state.phase === "round" || state.phase === "intermission" ? (
             <GameView state={state} room={room} />
           ) : null}

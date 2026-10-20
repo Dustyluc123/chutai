@@ -55,6 +55,8 @@ export function createTestRoom(
     theme?: Theme;
     renderRoundImages?: RoomDeps["renderRoundImages"];
     random?: () => number;
+    /** Contagem antes da 1ª rodada. Por padrão 0 (a rodada começa na hora, como nos testes antigos). */
+    countdownMs?: number;
   } = {},
 ) {
   const roomTheme = options.theme ?? theme;
@@ -85,6 +87,7 @@ export function createTestRoom(
       random: options.random ?? (() => 0),
       disconnectGraceMs: 5_000,
       intermissionMs: 3_000,
+      countdownMs: options.countdownMs ?? 0,
       onFinished: (record) => finished.push(record),
       renderRoundImages: options.renderRoundImages,
       onAbandoned: (closed) => abandoned.push(closed),

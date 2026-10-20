@@ -28,6 +28,7 @@ export interface RoomManagerDeps {
   disconnectGraceMs: number;
   emptyRoomTtlMs: number;
   intermissionMs?: number;
+  countdownMs?: number;
   now?: () => number;
 }
 
@@ -63,6 +64,7 @@ export class RoomManager {
       emitter: this.deps.emitterFor(code),
       disconnectGraceMs: this.deps.disconnectGraceMs,
       intermissionMs: this.deps.intermissionMs,
+      countdownMs: this.deps.countdownMs,
       now: this.now,
       onFinished: (record) => void this.deps.matches.save(record),
       onChange: (room) => this.persist(room),

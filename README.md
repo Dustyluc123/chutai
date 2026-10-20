@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-126_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-135_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -87,6 +87,8 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Entrar como convidado, só com apelido e avatar
 - [x] Lobby com lista de jogadores, vagas, regras editáveis pelo anfitrião e botão de expulsar
 - [x] Rodadas com cronômetro controlado pelo servidor
+- [x] Contagem **5, 4, 3, 2, 1, Vai!** antes da primeira rodada (controlada pelo servidor: palpites recusados e nada da rodada enviado antes) e **3, 2, 1** no fim de cada intervalo
+- [x] Sala abandonada no meio da partida (ninguém conectado por 60 s) é encerrada; sem ninguém, não começa rodada nova
 - [x] Autocompletar acessível (teclado e leitor de tela) que ignora acentos e aceita apelidos ("Fenômeno" → Ronaldo)
 - [x] Tabuleiro com peças que viram uma de cada vez, setas para números e tolerância para valores aproximados
 - [x] Dois modos de jogo: **Clássico** (atributos coloridos) e **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica)
@@ -301,23 +303,23 @@ Guarda um retrato de cada sala. Se o servidor reiniciar (um deploy, por exemplo)
 
 Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/src/events.ts).
 
-| Evento                                   | Direção                       | Para quê                                                              |
-| ---------------------------------------- | ----------------------------- | --------------------------------------------------------------------- |
-| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                 |
-| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                              |
-| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                               |
-| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                      |
-| `game:start`                             | anfitrião → servidor          | Começar a partida                                                     |
-| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                   |
-| `hint:request`                           | navegador → servidor          | Pedir dica                                                            |
-| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                       |
-| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase, placar                             |
-| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                     |
-| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                 |
-| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                     |
-| `round:start` / `round:end` / `game:end` | servidor → todos              | Início, revelação e fim                                               |
-| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou |
-| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome) |
+| Evento                                   | Direção                       | Para quê                                                                                              |
+| ---------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                                                 |
+| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                                                              |
+| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                                                               |
+| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                                                      |
+| `game:start`                             | anfitrião → servidor          | Começar a partida                                                                                     |
+| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                                                   |
+| `hint:request`                           | navegador → servidor          | Pedir dica                                                                                            |
+| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                                                       |
+| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase (`lobby`, `countdown`, `round`, `intermission`, `finished`), placar |
+| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                     |
+| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                 |
+| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                     |
+| `round:start` / `round:end` / `game:end` | servidor → todos              | Início, revelação e fim                                                                               |
+| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                 |
+| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                 |
 
 ## Pontuação
 
@@ -335,12 +337,12 @@ Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou 
 pnpm test
 ```
 
-| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                |
-| ------------------ | -----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                       |
-| `@chutai/realtime` |     60 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/web`      |      4 | Componentes de palpite: no modo Imagem, nada de imagem nem emoji                                                                                                                                                                                                                                                                                            |
-| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                |
+| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------ | -----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
+| `@chutai/realtime` |     66 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/web`      |      7 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji) e contagem regressiva                                                                                                                                                                                                                                                                                                |
+| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
 
 ## Deploy
 

@@ -32,6 +32,7 @@ beforeAll(async () => {
     { ...loadConfig({}), databaseUrl: undefined, redisUrl: undefined },
     {
       intermissionMs: 200,
+      countdownMs: 100,
       // Lê as imagens direto da pasta pública do site, sem precisar do Next rodando.
       imageLoader: (image) =>
         readFile(fileURLToPath(new URL(`../../web/public${image}`, import.meta.url))),

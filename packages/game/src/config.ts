@@ -72,6 +72,13 @@ export const IMAGE_MODE = {
 export const TIMING = {
   /** Segundos mostrando o personagem revelado antes da próxima rodada. */
   intermissionSeconds: 10,
+  /**
+   * Contagem antes da primeira rodada (5, 4, 3, 2, 1, Vai!). O servidor controla: o cronômetro
+   * da rodada só começa depois dela, e nada da rodada é enviado antes.
+   */
+  startCountdownSeconds: 5,
+  /** Entre rodadas, os últimos segundos do intervalo mostram 3, 2, 1 (sem aumentar o intervalo). */
+  betweenRoundsCountdownSeconds: 3,
 } as const;
 
 /** Ciclo de vida das salas durante a partida. */

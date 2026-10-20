@@ -34,6 +34,7 @@ export async function createRealtimeServer(
   config: Config,
   options: {
     intermissionMs?: number;
+    countdownMs?: number;
     /** Troca o jeito de buscar as imagens originais (os testes leem do disco). */
     imageLoader?: ImageLoader;
   } = {},
@@ -99,6 +100,7 @@ export async function createRealtimeServer(
     disconnectGraceMs: config.disconnectGraceMs,
     emptyRoomTtlMs: config.emptyRoomTtlMs,
     intermissionMs: options.intermissionMs,
+    countdownMs: options.countdownMs,
   });
   ref.manager = manager;
   await manager.restore();

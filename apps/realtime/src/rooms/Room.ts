@@ -88,6 +88,8 @@ export interface RoomDeps {
   random?: () => number;
   disconnectGraceMs?: number;
   intermissionMs?: number;
+  /** Contagem antes da primeira rodada. Com 0, a rodada começa na hora (usado em testes). */
+  countdownMs?: number;
   /** Chamado quando a partida termina (para salvar o histórico). */
   onFinished?: (record: MatchRecord) => void;
   /** Chamado quando o estado muda (para salvar retrato no Redis, por exemplo). */
@@ -120,6 +122,7 @@ export class Room {
   private lastRound?: RoundSummary;
   private standings?: FinalStanding[];
   private intermissionEndsAt?: number;
+  private countdownEndsAt?: number;
   private usedCharacterIds = new Set<string>();
   private history: { summary: RoundSummary; record: MatchRecord["rounds"][number] }[] = [];
   private matchStartedAt?: number;
@@ -135,6 +138,7 @@ export class Room {
   private readonly random: () => number;
   private readonly disconnectGraceMs: number;
   private readonly intermissionMs: number;
+  private readonly countdownMs: number;
   private readonly onFinished?: (record: MatchRecord) => void;
   private readonly onChange?: (room: Room) => void;
   private readonly renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
@@ -152,6 +156,7 @@ export class Room {
     this.random = deps.random ?? Math.random;
     this.disconnectGraceMs = deps.disconnectGraceMs ?? 20_000;
     this.intermissionMs = deps.intermissionMs ?? TIMING.intermissionSeconds * 1000;
+    this.countdownMs = deps.countdownMs ?? TIMING.startCountdownSeconds * 1000;
     this.onFinished = deps.onFinished;
     this.onChange = deps.onChange;
     this.renderRoundImages = deps.renderRoundImages;
@@ -219,7 +224,7 @@ export class Room {
 
   /** A partida está andando (contagem, rodada ou intervalo)? */
   get inMatch(): boolean {
-    return this.phase === "round" || this.phase === "intermission";
+    return this.phase === "countdown" || this.phase === "round" || this.phase === "intermission";
   }
 
   /**
@@ -246,10 +251,13 @@ export class Room {
   /** Alguém voltou para uma sala parada: a rodada que faltava começa daqui a pouco. */
   private resumeIfPaused(): void {
     const number = this.pausedRound;
-    if (number === undefined || this.phase !== "intermission") return;
+    if (number === undefined || (this.phase !== "intermission" && this.phase !== "countdown")) {
+      return;
+    }
     this.pausedRound = undefined;
     const delay = ROOM_LIFECYCLE.resumeSeconds * 1000;
-    this.intermissionEndsAt = this.now() + delay;
+    if (this.phase === "countdown") this.countdownEndsAt = this.now() + delay;
+    else this.intermissionEndsAt = this.now() + delay;
     this.cancelTimer = this.schedule(() => this.startRoundIfSomeoneIsHere(number), delay);
     this.changed();
   }
@@ -366,7 +374,16 @@ export class Room {
     this.lastRound = undefined;
     this.standings = undefined;
     this.matchStartedAt = this.now();
-    this.startRound(1);
+    if (this.countdownMs <= 0) {
+      this.startRound(1);
+      return;
+    }
+    // Contagem controlada pelo servidor: a rodada (sorteio, cronômetro, imagens) só nasce no fim.
+    this.cancelTimer?.();
+    this.phase = "countdown";
+    this.countdownEndsAt = this.now() + this.countdownMs;
+    this.cancelTimer = this.schedule(() => this.startRoundIfSomeoneIsHere(1), this.countdownMs);
+    this.changed();
   }
 
   /** Depois do pódio, o anfitrião leva todo mundo de volta ao lobby. */
@@ -405,6 +422,7 @@ export class Room {
     this.round = round;
     this.phase = "round";
     this.intermissionEndsAt = undefined;
+    this.countdownEndsAt = undefined;
     this.cancelTimer = this.schedule(() => this.endRound(), endsAt - startedAt);
     if (this.settings.mode === "image") this.prepareImages(round);
 
@@ -743,6 +761,7 @@ export class Room {
         : undefined,
       lastRound: this.phase === "lobby" ? undefined : this.lastRound,
       intermissionEndsAt: this.intermissionEndsAt,
+      countdownEndsAt: this.phase === "countdown" ? this.countdownEndsAt : undefined,
       standings: this.phase === "finished" ? this.standings : undefined,
       serverNow: this.now(),
     };
@@ -800,6 +819,7 @@ export class Room {
   }
 
   private requireRound(): ActiveRound {
+    if (this.phase === "countdown") throw new GameError("A rodada ainda não começou.");
     if (this.phase !== "round" || !this.round) throw new GameError("Não há rodada em andamento.");
     return this.round;
   }

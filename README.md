@@ -12,7 +12,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-90_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-119_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -46,11 +46,17 @@ Jogos "dle" (Wordle, Loldle e companhia) são divertidos, mas quase sempre solit
 
 O projeto foi pensado para o público brasileiro, com temas nacionais desde o lançamento:
 
-| Tema                | Personagens | O que cada palpite compara                                            |
-| ------------------- | ----------: | --------------------------------------------------------------------- |
-| Folclore brasileiro |          24 | Forma, região, onde aparece, quando aparece, comportamento            |
-| Lendas do futebol   |          49 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção |
-| Fauna brasileira    |          40 | Grupo, biomas, alimentação, onde vive, peso                           |
+| Tema                     | Personagens | O que cada palpite compara                                                           | Modo Imagem                  |
+| ------------------------ | ----------: | ------------------------------------------------------------------------------------ | ---------------------------- |
+| YouTubers e streamers    |          34 | Conteúdo, plataforma, quando começou, estado natal, região, nascimento               | Parcial (31 com imagem)      |
+| Música brasileira        |          40 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira | Parcial (39 com imagem)      |
+| Futebol brasileiro atual |          41 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal            | Parcial (39 com imagem)      |
+| Famosos da TV            |          30 | Mais conhecido como, estado natal, região, nascimento, início da carreira            | Normal (todos com imagem)    |
+| Folclore brasileiro      |          24 | Forma, região, onde aparece, quando aparece, comportamento                           | Indisponível (16 com imagem) |
+| Lendas do futebol        |          49 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                | Parcial (47 com imagem)      |
+| Fauna brasileira         |          40 | Grupo, biomas, alimentação, onde vive, peso                                          | Normal (todos com imagem)    |
+
+Os temas com pessoas reais (os quatro primeiros) seguem regras próprias: só adultos, só fatos públicos e neutros, dados conferidos na Wikipédia em português e no Wikidata, com o link de cada pessoa em [`packages/db/seed/FONTES.md`](packages/db/seed/FONTES.md) e a data dos dados na página do tema. Quem aparece no site pode pedir para ser removido pelo e-mail da página de créditos.
 
 ## Como se joga
 
@@ -67,7 +73,7 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 | Vermelho                     | Diferente                                                   |
 | Seta para cima ou para baixo | Em números, mostra se a resposta é maior ou menor           |
 
-**Imagem.** Aparece a imagem do personagem secreto bem borrada e pixelada. Cada chute errado e cada dica deixam a imagem um pouco mais nítida, em 5 níveis; a imagem nítida só aparece na revelação. Disponível nos temas em que todos os personagens têm imagem (hoje, a fauna).
+**Imagem.** Aparece a imagem do personagem secreto bem borrada e pixelada. Cada chute errado e cada dica deixam a imagem um pouco mais nítida, em 5 níveis; a imagem nítida só aparece na revelação. No modo Imagem, o autocompletar e a lista de chutes mostram só o nome, sem imagem nem emoji, e a imagem começa ampliada num pedaço perto do centro, afastando o zoom a cada nível. Fica disponível quando pelo menos 75% dos personagens do tema (e no mínimo 10) têm imagem; abaixo de 100%, é o modo Imagem parcial, em que os personagens sem imagem ficam de fora do sorteio e do autocompletar da partida.
 
 Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 
@@ -80,6 +86,9 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Autocompletar acessível (teclado e leitor de tela) que ignora acentos e aceita apelidos ("Fenômeno" → Ronaldo)
 - [x] Tabuleiro com peças que viram uma de cada vez, setas para números e tolerância para valores aproximados
 - [x] Dois modos de jogo: **Clássico** (atributos coloridos) e **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica)
+- [x] Modo Imagem parcial para temas com 75% ou mais de imagens; o lobby avisa quantos personagens ficam de fora
+- [x] No modo Imagem, as opções mostram só o nome: sem miniatura nem emoji para comparar com a imagem borrada
+- [x] Sete temas oficiais, quatro deles com pessoas reais (YouTubers, música, futebol atual e TV), com fontes e data dos dados
 - [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou (ou, no modo Imagem, a nitidez de cada um), nunca o personagem
 - [x] Dicas (revelar atributo, primeira letra) liberadas depois de 3 chutes, custando pontos
 - [x] Revelação do personagem ao fim de cada rodada, pódio final e "jogar de novo"
@@ -133,7 +142,7 @@ Princípios que guiaram o código:
 - **Regras do jogo isoladas.** `packages/game` é TypeScript puro, sem servidor nem React. Site e servidor usam as mesmas funções, e trocar o servidor por Bun ou Go no futuro não exige reescrever as regras.
 - **Contrato tipado.** Os eventos do Socket.IO estão descritos em `packages/shared/src/events.ts`; um evento com nome ou formato errado vira erro de compilação nos dois lados.
 - **Repositórios trocáveis.** Site e servidor pedem temas a uma interface (`ThemeRepository`). Hoje a implementação lê JSON; com `DATABASE_URL`, passa a ler o PostgreSQL sozinha.
-- **Modo Imagem sem trapaça.** Borrar com CSS não protege nada: o navegador teria a imagem nítida e a URL dela, que contém o id do personagem. O servidor de tempo real baixa a imagem original, aplica um disfarce sorteado a cada rodada (espelho, recorte, tom) e gera com `sharp` as versões degradadas. Cada jogador recebe pelo Socket.IO só os bytes do nível que alcançou, sem nome de arquivo nem metadados; o navegador não tem como pedir outro nível.
+- **Modo Imagem sem trapaça.** Borrar com CSS não protege nada: o navegador teria a imagem nítida e a URL dela, que contém o id do personagem. O servidor de tempo real lê a imagem original, aplica um disfarce sorteado a cada rodada (espelho, recorte, tom, zoom num ponto perto do centro que vai afastando) e gera com `sharp` as versões degradadas. A lista do autocompletar também vem do servidor (evento `room:characters`): no modo Imagem, sem imagens nem emojis, e só com os personagens da partida. Cada jogador recebe pelo Socket.IO só os bytes do nível que alcançou, sem nome de arquivo nem metadados; o navegador não tem como pedir outro nível.
 - **A sala não conhece o Socket.IO.** `Room.ts` recebe intenções e fala com o mundo por um `emitter`, o que permite testar uma partida inteira com relógio falso.
 
 ## Tecnologias
@@ -194,10 +203,11 @@ chutai/
 │       ├── src/schema.ts            # Tabelas (Drizzle)
 │       ├── src/repositories/        # JSON (hoje) e PostgreSQL (futuro), mesma interface
 │       ├── migrations/              # SQL gerado pelo drizzle-kit
-│       ├── seed/                    # Temas oficiais em JSON, origem das imagens e script que carrega no banco
+│       ├── seed/                    # Temas oficiais em JSON, origem das imagens, FONTES.md e script que carrega no banco
 │       ├── scripts/                 # fetch-images.ts: baixa as imagens do Commons e gera os créditos
 │       └── tests/                   # Testes com PostgreSQL de verdade em memória (PGlite)
 │
+├── docs/DEPLOY.md                   # Passo a passo do deploy (Railway e Vercel)
 ├── docs/screenshots/                # Imagens deste README
 ├── docker-compose.yml               # PostgreSQL e Redis para rodar localmente
 ├── .github/workflows/ci.yml         # Lint, formatação, tipos, testes e build a cada push
@@ -287,22 +297,23 @@ Guarda um retrato de cada sala. Se o servidor reiniciar (um deploy, por exemplo)
 
 Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/src/events.ts).
 
-| Evento                                   | Direção               | Para quê                                                              |
-| ---------------------------------------- | --------------------- | --------------------------------------------------------------------- |
-| `room:create`                            | navegador → servidor  | Criar sala (quem cria vira anfitrião)                                 |
-| `room:join`                              | navegador → servidor  | Entrar pelo código; com token, reconecta                              |
-| `room:update-settings`                   | anfitrião → servidor  | Mudar tema, modo, rodadas, tempo, dicas                               |
-| `room:kick`                              | anfitrião → servidor  | Expulsar jogador                                                      |
-| `game:start`                             | anfitrião → servidor  | Começar a partida                                                     |
-| `guess:submit`                           | navegador → servidor  | Chutar; a resposta volta com os atributos coloridos                   |
-| `hint:request`                           | navegador → servidor  | Pedir dica                                                            |
-| `game:restart`                           | anfitrião → servidor  | Voltar ao lobby depois do pódio                                       |
-| `room:state`                             | servidor → todos      | Fonte da verdade: jogadores, fase, placar                             |
-| `you:state`                              | servidor → um jogador | Seus palpites e dicas (ex.: depois de reconectar)                     |
-| `player:progress`                        | servidor → todos      | Progresso sem spoiler                                                 |
-| `player:solved`                          | servidor → todos      | "Fulano acertou!"                                                     |
-| `round:start` / `round:end` / `game:end` | servidor → todos      | Início, revelação e fim                                               |
-| `round:image`                            | servidor → um jogador | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou |
+| Evento                                   | Direção                       | Para quê                                                              |
+| ---------------------------------------- | ----------------------------- | --------------------------------------------------------------------- |
+| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                 |
+| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                              |
+| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                               |
+| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                      |
+| `game:start`                             | anfitrião → servidor          | Começar a partida                                                     |
+| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                   |
+| `hint:request`                           | navegador → servidor          | Pedir dica                                                            |
+| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                       |
+| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase, placar                             |
+| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                     |
+| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                 |
+| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                     |
+| `round:start` / `round:end` / `game:end` | servidor → todos              | Início, revelação e fim                                               |
+| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou |
+| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome) |
 
 ## Pontuação
 
@@ -320,11 +331,12 @@ Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou 
 pnpm test
 ```
 
-| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                         |
-| ------------------ | -----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     37 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis do modo Imagem                                                                                                                                      |
-| `@chutai/realtime` |     39 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião), modo Imagem (ninguém recebe um nível acima do que alcançou, nada vaza no estado público), geração das imagens com `sharp` e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/db`       |     14 | Migração e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens e créditos                                                                                                                                          |
+| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                      |
+| ------------------ | -----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                             |
+| `@chutai/realtime` |     53 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/web`      |      4 | Componentes de palpite: no modo Imagem, nada de imagem nem emoji                                                                                                                                                                                                                                                  |
+| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                      |
 
 ## Deploy
 
@@ -381,7 +393,8 @@ Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `tem
 - [x] **Fase 1** — Regras do jogo testadas e modo treino individual
 - [x] **Fase 2** — Multiplayer: salas, lobby, rodadas com cronômetro, placar ao vivo, pódio e reconexão
 - [x] **Fase 2.5** — Imagem de cada personagem (licença livre, com créditos) e modo de jogo Imagem
-- [ ] **Fase 3** — Lançamento: deploy, domínio, monitoramento de erros (Sentry) e testes com grupos de amigos
+- [x] **Fase 2.6** — Modo Imagem parcial, opções sem imagem no modo Imagem, quatro temas brasileiros com pessoas reais e projeto pronto para o deploy ([`docs/DEPLOY.md`](docs/DEPLOY.md))
+- [ ] **Fase 3** — Lançamento: colocar no ar seguindo o `docs/DEPLOY.md`, domínio, monitoramento de erros (Sentry) e testes com grupos de amigos
 - [ ] **Fase 4** — Comunidade: login com Google e Discord, editor de temas com upload de imagens, moderação e salas públicas
 - [ ] **Fase 5** — Crescimento: modo streamer (chat da Twitch contra o streamer), modo emoji, plano premium
 

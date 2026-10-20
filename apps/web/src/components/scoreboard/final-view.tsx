@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import type { UseRoom } from "@/hooks/useRoom";
 import { Podium } from "./podium";
 import { RoundReveal } from "./round-reveal";
+import { ShareResult } from "./share-result";
 
 /** Fim de jogo: pódio, último personagem revelado e "jogar de novo". */
 export function FinalView({
@@ -34,6 +35,10 @@ export function FinalView({
       </div>
 
       <Podium standings={standings} meId={meId} />
+
+      {standings.length ? (
+        <ShareResult code={state.code} themeName={state.theme.name} standings={standings} />
+      ) : null}
 
       <div className="flex flex-col items-center gap-3">
         {room.isHost ? (

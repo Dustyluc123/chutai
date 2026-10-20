@@ -122,6 +122,22 @@ describe("servidor de tempo real", () => {
     expect(final.standings?.[0]?.nickname).toBe("Ana");
     expect(final.lastRound?.character.id).toBe(answer.id);
 
+    // Pódio para a imagem de compartilhar: só dados públicos, sem ids nem tokens.
+    const result = await fetch(`${url}/rooms/${created.code}/result`, {
+      headers: { "x-forwarded-for": "203.0.113.20" },
+    }).then((r) => r.json());
+    expect(result).toMatchObject({
+      code: created.code,
+      theme: { name: "Fauna brasileira" },
+      rounds: 1,
+      playerCount: 2,
+      standings: [
+        { position: 1, nickname: "Ana", avatar: "🦜" },
+        { position: 2, nickname: "Bia", avatar: "🐆" },
+      ],
+    });
+    expect(JSON.stringify(result)).not.toMatch(/token|playerId/i);
+
     // Bia "recarrega a página": nova conexão com o token volta como o mesmo jogador.
     bia.disconnect();
     const biaAgain = await client();
@@ -240,6 +256,8 @@ describe("servidor de tempo real", () => {
     );
     expect(during).not.toContain(answer.id);
     expect(during).not.toContain(answer.name);
+    // Fora do pódio, não há resultado.
+    expect((await fetch(`${url}/rooms/${created.code}/result`, { headers })).status).toBe(404);
 
     expect((await fetch(`${url}/rooms/ZZZZZZ/preview`, { headers })).status).toBe(404);
     expect((await fetch(`${url}/rooms/%E0%A4%A/preview`, { headers })).status).toBe(404);

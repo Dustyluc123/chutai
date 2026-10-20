@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-140_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-143_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -99,6 +99,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou (ou, no modo Imagem, a nitidez de cada um), nunca o personagem
 - [x] Dicas (revelar atributo, primeira letra) liberadas depois de 3 chutes, custando pontos
 - [x] Revelação do personagem ao fim de cada rodada, pódio final e "jogar de novo"
+- [x] **Compartilhar resultado**: imagem do pódio (1080×1350, boa para WhatsApp e feed do Instagram) com o compartilhamento nativo do celular; no computador, baixa o PNG e oferece "Copiar texto"
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
@@ -330,6 +331,7 @@ Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/
 | `GET /health`                | Saúde do servidor                                                                                                                 |
 | `GET /themes`                | Lista de temas                                                                                                                    |
 | `GET /rooms/:codigo/preview` | Prévia do link: só dados públicos (apelido e avatar do anfitrião, tema, jogadores, limite e fase). Nada da rodada. Limite por IP. |
+| `GET /rooms/:codigo/result`  | Pódio da partida terminada (posição, apelido, avatar e pontos), para a imagem de compartilhar. Só enquanto a sala está no pódio.  |
 
 ## Pontuação
 
@@ -351,7 +353,7 @@ pnpm test
 | ------------------ | -----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
 | `@chutai/realtime` |     67 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/web`      |     11 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva e emojis das imagens geradas (sem CDN, a imagem sai sem emoji)                                                                                                                                                                                                                                  |
+| `@chutai/web`      |     14 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva, emojis das imagens geradas (sem CDN, a imagem sai sem emoji) e texto do pódio com empates                                                                                                                                                                                                      |
 | `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
 
 ## Deploy

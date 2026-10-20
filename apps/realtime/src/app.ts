@@ -51,7 +51,7 @@ export async function createRealtimeServer(
   const assetsOnDisk = existsSync(config.assetsDir);
 
   const startedAt = Date.now();
-  // Prévia do link: quem gera é o site (servidor da Vercel) quando alguém cola o link num app.
+  // Prévia do link e pódio: quem gera as imagens é o site (servidor da Vercel) quando alguém cola o link num app.
   // Um limite folgado por IP basta para impedir varredura de códigos.
   const previewLimiter = new HttpRateLimiter(30, 1);
   // O gerenciador depende do Socket.IO, que depende do servidor HTTP: guardamos a referência aqui.
@@ -81,8 +81,8 @@ export async function createRealtimeServer(
       res.end(JSON.stringify(await themes.list()));
       return;
     }
-    const preview = /^\/rooms\/([^/?#]+)\/preview(?:\?.*)?$/.exec(req.url ?? "");
-    if (preview && req.method === "GET") {
+    const roomRoute = /^\/rooms\/([^/?#]+)\/(preview|result)(?:\?.*)?$/.exec(req.url ?? "");
+    if (roomRoute && req.method === "GET") {
       res.setHeader("Cache-Control", "no-store");
       if (!previewLimiter.allow(req)) {
         res.statusCode = 429;
@@ -90,14 +90,16 @@ export async function createRealtimeServer(
         return;
       }
       // O código só tem letras e números: nada para decodificar (e nada de exceção com % solto).
-      const code = roomCodeSchema.safeParse(preview[1]);
+      const code = roomCodeSchema.safeParse(roomRoute[1]);
       const room = code.success ? ref.manager?.get(code.data) : undefined;
-      if (!room) {
+      // Prévia: dados públicos da sala. Resultado: o pódio, só enquanto a sala está nele.
+      const body = roomRoute[2] === "preview" ? room?.toPreview() : room?.toResult();
+      if (!body) {
         res.statusCode = 404;
         res.end(JSON.stringify({ ok: false, error: "Sala não encontrada." }));
         return;
       }
-      res.end(JSON.stringify(room.toPreview()));
+      res.end(JSON.stringify(body));
       return;
     }
     res.statusCode = 404;

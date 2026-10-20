@@ -246,6 +246,18 @@ export interface RoomPreview {
   phase: RoomPhase;
 }
 
+/**
+ * Pódio de uma partida terminada, para a imagem de compartilhar.
+ * Vem da rota HTTP `GET /rooms/:codigo/result` (só enquanto a sala está no pódio).
+ */
+export interface RoomResult {
+  code: string;
+  theme: { name: string; emoji: string };
+  rounds: number;
+  playerCount: number;
+  standings: { position: number; nickname: string; avatar: string; score: number }[];
+}
+
 export interface FinalStanding {
   playerId: string;
   nickname: string;

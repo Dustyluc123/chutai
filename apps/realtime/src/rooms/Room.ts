@@ -16,6 +16,7 @@ import type {
   PublicPlayer,
   RoomPhase,
   RoomPreview,
+  RoomResult,
   RoomSettings,
   RoomState,
   RoundSummary,
@@ -778,6 +779,23 @@ export class Room {
       players: this.players.size,
       maxPlayers: this.settings.maxPlayers,
       phase: this.phase,
+    };
+  }
+
+  /** Pódio público da partida terminada (para a imagem de compartilhar). Fora do pódio: null. */
+  toResult(): RoomResult | null {
+    if (this.phase !== "finished" || !this.standings) return null;
+    return {
+      code: this.code,
+      theme: { name: this.theme.name, emoji: this.theme.emoji },
+      rounds: this.history.length,
+      playerCount: this.standings.length,
+      standings: this.standings.map(({ position, nickname, avatar, score }) => ({
+        position,
+        nickname,
+        avatar,
+        score,
+      })),
     };
   }
 

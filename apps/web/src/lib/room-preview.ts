@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import type { RoomPreview } from "@chutai/shared";
+import type { RoomPreview, RoomResult } from "@chutai/shared";
 import { REALTIME_URL } from "./site";
 
 /**
@@ -28,4 +28,18 @@ export function previewPlayersText(preview: RoomPreview): string {
     return `${preview.players} de ${preview.maxPlayers} jogadores na sala.`;
   if (preview.phase === "finished") return `Partida encerrada com ${count}.`;
   return `Partida em andamento com ${count}.`;
+}
+
+/** Pódio da partida que acabou de terminar (só existe enquanto a sala está no pódio). */
+export async function fetchRoomResult(code: string): Promise<RoomResult | null> {
+  try {
+    const response = await fetch(`${REALTIME_URL}/rooms/${encodeURIComponent(code)}/result`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(2000),
+    });
+    if (!response.ok) return null;
+    return (await response.json()) as RoomResult;
+  } catch {
+    return null;
+  }
 }

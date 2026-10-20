@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "description": "Site do Chutaí em Next.js: páginas, lobby, jogo e placar.",
   "scripts": {
     "dev": "next dev --port 3000",

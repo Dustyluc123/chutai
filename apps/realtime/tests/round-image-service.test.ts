@@ -3,7 +3,13 @@ import { describe, expect, it } from "vitest";
 import sharp from "sharp";
 import { MAX_ROUND_IMAGE_LEVEL } from "@chutai/game";
 import type { Character } from "@chutai/shared";
-import { ROUND_IMAGE_SIZE, RoundImageService } from "../src/services/roundImageService";
+import { existsSync } from "node:fs";
+import { loadConfig } from "../src/config";
+import {
+  ROUND_IMAGE_SIZE,
+  RoundImageService,
+  diskImageLoader,
+} from "../src/services/roundImageService";
 
 const character: Character = {
   id: "capivara",
@@ -130,5 +136,31 @@ describe("RoundImageService", () => {
     await service.render(character);
     expect(loads).toBe(1);
     await expect(service.render({ ...character, image: undefined })).rejects.toThrow();
+  });
+});
+
+describe("diskImageLoader", () => {
+  const { assetsDir } = loadConfig({});
+  const fallback = async (image: string) => Buffer.from(`http:${image}`);
+  const load = diskImageLoader(assetsDir, fallback);
+
+  it("a pasta padrão aponta para as imagens do site", () => {
+    expect(existsSync(`${assetsDir}/temas/fauna-brasileira/capivara.webp`)).toBe(true);
+  });
+
+  it("lê do disco as imagens dos temas oficiais", async () => {
+    const bytes = await load("/temas/fauna-brasileira/capivara.webp");
+    expect((await sharp(bytes).metadata()).format).toBe("webp");
+  });
+
+  it("o que não está no disco, e URLs completas, vão para a busca por HTTP", async () => {
+    expect((await load("/temas/nao-existe.webp")).toString()).toBe("http:/temas/nao-existe.webp");
+    expect((await load("https://cdn.exemplo.com/a.webp")).toString()).toBe(
+      "http:https://cdn.exemplo.com/a.webp",
+    );
+  });
+
+  it("nunca lê fora da pasta de imagens", async () => {
+    await expect(load("/../../package.json")).rejects.toThrow("inválido");
   });
 });

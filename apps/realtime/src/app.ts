@@ -2,6 +2,7 @@
  * Monta o servidor completo: HTTP (saúde e lista de temas) + Socket.IO + salas.
  * Separado do index.ts para os testes subirem um servidor de verdade numa porta livre.
  */
+import { existsSync } from "node:fs";
 import { createServer, type Server as HttpServer } from "node:http";
 import { Server } from "socket.io";
 import { createRepositories } from "@chutai/db";
@@ -9,7 +10,12 @@ import type { Config } from "./config";
 import { RoomManager } from "./rooms/RoomManager";
 import { createRoomStore } from "./rooms/store";
 import { MatchService } from "./services/matchService";
-import { RoundImageService, httpImageLoader, type ImageLoader } from "./services/roundImageService";
+import {
+  RoundImageService,
+  diskImageLoader,
+  httpImageLoader,
+  type ImageLoader,
+} from "./services/roundImageService";
 import { ThemeService } from "./services/themeService";
 import { registerSocketHandlers } from "./socket";
 import { playerChannel, roomChannel, type IoServer } from "./socket/types";
@@ -37,8 +43,9 @@ export async function createRealtimeServer(
   const themes = new ThemeService(repositories.themes);
   const matches = new MatchService(repositories.matches);
   const roundImages = new RoundImageService(
-    options.imageLoader ?? httpImageLoader(config.assetsBaseUrl),
+    options.imageLoader ?? diskImageLoader(config.assetsDir, httpImageLoader(config.assetsBaseUrl)),
   );
+  const assetsOnDisk = existsSync(config.assetsDir);
 
   const startedAt = Date.now();
   // O gerenciador depende do Socket.IO, que depende do servidor HTTP: guardamos a referência aqui.
@@ -59,6 +66,7 @@ export async function createRealtimeServer(
           uptimeSeconds: Math.round((Date.now() - startedAt) / 1000),
           data: repositories.mode,
           roomStore: store.kind,
+          images: assetsOnDisk ? "disco" : "http",
         }),
       );
       return;

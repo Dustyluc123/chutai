@@ -248,14 +248,15 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 
 ### Variáveis de ambiente
 
-| Variável                   | Padrão                  | Para quê                                                             |
-| -------------------------- | ----------------------- | -------------------------------------------------------------------- |
-| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                   |
-| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                      |
-| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                |
-| `ASSETS_BASE_URL`          | `http://localhost:3000` | De onde o servidor de tempo real baixa as imagens para o modo Imagem |
-| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                       |
-| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                     |
+| Variável                   | Padrão                  | Para quê                                                            |
+| -------------------------- | ----------------------- | ------------------------------------------------------------------- |
+| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                  |
+| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                     |
+| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)               |
+| `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem |
+| `ASSETS_BASE_URL`          | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco |
+| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                      |
+| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                    |
 
 ## Banco de dados e Redis (preparados para o futuro)
 
@@ -327,14 +328,16 @@ pnpm test
 
 ## Deploy
 
-| Peça                         | Sugestão                  | Observação                                                                                                                        |
-| ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Site (`apps/web`)            | Vercel                    | Defina `NEXT_PUBLIC_REALTIME_URL` com o endereço do servidor                                                                      |
-| Tempo real (`apps/realtime`) | Railway, Fly.io ou Render | Precisa de conexões abertas, por isso **não** vai na Vercel. `pnpm --filter @chutai/realtime build` gera um único `dist/index.js` |
-| PostgreSQL                   | Neon ou Supabase          | Opcional                                                                                                                          |
-| Redis                        | Upstash                   | Opcional                                                                                                                          |
+O passo a passo completo, para quem nunca fez deploy, está em [`docs/DEPLOY.md`](docs/DEPLOY.md). Resumo:
 
-No servidor de tempo real, ajuste `CORS_ORIGIN` e `ASSETS_BASE_URL` para o domínio do site. O `sharp` (usado no modo Imagem) fica fora do `dist/index.js` e é instalado junto com as dependências.
+| Peça                         | Onde             | Observação                                                                                                                                                       |
+| ---------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tempo real (`apps/realtime`) | Railway          | Configurado pelo `railway.json` (build, start e `/health`). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
+| Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                      |
+| PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                            |
+| Redis                        | Upstash          | Opcional                                                                                                                                                         |
+
+Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site em `CORS_ORIGIN`.
 
 ## Criar um tema
 

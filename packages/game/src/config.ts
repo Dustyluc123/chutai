@@ -73,3 +73,14 @@ export const TIMING = {
   /** Segundos mostrando o personagem revelado antes da próxima rodada. */
   intermissionSeconds: 10,
 } as const;
+
+/** Ciclo de vida das salas durante a partida. */
+export const ROOM_LIFECYCLE = {
+  /**
+   * Se ninguém estiver conectado por este tempo no meio da partida (contagem, rodada ou
+   * intervalo), a partida termina e a sala é apagada. Quem só recarregou a página volta antes.
+   */
+  abandonedSeconds: 60,
+  /** Quando alguém volta para uma sala parada (sem rodada nova por falta de gente), a próxima começa depois disto. */
+  resumeSeconds: 3,
+} as const;

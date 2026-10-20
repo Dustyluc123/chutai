@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-119_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-126_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -335,12 +335,12 @@ Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou 
 pnpm test
 ```
 
-| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                      |
-| ------------------ | -----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                             |
-| `@chutai/realtime` |     53 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/web`      |      4 | Componentes de palpite: no modo Imagem, nada de imagem nem emoji                                                                                                                                                                                                                                                  |
-| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                      |
+| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                |
+| ------------------ | -----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                       |
+| `@chutai/realtime` |     60 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/web`      |      4 | Componentes de palpite: no modo Imagem, nada de imagem nem emoji                                                                                                                                                                                                                                                                                            |
+| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                |
 
 ## Deploy
 

@@ -9,7 +9,7 @@ import {
   type RoomSettings,
   type Theme,
 } from "@chutai/shared";
-import { randomCode } from "@chutai/game";
+import { ROOM_LIFECYCLE, randomCode } from "@chutai/game";
 import { Room, type RoomEmitter } from "./Room";
 import type { RoomSnapshot, RoomStore } from "./store";
 import type { MatchService } from "../services/matchService";
@@ -71,6 +71,12 @@ export class RoomManager {
         : undefined,
       onImageError: (error, character) =>
         logger.error(`Sala ${code}: não deu para gerar a imagem de ${character.id}`, error),
+      onAbandoned: () => {
+        logger.info(
+          `Sala ${code} encerrada por abandono (ninguém conectado por ${ROOM_LIFECYCLE.abandonedSeconds} s no meio da partida).`,
+        );
+        this.delete(code);
+      },
     });
   }
 

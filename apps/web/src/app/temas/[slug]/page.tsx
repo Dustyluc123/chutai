@@ -5,6 +5,7 @@ import { formatValue } from "@chutai/game";
 import type { AttributeType } from "@chutai/shared";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { CharacterPicture } from "@/components/ui/character-picture";
 import { THEME_COLORS } from "@/lib/colors";
 import { cn } from "@/lib/cn";
 import { getTheme, listThemes } from "@/lib/themes";
@@ -119,11 +120,17 @@ export default async function ThemePage({ params }: PageProps) {
               <tbody>
                 {characters.map((character) => (
                   <tr key={character.id} className="border-t border-linha">
-                    <th scope="row" className="px-4 py-2.5 font-semibold">
-                      <span aria-hidden className="mr-2">
-                        {character.emoji}
+                    <th scope="row" className="px-4 py-2 font-semibold">
+                      <span className="flex items-center gap-3">
+                        <CharacterPicture
+                          name={character.name}
+                          image={character.image}
+                          emoji={character.emoji}
+                          size="md"
+                          decorative
+                        />
+                        {character.name}
                       </span>
-                      {character.name}
                     </th>
                     {theme.attributes.map((attr) => (
                       <td key={attr.key} className="px-4 py-2.5 text-tinta-soft">
@@ -137,7 +144,11 @@ export default async function ThemePage({ params }: PageProps) {
           </div>
           <p className="text-sm text-tinta-soft">
             Achou algum dado errado? Os temas ficam em arquivos JSON no repositório e qualquer um
-            pode sugerir correções.
+            pode sugerir correções. As imagens têm licença livre; veja autores e licenças em{" "}
+            <Link href="/creditos" className="font-semibold text-tinta underline">
+              créditos das imagens
+            </Link>
+            .
           </p>
         </section>
       </main>

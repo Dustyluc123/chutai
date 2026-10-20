@@ -3,6 +3,7 @@
  * e de salvar/restaurar retratos no store (memória ou Redis).
  */
 import {
+  DEFAULT_SETTINGS,
   ROOM_CODE_ALPHABET,
   ROOM_CODE_LENGTH,
   type RoomSettings,
@@ -13,12 +14,15 @@ import { Room, type RoomEmitter } from "./Room";
 import type { RoomSnapshot, RoomStore } from "./store";
 import type { MatchService } from "../services/matchService";
 import type { ThemeService } from "../services/themeService";
+import type { RoundImageService } from "../services/roundImageService";
 import { logger } from "../lib/logger";
 
 export interface RoomManagerDeps {
   store: RoomStore;
   matches: MatchService;
   themes: ThemeService;
+  /** Gera as imagens degradadas do modo Imagem. */
+  roundImages?: RoundImageService;
   /** Como cada sala fala com os jogadores (Socket.IO no servidor real). */
   emitterFor: (code: string) => RoomEmitter;
   disconnectGraceMs: number;
@@ -62,6 +66,11 @@ export class RoomManager {
       now: this.now,
       onFinished: (record) => void this.deps.matches.save(record),
       onChange: (room) => this.persist(room),
+      renderRoundImages: this.deps.roundImages
+        ? (character) => this.deps.roundImages!.render(character)
+        : undefined,
+      onImageError: (error, character) =>
+        logger.error(`Sala ${code}: não deu para gerar a imagem de ${character.id}`, error),
     });
   }
 
@@ -127,7 +136,8 @@ export class RoomManager {
       if (this.rooms.has(snapshot.code) || snapshot.players.length === 0) continue;
       const theme = await this.deps.themes.get(snapshot.themeSlug);
       if (!theme) continue;
-      const room = this.build(snapshot.code, theme, snapshot.settings);
+      // Retratos antigos podem não ter campos novos (ex.: `mode`): completa com o padrão.
+      const room = this.build(snapshot.code, theme, { ...DEFAULT_SETTINGS, ...snapshot.settings });
       for (const saved of snapshot.players) {
         room.players.set(saved.id, { ...saved, score: 0, connected: false });
       }

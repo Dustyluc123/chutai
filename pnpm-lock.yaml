@@ -50,6 +50,9 @@ importers:
       ioredis:
         specifier: ^5.8.2
         version: 5.11.1
+      sharp:
+        specifier: ^0.35.5
+        version: 0.35.5(@types/node@22.20.5)
       socket.io:
         specifier: ^4.8.4
         version: 4.8.4
@@ -136,6 +139,9 @@ importers:
 
   packages/db:
     dependencies:
+      '@chutai/game':
+        specifier: workspace:*
+        version: link:../game
       '@chutai/shared':
         specifier: workspace:*
         version: link:../shared
@@ -155,6 +161,9 @@ importers:
       drizzle-kit:
         specifier: ^0.31.11
         version: 0.31.11
+      sharp:
+        specifier: ^0.35.5
+        version: 0.35.5(@types/node@22.20.5)
       tsx:
         specifier: ^4.20.6
         version: 4.23.15
@@ -3366,8 +3375,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.35.5':
     optionalDependencies:
@@ -4756,7 +4764,6 @@ snapshots:
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
       '@types/node': 22.20.5
-    optional: true
 
   shebang-command@2.0.0:
     dependencies:

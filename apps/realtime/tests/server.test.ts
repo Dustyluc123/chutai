@@ -2,6 +2,8 @@
  * Teste de ponta a ponta: sobe o servidor real numa porta livre, conecta dois
  * "navegadores" com socket.io-client e joga uma partida inteira.
  */
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { io as connect, type Socket } from "socket.io-client";
 import type {
@@ -9,7 +11,9 @@ import type {
   ClientToServerEvents,
   GuessResult,
   JoinedRoom,
+  PrivateState,
   RoomState,
+  RoundImage,
   ServerToClientEvents,
 } from "@chutai/shared";
 import { createRealtimeServer, type RealtimeServer } from "../src/app";
@@ -26,7 +30,12 @@ const clients: Client[] = [];
 beforeAll(async () => {
   server = await createRealtimeServer(
     { ...loadConfig({}), databaseUrl: undefined, redisUrl: undefined },
-    { intermissionMs: 200 },
+    {
+      intermissionMs: 200,
+      // Lê as imagens direto da pasta pública do site, sem precisar do Next rodando.
+      imageLoader: (image) =>
+        readFile(fileURLToPath(new URL(`../../web/public${image}`, import.meta.url))),
+    },
   );
   const port = await server.listen(0);
   url = `http://localhost:${port}`;
@@ -124,6 +133,70 @@ describe("servidor de tempo real", () => {
       }),
     );
     expect(rejoined.playerId).toBe(joined.playerId);
+  });
+
+  it("modo Imagem: cada um recebe só a imagem do seu nível, e a resposta não vaza", async () => {
+    const ana = await client();
+    const bia = await client();
+    const created = unwrap(
+      await ana.emitWithAck("room:create", {
+        nickname: "Ana",
+        avatar: "🦜",
+        settings: { rounds: 1, roundSeconds: 60, themeSlug: "fauna-brasileira", mode: "image" },
+      }),
+    );
+    unwrap(
+      await bia.emitWithAck("room:join", { code: created.code, nickname: "Bia", avatar: "🐆" }),
+    );
+
+    // Tudo que a Bia recebe até o fim da rodada (menos os bytes das imagens).
+    const biaEvents: string[] = [];
+    const biaImages: RoundImage[] = [];
+    const anaImages: RoundImage[] = [];
+    bia.onAny((event: string, ...args: unknown[]) => {
+      if (event === "round:image") biaImages.push(args[0] as RoundImage);
+      else if (event !== "round:end" && event !== "game:end") biaEvents.push(JSON.stringify(args));
+    });
+    ana.on("round:image", (image) => anaImages.push(image));
+
+    const biaReady = new Promise<void>((resolve) => {
+      bia.on("you:state", (state: PrivateState) => state.image?.status === "ready" && resolve());
+    });
+    const started = nextState(bia, (s) => s.phase === "round");
+    unwrap(await ana.emitWithAck("game:start"));
+    expect((await started).settings.mode).toBe("image");
+    await biaReady;
+
+    const room = server.manager.get(created.code)!;
+    const answer = room.peekAnswerForTests()!;
+    const wrong = room.theme.characters.find((c) => c.id !== answer.id)!;
+
+    const anaLevel1 = new Promise<void>((resolve) => {
+      ana.on("round:image", (image) => image.level === 1 && resolve());
+    });
+    const miss = unwrap(await ana.emitWithAck("guess:submit", { characterId: wrong.id }));
+    expect(miss.feedback).toEqual([]);
+    await anaLevel1;
+
+    // A Bia não chutou: continua só com o nível 0, e não recebeu o nível da Ana.
+    expect(biaImages.map((image) => image.level)).toEqual([0]);
+    expect(anaImages.map((image) => image.level)).toEqual([0, 1]);
+    expect(
+      Buffer.from(biaImages[0]!.data as ArrayBuffer)
+        .subarray(8, 12)
+        .toString(),
+    ).toBe("WEBP");
+
+    for (const text of biaEvents) {
+      expect(text).not.toContain(`"${answer.id}"`);
+      expect(text).not.toContain(answer.image!);
+    }
+
+    // Na revelação, a imagem nítida (o caminho público) aparece.
+    const finished = nextState(ana, (s) => s.phase === "finished");
+    unwrap(await ana.emitWithAck("guess:submit", { characterId: answer.id }));
+    unwrap(await bia.emitWithAck("guess:submit", { characterId: answer.id }));
+    expect((await finished).lastRound?.character.image).toBe(answer.image);
   });
 
   it("recusa dados inválidos com mensagem em português", async () => {

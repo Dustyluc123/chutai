@@ -1,4 +1,5 @@
 import type { GuessResult } from "@chutai/shared";
+import { CharacterPicture } from "@/components/ui/character-picture";
 import { cn } from "@/lib/cn";
 import { Tile } from "./tile";
 
@@ -69,9 +70,13 @@ export function GuessBoard({
                   animate && "animate-pop",
                 )}
               >
-                <span aria-hidden className="text-2xl leading-none">
-                  {guess.emoji ?? "❔"}
-                </span>
+                <CharacterPicture
+                  name={guess.characterName}
+                  image={guess.image}
+                  emoji={guess.emoji}
+                  size="md"
+                  decorative
+                />
                 <span className="text-sm leading-tight font-semibold">{guess.characterName}</span>
               </div>
               {guess.feedback.map((feedback, index) => (

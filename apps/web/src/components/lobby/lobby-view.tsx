@@ -35,6 +35,7 @@ export function LobbyView({ state, room }: LobbyViewProps) {
       <div className="flex flex-col gap-4 lg:sticky lg:top-6 lg:self-start">
         <SettingsPanel
           settings={state.settings}
+          theme={state.theme}
           editable={room.isHost}
           onChange={(changes) => void room.actions.updateSettings(changes)}
         />

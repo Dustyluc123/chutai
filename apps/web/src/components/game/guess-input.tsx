@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 
 import { Search } from "lucide-react";
 import type { CharacterOption } from "@chutai/shared";
 import { searchCharacters } from "@chutai/game";
+import { CharacterPicture } from "@/components/ui/character-picture";
 import { cn } from "@/lib/cn";
 
 interface GuessInputProps {
@@ -133,13 +134,17 @@ export function GuessInput({
                 onMouseEnter={() => setActive(index)}
                 onClick={() => void choose(option)}
                 className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5",
+                  "flex cursor-pointer items-center gap-3 rounded-xl px-2.5 py-1.5",
                   index === active ? "bg-gema" : "hover:bg-papel",
                 )}
               >
-                <span aria-hidden className="text-xl leading-none">
-                  {option.emoji ?? "❔"}
-                </span>
+                <CharacterPicture
+                  name={option.name}
+                  image={option.image}
+                  emoji={option.emoji}
+                  size="md"
+                  decorative
+                />
                 <span className="font-semibold">{option.name}</span>
                 {option.aliases.length ? (
                   <span className="truncate text-sm text-tinta-soft">

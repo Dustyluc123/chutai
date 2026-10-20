@@ -9,6 +9,8 @@ import { LiveScoreboard } from "@/components/scoreboard/live-scoreboard";
 import { RoundReveal } from "@/components/scoreboard/round-reveal";
 import { GuessBoard } from "./guess-board";
 import { GuessInput } from "./guess-input";
+import { GuessList } from "./guess-list";
+import { MysteryImage } from "./mystery-image";
 import { HintBar } from "./hint-bar";
 import { Legend } from "./legend";
 import { RoundTimer } from "./round-timer";
@@ -37,6 +39,7 @@ export function GameView({ state, room }: GameViewProps) {
 
   const inRound = state.phase === "round" && state.round;
   const solved = me?.solved ?? false;
+  const imageMode = state.settings.mode === "image";
 
   return (
     <div className="flex flex-1 flex-col">
@@ -73,6 +76,16 @@ export function GameView({ state, room }: GameViewProps) {
             />
           ) : null}
 
+          {inRound && imageMode ? (
+            <MysteryImage
+              url={room.roundImage?.url ?? null}
+              level={room.roundImage?.level ?? me?.image?.level ?? 0}
+              maxLevel={room.roundImage?.maxLevel ?? me?.image?.maxLevel ?? 4}
+              status={me?.image?.status ?? "loading"}
+              className="self-center"
+            />
+          ) : null}
+
           {inRound ? (
             solved ? (
               <div
@@ -103,7 +116,14 @@ export function GameView({ state, room }: GameViewProps) {
             )
           ) : null}
 
-          {state.phase === "round" || guesses.length ? (
+          {imageMode ? (
+            state.phase === "round" || guesses.length ? (
+              <GuessList
+                guesses={guesses}
+                emptyMessage="Quem é? Chute pelo nome. Cada erro deixa a imagem um pouco mais nítida."
+              />
+            ) : null
+          ) : state.phase === "round" || guesses.length ? (
             <GuessBoard
               attributes={state.theme.attributes}
               guesses={guesses}
@@ -112,7 +132,7 @@ export function GameView({ state, room }: GameViewProps) {
             />
           ) : null}
 
-          {inRound ? <Legend className="pt-1" /> : null}
+          {inRound && !imageMode ? <Legend className="pt-1" /> : null}
         </div>
 
         <aside>
@@ -120,6 +140,7 @@ export function GameView({ state, room }: GameViewProps) {
             players={state.players}
             progress={state.round?.progress}
             attributeCount={state.round?.attributeCount}
+            imageLevels={imageMode ? (me?.image?.maxLevel ?? 4) + 1 : undefined}
             meId={meId}
           />
         </aside>

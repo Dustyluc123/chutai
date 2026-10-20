@@ -13,10 +13,12 @@
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
     "seed": "tsx seed/seed.ts",
+    "images:fetch": "tsx scripts/fetch-images.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@chutai/game": "workspace:*",
     "@chutai/shared": "workspace:*",
     "drizzle-orm": "^0.45.4",
     "postgres": "^3.4.7"
@@ -25,6 +27,7 @@
     "@electric-sql/pglite": "^0.5.10",
     "@types/node": "^22.19.0",
     "drizzle-kit": "^0.31.11",
+    "sharp": "^0.35.5",
     "tsx": "^4.20.6",
     "typescript": "~5.9.3",
     "vitest": "^5.0.5"

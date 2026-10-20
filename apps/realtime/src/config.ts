@@ -13,6 +13,11 @@ export interface Config {
   disconnectGraceMs: number;
   /** Sala sem ninguém conectado é apagada depois deste tempo. */
   emptyRoomTtlMs: number;
+  /**
+   * Endereço do site, de onde o servidor baixa as imagens originais dos personagens
+   * para gerar as versões borradas do modo Imagem.
+   */
+  assetsBaseUrl: string;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
@@ -26,5 +31,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     redisUrl: env.REDIS_URL || undefined,
     disconnectGraceMs: number(env.DISCONNECT_GRACE_SECONDS, 20) * 1000,
     emptyRoomTtlMs: number(env.EMPTY_ROOM_MINUTES, 10) * 60_000,
+    assetsBaseUrl: env.ASSETS_BASE_URL || "http://localhost:3000",
   };
 }

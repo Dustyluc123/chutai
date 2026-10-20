@@ -1,9 +1,18 @@
 import type { ServerToClientEvents, Theme } from "@chutai/shared";
 import { OFFICIAL_THEMES } from "@chutai/db";
 import type { MatchRecord } from "@chutai/db";
-import { Room, type RoomEmitter } from "../src/rooms/Room";
+import { Room, type RoomDeps, type RoomEmitter } from "../src/rooms/Room";
 
 export const theme: Theme = OFFICIAL_THEMES[0]!;
+/** Tema com imagem para todos os personagens (o único que aceita o modo Imagem). */
+export const imageTheme: Theme = OFFICIAL_THEMES.find((t) => t.slug === "fauna-brasileira")!;
+
+/** Gerador falso: cada nível vira um buffer com o texto "nivel-N", fácil de conferir. */
+export const fakeRenderer = async () =>
+  Array.from({ length: 5 }, (_, level) => new TextEncoder().encode(`nivel-${level}`));
+
+/** Deixa as promessas pendentes (como a geração de imagens) terminarem. */
+export const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 /** Relógio e agendador falsos: o teste decide quando o tempo passa. */
 export class FakeClock {
@@ -37,7 +46,11 @@ export class FakeClock {
 
 type Sent = { to: "all" | string; event: keyof ServerToClientEvents; args: unknown[] };
 
-export function createTestRoom(overrides: Partial<Room["settings"]> = {}) {
+export function createTestRoom(
+  overrides: Partial<Room["settings"]> = {},
+  options: { theme?: Theme; renderRoundImages?: RoomDeps["renderRoundImages"] } = {},
+) {
+  const roomTheme = options.theme ?? theme;
   const clock = new FakeClock();
   const sent: Sent[] = [];
   const finished: MatchRecord[] = [];
@@ -47,9 +60,10 @@ export function createTestRoom(overrides: Partial<Room["settings"]> = {}) {
   };
   const room = new Room(
     "ABC234",
-    theme,
+    roomTheme,
     {
-      themeSlug: theme.slug,
+      themeSlug: roomTheme.slug,
+      mode: "classic",
       rounds: 2,
       roundSeconds: 60,
       hintsEnabled: true,
@@ -64,6 +78,7 @@ export function createTestRoom(overrides: Partial<Room["settings"]> = {}) {
       disconnectGraceMs: 5_000,
       intermissionMs: 3_000,
       onFinished: (record) => finished.push(record),
+      renderRoundImages: options.renderRoundImages,
     },
   );
   return { room, clock, sent, finished };
@@ -72,5 +87,5 @@ export function createTestRoom(overrides: Partial<Room["settings"]> = {}) {
 /** Um personagem do tema que NÃO é a resposta atual. */
 export function wrongCharacter(room: Room, skip: string[] = []) {
   const answer = room.peekAnswerForTests()!;
-  return theme.characters.find((c) => c.id !== answer.id && !skip.includes(c.id))!;
+  return room.theme.characters.find((c) => c.id !== answer.id && !skip.includes(c.id))!;
 }

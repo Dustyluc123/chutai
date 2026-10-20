@@ -8,6 +8,7 @@ import { drizzle } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { count } from "drizzle-orm";
 import { beforeAll, describe, expect, it } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import type { Theme } from "@chutai/shared";
 import * as schema from "../src/schema";
@@ -49,6 +50,75 @@ describe("temas oficiais", () => {
   });
 });
 
+describe("imagens dos temas oficiais", () => {
+  const publicDir = fileURLToPath(new URL("../../../apps/web/public", import.meta.url));
+  const withImage = OFFICIAL_THEMES.flatMap((theme) =>
+    theme.characters.filter((c) => c.image).map((c) => ({ theme, character: c })),
+  );
+
+  it("seguem o caminho /temas/<slug>/<id>.webp e o arquivo existe", () => {
+    expect(withImage.length).toBeGreaterThan(0);
+    for (const { theme, character } of withImage) {
+      expect(character.image).toBe(`/temas/${theme.slug}/${character.id}.webp`);
+      expect(existsSync(`${publicDir}${character.image}`), character.image).toBe(true);
+    }
+  });
+
+  it("cada imagem tem crédito com licença livre e link para o original", () => {
+    for (const { character } of withImage) {
+      const credit = character.imageCredit;
+      expect(credit, character.id).toBeDefined();
+      expect(credit!.license).toMatch(/^(domínio público|pd|cc0|cc by(-sa)? \d)/i);
+      expect(credit!.author).not.toBe("");
+      expect(credit!.source).toMatch(/^https:\/\/commons\.wikimedia\.org\//);
+    }
+  });
+
+  it("o CREDITOS.md lista todas as imagens", () => {
+    const markdown = readFileSync(`${publicDir}/temas/CREDITOS.md`, "utf8");
+    for (const { character } of withImage) {
+      expect(markdown, character.id).toContain(character.imageCredit!.source!);
+    }
+  });
+});
+
+describe("validateTheme: imagens", () => {
+  const base = OFFICIAL_THEMES.find((t) => t.slug === "fauna-brasileira")!;
+  const withCharacter = (patch: Partial<Theme["characters"][number]>) => ({
+    ...base,
+    characters: [{ ...base.characters[0]!, ...patch }, ...base.characters.slice(1)],
+  });
+
+  it("aceita caminho do site e URL https de imagem", () => {
+    expect(validateTheme(withCharacter({ image: "/temas/x/y.webp" }))).toEqual([]);
+    expect(validateTheme(withCharacter({ image: "https://cdn.exemplo.com/a/b.png" }))).toEqual([]);
+  });
+
+  it("recusa caminhos estranhos, http, outros formatos e “..”", () => {
+    for (const image of [
+      "temas/x.webp",
+      "//outro-site.com/x.webp",
+      "http://cdn.exemplo.com/x.webp",
+      "/temas/x.svg",
+      "/temas/../segredo.webp",
+      "/temas/x.webp?v=1",
+    ]) {
+      expect(validateTheme(withCharacter({ image })), image).not.toEqual([]);
+    }
+  });
+
+  it("crédito precisa de autor e licença, e de uma imagem", () => {
+    expect(
+      validateTheme(withCharacter({ imageCredit: { author: "", license: "CC0" } })),
+    ).not.toEqual([]);
+    expect(
+      validateTheme(
+        withCharacter({ image: undefined, imageCredit: { author: "Ana", license: "CC0" } }),
+      ),
+    ).not.toEqual([]);
+  });
+});
+
 describe("DrizzleThemeRepository", () => {
   it("lista os mesmos temas que o repositório JSON", async () => {
     const fromDb = await new DrizzleThemeRepository(db).listThemes();
@@ -63,6 +133,19 @@ describe("DrizzleThemeRepository", () => {
       expect(loaded).not.toBeNull();
       expect(normalize(loaded!)).toEqual(normalize(theme));
     }
+  });
+
+  it("guarda e devolve a imagem dos personagens", async () => {
+    const theme = OFFICIAL_THEMES.find((t) => t.characters.some((c) => c.image))!;
+    const loaded = await new DrizzleThemeRepository(db).getTheme(theme.slug);
+    const expected = theme.characters.filter((c) => c.image).length;
+    expect(loaded!.characters.filter((c) => c.image)).toHaveLength(expected);
+  });
+
+  it("só a fauna tem imagem para todos os personagens (modo Imagem)", async () => {
+    const summaries = await new DrizzleThemeRepository(db).listThemes();
+    const available = summaries.filter((t) => t.imageModeAvailable).map((t) => t.slug);
+    expect(available).toEqual(["fauna-brasileira"]);
   });
 
   it("rodar o seed de novo não duplica nada", async () => {
@@ -87,6 +170,7 @@ describe("DrizzleMatchRepository", () => {
       finishedAt: new Date("2026-10-19T20:10:00Z"),
       settings: {
         themeSlug: "folclore-brasileiro",
+        mode: "classic",
         rounds: 1,
         roundSeconds: 90,
         hintsEnabled: true,

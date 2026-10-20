@@ -7,18 +7,22 @@ interface LiveScoreboardProps {
   players: PublicPlayer[];
   progress?: PlayerProgress[];
   attributeCount?: number;
+  /** Modo Imagem: total de níveis de nitidez (o placar mostra o nível de cada um). */
+  imageLevels?: number;
   meId?: string;
   className?: string;
 }
 
 /**
  * Placar ao vivo. Mostra quanto cada um avançou sem entregar nada:
- * número de chutes e quantos atributos verdes já conseguiu num palpite.
+ * número de chutes e quantos atributos verdes já conseguiu num palpite
+ * (no modo Imagem, o nível de nitidez, que só depende de chutes e dicas).
  */
 export function LiveScoreboard({
   players,
   progress,
   attributeCount = 0,
+  imageLevels,
   meId,
   className,
 }: LiveScoreboardProps) {
@@ -61,22 +65,45 @@ export function LiveScoreboard({
                     />
                   ) : null}
                 </span>
-                {p && attributeCount > 0 ? (
+                {p && (attributeCount > 0 || imageLevels) ? (
                   <span className="flex items-center gap-2 text-xs whitespace-nowrap text-tinta-soft">
-                    <span
-                      aria-label={`${p.bestMatch} de ${attributeCount} atributos certos no melhor palpite`}
-                      className="flex gap-0.5"
-                    >
-                      {Array.from({ length: attributeCount }, (_, i) => (
-                        <span
-                          key={i}
-                          className={cn(
-                            "h-2 w-2.5 rounded-[3px] border border-tinta/40",
-                            p.solved || i < p.bestMatch ? "border-folha bg-folha" : "bg-papel",
-                          )}
-                        />
-                      ))}
-                    </span>
+                    {imageLevels ? (
+                      <span
+                        role="img"
+                        aria-label={`Nitidez ${(p.imageLevel ?? 0) + 1} de ${imageLevels}`}
+                        className="flex gap-0.5"
+                      >
+                        {Array.from({ length: imageLevels }, (_, i) => (
+                          <span
+                            key={i}
+                            className={cn(
+                              "h-2 w-2.5 rounded-[3px] border border-tinta/40",
+                              p.solved
+                                ? "border-folha bg-folha"
+                                : i <= (p.imageLevel ?? 0)
+                                  ? "border-anil bg-anil"
+                                  : "bg-papel",
+                            )}
+                          />
+                        ))}
+                      </span>
+                    ) : (
+                      <span
+                        role="img"
+                        aria-label={`${p.bestMatch} de ${attributeCount} atributos certos no melhor palpite`}
+                        className="flex gap-0.5"
+                      >
+                        {Array.from({ length: attributeCount }, (_, i) => (
+                          <span
+                            key={i}
+                            className={cn(
+                              "h-2 w-2.5 rounded-[3px] border border-tinta/40",
+                              p.solved || i < p.bestMatch ? "border-folha bg-folha" : "bg-papel",
+                            )}
+                          />
+                        ))}
+                      </span>
+                    )}
                     <span className="tabular">
                       {p.guessCount} {p.guessCount === 1 ? "chute" : "chutes"}
                     </span>

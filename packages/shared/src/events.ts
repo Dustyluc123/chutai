@@ -13,6 +13,7 @@ import type {
   PlayerProgress,
   PrivateState,
   RoomState,
+  RoundImage,
   RoundSummary,
   FinalStanding,
 } from "./types";
@@ -58,6 +59,8 @@ export interface ServerToClientEvents {
   "player:solved": (payload: { playerId: string; nickname: string; rank: number }) => void;
   "round:start": (payload: { number: number; endsAt: number }) => void;
   "round:end": (summary: RoundSummary) => void;
+  /** Modo Imagem: o nível de nitidez que ESTE jogador alcançou. Nunca vai para a sala inteira. */
+  "round:image": (image: RoundImage) => void;
   "game:end": (standings: FinalStanding[]) => void;
   "room:kicked": () => void;
   "room:closed": (reason: string) => void;

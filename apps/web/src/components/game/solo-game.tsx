@@ -8,8 +8,10 @@ import {
   drawCharacter,
   formatValue,
   MAX_ROUND_IMAGE_LEVEL,
+  drawZoomCenter,
   imageLevel,
   supportsImageMode,
+  type ZoomCenter,
 } from "@chutai/game";
 import { Button } from "@/components/ui/button";
 import { CharacterPicture } from "@/components/ui/character-picture";
@@ -29,10 +31,17 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const [mode, setMode] = useState<GameMode>("classic");
   const imageAvailable = supportsImageMode(theme.characters);
   const imageMode = mode === "image" && imageAvailable;
+  const [zoomCenter, setZoomCenter] = useState<ZoomCenter>({ x: 0.5, y: 0.5 });
+  // No modo Imagem, o autocompletar mostra só o nome (a miniatura entregaria a resposta).
+  const visibleOptions = useMemo(
+    () => (imageMode ? options.map(({ id, name, aliases }) => ({ id, name, aliases })) : options),
+    [imageMode, options],
+  );
 
   // Sorteio só no navegador (evita diferença entre servidor e cliente na hidratação).
   useEffect(() => {
     setAnswer(drawCharacter(theme.characters, new Set()));
+    setZoomCenter(drawZoomCenter());
   }, [theme]);
 
   const guessedIds = useMemo(() => new Set(guesses.map((g) => g.characterId)), [guesses]);
@@ -52,8 +61,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
       {
         characterId: character.id,
         characterName: character.name,
-        emoji: character.emoji,
-        image: character.image,
+        ...(imageMode ? {} : { emoji: character.emoji, image: character.image }),
         feedback: imageMode ? [] : compareCharacters(character, answer, theme.attributes),
         correct: character.id === answer.id,
         guessNumber: current.length + 1,
@@ -66,6 +74,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     const used = new Set(played).add(answer.id);
     setPlayed(used);
     setAnswer(drawCharacter(theme.characters, used));
+    setZoomCenter(drawZoomCenter());
     setGuesses([]);
     setRevealed(false);
   }
@@ -113,6 +122,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
           <PixelatedImage
             src={answer.image}
             level={level}
+            center={zoomCenter}
             label={`Imagem misteriosa do personagem, borrada. Nitidez ${level + 1} de ${MAX_ROUND_IMAGE_LEVEL + 1}.`}
           />
         </div>
@@ -154,8 +164,9 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
         </section>
       ) : (
         <GuessInput
-          options={options}
+          options={visibleOptions}
           guessedIds={guessedIds}
+          showPictures={!imageMode}
           onGuess={guess}
           disabled={!answer}
           autoFocus
@@ -165,6 +176,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
       {imageMode ? (
         <GuessList
           guesses={guesses}
+          showPictures={false}
           emptyMessage="Quem é? Chute pelo nome. Cada erro deixa a imagem um pouco mais nítida."
         />
       ) : (

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type {
+  CharacterOption,
   HintType,
   JoinedRoom,
   PrivateState,
@@ -52,6 +53,7 @@ export function useRoom(code: string) {
   const [connected, setConnected] = useState(true);
   const [serverOffset, setServerOffset] = useState(0);
   const [roundImage, setRoundImage] = useState<MysteryImageState | null>(null);
+  const [characters, setCharacters] = useState<CharacterOption[]>([]);
   const imageUrlRef = useRef<string | null>(null);
   const sessionRef = useRef<JoinedRoom | null>(null);
   const profileRef = useRef<Profile | null>(null);
@@ -128,6 +130,7 @@ export function useRoom(code: string) {
     socket.on("room:state", onState);
     socket.on("you:state", onPrivate);
     socket.on("round:image", onImage);
+    socket.on("room:characters", setCharacters);
     socket.on("player:solved", onSolved);
     socket.on("room:kicked", onKicked);
     socket.on("connect", onConnect);
@@ -156,6 +159,7 @@ export function useRoom(code: string) {
       socket.off("room:state", onState);
       socket.off("you:state", onPrivate);
       socket.off("round:image", onImage);
+      socket.off("room:characters", setCharacters);
       if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
       imageUrlRef.current = null;
       socket.off("player:solved", onSolved);
@@ -224,6 +228,8 @@ export function useRoom(code: string) {
     error,
     connected,
     serverOffset,
+    /** Personagens que podem ser chutados nesta partida (a lista vem do servidor). */
+    characters,
     /** Só vale para a rodada atual; numa rodada nova, espere a imagem dela chegar. */
     roundImage:
       roundImage && state?.phase === "round" && state.round?.number === roundImage.round

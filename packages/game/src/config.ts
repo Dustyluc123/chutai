@@ -42,16 +42,24 @@ export const IMAGE_MODE = {
    */
   perExtraGuess: 80,
   /**
-   * Como degradar cada nível (do 0 ao penúltimo): a imagem é reduzida para `pixels` × `pixels`
-   * (vira blocos) e depois recebe um desfoque de raio `blur`.
+   * Como degradar cada nível (do 0 ao penúltimo):
+   * - `zoom`: mostra só um pedaço da imagem, ampliado (3 = um terço da largura). Vai afastando
+   *   a cada nível, para não dar para comparar de cara com a galeria do tema;
+   * - `pixels`: a imagem é reduzida para `pixels` × `pixels` (vira blocos);
+   * - `blur`: desfoque por cima, de raio `blur`.
    */
   effects: [
-    { pixels: 6, blur: 6 },
-    { pixels: 10, blur: 4 },
-    { pixels: 16, blur: 2.5 },
-    { pixels: 26, blur: 1.5 },
-    { pixels: 44, blur: 0.8 },
-  ] as readonly { pixels: number; blur: number }[],
+    { zoom: 3, pixels: 6, blur: 6 },
+    { zoom: 2.4, pixels: 10, blur: 4 },
+    { zoom: 1.8, pixels: 16, blur: 2.5 },
+    { zoom: 1.35, pixels: 26, blur: 1.5 },
+    { zoom: 1, pixels: 44, blur: 0.8 },
+  ] as readonly { zoom: number; pixels: number; blur: number }[],
+  /**
+   * O ponto ampliado é sorteado nesta fração central da imagem (0,5 = nos 50% do meio),
+   * para o primeiro nível não cair num canto vazio. É o mesmo em todos os níveis da rodada.
+   */
+  zoomCenterArea: 0.5,
 } as const;
 
 export const TIMING = {

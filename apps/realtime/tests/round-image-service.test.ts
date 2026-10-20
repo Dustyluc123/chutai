@@ -76,6 +76,38 @@ describe("RoundImageService", () => {
     }
   });
 
+  it("começa ampliado perto do centro e vai afastando o zoom", async () => {
+    // Imagem branca com uma moldura preta grossa: ampliada no centro, a moldura some.
+    const framed = await sharp({
+      create: { width: 400, height: 400, channels: 3, background: "#000000" },
+    })
+      .composite([
+        {
+          input: await sharp({
+            create: { width: 240, height: 240, channels: 3, background: "#ffffff" },
+          })
+            .png()
+            .toBuffer(),
+          left: 80,
+          top: 80,
+        },
+      ])
+      .png()
+      .toBuffer();
+    // random 0,5: ponto do zoom bem no centro, sem espelho e sem mudar o tom.
+    const service = new RoundImageService(
+      async () => framed,
+      () => 0.5,
+    );
+    const levels = await service.render(character);
+    const brightness = await Promise.all(
+      levels.map(async (level) => (await sharp(level).stats()).channels[0]!.mean),
+    );
+    expect(brightness[0]!).toBeGreaterThan(240); // só o miolo branco
+    expect(brightness.at(-1)!).toBeLessThan(200); // a imagem inteira, com a moldura
+    expect(brightness[0]!).toBeGreaterThan(brightness.at(-1)!);
+  });
+
   it("disfarça cada rodada de um jeito diferente", async () => {
     const source = await sourceImage();
     let seed = 0;

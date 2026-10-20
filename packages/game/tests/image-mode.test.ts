@@ -2,7 +2,9 @@ import { describe, expect, it } from "vitest";
 import { IMAGE_MODE } from "../src/config";
 import {
   MAX_ROUND_IMAGE_LEVEL,
+  drawZoomCenter,
   imageEffect,
+  zoomWindow,
   imageLevel,
   supportsImageMode,
 } from "../src/image-mode";
@@ -36,7 +38,11 @@ describe("imageEffect", () => {
     for (let i = 1; i < effects.length; i++) {
       expect(effects[i]!.pixels).toBeGreaterThan(effects[i - 1]!.pixels);
       expect(effects[i]!.blur).toBeLessThan(effects[i - 1]!.blur);
+      expect(effects[i]!.zoom).toBeLessThan(effects[i - 1]!.zoom);
     }
+    // O primeiro nível começa ampliado; o último da rodada mostra a imagem inteira.
+    expect(effects[0]!.zoom).toBeGreaterThan(1);
+    expect(effects.at(-1)!.zoom).toBe(1);
   });
 
   it("recusa o nível nítido e níveis inventados", () => {
@@ -60,5 +66,32 @@ describe("pontuação no modo Imagem", () => {
     const classic = computeRoundPoints(base);
     const image = computeRoundPoints({ ...base, mode: "image" });
     expect(classic - image).toBe(3 * (IMAGE_MODE.perExtraGuess - 40));
+  });
+});
+
+describe("zoom do modo Imagem", () => {
+  it("sorteia o ponto do zoom só nos 50% centrais", () => {
+    expect(drawZoomCenter(() => 0)).toEqual({ x: 0.25, y: 0.25 });
+    expect(drawZoomCenter(() => 0.999999).x).toBeCloseTo(0.75);
+    for (let i = 0; i < 200; i++) {
+      const { x, y } = drawZoomCenter();
+      for (const v of [x, y]) {
+        expect(v).toBeGreaterThanOrEqual(0.25);
+        expect(v).toBeLessThanOrEqual(0.75);
+      }
+    }
+  });
+
+  it("a janela fica em volta do centro e nunca sai da imagem", () => {
+    expect(zoomWindow(2, { x: 0.5, y: 0.5 })).toEqual({ left: 0.25, top: 0.25, size: 0.5 });
+    const corner = zoomWindow(3, { x: 0.25, y: 0.75 });
+    expect(corner.size).toBeCloseTo(1 / 3);
+    expect(corner.left).toBeCloseTo(0.25 - 1 / 6);
+    expect(corner.top + corner.size).toBeLessThanOrEqual(1);
+    expect(zoomWindow(3, { x: 0, y: 1 })).toMatchObject({ left: 0, top: 1 - 1 / 3 });
+  });
+
+  it("com zoom 1 mostra a imagem inteira", () => {
+    expect(zoomWindow(1, { x: 0.3, y: 0.7 })).toEqual({ left: 0, top: 0, size: 1 });
   });
 });

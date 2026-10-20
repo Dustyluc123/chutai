@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { imageEffect } from "@chutai/game";
+import { imageEffect, zoomWindow, type ZoomCenter } from "@chutai/game";
 
 const SIZE = 300;
 
 interface PixelatedImageProps {
   src: string;
   level: number;
+  /** Ponto do zoom, sorteado uma vez por personagem (o mesmo em todos os níveis). */
+  center: ZoomCenter;
   label: string;
 }
 
@@ -16,7 +18,7 @@ interface PixelatedImageProps {
  * Aqui não há o que proteger: no treino o navegador já tem o tema inteiro.
  * Na partida com amigos quem degrada a imagem é o servidor.
  */
-export function PixelatedImage({ src, level, label }: PixelatedImageProps) {
+export function PixelatedImage({ src, level, center, label }: PixelatedImageProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -27,12 +29,26 @@ export function PixelatedImage({ src, level, label }: PixelatedImageProps) {
     let cancelled = false;
     image.onload = () => {
       if (cancelled) return;
-      const { pixels, blur } = imageEffect(level);
-      // 1. Desenha a imagem bem pequena; 2. amplia sem suavizar (blocos); 3. desfoca.
+      const { zoom, pixels, blur } = imageEffect(level);
+      const window = zoomWindow(zoom, center);
+      // 1. Recorta o pedaço ampliado e desenha bem pequeno; 2. amplia sem suavizar (blocos);
+      // 3. desfoca.
       const small = document.createElement("canvas");
       small.width = pixels;
       small.height = pixels;
-      small.getContext("2d")?.drawImage(image, 0, 0, pixels, pixels);
+      small
+        .getContext("2d")
+        ?.drawImage(
+          image,
+          window.left * image.naturalWidth,
+          window.top * image.naturalHeight,
+          window.size * image.naturalWidth,
+          window.size * image.naturalHeight,
+          0,
+          0,
+          pixels,
+          pixels,
+        );
       ctx.imageSmoothingEnabled = false;
       ctx.filter = `blur(${blur}px)`;
       ctx.clearRect(0, 0, SIZE, SIZE);
@@ -43,7 +59,7 @@ export function PixelatedImage({ src, level, label }: PixelatedImageProps) {
     return () => {
       cancelled = true;
     };
-  }, [src, level]);
+  }, [src, level, center]);
 
   return (
     <canvas

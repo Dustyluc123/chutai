@@ -7,6 +7,7 @@
  */
 import type {
   Ack,
+  CharacterOption,
   GuessResult,
   HintReveal,
   JoinedRoom,
@@ -51,6 +52,11 @@ export interface ClientToServerEvents {
 export interface ServerToClientEvents {
   /** Fonte da verdade: enviado para a sala inteira a cada mudança. */
   "room:state": (state: RoomState) => void;
+  /**
+   * Personagens que podem ser chutados nesta partida (para o autocompletar). O servidor decide
+   * a lista; no modo Imagem ela vem sem imagem e sem emoji, para não dar a resposta.
+   */
+  "room:characters": (characters: CharacterOption[]) => void;
   /** Só para o próprio jogador: seus palpites e dicas (ex.: depois de reconectar). */
   "you:state": (state: PrivateState) => void;
   /** Alguém progrediu na rodada (sem revelar nada). */

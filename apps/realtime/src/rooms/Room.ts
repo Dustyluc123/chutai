@@ -6,6 +6,7 @@
 import { randomUUID } from "node:crypto";
 import type {
   Character,
+  CharacterOption,
   FinalStanding,
   GuessResult,
   HintReveal,
@@ -33,7 +34,7 @@ import {
   imageLevel,
   supportsImageMode,
 } from "@chutai/game";
-import { toThemeSummary, type MatchRecord } from "@chutai/db";
+import { toCharacterOptions, toThemeSummary, type MatchRecord } from "@chutai/db";
 import { GameError } from "../lib/errors";
 
 export interface PlayerState {
@@ -244,6 +245,7 @@ export class Room {
         "O modo Imagem precisa de um tema em que todos os personagens têm imagem.",
       );
     }
+    const before = `${this.theme.slug}:${this.settings.mode}`;
     this.theme = nextTheme;
     // Trocar para um tema sem todas as imagens volta o modo para Clássico.
     this.settings = this.normalizeMode({
@@ -252,6 +254,20 @@ export class Room {
       themeSlug: this.theme.slug,
     });
     this.changed();
+    // Tema ou modo novo: a lista do autocompletar muda para todo mundo.
+    if (`${this.theme.slug}:${this.settings.mode}` !== before) {
+      this.emitter.broadcast("room:characters", this.characterOptions());
+    }
+  }
+
+  /**
+   * Lista para o autocompletar. No modo Imagem vai sem imagem e sem emoji:
+   * com as miniaturas, bastaria comparar com a imagem borrada.
+   */
+  characterOptions(): CharacterOption[] {
+    const options = toCharacterOptions(this.theme);
+    if (this.settings.mode !== "image") return options;
+    return options.map(({ id, name, aliases }) => ({ id, name, aliases }));
   }
 
   get imageModeAvailable(): boolean {
@@ -411,8 +427,8 @@ export class Room {
     const result: GuessResult = {
       characterId: guessed.id,
       characterName: guessed.name,
-      emoji: guessed.emoji,
-      image: guessed.image,
+      // No modo Imagem, nem imagem nem emoji nos palpites (seriam dica para quem vê a lista).
+      ...(imageMode ? {} : { emoji: guessed.emoji, image: guessed.image }),
       feedback,
       correct,
       guessNumber: state.guesses.length + 1,

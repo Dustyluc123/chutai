@@ -6,12 +6,18 @@
  * já degradados, sem nome de arquivo nem metadados.
  *
  * A cada rodada a imagem também passa por uma transformação aleatória (espelho, recorte,
- * tom), para não dar para descobrir o personagem comparando os bytes com as miniaturas
- * públicas do autocompletar.
+ * tom) e começa ampliada num ponto sorteado perto do centro, afastando o zoom a cada nível.
+ * Assim fica difícil achar o personagem comparando com a galeria pública do tema.
  */
 import sharp from "sharp";
 import type { Character } from "@chutai/shared";
-import { MAX_ROUND_IMAGE_LEVEL, imageEffect, type Random } from "@chutai/game";
+import {
+  MAX_ROUND_IMAGE_LEVEL,
+  drawZoomCenter,
+  imageEffect,
+  zoomWindow,
+  type Random,
+} from "@chutai/game";
 
 /** Lado (em pixels) das imagens entregues ao navegador. */
 export const ROUND_IMAGE_SIZE = 300;
@@ -50,11 +56,23 @@ export class RoundImageService {
   async render(character: Character): Promise<Buffer[]> {
     if (!character.image) throw new Error(`${character.id} não tem imagem.`);
     const base = await this.disguise(await this.original(character.image));
+    // O mesmo ponto em todos os níveis: dá a sensação de "afastar a câmera".
+    const center = drawZoomCenter(this.random);
     const levels: Buffer[] = [];
     for (let level = 0; level <= MAX_ROUND_IMAGE_LEVEL; level++) {
-      const { pixels, blur } = imageEffect(level);
+      const { zoom, pixels, blur } = imageEffect(level);
+      const window = zoomWindow(zoom, center);
+      const size = Math.max(1, Math.round(window.size * ROUND_IMAGE_SIZE));
+      const zoomed = await sharp(base)
+        .extract({
+          left: Math.min(ROUND_IMAGE_SIZE - size, Math.round(window.left * ROUND_IMAGE_SIZE)),
+          top: Math.min(ROUND_IMAGE_SIZE - size, Math.round(window.top * ROUND_IMAGE_SIZE)),
+          width: size,
+          height: size,
+        })
+        .toBuffer();
       // Reduz (vira blocos), amplia sem suavizar e desfoca por cima.
-      const small = await sharp(base).resize(pixels, pixels, { fit: "fill" }).toBuffer();
+      const small = await sharp(zoomed).resize(pixels, pixels, { fit: "fill" }).toBuffer();
       levels.push(
         await sharp(small)
           .resize(ROUND_IMAGE_SIZE, ROUND_IMAGE_SIZE, { kernel: "nearest" })

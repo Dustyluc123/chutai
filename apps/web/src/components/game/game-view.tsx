@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PartyPopper } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
-import { useCharacterOptions } from "@/hooks/useCharacterOptions";
 import type { UseRoom } from "@/hooks/useRoom";
 import { LiveScoreboard } from "@/components/scoreboard/live-scoreboard";
 import { RoundReveal } from "@/components/scoreboard/round-reveal";
@@ -22,7 +21,7 @@ interface GameViewProps {
 
 /** Tela da partida: cronômetro, campo de palpite, tabuleiro e placar ao vivo. */
 export function GameView({ state, room }: GameViewProps) {
-  const { options } = useCharacterOptions(state.theme.slug);
+  const options = room.characters;
   const me = room.me;
   const meId = room.session?.playerId;
   const guesses = useMemo(() => me?.guesses ?? [], [me?.guesses]);
@@ -100,6 +99,7 @@ export function GameView({ state, room }: GameViewProps) {
                 <GuessInput
                   options={options}
                   guessedIds={guessedIds}
+                  showPictures={!imageMode}
                   autoFocus
                   onGuess={async (id) => {
                     await room.actions.guess(id);
@@ -120,6 +120,7 @@ export function GameView({ state, room }: GameViewProps) {
             state.phase === "round" || guesses.length ? (
               <GuessList
                 guesses={guesses}
+                showPictures={false}
                 emptyMessage="Quem é? Chute pelo nome. Cada erro deixa a imagem um pouco mais nítida."
               />
             ) : null

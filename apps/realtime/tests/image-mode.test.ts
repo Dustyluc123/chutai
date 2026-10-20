@@ -143,6 +143,42 @@ describe("modo Imagem: nitidez por jogador", () => {
   });
 });
 
+describe("modo Imagem: sem imagem nas opções", () => {
+  it("o autocompletar não traz imagem nem emoji", () => {
+    const { room } = imageRoom();
+    const options = room.characterOptions();
+    expect(options.length).toBe(imageTheme.characters.length);
+    for (const option of options) {
+      expect(option).not.toHaveProperty("image");
+      expect(option).not.toHaveProperty("emoji");
+    }
+  });
+
+  it("no Clássico as opções continuam com imagem e emoji", () => {
+    const { room } = createTestRoom({}, { theme: imageTheme });
+    expect(room.characterOptions().every((option) => option.image && option.emoji)).toBe(true);
+  });
+
+  it("os palpites também vêm sem imagem e sem emoji", async () => {
+    const { room, ana } = imageRoom();
+    room.start(ana.id);
+    await flush();
+    const result = room.guess(ana.id, wrongCharacter(room).id);
+    expect(result).not.toHaveProperty("image");
+    expect(result).not.toHaveProperty("emoji");
+    expect(JSON.stringify(room.privateState(ana.id))).not.toContain("/temas/");
+  });
+
+  it("trocar o modo manda a lista nova para a sala inteira", () => {
+    const { room, sent } = createTestRoom({}, { theme: imageTheme });
+    const ana = room.addPlayer("Ana", "🦜");
+    room.updateSettings(ana.id, { mode: "image" });
+    const update = sent.filter((item) => item.event === "room:characters").at(-1);
+    expect(update?.to).toBe("all");
+    expect(JSON.stringify(update?.args)).not.toContain("/temas/");
+  });
+});
+
 describe("modo Imagem: nada vaza", () => {
   it("estado público, estado privado e eventos não identificam a resposta", async () => {
     const { room, sent, ana, bia } = imageRoom();

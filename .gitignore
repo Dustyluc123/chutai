@@ -24,3 +24,6 @@ test-results/
 Thumbs.db
 *.log
 .cache/
+
+# instruções locais para o Claude Code
+PROMPT.md

@@ -6,3 +6,4 @@ export * from "./hints";
 export * from "./draw";
 export * from "./search";
 export * from "./image-mode";
+export * from "./explain";

@@ -2,13 +2,13 @@ import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const items = [
-  { className: "bg-folha border-folha", label: "Igual à resposta" },
-  { className: "bg-gema border-gema", label: "Chegou perto ou tem algo em comum" },
+  { className: "bg-folha border-folha", label: "Igual ao secreto" },
+  { className: "bg-gema border-gema", label: "Perto ou tem algo em comum" },
   { className: "bg-pitanga border-pitanga", label: "Diferente" },
 ];
 
 /** Explica as cores das peças. */
-export function Legend({ className }: { className?: string }) {
+export function Legend({ className, tapTip = true }: { className?: string; tapTip?: boolean }) {
   return (
     <ul className={cn("flex flex-wrap gap-x-4 gap-y-2 text-sm text-tinta-soft", className)}>
       {items.map((item) => (
@@ -24,8 +24,9 @@ export function Legend({ className }: { className?: string }) {
         >
           <ArrowUp className="size-3" strokeWidth={3} />
         </span>
-        A resposta é maior
+        O secreto é maior ou mais recente
       </li>
+      {tapTip ? <li className="font-semibold text-tinta">Toque numa peça para entender.</li> : null}
     </ul>
   );
 }

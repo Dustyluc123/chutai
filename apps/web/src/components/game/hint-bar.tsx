@@ -47,13 +47,17 @@ export function HintBar({ enabled, guessCount, hints, solved, onRequest }: HintB
               onClick={() => onRequest(type)}
             >
               {LABELS[type]}
-              <span className="tabular text-xs text-tinta-soft">−{SCORING.perHint}</span>
+              <span className="tabular text-xs text-tinta-soft">−{SCORING.perHint} pontos</span>
             </Button>
           );
         })}
-        {locked && !solved ? (
-          <span className="text-sm text-tinta-soft">
-            Libera em {missing} {missing === 1 ? "chute" : "chutes"}.
+        {solved ? null : locked ? (
+          <span role="status" className="text-sm font-semibold text-tinta-soft">
+            Dica liberada em {missing} {missing === 1 ? "chute" : "chutes"}.
+          </span>
+        ) : hints.length < HINTS.maxPerRound ? (
+          <span role="status" className="text-sm font-semibold text-folha">
+            Dicas liberadas! Até {HINTS.maxPerRound} por rodada.
           </span>
         ) : null}
       </div>

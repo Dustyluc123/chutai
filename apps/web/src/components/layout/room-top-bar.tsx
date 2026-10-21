@@ -3,6 +3,7 @@
 import { LogOut, WifiOff } from "lucide-react";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/ui/logo";
+import { HowToPlayButton, type HelpTab } from "@/components/help/how-to-play";
 
 interface RoomTopBarProps {
   code: string;
@@ -10,6 +11,8 @@ interface RoomTopBarProps {
   themeEmoji?: string;
   connected: boolean;
   onLeave?: () => void;
+  /** Aba que o "Como jogar" abre primeiro (a do modo da sala). */
+  helpTab?: HelpTab;
   children?: ReactNode;
 }
 
@@ -20,6 +23,7 @@ export function RoomTopBar({
   themeEmoji,
   connected,
   onLeave,
+  helpTab,
   children,
 }: RoomTopBarProps) {
   return (
@@ -43,6 +47,7 @@ export function RoomTopBar({
               <WifiOff aria-hidden className="size-4" /> Reconectando…
             </span>
           ) : null}
+          <HowToPlayButton tone="light" initialTab={helpTab} />
           {onLeave ? (
             <button
               type="button"

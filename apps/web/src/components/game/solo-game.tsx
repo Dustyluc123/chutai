@@ -22,7 +22,7 @@ import { GuessBoard } from "./guess-board";
 import { GuessInput } from "./guess-input";
 import { GuessList } from "./guess-list";
 import { PixelatedImage } from "./pixelated-image";
-import { Legend } from "./legend";
+import { HowToPlayButton } from "@/components/help/how-to-play";
 
 /** Treino individual: sorteia um personagem e deixa chutar sem limite de tempo. */
 export function SoloGame({ theme, options }: { theme: Theme; options: CharacterOption[] }) {
@@ -102,7 +102,8 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             <span aria-hidden>{theme.emoji}</span> {theme.name}
           </h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <HowToPlayButton initialTab={mode} className="h-11 px-4" />
           {!finished ? (
             <Button variant="ghost" onClick={() => setRevealed(true)} disabled={!answer}>
               <Eye aria-hidden className="size-4" /> Desistir
@@ -204,9 +205,8 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             attributes={theme.attributes}
             guesses={guesses}
             animateLatest
-            emptyMessage="Chute qualquer personagem para começar. As cores mostram o que bate com o personagem secreto."
+            emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
           />
-          <Legend />
         </>
       )}
     </>

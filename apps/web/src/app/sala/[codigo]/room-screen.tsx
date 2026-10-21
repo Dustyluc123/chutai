@@ -46,6 +46,7 @@ export function RoomScreen({ code }: { code: string }) {
           themeEmoji={state.theme.emoji}
           connected={room.connected}
           onLeave={leave}
+          helpTab={state.settings.mode === "image" ? "image" : "classic"}
         />
         <main id="conteudo" className="flex flex-1 flex-col">
           {state.phase === "lobby" ? <LobbyView state={state} room={room} /> : null}

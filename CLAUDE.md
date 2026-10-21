@@ -54,6 +54,11 @@ Abandoned rooms: if nobody is connected for `ROOM_LIFECYCLE.abandonedSeconds` (6
 
 Server → client flow: `room:state` is the source of truth broadcast to everyone; `you:state` is per-player private state (guesses, hints); `player:progress` is spoiler-free progress. Full event table is in README.md.
 
+## Onboarding
+
+- `components/help/how-to-play.tsx`: "Como jogar" dialog (room top bar and practice) and the first-visit panel in the lobby (`localStorage` key `chutai:como-jogar-visto`; inline, never blocks starting). The example board uses real Fauna data and `compareCharacters`.
+- Board tiles are buttons with a tooltip portal; the text comes from `explainFeedback` in `packages/game/src/explain.ts` (only uses the guess feedback, never the answer).
+
 ## Link previews (Open Graph)
 
 - `apps/web/src/app/opengraph-image.tsx` (site default) and `app/sala/[codigo]/opengraph-image.tsx` (room card) use `ImageResponse`. Room data comes from the realtime read-only route `GET /rooms/:codigo/preview` (`Room.toPreview()`: host nickname/avatar, theme, player count, limit, phase — never anything from the round; rate-limited per IP) via `lib/room-preview.ts` (2 s timeout, `null` → generic "Essa sala já acabou" card).

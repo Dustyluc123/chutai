@@ -98,6 +98,8 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Sete temas oficiais, quatro deles com pessoas reais (YouTubers, música, futebol atual e TV), com fontes e data dos dados
 - [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou (ou, no modo Imagem, a nitidez de cada um), nunca o personagem
 - [x] Dicas (revelar atributo, primeira letra) liberadas depois de 3 chutes, custando pontos
+- [x] **Como jogar** na sala e no treino (abas Clássico e Imagem, com exemplo animado); na primeira vez numa sala, a explicação aparece sozinha no lobby
+- [x] Cada peça do tabuleiro explica o que quer dizer ao tocar, passar o mouse ou focar ("Nascimento: 1993. O do personagem secreto é antes de 1993.")
 - [x] Revelação do personagem ao fim de cada rodada, pódio final e "jogar de novo"
 - [x] **Compartilhar resultado**: imagem do pódio (1080×1350, boa para WhatsApp e feed do Instagram) com o compartilhamento nativo do celular; no computador, baixa o PNG e oferece "Copiar texto"
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos

@@ -12,7 +12,6 @@ import { GuessInput } from "./guess-input";
 import { GuessList } from "./guess-list";
 import { MysteryImage } from "./mystery-image";
 import { HintBar } from "./hint-bar";
-import { Legend } from "./legend";
 import { RoundTimer } from "./round-timer";
 import { BetweenRoundsCountdown, GoFlash } from "./countdown";
 
@@ -156,11 +155,9 @@ export function GameView({ state, room }: GameViewProps) {
               attributes={state.theme.attributes}
               guesses={guesses}
               animateLatest={animateLatest}
-              emptyMessage="Chute um personagem. Cada coluna mostra se aquele atributo bate com o personagem secreto."
+              emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
             />
           ) : null}
-
-          {inRound && !imageMode ? <Legend className="pt-1" /> : null}
         </div>
 
         <aside>

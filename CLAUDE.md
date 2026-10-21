@@ -96,6 +96,8 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 
 ## Adding a theme
 
+Optional `noun` (`{ singular, plural, gender }`, e.g. the states theme: `estado`) replaces "personagem" in theme-specific UI text (tile explanations via `explainFeedback`, empty board, reveal, counts); helpers in `packages/game/src/noun.ts`. Flags (`estados-do-brasil`) are fitted with `contain` on a white background by `images:fetch` instead of cropped.
+
 Add a JSON file to `packages/db/seed/` (attribute types: `text`, `list`, `number`, `range` with `tolerance`/`unit`), then register it in `packages/db/src/themes.ts`. The db test "temas oficiais estão todos consistentes" catches missing values.
 
 ## Conventions

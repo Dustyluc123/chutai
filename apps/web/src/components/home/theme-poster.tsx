@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ThemeSummary } from "@chutai/shared";
+import { nounPhrases } from "@chutai/game";
 import { THEME_COLORS } from "@/lib/colors";
 import { cn } from "@/lib/cn";
 
@@ -27,7 +28,7 @@ export function ThemePoster({ theme, className }: { theme: ThemeSummary; classNa
       </div>
       <div className="relative flex flex-col gap-3">
         <p className="text-sm font-semibold">
-          {theme.characterCount} personagens, {theme.attributes.length} atributos
+          {nounPhrases(theme.noun).count(theme.characterCount)}, {theme.attributes.length} atributos
         </p>
         <div className="flex flex-wrap gap-2">
           {/* Link comum (recarrega) para o cartão inicial ler o ?tema= da URL. */}

@@ -12,6 +12,7 @@ import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
 import youtubers from "../seed/youtubers-e-streamers.json" with { type: "json" };
 import famososTv from "../seed/famosos-da-tv.json" with { type: "json" };
 import historia from "../seed/historia-do-brasil.json" with { type: "json" };
+import estados from "../seed/estados-do-brasil.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
 export const OFFICIAL_THEMES: readonly Theme[] = [
@@ -20,6 +21,7 @@ export const OFFICIAL_THEMES: readonly Theme[] = [
   futebolAtual,
   famososTv,
   historia,
+  estados,
   folclore,
   futebol,
   fauna,
@@ -36,6 +38,7 @@ export function toThemeSummary(theme: Theme): ThemeSummary {
     characterCount: theme.characters.length,
     imageMode: imageModeAvailability(theme.characters),
     imageCharacterCount: theme.characters.filter((character) => !!character.image).length,
+    ...(theme.noun ? { noun: theme.noun } : {}),
     attributes: theme.attributes.map(({ key, label }) => ({ key, label })),
   };
 }
@@ -73,6 +76,9 @@ export function validateTheme(theme: Theme): string[] {
   const problems: string[] = [];
   if (theme.attributes.length < 2) problems.push("O tema precisa de pelo menos 2 atributos.");
   if (theme.characters.length < 5) problems.push("O tema precisa de pelo menos 5 personagens.");
+  if (theme.noun && (!theme.noun.singular.trim() || !theme.noun.plural.trim())) {
+    problems.push("noun precisa de singular e plural.");
+  }
   if (theme.dataUpdatedAt !== undefined && !/^\d{4}-(0[1-9]|1[0-2])$/.test(theme.dataUpdatedAt)) {
     problems.push("dataUpdatedAt precisa estar no formato AAAA-MM (ex.: 2026-10).");
   }

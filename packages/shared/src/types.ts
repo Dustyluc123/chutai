@@ -64,6 +64,16 @@ export type ThemeVisibility = "official" | "public" | "private";
 /** Cores de destaque disponíveis para temas (mapeadas para tokens de cor no site). */
 export type ThemeColor = "anil" | "gema" | "chiclete" | "folha" | "laranja";
 
+/**
+ * Como chamar o que se adivinha num tema. Padrão: "personagem". No tema de Estados,
+ * por exemplo: { singular: "estado", plural: "estados", gender: "m" } ("o estado secreto").
+ */
+export interface ThemeNoun {
+  singular: string;
+  plural: string;
+  gender: "m" | "f";
+}
+
 export interface Theme {
   slug: string;
   name: string;
@@ -76,6 +86,8 @@ export interface Theme {
    * (clube atual, inscritos...). A página do tema mostra "Dados de outubro de 2026".
    */
   dataUpdatedAt?: string;
+  /** Palavra para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
   attributes: ThemeAttribute[];
   characters: Character[];
 }
@@ -99,6 +111,8 @@ export interface ThemeSummary {
   imageMode: ImageModeAvailability;
   /** Quantos personagens têm imagem. */
   imageCharacterCount: number;
+  /** Palavra para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
   attributes: Pick<ThemeAttribute, "key" | "label">[];
 }
 

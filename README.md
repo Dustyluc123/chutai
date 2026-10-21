@@ -57,6 +57,7 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 | Futebol brasileiro atual          |          54 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal                    | Parcial (52 com imagem)      |
 | Famosos da TV                     |          50 | Mais conhecido como, estado natal, região, nascimento, início da carreira                    | Normal (todos com imagem)    |
 | Personagens da história do Brasil |          53 | Área, período de nascimento (Colônia, Império, República), estado, região, nascimento, morte | Parcial (51 com imagem)      |
+| Estados do Brasil                 |          27 | Região, população e área (IBGE), biomas, litoral, fronteira com outro país                   | Normal (todas as bandeiras)  |
 | Folclore brasileiro               |          27 | Forma, região, onde aparece, quando aparece, comportamento                                   | Indisponível (16 com imagem) |
 | Lendas do futebol                 |          60 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                        | Parcial (58 com imagem)      |
 | Fauna brasileira                  |          40 | Grupo, biomas, alimentação, onde vive, peso                                                  | Normal (todos com imagem)    |

@@ -1,6 +1,7 @@
 "use client";
 
-import type { PublicPlayer, RoundSummary } from "@chutai/shared";
+import type { PublicPlayer, RoundSummary, ThemeNoun } from "@chutai/shared";
+import { nounPhrases } from "@chutai/game";
 import { Avatar } from "@/components/ui/avatar";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { useCountdown } from "@/hooks/useCountdown";
@@ -13,6 +14,8 @@ interface RoundRevealProps {
   nextAt?: number;
   /** Modo Misto: tipo da próxima rodada ("Próxima: Imagem"). */
   nextKind?: "classic" | "image";
+  /** Palavra do tema para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
   serverOffset: number;
   meId?: string;
 }
@@ -24,6 +27,7 @@ export function RoundReveal({
   totalRounds,
   nextAt,
   nextKind,
+  noun,
   serverOffset,
   meId,
 }: RoundRevealProps) {
@@ -46,7 +50,7 @@ export function RoundReveal({
         />
         <div className="flex flex-col gap-1">
           <p className="text-sm font-semibold text-white/75">
-            Rodada {summary.number}: o personagem era
+            Rodada {summary.number}: {nounPhrases(noun).itWasLower}
           </p>
           <h2 className="font-display text-4xl sm:text-5xl">{summary.character.name}</h2>
         </div>

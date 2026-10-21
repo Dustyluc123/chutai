@@ -3,7 +3,7 @@
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import type { AttributeFeedback } from "@chutai/shared";
+import type { AttributeFeedback, ThemeNoun } from "@chutai/shared";
 import { explainFeedback } from "@chutai/game";
 import { STATUS_STYLES } from "@/lib/colors";
 import { cn } from "@/lib/cn";
@@ -16,6 +16,8 @@ interface TileProps {
   animate?: boolean;
   /** Fora de um tabuleiro (ex.: legenda, exemplo), a peça é só uma imagem com descrição. */
   standalone?: boolean;
+  /** Palavra do tema para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
 }
 
 const BASE =
@@ -26,8 +28,8 @@ const BASE =
  * No tabuleiro, a peça é um botão: passar o mouse, tocar ou focar mostra o que ela quer dizer
  * ("Nascimento: 1993. O do personagem secreto é antes de 1993."). O leitor de tela lê a mesma frase.
  */
-export function Tile({ label, feedback, index = 0, animate, standalone }: TileProps) {
-  const explanation = explainFeedback(label, feedback);
+export function Tile({ label, feedback, index = 0, animate, standalone, noun }: TileProps) {
+  const explanation = explainFeedback(label, feedback, noun);
   const style = animate ? { animationDelay: `${index * 110}ms` } : undefined;
   const content = (
     <>

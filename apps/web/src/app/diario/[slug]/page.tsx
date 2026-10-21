@@ -52,6 +52,7 @@ export default async function DailyPage({ params }: PageProps) {
             attributes={theme.attributes.map(({ key, label }) => ({ key, label }))}
             options={toCharacterOptions(theme)}
             day={number}
+            noun={theme.noun}
           />
         ) : (
           <p

@@ -344,3 +344,37 @@ Dados de outubro de 2026. Só pessoas já falecidas, da Colônia ao século XX, 
 | Adhemar Ferreira da Silva  | [Wikipédia](https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q199631)                      |
 | Maria Lenk                 | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Lenk), [Wikidata](https://www.wikidata.org/wiki/Q451298)                                     |
 | Chico Mendes               | [Wikipédia](https://pt.wikipedia.org/wiki/Chico_Mendes), [Wikidata](https://www.wikidata.org/wiki/Q550176)                                   |
+
+## Estados do Brasil
+
+Dados de outubro de 2026, de fontes oficiais. População: Censo Demográfico 2022 do IBGE (tabela 4709, população residente), em milhões. Área: Censo 2022 do IBGE (tabela 4714, área da unidade territorial), em mil km². Biomas: Tabela 1 de "Biomas e Sistema Costeiro-Marinho do Brasil" (IBGE, 2019), contando os biomas com área maior que zero no estado. Litoral e fronteira: artigos "Litoral do Brasil" (17 estados costeiros) e "Fronteiras do Brasil" (11 unidades com fronteira internacional) da Wikipédia. Imagem: a bandeira de cada unidade (domínio público, Wikimedia Commons). Fontes gerais: [IBGE, Censo 2022 (SIDRA)](https://sidra.ibge.gov.br/tabela/4709), [IBGE, área territorial (SIDRA)](https://sidra.ibge.gov.br/tabela/4714), [IBGE, Biomas e Sistema Costeiro-Marinho do Brasil](https://biblioteca.ibge.gov.br/visualizacao/livros/liv101676.pdf).
+
+| Personagem          | Fontes                                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Rondônia            | [Wikipédia](https://pt.wikipedia.org/wiki/Rond%C3%B4nia), [Wikidata](https://www.wikidata.org/wiki/Q43235)                  |
+| Acre                | [Wikipédia](https://pt.wikipedia.org/wiki/Acre), [Wikidata](https://www.wikidata.org/wiki/Q40780)                           |
+| Amazonas            | [Wikipédia](https://pt.wikipedia.org/wiki/Amazonas), [Wikidata](https://www.wikidata.org/wiki/Q40040)                       |
+| Roraima             | [Wikipédia](https://pt.wikipedia.org/wiki/Roraima), [Wikidata](https://www.wikidata.org/wiki/Q42508)                        |
+| Pará                | [Wikipédia](https://pt.wikipedia.org/wiki/Par%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q39517)                      |
+| Amapá               | [Wikipédia](https://pt.wikipedia.org/wiki/Amap%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q40130)                     |
+| Tocantins           | [Wikipédia](https://pt.wikipedia.org/wiki/Tocantins), [Wikidata](https://www.wikidata.org/wiki/Q43695)                      |
+| Maranhão            | [Wikipédia](https://pt.wikipedia.org/wiki/Maranh%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q42362)                  |
+| Piauí               | [Wikipédia](https://pt.wikipedia.org/wiki/Piau%C3%AD), [Wikidata](https://www.wikidata.org/wiki/Q42722)                     |
+| Ceará               | [Wikipédia](https://pt.wikipedia.org/wiki/Cear%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q40123)                     |
+| Rio Grande do Norte | [Wikipédia](https://pt.wikipedia.org/wiki/Rio_Grande_do_Norte), [Wikidata](https://www.wikidata.org/wiki/Q43255)            |
+| Paraíba             | [Wikipédia](https://pt.wikipedia.org/wiki/Para%C3%ADba), [Wikidata](https://www.wikidata.org/wiki/Q38088)                   |
+| Pernambuco          | [Wikipédia](https://pt.wikipedia.org/wiki/Pernambuco), [Wikidata](https://www.wikidata.org/wiki/Q40942)                     |
+| Alagoas             | [Wikipédia](https://pt.wikipedia.org/wiki/Alagoas), [Wikidata](https://www.wikidata.org/wiki/Q40885)                        |
+| Sergipe             | [Wikipédia](https://pt.wikipedia.org/wiki/Sergipe), [Wikidata](https://www.wikidata.org/wiki/Q43783)                        |
+| Bahia               | [Wikipédia](https://pt.wikipedia.org/wiki/Bahia), [Wikidata](https://www.wikidata.org/wiki/Q40430)                          |
+| Minas Gerais        | [Wikipédia](https://pt.wikipedia.org/wiki/Minas_Gerais), [Wikidata](https://www.wikidata.org/wiki/Q39109)                   |
+| Espírito Santo      | [Wikipédia](https://pt.wikipedia.org/wiki/Esp%C3%ADrito_Santo), [Wikidata](https://www.wikidata.org/wiki/Q37302)            |
+| Rio de Janeiro      | [Wikipédia](https://pt.wikipedia.org/wiki/Rio_de_Janeiro_%28estado%29), [Wikidata](https://www.wikidata.org/wiki/Q41428)    |
+| São Paulo           | [Wikipédia](https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_%28estado%29), [Wikidata](https://www.wikidata.org/wiki/Q175)      |
+| Paraná              | [Wikipédia](https://pt.wikipedia.org/wiki/Paran%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q15499)                    |
+| Santa Catarina      | [Wikipédia](https://pt.wikipedia.org/wiki/Santa_Catarina), [Wikidata](https://www.wikidata.org/wiki/Q41115)                 |
+| Rio Grande do Sul   | [Wikipédia](https://pt.wikipedia.org/wiki/Rio_Grande_do_Sul), [Wikidata](https://www.wikidata.org/wiki/Q40030)              |
+| Mato Grosso do Sul  | [Wikipédia](https://pt.wikipedia.org/wiki/Mato_Grosso_do_Sul), [Wikidata](https://www.wikidata.org/wiki/Q43319)             |
+| Mato Grosso         | [Wikipédia](https://pt.wikipedia.org/wiki/Mato_Grosso), [Wikidata](https://www.wikidata.org/wiki/Q42824)                    |
+| Goiás               | [Wikipédia](https://pt.wikipedia.org/wiki/Goi%C3%A1s), [Wikidata](https://www.wikidata.org/wiki/Q41587)                     |
+| Distrito Federal    | [Wikipédia](https://pt.wikipedia.org/wiki/Distrito_Federal_%28Brasil%29), [Wikidata](https://www.wikidata.org/wiki/Q119158) |

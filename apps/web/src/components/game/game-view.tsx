@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PartyPopper } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
-import { TIMING } from "@chutai/game";
+import { TIMING, nounPhrases } from "@chutai/game";
 import { playSound } from "@/lib/sound";
 import { guessSound } from "@/lib/sound/director";
 import type { UseRoom } from "@/hooks/useRoom";
@@ -46,6 +46,7 @@ export function GameView({ state, room }: GameViewProps) {
   const imageMode = kind === "image";
   const mixed = state.settings.mode === "mixed";
   const nextKind = mixed ? state.nextRoundKind : undefined;
+  const noun = nounPhrases(state.theme.noun);
 
   return (
     <div className="flex flex-1 flex-col">
@@ -107,6 +108,7 @@ export function GameView({ state, room }: GameViewProps) {
               summary={state.lastRound}
               players={state.players}
               totalRounds={state.settings.rounds}
+              noun={state.theme.noun}
               nextAt={state.intermissionEndsAt}
               nextKind={nextKind}
               serverOffset={room.serverOffset}
@@ -139,6 +141,7 @@ export function GameView({ state, room }: GameViewProps) {
                   options={options}
                   guessedIds={guessedIds}
                   showPictures={!imageMode}
+                  noun={state.theme.noun}
                   autoFocus
                   onGuess={async (id) => {
                     const result = await room.actions.guess(id);
@@ -169,7 +172,8 @@ export function GameView({ state, room }: GameViewProps) {
               attributes={state.theme.attributes}
               guesses={guesses}
               animateLatest={animateLatest}
-              emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
+              noun={state.theme.noun}
+              emptyMessage={`Chute ${noun.any}. As cores mostram o quanto você chegou perto.`}
             />
           ) : null}
         </div>

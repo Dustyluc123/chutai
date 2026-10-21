@@ -1,0 +1,573 @@
+{
+  "slug": "estados-do-brasil",
+  "name": "Estados do Brasil",
+  "description": "Os 26 estados e o Distrito Federal. No modo Imagem, adivinhe pela bandeira.",
+  "emoji": "🗺️",
+  "color": "folha",
+  "visibility": "official",
+  "dataUpdatedAt": "2026-10",
+  "attributes": [
+    { "key": "regiao", "label": "Região", "type": "text" },
+    {
+      "key": "populacao",
+      "label": "População",
+      "type": "range",
+      "unit": "milhões",
+      "tolerance": 25,
+      "toleranceIsPercent": true
+    },
+    {
+      "key": "area",
+      "label": "Área",
+      "type": "range",
+      "unit": "mil km²",
+      "tolerance": 25,
+      "toleranceIsPercent": true
+    },
+    { "key": "biomas", "label": "Biomas", "type": "list" },
+    { "key": "litoral", "label": "Tem litoral", "type": "text" },
+    { "key": "fronteira", "label": "Faz fronteira com outro país", "type": "text" }
+  ],
+  "characters": [
+    {
+      "id": "rondonia",
+      "name": "Rondônia",
+      "image": "/temas/estados-do-brasil/rondonia.webp",
+      "imageCredit": {
+        "author": "E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Rond%C3%B4nia.svg"
+      },
+      "aliases": ["RO"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 1.6,
+        "area": 237.8,
+        "biomas": ["Amazônia", "Cerrado"],
+        "litoral": "Não",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "acre",
+      "name": "Acre",
+      "image": "/temas/estados-do-brasil/acre.webp",
+      "imageCredit": {
+        "author": "Public domainPublic domainfalsefalse This work has been released into the public domain by its author, E2m. This appl…",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Acre.svg"
+      },
+      "aliases": ["AC"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 0.8,
+        "area": 164.2,
+        "biomas": ["Amazônia"],
+        "litoral": "Não",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "amazonas",
+      "name": "Amazonas",
+      "image": "/temas/estados-do-brasil/amazonas.webp",
+      "imageCredit": {
+        "author": "This work is in the public domain in Brazil for one of the following reasons: It is a work published or commissioned …",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Amazonas.svg"
+      },
+      "aliases": ["AM"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 3.9,
+        "area": 1559.3,
+        "biomas": ["Amazônia"],
+        "litoral": "Não",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "roraima",
+      "name": "Roraima",
+      "image": "/temas/estados-do-brasil/roraima.webp",
+      "imageCredit": {
+        "author": "E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Roraima.svg"
+      },
+      "aliases": ["RR"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 0.6,
+        "area": 223.6,
+        "biomas": ["Amazônia"],
+        "litoral": "Não",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "para",
+      "name": "Pará",
+      "image": "/temas/estados-do-brasil/para.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Par%C3%A1.svg"
+      },
+      "aliases": ["PA"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 8.1,
+        "area": 1245.9,
+        "biomas": ["Amazônia", "Cerrado"],
+        "litoral": "Sim",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "amapa",
+      "name": "Amapá",
+      "image": "/temas/estados-do-brasil/amapa.webp",
+      "imageCredit": {
+        "author": "E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Amap%C3%A1.svg"
+      },
+      "aliases": ["AP"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 0.7,
+        "area": 142.5,
+        "biomas": ["Amazônia"],
+        "litoral": "Sim",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "tocantins",
+      "name": "Tocantins",
+      "image": "/temas/estados-do-brasil/tocantins.webp",
+      "imageCredit": {
+        "author": "Own work",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Tocantins.svg"
+      },
+      "aliases": ["TO"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Norte",
+        "populacao": 1.5,
+        "area": 277.4,
+        "biomas": ["Amazônia", "Cerrado"],
+        "litoral": "Não",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "maranhao",
+      "name": "Maranhão",
+      "image": "/temas/estados-do-brasil/maranhao.webp",
+      "imageCredit": {
+        "author": "No machine-readable author provided. E2m assumed (based on copyright claims).",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Maranh%C3%A3o.svg"
+      },
+      "aliases": ["MA"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 6.8,
+        "area": 329.7,
+        "biomas": ["Amazônia", "Cerrado"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "piaui",
+      "name": "Piauí",
+      "image": "/temas/estados-do-brasil/piaui.webp",
+      "imageCredit": {
+        "author": "E2m, Giro720",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Piau%C3%AD.svg"
+      },
+      "aliases": ["PI"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 3.3,
+        "area": 251.8,
+        "biomas": ["Cerrado", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "ceara",
+      "name": "Ceará",
+      "image": "/temas/estados-do-brasil/ceara.webp",
+      "imageCredit": {
+        "author": "Srfortes",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Cear%C3%A1.svg"
+      },
+      "aliases": ["CE"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 8.8,
+        "area": 148.9,
+        "biomas": ["Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "rio-grande-do-norte",
+      "name": "Rio Grande do Norte",
+      "image": "/temas/estados-do-brasil/rio-grande-do-norte.webp",
+      "imageCredit": {
+        "author": "Giro720",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Rio_Grande_do_Norte.svg"
+      },
+      "aliases": ["RN"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 3.3,
+        "area": 52.8,
+        "biomas": ["Mata Atlântica", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "paraiba",
+      "name": "Paraíba",
+      "image": "/temas/estados-do-brasil/paraiba.webp",
+      "imageCredit": {
+        "author": "SVG implementation by E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_da_Para%C3%ADba.svg"
+      },
+      "aliases": ["PB"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 4.0,
+        "area": 56.5,
+        "biomas": ["Mata Atlântica", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "pernambuco",
+      "name": "Pernambuco",
+      "image": "/temas/estados-do-brasil/pernambuco.webp",
+      "imageCredit": {
+        "author": "Original: Revolução Pernambucana Vector: SpinnerLaserzthe2nd, E2m, Pedro Alb Xavier",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Pernambuco.svg"
+      },
+      "aliases": ["PE"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 9.1,
+        "area": 98.1,
+        "biomas": ["Mata Atlântica", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "alagoas",
+      "name": "Alagoas",
+      "image": "/temas/estados-do-brasil/alagoas.webp",
+      "imageCredit": {
+        "author": "Giro720",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Alagoas.svg"
+      },
+      "aliases": ["AL"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 3.1,
+        "area": 27.8,
+        "biomas": ["Mata Atlântica", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "sergipe",
+      "name": "Sergipe",
+      "image": "/temas/estados-do-brasil/sergipe.webp",
+      "imageCredit": {
+        "author": "E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Sergipe.svg"
+      },
+      "aliases": ["SE"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 2.2,
+        "area": 21.9,
+        "biomas": ["Mata Atlântica", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "bahia",
+      "name": "Bahia",
+      "image": "/temas/estados-do-brasil/bahia.webp",
+      "imageCredit": {
+        "author": "Diocleciano Ramos",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_da_Bahia.svg"
+      },
+      "aliases": ["BA"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Nordeste",
+        "populacao": 14.1,
+        "area": 564.8,
+        "biomas": ["Cerrado", "Mata Atlântica", "Caatinga"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "minas-gerais",
+      "name": "Minas Gerais",
+      "image": "/temas/estados-do-brasil/minas-gerais.webp",
+      "imageCredit": {
+        "author": "Plovisanta",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Minas_Gerais.svg"
+      },
+      "aliases": ["MG"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sudeste",
+        "populacao": 20.5,
+        "area": 586.5,
+        "biomas": ["Cerrado", "Mata Atlântica", "Caatinga"],
+        "litoral": "Não",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "espirito-santo",
+      "name": "Espírito Santo",
+      "image": "/temas/estados-do-brasil/espirito-santo.webp",
+      "imageCredit": {
+        "author": "SVG implementation by E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Esp%C3%ADrito_Santo.svg"
+      },
+      "aliases": ["ES"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sudeste",
+        "populacao": 3.8,
+        "area": 46.1,
+        "biomas": ["Mata Atlântica"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "rio-de-janeiro",
+      "name": "Rio de Janeiro",
+      "image": "/temas/estados-do-brasil/rio-de-janeiro.webp",
+      "imageCredit": {
+        "author": "FORTES",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_estado_do_Rio_de_Janeiro.svg"
+      },
+      "aliases": ["RJ"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sudeste",
+        "populacao": 16.1,
+        "area": 43.8,
+        "biomas": ["Mata Atlântica"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "sao-paulo",
+      "name": "São Paulo",
+      "image": "/temas/estados-do-brasil/sao-paulo.webp",
+      "imageCredit": {
+        "author": "Felipe Micaroni Lalli, Giro720",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_estado_de_S%C3%A3o_Paulo.svg"
+      },
+      "aliases": ["SP"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sudeste",
+        "populacao": 44.4,
+        "area": 248.2,
+        "biomas": ["Cerrado", "Mata Atlântica"],
+        "litoral": "Sim",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "parana",
+      "name": "Paraná",
+      "image": "/temas/estados-do-brasil/parana.webp",
+      "imageCredit": {
+        "author": "FXXX",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Paran%C3%A1.svg"
+      },
+      "aliases": ["PR"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sul",
+        "populacao": 11.4,
+        "area": 199.3,
+        "biomas": ["Cerrado", "Mata Atlântica"],
+        "litoral": "Sim",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "santa-catarina",
+      "name": "Santa Catarina",
+      "image": "/temas/estados-do-brasil/santa-catarina.webp",
+      "imageCredit": {
+        "author": "OAlexander (talk) (colours from Manual de Identidade Visual do Governo do Estado do Santa Catarina)",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Santa_Catarina.svg"
+      },
+      "aliases": ["SC"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sul",
+        "populacao": 7.6,
+        "area": 95.7,
+        "biomas": ["Mata Atlântica"],
+        "litoral": "Sim",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "rio-grande-do-sul",
+      "name": "Rio Grande do Sul",
+      "image": "/temas/estados-do-brasil/rio-grande-do-sul.webp",
+      "imageCredit": {
+        "author": "Srfortes",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Rio_Grande_do_Sul.svg"
+      },
+      "aliases": ["RS"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Sul",
+        "populacao": 10.9,
+        "area": 281.7,
+        "biomas": ["Mata Atlântica", "Pampa"],
+        "litoral": "Sim",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "mato-grosso-do-sul",
+      "name": "Mato Grosso do Sul",
+      "image": "/temas/estados-do-brasil/mato-grosso-do-sul.webp",
+      "imageCredit": {
+        "author": "E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Mato_Grosso_do_Sul.svg"
+      },
+      "aliases": ["MS"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Centro-Oeste",
+        "populacao": 2.8,
+        "area": 357.1,
+        "biomas": ["Cerrado", "Mata Atlântica", "Pantanal"],
+        "litoral": "Não",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "mato-grosso",
+      "name": "Mato Grosso",
+      "image": "/temas/estados-do-brasil/mato-grosso.webp",
+      "imageCredit": {
+        "author": "SVG implementation by E2m",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_de_Mato_Grosso.svg"
+      },
+      "aliases": ["MT"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Centro-Oeste",
+        "populacao": 3.7,
+        "area": 903.2,
+        "biomas": ["Amazônia", "Cerrado", "Pantanal"],
+        "litoral": "Não",
+        "fronteira": "Sim"
+      }
+    },
+    {
+      "id": "goias",
+      "name": "Goiás",
+      "image": "/temas/estados-do-brasil/goias.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Goi%C3%A1s.svg"
+      },
+      "aliases": ["GO"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Centro-Oeste",
+        "populacao": 7.1,
+        "area": 340.2,
+        "biomas": ["Cerrado", "Mata Atlântica"],
+        "litoral": "Não",
+        "fronteira": "Não"
+      }
+    },
+    {
+      "id": "distrito-federal",
+      "name": "Distrito Federal",
+      "image": "/temas/estados-do-brasil/distrito-federal.webp",
+      "imageCredit": {
+        "author": "Governo do Distrito Federal; [ Decreto 1090 de 25/08/1969 Sem Revogação Expressa https://www.sinj.df.gov.br/sinj/Diar…",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bandeira_do_Distrito_Federal_(Brasil).svg"
+      },
+      "aliases": ["DF"],
+      "emoji": "🚩",
+      "values": {
+        "regiao": "Centro-Oeste",
+        "populacao": 2.8,
+        "area": 5.8,
+        "biomas": ["Cerrado"],
+        "litoral": "Não",
+        "fronteira": "Não"
+      }
+    }
+  ]
+}

@@ -8,3 +8,4 @@ export * from "./search";
 export * from "./image-mode";
 export * from "./explain";
 export * from "./daily";
+export * from "./noun";

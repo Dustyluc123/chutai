@@ -60,6 +60,8 @@ export const themes = pgTable(
     moderationStatus: moderationEnum("moderation_status").notNull().default("pending"),
     /** Mês em que os dados foram conferidos ("AAAA-MM"); vazio para temas que não mudam. */
     dataUpdatedAt: text("data_updated_at"),
+    /** Palavra para o que se adivinha (ex.: estado). Vazio = personagem. */
+    noun: jsonb("noun").$type<{ singular: string; plural: string; gender: "m" | "f" }>(),
     timesPlayed: integer("times_played").notNull().default(0),
     ...timestamps,
     updatedAt: timestamp("updated_at", { withTimezone: true })

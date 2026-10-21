@@ -59,6 +59,10 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 - `components/help/how-to-play.tsx`: "Como jogar" dialog (room top bar and practice) and the first-visit panel in the lobby (`localStorage` key `chutai:como-jogar-visto`; inline, never blocks starting). The example board uses real Fauna data and `compareCharacters`.
 - Board tiles are buttons with a tooltip portal; the text comes from `explainFeedback` in `packages/game/src/explain.ts` (only uses the guess feedback, never the answer).
 
+## Sound
+
+- `apps/web/src/lib/sound/`: `director.ts` (pure: which state change plays which sound; tested with a fake player), `engine.ts` (Web Audio synth: effects + generative background music; nothing plays before the first pointer/key interaction or with the tab hidden), `settings.ts` (`localStorage` key `chutai:som`, effects on / music off by default), `index.ts` (`useSoundSetup` in `Providers`, `useRoomSounds` in the room screen, `playSound`). My own guess sound comes from the guess ack (`guessSound`), not from state diffs.
+
 ## Link previews (Open Graph)
 
 - `apps/web/src/app/opengraph-image.tsx` (site default) and `app/sala/[codigo]/opengraph-image.tsx` (room card) use `ImageResponse`. Room data comes from the realtime read-only route `GET /rooms/:codigo/preview` (`Room.toPreview()`: host nickname/avatar, theme, player count, limit, phase — never anything from the round; rate-limited per IP) via `lib/room-preview.ts` (2 s timeout, `null` → generic "Essa sala já acabou" card).

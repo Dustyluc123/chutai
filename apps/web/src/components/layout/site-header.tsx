@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
+import { SoundButton } from "@/components/ui/sound-button";
 import { cn } from "@/lib/cn";
 
 /** Cabeçalho. `tone="light"` para usar sobre o fundo anil. */
@@ -23,6 +24,7 @@ export function SiteHeader({ tone = "dark" }: { tone?: "dark" | "light" }) {
         <Link href="/criar-tema" className={cn(link, "hidden sm:inline-flex")}>
           Criar tema
         </Link>
+        <SoundButton tone={tone} />
       </nav>
     </header>
   );

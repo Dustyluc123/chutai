@@ -23,12 +23,12 @@ export function LobbyView({ state, room }: LobbyViewProps) {
 
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[1.5fr_1fr] lg:py-10">
-      <div className="flex flex-col gap-6">
+      <div className="flex min-w-0 flex-col gap-6">
         {showHelp ? (
           // Primeira vez numa sala: explicação no próprio lobby. Não é janela: não bloqueia nada.
           <section
             aria-labelledby="primeira-vez"
-            className="relative flex flex-col gap-4 rounded-3xl border-2 border-tinta bg-white p-5 shadow-carimbo sm:p-6"
+            className="relative flex min-w-0 flex-col gap-4 rounded-3xl border-2 border-tinta bg-white p-5 shadow-carimbo sm:p-6"
           >
             <div className="flex items-start justify-between gap-4">
               <h2 id="primeira-vez" className="font-display text-2xl">

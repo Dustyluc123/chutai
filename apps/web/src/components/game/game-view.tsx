@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { PartyPopper } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
 import { TIMING } from "@chutai/game";
+import { playSound } from "@/lib/sound";
+import { guessSound } from "@/lib/sound/director";
 import type { UseRoom } from "@/hooks/useRoom";
 import { LiveScoreboard } from "@/components/scoreboard/live-scoreboard";
 import { RoundReveal } from "@/components/scoreboard/round-reveal";
@@ -128,7 +130,8 @@ export function GameView({ state, room }: GameViewProps) {
                   showPictures={!imageMode}
                   autoFocus
                   onGuess={async (id) => {
-                    await room.actions.guess(id);
+                    const result = await room.actions.guess(id);
+                    playSound(guessSound(result.correct));
                   }}
                 />
                 <HintBar

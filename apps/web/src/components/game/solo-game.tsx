@@ -23,6 +23,8 @@ import { GuessInput } from "./guess-input";
 import { GuessList } from "./guess-list";
 import { PixelatedImage } from "./pixelated-image";
 import { HowToPlayButton } from "@/components/help/how-to-play";
+import { playSound } from "@/lib/sound";
+import { guessSound } from "@/lib/sound/director";
 
 /** Treino individual: sorteia um personagem e deixa chutar sem limite de tempo. */
 export function SoloGame({ theme, options }: { theme: Theme; options: CharacterOption[] }) {
@@ -65,6 +67,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     if (!answer) return;
     const character = theme.characters.find((c) => c.id === id);
     if (!character) return;
+    playSound(guessSound(character.id === answer.id));
     setGuesses((current) => [
       ...current,
       {

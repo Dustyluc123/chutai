@@ -41,7 +41,7 @@ export function ProfileFields({
 
       <fieldset className="flex flex-col gap-2">
         <legend className="mb-1.5 text-sm font-semibold">Avatar</legend>
-        <div className="grid grid-cols-8 gap-1.5">
+        <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9">
           {AVATARS.map((emoji) => {
             const selected = emoji === avatar;
             return (

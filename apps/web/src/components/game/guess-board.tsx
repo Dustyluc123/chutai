@@ -1,6 +1,7 @@
 import type { GuessResult } from "@chutai/shared";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { cn } from "@/lib/cn";
+import { Legend } from "./legend";
 import { Tile } from "./tile";
 
 interface GuessBoardProps {
@@ -24,74 +25,92 @@ export function GuessBoard({
   const columns = `minmax(8rem, 1.3fr) repeat(${attributes.length}, minmax(5rem, 1fr))`;
   const rows = [...guesses].reverse();
 
-  return (
-    <div className={cn("-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0", className)}>
+  // Antes do primeiro chute: só a frase e as cores, fora da área que rola para o lado
+  // (no celular, a frase ficava cortada dentro do tabuleiro).
+  if (rows.length === 0) {
+    return emptyMessage ? (
       <div
-        role="table"
-        aria-label="Seus palpites"
-        className="flex min-w-max flex-col gap-2 sm:min-w-0"
+        className={cn(
+          "flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-linha px-4 py-6 text-center",
+          className,
+        )}
       >
-        <div role="row" className="grid gap-2" style={{ gridTemplateColumns: columns }}>
-          <div role="columnheader" className="px-1 text-xs font-semibold text-tinta-soft">
-            Personagem
-          </div>
-          {attributes.map((attr) => (
-            <div
-              key={attr.key}
-              role="columnheader"
-              lang="pt-BR"
-              className="px-1 text-center text-xs leading-tight font-semibold [overflow-wrap:anywhere] hyphens-auto text-tinta-soft"
-            >
-              {attr.label}
-            </div>
-          ))}
-        </div>
-
-        {rows.length === 0 && emptyMessage ? (
-          <p className="rounded-xl border-2 border-dashed border-linha px-4 py-8 text-center text-sm text-tinta-soft">
-            {emptyMessage}
-          </p>
-        ) : null}
-
-        {rows.map((guess, rowIndex) => {
-          const animate = animateLatest && rowIndex === 0;
-          return (
-            <div
-              key={guess.characterId}
-              role="row"
-              className="grid gap-2"
-              style={{ gridTemplateColumns: columns }}
-            >
-              <div
-                role="rowheader"
-                className={cn(
-                  "flex min-h-16 items-center gap-2 rounded-xl border-2 px-2.5 py-2",
-                  guess.correct ? "border-folha bg-folha-soft" : "border-tinta bg-white",
-                  animate && "animate-pop",
-                )}
-              >
-                <CharacterPicture
-                  name={guess.characterName}
-                  image={guess.image}
-                  emoji={guess.emoji}
-                  size="md"
-                  decorative
-                />
-                <span className="text-sm leading-tight font-semibold">{guess.characterName}</span>
-              </div>
-              {guess.feedback.map((feedback, index) => (
-                <Tile
-                  key={feedback.key}
-                  label={attributes[index]?.label ?? feedback.key}
-                  feedback={feedback}
-                  index={index + 1}
-                  animate={animate}
-                />
-              ))}
-            </div>
-          );
-        })}
+        <p className="font-semibold text-tinta">{emptyMessage}</p>
+        <Legend className="justify-center" tapTip={false} />
       </div>
+    ) : null;
+  }
+
+  return (
+    <div className={cn("flex flex-col gap-3", className)}>
+      <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+        <div
+          role="table"
+          aria-label="Seus palpites"
+          className="flex min-w-max flex-col gap-2 sm:min-w-0"
+        >
+          <div role="row" className="grid gap-2" style={{ gridTemplateColumns: columns }}>
+            <div role="columnheader" className="px-1 text-xs font-semibold text-tinta-soft">
+              Personagem
+            </div>
+            {attributes.map((attr) => (
+              <div
+                key={attr.key}
+                role="columnheader"
+                lang="pt-BR"
+                className="px-1 text-center text-xs leading-tight font-semibold [overflow-wrap:anywhere] hyphens-auto text-tinta-soft"
+              >
+                {attr.label}
+              </div>
+            ))}
+          </div>
+
+          {rows.map((guess, rowIndex) => {
+            const animate = animateLatest && rowIndex === 0;
+            return (
+              <div
+                key={guess.characterId}
+                role="row"
+                className="grid gap-2"
+                style={{ gridTemplateColumns: columns }}
+              >
+                <div
+                  role="rowheader"
+                  className={cn(
+                    "flex min-h-16 items-center gap-2 rounded-xl border-2 px-2.5 py-2",
+                    guess.correct ? "border-folha bg-folha-soft" : "border-tinta bg-white",
+                    animate && "animate-pop",
+                  )}
+                >
+                  <CharacterPicture
+                    name={guess.characterName}
+                    image={guess.image}
+                    emoji={guess.emoji}
+                    size="md"
+                    decorative
+                  />
+                  <span className="text-sm leading-tight font-semibold">{guess.characterName}</span>
+                </div>
+                {guess.feedback.map((feedback, index) => (
+                  <Tile
+                    key={feedback.key}
+                    label={attributes[index]?.label ?? feedback.key}
+                    feedback={feedback}
+                    index={index + 1}
+                    animate={animate}
+                  />
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {attributes.length > 2 ? (
+        <p className="text-xs font-semibold text-tinta-soft sm:hidden">
+          Deslize o tabuleiro para o lado para ver todas as colunas.
+        </p>
+      ) : null}
+      <Legend />
     </div>
   );
 }

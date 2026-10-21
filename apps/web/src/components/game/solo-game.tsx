@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Eye, PartyPopper, Shuffle } from "lucide-react";
-import type { Character, CharacterOption, GameMode, GuessResult, Theme } from "@chutai/shared";
+import type { Character, CharacterOption, RoundKind, GuessResult, Theme } from "@chutai/shared";
 import {
   compareCharacters,
   drawCharacter,
@@ -22,7 +22,9 @@ import { GuessBoard } from "./guess-board";
 import { GuessInput } from "./guess-input";
 import { GuessList } from "./guess-list";
 import { PixelatedImage } from "./pixelated-image";
-import { Legend } from "./legend";
+import { HowToPlayButton } from "@/components/help/how-to-play";
+import { playSound } from "@/lib/sound";
+import { guessSound } from "@/lib/sound/director";
 
 /** Treino individual: sorteia um personagem e deixa chutar sem limite de tempo. */
 export function SoloGame({ theme, options }: { theme: Theme; options: CharacterOption[] }) {
@@ -30,14 +32,14 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const [guesses, setGuesses] = useState<GuessResult[]>([]);
   const [revealed, setRevealed] = useState(false);
   const [played, setPlayed] = useState<Set<string>>(new Set());
-  const [mode, setMode] = useState<GameMode>("classic");
+  const [mode, setMode] = useState<RoundKind>("classic");
   const imageAvailable = supportsImageMode(theme.characters);
   const imageMode = mode === "image" && imageAvailable;
   const [zoomCenter, setZoomCenter] = useState<ZoomCenter>({ x: 0.5, y: 0.5 });
   // No modo Imagem, o autocompletar mostra só o nome (a miniatura entregaria a resposta).
   const partial = imageMode && imageModeAvailability(theme.characters) === "partial";
   // Personagens do jogo: no modo Imagem, só quem tem imagem (no parcial, os outros ficam de fora).
-  const poolFor = (value: GameMode) =>
+  const poolFor = (value: RoundKind) =>
     value === "image" && imageAvailable ? imageModeCharacters(theme.characters) : theme.characters;
   const visibleOptions = useMemo(() => {
     if (!imageMode) return options;
@@ -65,6 +67,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     if (!answer) return;
     const character = theme.characters.find((c) => c.id === id);
     if (!character) return;
+    playSound(guessSound(character.id === answer.id));
     setGuesses((current) => [
       ...current,
       {
@@ -78,7 +81,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     ]);
   }
 
-  function next(value: GameMode = mode) {
+  function next(value: RoundKind = mode) {
     if (!answer) return;
     const used = new Set(played).add(answer.id);
     setPlayed(used);
@@ -88,7 +91,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     setRevealed(false);
   }
 
-  function changeMode(value: GameMode) {
+  function changeMode(value: RoundKind) {
     setMode(value);
     next(value);
   }
@@ -102,7 +105,8 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             <span aria-hidden>{theme.emoji}</span> {theme.name}
           </h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <HowToPlayButton initialTab={mode} className="h-11 px-4" />
           {!finished ? (
             <Button variant="ghost" onClick={() => setRevealed(true)} disabled={!answer}>
               <Eye aria-hidden className="size-4" /> Desistir
@@ -204,9 +208,8 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             attributes={theme.attributes}
             guesses={guesses}
             animateLatest
-            emptyMessage="Chute qualquer personagem para começar. As cores mostram o que bate com o personagem secreto."
+            emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
           />
-          <Legend />
         </>
       )}
     </>

@@ -1,8 +1,9 @@
 "use client";
 
-import { Play } from "lucide-react";
+import { Play, X } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
 import { Button } from "@/components/ui/button";
+import { HowToPlayContent, useFirstVisitHelp } from "@/components/help/how-to-play";
 import type { UseRoom } from "@/hooks/useRoom";
 import { PlayerList } from "./player-list";
 import { RoomCodeCard } from "./room-code-card";
@@ -18,10 +19,36 @@ export function LobbyView({ state, room }: LobbyViewProps) {
   const meId = room.session?.playerId;
   const connectedCount = state.players.filter((player) => player.connected).length;
   const host = state.players.find((player) => player.isHost);
+  const [showHelp, dismissHelp] = useFirstVisitHelp();
 
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[1.5fr_1fr] lg:py-10">
-      <div className="flex flex-col gap-6">
+      <div className="flex min-w-0 flex-col gap-6">
+        {showHelp ? (
+          // Primeira vez numa sala: explicação no próprio lobby. Não é janela: não bloqueia nada.
+          <section
+            aria-labelledby="primeira-vez"
+            className="relative flex min-w-0 flex-col gap-4 rounded-3xl border-2 border-tinta bg-white p-5 shadow-carimbo sm:p-6"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <h2 id="primeira-vez" className="font-display text-2xl">
+                Primeira vez? É assim:
+              </h2>
+              <button
+                type="button"
+                onClick={dismissHelp}
+                aria-label="Fechar explicação"
+                className="rounded-lg p-1.5 hover:bg-tinta/5"
+              >
+                <X aria-hidden className="size-5" />
+              </button>
+            </div>
+            <HowToPlayContent initialTab={state.settings.mode === "image" ? "image" : "classic"} />
+            <Button variant="secondary" onClick={dismissHelp} className="self-start">
+              Entendi
+            </Button>
+          </section>
+        ) : null}
         <RoomCodeCard code={state.code} />
         <PlayerList
           players={state.players}

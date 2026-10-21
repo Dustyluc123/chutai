@@ -48,3 +48,4 @@ export async function createRepositories(
     matches: new DrizzleMatchRepository(db),
   };
 }
+export * from "./daily";

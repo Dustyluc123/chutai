@@ -36,11 +36,14 @@ export function StartCountdown({
   serverOffset,
   themeName,
   themeEmoji,
+  mixed,
 }: {
   endsAt: number;
   serverOffset: number;
   themeName: string;
   themeEmoji: string;
+  /** Modo Misto: avisa que a primeira rodada é Clássica. */
+  mixed?: boolean;
 }) {
   const seconds = useSecondsLeft(endsAt, serverOffset);
   const go = seconds <= 0;
@@ -56,7 +59,11 @@ export function StartCountdown({
         value={go ? "Vai!" : String(seconds)}
         label={go ? "Vai!" : `A partida começa em ${seconds}`}
       />
-      <p className="font-semibold text-white/85">Prepare o dedo: o primeiro personagem vem aí.</p>
+      <p className="font-semibold text-white/85">
+        {mixed
+          ? "Modo Misto: começa com uma rodada Clássica, depois uma de Imagem."
+          : "Prepare o dedo: o primeiro personagem vem aí."}
+      </p>
     </section>
   );
 }
@@ -70,12 +77,16 @@ export function BetweenRoundsCountdown({
   serverOffset,
   from,
   nextRound,
+  nextKind,
 }: {
   endsAt: number | undefined;
   serverOffset: number;
   from: number;
   nextRound: number;
+  /** Modo Misto: tipo da próxima rodada. */
+  nextKind?: "classic" | "image";
 }) {
+  const kindLabel = nextKind ? (nextKind === "image" ? " · Imagem" : " · Clássica") : "";
   const seconds = useSecondsLeft(endsAt, serverOffset);
   if (!endsAt || seconds <= 0 || seconds > from) return null;
   return (
@@ -84,7 +95,10 @@ export function BetweenRoundsCountdown({
       aria-label={`Rodada ${nextRound} vai começar`}
       className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-4 bg-anil/95 px-4 text-center"
     >
-      <p className="font-display text-2xl text-gema sm:text-3xl">Rodada {nextRound}</p>
+      <p className="font-display text-2xl text-gema sm:text-3xl">
+        Rodada {nextRound}
+        {kindLabel}
+      </p>
       <CountdownNumber value={String(seconds)} label={`Rodada ${nextRound} em ${seconds}`} />
     </div>
   );

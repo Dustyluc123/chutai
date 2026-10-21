@@ -15,6 +15,7 @@ import type {
   PrivateState,
   RoomState,
   RoundImage,
+  RoundKind,
   RoundSummary,
   FinalStanding,
 } from "./types";
@@ -63,7 +64,7 @@ export interface ServerToClientEvents {
   "player:progress": (progress: PlayerProgress) => void;
   /** Alguém acertou: o site mostra um aviso "Fulano acertou!". */
   "player:solved": (payload: { playerId: string; nickname: string; rank: number }) => void;
-  "round:start": (payload: { number: number; endsAt: number }) => void;
+  "round:start": (payload: { number: number; endsAt: number; kind: RoundKind }) => void;
   "round:end": (summary: RoundSummary) => void;
   /** Modo Imagem: o nível de nitidez que ESTE jogador alcançou. Nunca vai para a sala inteira. */
   "round:image": (image: RoundImage) => void;

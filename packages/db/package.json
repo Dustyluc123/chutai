@@ -15,7 +15,8 @@
     "seed": "tsx seed/seed.ts",
     "images:fetch": "tsx scripts/fetch-images.ts",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "daily:roster": "tsx scripts/daily-roster.ts"
   },
   "dependencies": {
     "@chutai/game": "workspace:*",

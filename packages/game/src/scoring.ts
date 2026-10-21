@@ -1,4 +1,4 @@
-import type { GameMode } from "@chutai/shared";
+import type { RoundKind } from "@chutai/shared";
 import { IMAGE_MODE, SCORING } from "./config";
 
 export interface ScoreInput {
@@ -11,8 +11,11 @@ export interface ScoreInput {
   hintsUsed: number;
   /** 1 = primeiro a acertar. */
   solveRank: number;
-  /** Padrão: classic. No modo Imagem, cada chute extra custa mais (IMAGE_MODE.perExtraGuess). */
-  mode?: GameMode;
+  /**
+   * Tipo da rodada (padrão: classic). Numa rodada de Imagem, cada chute extra custa mais
+   * (IMAGE_MODE.perExtraGuess). No modo Misto, vale o tipo de cada rodada.
+   */
+  mode?: RoundKind;
 }
 
 /**

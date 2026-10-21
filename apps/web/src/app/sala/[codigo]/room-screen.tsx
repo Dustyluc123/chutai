@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import { useRoom } from "@/hooks/useRoom";
+import { useRoomSounds } from "@/lib/sound";
 import { RoomTopBar } from "@/components/layout/room-top-bar";
 import { JoinCard } from "@/components/lobby/join-card";
 import { LobbyView } from "@/components/lobby/lobby-view";
@@ -17,6 +18,11 @@ export function RoomScreen({ code }: { code: string }) {
   const router = useRouter();
   const room = useRoom(code);
   const { status, state } = room;
+  useRoomSounds(
+    (status === "joined" && state) || undefined,
+    room.session?.playerId,
+    room.serverOffset,
+  );
 
   const leave = () => {
     room.actions.leave();
@@ -46,6 +52,7 @@ export function RoomScreen({ code }: { code: string }) {
           themeEmoji={state.theme.emoji}
           connected={room.connected}
           onLeave={leave}
+          helpTab={state.settings.mode === "image" ? "image" : "classic"}
         />
         <main id="conteudo" className="flex flex-1 flex-col">
           {state.phase === "lobby" ? <LobbyView state={state} room={room} /> : null}
@@ -55,6 +62,7 @@ export function RoomScreen({ code }: { code: string }) {
               serverOffset={room.serverOffset}
               themeName={state.theme.name}
               themeEmoji={state.theme.emoji}
+              mixed={state.settings.mode === "mixed"}
             />
           ) : null}
           {state.phase === "round" || state.phase === "intermission" ? (

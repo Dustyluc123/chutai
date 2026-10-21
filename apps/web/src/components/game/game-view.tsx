@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { PartyPopper } from "lucide-react";
 import type { RoomState } from "@chutai/shared";
 import { TIMING } from "@chutai/game";
+import { playSound } from "@/lib/sound";
+import { guessSound } from "@/lib/sound/director";
 import type { UseRoom } from "@/hooks/useRoom";
 import { LiveScoreboard } from "@/components/scoreboard/live-scoreboard";
 import { RoundReveal } from "@/components/scoreboard/round-reveal";
@@ -12,7 +14,6 @@ import { GuessInput } from "./guess-input";
 import { GuessList } from "./guess-list";
 import { MysteryImage } from "./mystery-image";
 import { HintBar } from "./hint-bar";
-import { Legend } from "./legend";
 import { RoundTimer } from "./round-timer";
 import { BetweenRoundsCountdown, GoFlash } from "./countdown";
 
@@ -40,7 +41,11 @@ export function GameView({ state, room }: GameViewProps) {
 
   const inRound = state.phase === "round" && state.round;
   const solved = me?.solved ?? false;
-  const imageMode = state.settings.mode === "image";
+  // Tipo da rodada atual (ou da que acabou, no intervalo). No Misto muda a cada rodada.
+  const kind = state.round?.kind ?? (state.settings.mode === "image" ? "image" : "classic");
+  const imageMode = kind === "image";
+  const mixed = state.settings.mode === "mixed";
+  const nextKind = mixed ? state.nextRoundKind : undefined;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -50,6 +55,7 @@ export function GameView({ state, room }: GameViewProps) {
           serverOffset={room.serverOffset}
           from={TIMING.betweenRoundsCountdownSeconds}
           nextRound={roundNumber + 1}
+          nextKind={nextKind}
         />
       ) : null}
       {inRound ? (
@@ -66,6 +72,11 @@ export function GameView({ state, room }: GameViewProps) {
               Rodada {roundNumber}
               <span className="text-tinta-soft"> / {state.settings.rounds}</span>
             </p>
+            {mixed ? (
+              <span className="rounded-full border-2 border-tinta bg-anil-soft px-2.5 py-0.5 text-xs font-bold">
+                {imageMode ? "Rodada de Imagem" : "Rodada Clássica"}
+              </span>
+            ) : null}
             {imageMode && state.theme.imageMode === "partial" ? (
               <span
                 title={`Só os ${state.theme.imageCharacterCount} personagens com imagem estão nesta partida.`}
@@ -97,6 +108,7 @@ export function GameView({ state, room }: GameViewProps) {
               players={state.players}
               totalRounds={state.settings.rounds}
               nextAt={state.intermissionEndsAt}
+              nextKind={nextKind}
               serverOffset={room.serverOffset}
               meId={meId}
             />
@@ -129,7 +141,8 @@ export function GameView({ state, room }: GameViewProps) {
                   showPictures={!imageMode}
                   autoFocus
                   onGuess={async (id) => {
-                    await room.actions.guess(id);
+                    const result = await room.actions.guess(id);
+                    playSound(guessSound(result.correct));
                   }}
                 />
                 <HintBar
@@ -156,11 +169,9 @@ export function GameView({ state, room }: GameViewProps) {
               attributes={state.theme.attributes}
               guesses={guesses}
               animateLatest={animateLatest}
-              emptyMessage="Chute um personagem. Cada coluna mostra se aquele atributo bate com o personagem secreto."
+              emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
             />
           ) : null}
-
-          {inRound && !imageMode ? <Legend className="pt-1" /> : null}
         </div>
 
         <aside>

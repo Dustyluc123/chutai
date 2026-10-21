@@ -21,7 +21,7 @@ export const roomCodeSchema = z
   .length(ROOM_CODE_LENGTH, `O código tem ${ROOM_CODE_LENGTH} caracteres.`)
   .refine((code) => [...code].every((ch) => ROOM_CODE_ALPHABET.includes(ch)), "Código inválido.");
 
-export const gameModeSchema = z.enum(["classic", "image"]);
+export const gameModeSchema = z.enum(["classic", "image", "mixed"]);
 
 export const roomSettingsSchema = z.object({
   themeSlug: z.string().min(1).max(64),
@@ -58,6 +58,28 @@ export const submitGuessSchema = z.object({
 export const requestHintSchema = z.object({
   type: z.enum(["attribute", "firstLetter"]),
 });
+
+/**
+ * Pedido para a rota do desafio diário (POST /api/diario/[slug]).
+ * `day` é o número do desafio que o navegador está jogando (para detectar a virada do dia).
+ * Na dica, o navegador manda os chutes que já deu: o servidor confere de novo cada um.
+ */
+export const dailyRequestSchema = z.discriminatedUnion("action", [
+  z.object({
+    action: z.literal("guess"),
+    day: z.number().int().min(1),
+    characterId: z.string().min(1).max(100),
+  }),
+  z.object({
+    action: z.literal("hint"),
+    day: z.number().int().min(1),
+    type: z.enum(["attribute", "firstLetter"]),
+    guesses: z.array(z.string().min(1).max(100)).max(200),
+    hintsUsed: z.array(z.enum(["attribute", "firstLetter"])).max(2),
+  }),
+]);
+
+export type DailyRequest = z.infer<typeof dailyRequestSchema>;
 
 export type CreateRoomInput = z.infer<typeof createRoomSchema>;
 export type JoinRoomInput = z.infer<typeof joinRoomSchema>;

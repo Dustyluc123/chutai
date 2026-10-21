@@ -91,3 +91,14 @@ export const ROOM_LIFECYCLE = {
   /** Quando alguém volta para uma sala parada (sem rodada nova por falta de gente), a próxima começa depois disto. */
   resumeSeconds: 3,
 } as const;
+
+/** Desafio diário (um personagem por dia por tema, o mesmo para todo mundo). */
+export const DAILY = {
+  /**
+   * Dia do Chutaí #1 (AAAA-MM-DD, horário de Brasília). CONFIRA ANTES DO MERGE: tem que ser o
+   * dia em que o diário entra no ar. Mudar depois do lançamento muda a numeração e as respostas.
+   */
+  launchDate: "2026-10-22",
+  /** O dia vira à meia-noite deste fuso. */
+  timeZone: "America/Sao_Paulo",
+} as const;

@@ -71,6 +71,7 @@ export function LiveScoreboard({
                       <span
                         role="img"
                         aria-label={`Nitidez ${(p.imageLevel ?? 0) + 1} de ${imageLevels}`}
+                        title={`Nitidez da imagem: ${(p.imageLevel ?? 0) + 1} de ${imageLevels}`}
                         className="flex gap-0.5"
                       >
                         {Array.from({ length: imageLevels }, (_, i) => (
@@ -91,6 +92,7 @@ export function LiveScoreboard({
                       <span
                         role="img"
                         aria-label={`${p.bestMatch} de ${attributeCount} atributos certos no melhor palpite`}
+                        title={`Melhor chute: ${p.bestMatch} de ${attributeCount} atributos certos`}
                         className="flex gap-0.5"
                       >
                         {Array.from({ length: attributeCount }, (_, i) => (

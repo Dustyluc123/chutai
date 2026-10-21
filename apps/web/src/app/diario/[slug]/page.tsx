@@ -1,0 +1,58 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { toCharacterOptions } from "@chutai/db";
+import { SiteHeader } from "@/components/layout/site-header";
+import { DailyGame } from "@/components/daily/daily-game";
+import { dailyTheme, today } from "@/lib/daily/server";
+
+export const dynamic = "force-dynamic";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const theme = dailyTheme((await params).slug);
+  return {
+    title: theme ? `Desafio do dia: ${theme.name}` : "Desafio do dia",
+    description: "Um personagem por dia, o mesmo para todo mundo. Quantos chutes você precisa?",
+  };
+}
+
+/**
+ * Desafio diário de um tema. A página só manda a lista de personagens (para o autocompletar)
+ * e os atributos; a resposta fica no servidor (rota /api/diario/[slug]).
+ */
+export default async function DailyPage({ params }: PageProps) {
+  const theme = dailyTheme((await params).slug);
+  if (!theme) notFound();
+  const { number } = today();
+  const configured = !!process.env.DAILY_SECRET?.trim();
+  return (
+    <>
+      <SiteHeader />
+      <main
+        id="conteudo"
+        className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 pt-4 pb-16 sm:px-6"
+      >
+        {configured ? (
+          <DailyGame
+            slug={theme.slug}
+            themeName={theme.name}
+            themeEmoji={theme.emoji}
+            attributes={theme.attributes.map(({ key, label }) => ({ key, label }))}
+            options={toCharacterOptions(theme)}
+            day={number}
+          />
+        ) : (
+          <p
+            role="alert"
+            className="rounded-2xl border-2 border-pitanga bg-white p-5 font-semibold"
+          >
+            Desafio diário indisponível: falta configurar a variável DAILY_SECRET no servidor.
+          </p>
+        )}
+      </main>
+    </>
+  );
+}

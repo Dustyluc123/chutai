@@ -154,8 +154,12 @@ export interface HintReveal {
 /**
  * classic → cada palpite mostra os atributos coloridos
  * image   → aparece a imagem borrada do personagem, mais nítida a cada chute errado ou dica
+ * mixed   → alterna as rodadas: uma Clássica, uma Imagem, uma Clássica...
  */
-export type GameMode = "classic" | "image";
+export type GameMode = "classic" | "image" | "mixed";
+
+/** Tipo de UMA rodada. No modo Misto, cada rodada tem o seu (o servidor avisa no começo). */
+export type RoundKind = "classic" | "image";
 
 export interface RoomSettings {
   themeSlug: string;
@@ -200,6 +204,8 @@ export interface PlayerProgress {
 
 export interface RoundPublic {
   number: number;
+  /** Tipo desta rodada (no Misto muda a cada rodada; nos outros modos é o do modo). */
+  kind: RoundKind;
   totalRounds: number;
   startedAt: number;
   endsAt: number;
@@ -258,6 +264,22 @@ export interface RoomResult {
   standings: { position: number; nickname: string; avatar: string; score: number }[];
 }
 
+/** Resposta da rota do desafio diário. A resposta do dia só vem depois de acertar. */
+export type DailyResponse =
+  | {
+      ok: true;
+      guess?: GuessResult;
+      hint?: HintReveal;
+      /** Só depois de acertar: o personagem do dia e o de ontem. */
+      answer?: CharacterReveal;
+      yesterday?: { name: string; emoji?: string; image?: string } | null;
+    }
+  | {
+      ok: false;
+      error: string;
+      /** Novo desafio (virou o dia): o número de hoje. */ today?: number;
+    };
+
 export interface FinalStanding {
   playerId: string;
   nickname: string;
@@ -277,6 +299,8 @@ export interface RoomState {
   round?: RoundPublic;
   lastRound?: RoundSummary;
   intermissionEndsAt?: number;
+  /** Tipo da próxima rodada (contagem e intervalo), para mostrar "Próxima: Imagem". */
+  nextRoundKind?: RoundKind;
   /** Fase `countdown`: quando a contagem termina e a primeira rodada começa (horário do servidor). */
   countdownEndsAt?: number;
   standings?: FinalStanding[];

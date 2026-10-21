@@ -11,6 +11,8 @@ interface RoundRevealProps {
   players: PublicPlayer[];
   totalRounds: number;
   nextAt?: number;
+  /** Modo Misto: tipo da próxima rodada ("Próxima: Imagem"). */
+  nextKind?: "classic" | "image";
   serverOffset: number;
   meId?: string;
 }
@@ -21,6 +23,7 @@ export function RoundReveal({
   players,
   totalRounds,
   nextAt,
+  nextKind,
   serverOffset,
   meId,
 }: RoundRevealProps) {
@@ -95,7 +98,11 @@ export function RoundReveal({
         </ol>
         {nextAt ? (
           <p className="text-sm font-semibold text-tinta-soft">
-            {isLast ? "Resultado final em" : "Próxima rodada em"}{" "}
+            {isLast
+              ? "Resultado final em"
+              : nextKind
+                ? `Próxima: ${nextKind === "image" ? "Imagem" : "Clássica"}, em`
+                : "Próxima rodada em"}{" "}
             <span className="tabular text-tinta">{Math.ceil(remaining / 1000)}s</span>
           </p>
         ) : null}

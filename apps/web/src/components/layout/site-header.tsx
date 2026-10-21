@@ -15,6 +15,9 @@ export function SiteHeader({ tone = "dark" }: { tone?: "dark" | "light" }) {
     <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
       <Logo tone={tone} />
       <nav aria-label="Principal" className="flex items-center gap-1">
+        <Link href="/diario" className={link}>
+          Diário
+        </Link>
         <Link href="/temas" className={link}>
           Temas
         </Link>

@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-143_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-182_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -105,6 +105,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
+- [x] **Desafio do dia** (`/diario`): um personagem por tema, o mesmo para todo mundo, que muda à meia-noite de Brasília. Sem tempo, com sequência de dias seguidos e resultado para compartilhar em quadradinhos, sem revelar o personagem
 - [x] Imagem de cada personagem no autocompletar, no tabuleiro, na revelação, no treino e na página do tema; sem imagem, aparece o emoji
 - [x] Imagens só com licença livre (Wikimedia Commons), com autor e licença de cada uma na página [/creditos](apps/web/public/temas/CREDITOS.md)
 - [x] Sons gerados no navegador (Web Audio API, sem arquivos): chute errado e certo, alguém acertou, contagem, últimos 5 segundos, fim da rodada e pódio; música calma opcional. Botão **Som** com efeitos e música separados
@@ -270,16 +271,17 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 
 ### Variáveis de ambiente
 
-| Variável                   | Padrão                  | Para quê                                                            |
-| -------------------------- | ----------------------- | ------------------------------------------------------------------- |
-| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                  |
-| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar  |
-| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                     |
-| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)               |
-| `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem |
-| `ASSETS_BASE_URL`          | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco |
-| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                      |
-| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                    |
+| Variável                   | Padrão                  | Para quê                                                                                                                        |
+| -------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                                                                              |
+| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar                                                              |
+| `DAILY_SECRET`             | (vazio)                 | Chave do sorteio do desafio diário (só no servidor). Sem ela, o diário fica indisponível. **Nunca troque depois do lançamento** |
+| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                                                                                 |
+| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                                                                           |
+| `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem                                                             |
+| `ASSETS_BASE_URL`          | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco                                                             |
+| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                                                                                  |
+| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                                                                                |
 
 ## Banco de dados e Redis (preparados para o futuro)
 
@@ -337,6 +339,14 @@ Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/
 | `GET /rooms/:codigo/preview` | Prévia do link: só dados públicos (apelido e avatar do anfitrião, tema, jogadores, limite e fase). Nada da rodada. Limite por IP. |
 | `GET /rooms/:codigo/result`  | Pódio da partida terminada (posição, apelido, avatar e pontos), para a imagem de compartilhar. Só enquanto a sala está no pódio.  |
 
+## Desafio do dia
+
+- Os chutes vão para a rota do próprio site `POST /api/diario/[slug]` (na Vercel), que confere o chute e só devolve a resposta depois do acerto. Funciona mesmo com o servidor de tempo real fora do ar.
+- O personagem do dia sai de ciclos que passam por todo o tema sem repetir. A ordem de cada ciclo vem de um HMAC com a chave `DAILY_SECRET`: sem ela, não dá para prever.
+- [`packages/db/seed/daily-roster.json`](packages/db/seed/daily-roster.json) guarda só quais personagens entram no diário e desde quando (nada sobre os dias). Personagem novo entra no próximo ciclo, então adicionar personagens não muda a resposta de hoje nem a de ontem. Depois de adicionar personagens a um tema, rode `pnpm daily:roster` (um teste avisa se esquecer).
+- O dia do Chutaí #1 fica em `DAILY.launchDate`, em [`packages/game/src/config.ts`](packages/game/src/config.ts).
+- Progresso, sequência e estatísticas ficam no `localStorage` do navegador.
+
 ## Pontuação
 
 Só quem acerta pontua:
@@ -355,10 +365,10 @@ pnpm test
 
 | Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------ | -----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
-| `@chutai/realtime` |     67 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/web`      |     14 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva, emojis das imagens geradas (sem CDN, a imagem sai sem emoji) e texto do pódio com empates                                                                                                                                                                                                      |
-| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
+| `@chutai/game`     |     57 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
+| `@chutai/realtime` |     74 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/web`      |     39 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva, emojis das imagens geradas (sem CDN, a imagem sai sem emoji) e texto do pódio com empates                                                                                                                                                                                                      |
+| `@chutai/db`       |     18 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
 
 ## Deploy
 
@@ -416,6 +426,7 @@ Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `tem
 - [x] **Fase 2** — Multiplayer: salas, lobby, rodadas com cronômetro, placar ao vivo, pódio e reconexão
 - [x] **Fase 2.5** — Imagem de cada personagem (licença livre, com créditos) e modo de jogo Imagem
 - [x] **Fase 2.6** — Modo Imagem parcial, opções sem imagem no modo Imagem, quatro temas brasileiros com pessoas reais e projeto pronto para o deploy ([`docs/DEPLOY.md`](docs/DEPLOY.md))
+- [x] **Fase 2.7** — Como jogar, sons, modo Misto e desafio do dia
 - [ ] **Fase 3** — Lançamento: no ar em [chutai-bay.vercel.app](https://chutai-bay.vercel.app); faltam domínio próprio, monitoramento de erros (Sentry) e testes com grupos de amigos
 - [ ] **Fase 4** — Comunidade: login com Google e Discord, editor de temas com upload de imagens, moderação e salas públicas
 - [ ] **Fase 5** — Crescimento: modo streamer (chat da Twitch contra o streamer), modo emoji, plano premium

@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { StartPanel } from "@/components/home/start-panel";
 import { DemoBoard } from "@/components/home/demo-board";
+import { DailyHighlight } from "@/components/daily/daily-highlight";
 import { ThemePoster } from "@/components/home/theme-poster";
 import { THEME_COLORS } from "@/lib/colors";
 import { cn } from "@/lib/cn";
@@ -84,6 +85,9 @@ export default async function HomePage() {
               não bate com o personagem secreto. Quem acerta mais rápido e com menos chutes leva
               mais pontos.
             </p>
+            <div className="max-w-xl">
+              <DailyHighlight />
+            </div>
           </div>
 
           <div

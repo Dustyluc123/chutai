@@ -78,6 +78,14 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 - Mixed mode (`mode: "mixed"`): each round has a `kind` (`roundKind(mode, n)` in `image-mode.ts`: odd rounds classic, even rounds image). `Room` stores `kind` on the active round and every image rule (draw pool, images, scoring, no pictures in options, `room:characters` re-broadcast at round start) follows the round's kind, not `settings.mode`. `RoomState.round.kind` and `nextRoundKind` (countdown/intermission) tell the client. Available only where image mode is (`modeNeedsImages`).
 - The realtime server reads original images from disk (`ASSETS_DIR`, default `apps/web/public`) and falls back to HTTP (`ASSETS_BASE_URL`).
 
+## Daily challenge (`/diario`)
+
+- One character per official theme per day, same for everyone; the day turns at midnight in `America/Sao_Paulo`. Day number counts from `DAILY.launchDate` (`packages/game/src/config.ts`).
+- Pure logic in `packages/game/src/daily.ts` (`dailyDateKey`, `dailyNumber`, `dailyAnswerId`: cycles over the roster without repeats, order from an injected `rank`). The secret part lives only in the web server: `apps/web/src/lib/daily/server.ts` ranks with HMAC-SHA256 of `DAILY_SECRET` (no default value: without it the route answers 503 with a clear message).
+- `POST /api/diario/[slug]` (`dailyRequestSchema`) judges guesses and hints statelessly (hints re-judge the guesses the browser sends). The answer is only returned after a correct guess. Progress/streak/stats live in `localStorage` (`lib/daily/storage.ts`).
+- `packages/db/seed/daily-roster.json` lists each character and the date it joins the daily — nothing about which day gets which character (the repo is public). New characters join at the next cycle, so today/yesterday never change. After adding characters run `pnpm daily:roster` (a db test fails otherwise).
+- **Never change `DAILY_SECRET` after launch** (every answer changes, including today's) and **avoid removing characters from themes with a daily** (that day's answer changes; the roster keeps removed ids and the day falls to the next character).
+
 ## Themes with real people (mandatory rules)
 
 - Adults only (18+). Only public, neutral facts: no religion, politics, sexual orientation, health, relationships, controversies or lawsuits. People with a big recent controversy are swapped for a reserve.

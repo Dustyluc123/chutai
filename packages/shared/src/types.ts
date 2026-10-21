@@ -264,6 +264,22 @@ export interface RoomResult {
   standings: { position: number; nickname: string; avatar: string; score: number }[];
 }
 
+/** Resposta da rota do desafio diário. A resposta do dia só vem depois de acertar. */
+export type DailyResponse =
+  | {
+      ok: true;
+      guess?: GuessResult;
+      hint?: HintReveal;
+      /** Só depois de acertar: o personagem do dia e o de ontem. */
+      answer?: CharacterReveal;
+      yesterday?: { name: string; emoji?: string; image?: string } | null;
+    }
+  | {
+      ok: false;
+      error: string;
+      /** Novo desafio (virou o dia): o número de hoje. */ today?: number;
+    };
+
 export interface FinalStanding {
   playerId: string;
   nickname: string;

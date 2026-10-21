@@ -7,3 +7,4 @@ export * from "./draw";
 export * from "./search";
 export * from "./image-mode";
 export * from "./explain";
+export * from "./daily";

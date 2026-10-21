@@ -11,6 +11,8 @@ interface HintBarProps {
   hints: HintReveal[];
   solved: boolean;
   onRequest: (type: HintType) => void;
+  /** Desafio diário: sem pontos, então sem custo nos botões. */
+  scoreless?: boolean;
 }
 
 const LABELS: Record<HintType, string> = {
@@ -19,7 +21,14 @@ const LABELS: Record<HintType, string> = {
 };
 
 /** Dicas: liberadas depois de alguns chutes, cada uma custa pontos. */
-export function HintBar({ enabled, guessCount, hints, solved, onRequest }: HintBarProps) {
+export function HintBar({
+  enabled,
+  guessCount,
+  hints,
+  solved,
+  onRequest,
+  scoreless,
+}: HintBarProps) {
   if (!enabled) return null;
   const locked = guessCount < HINTS.unlockAfterGuesses;
   const missing = HINTS.unlockAfterGuesses - guessCount;
@@ -47,7 +56,9 @@ export function HintBar({ enabled, guessCount, hints, solved, onRequest }: HintB
               onClick={() => onRequest(type)}
             >
               {LABELS[type]}
-              <span className="tabular text-xs text-tinta-soft">−{SCORING.perHint} pontos</span>
+              {scoreless ? null : (
+                <span className="tabular text-xs text-tinta-soft">−{SCORING.perHint} pontos</span>
+              )}
             </Button>
           );
         })}
@@ -57,7 +68,7 @@ export function HintBar({ enabled, guessCount, hints, solved, onRequest }: HintB
           </span>
         ) : hints.length < HINTS.maxPerRound ? (
           <span role="status" className="text-sm font-semibold text-folha">
-            Dicas liberadas! Até {HINTS.maxPerRound} por rodada.
+            Dicas liberadas! Até {HINTS.maxPerRound} {scoreless ? "hoje" : "por rodada"}.
           </span>
         ) : null}
       </div>

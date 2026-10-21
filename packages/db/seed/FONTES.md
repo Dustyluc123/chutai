@@ -284,3 +284,63 @@ Esta seção cobre os 3 personagens que entraram em outubro de 2026 (os outros 2
 | Papa-figo  | [Wikipédia](https://pt.wikipedia.org/wiki/Papa-figo), [Wikidata](https://www.wikidata.org/wiki/Q10344281) |
 | Capelobo   | [Wikipédia](https://pt.wikipedia.org/wiki/Capelobo), [Wikidata](https://www.wikidata.org/wiki/Q9696177)   |
 | Cumacanga  | [Wikipédia](https://pt.wikipedia.org/wiki/Cumacanga), [Wikidata](https://www.wikidata.org/wiki/Q8352644)  |
+
+## Personagens da história do Brasil
+
+Dados de outubro de 2026. Só pessoas já falecidas, da Colônia ao século XX, e só fatos neutros. Área: classificação do Chutaí a partir da descrição do artigo. Nasceu no período: calculado pela data de nascimento (Colônia até 7/9/1822, Império até 15/11/1889, República depois). Estado de nascimento: local de nascimento com o nome atual do estado; "Exterior" para quem nasceu fora do Brasil. Nascimento e morte: caixa de informações e primeiro parágrafo, conferidos no Wikidata; anos aproximados no próprio artigo (Arariboia, c. 1520; Sepé Tiaraju, c. 1723; Aleijadinho, "mais provavelmente" 1738) valem com a tolerância de 10 anos. Ficaram fora por existência contestada ou por falta de data confirmada de nascimento: Dandara (descrita como personagem literária), Zumbi dos Palmares (o artigo diz que não há fontes para a data e o local de nascimento), Tereza de Benguela, Ajuricaba, Filipe Camarão (Wikipédia e Wikidata divergem em 20 anos) e Maria Firmina dos Reis (as fontes divergem entre 1822 e 1825, o que muda o período).
+
+| Personagem                 | Fontes                                                                                                                                       |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tiradentes                 | [Wikipédia](https://pt.wikipedia.org/wiki/Tiradentes), [Wikidata](https://www.wikidata.org/wiki/Q527112)                                     |
+| Dom Pedro I                | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_I_do_Brasil), [Wikidata](https://www.wikidata.org/wiki/Q939)                                 |
+| Dom Pedro II               | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_II_do_Brasil), [Wikidata](https://www.wikidata.org/wiki/Q156774)                             |
+| Maria Leopoldina           | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Leopoldina_da_%C3%81ustria), [Wikidata](https://www.wikidata.org/wiki/Q84239)                |
+| Princesa Isabel            | [Wikipédia](https://pt.wikipedia.org/wiki/Isabel%2C_Princesa_Imperial_do_Brasil), [Wikidata](https://www.wikidata.org/wiki/Q464449)          |
+| José Bonifácio             | [Wikipédia](https://pt.wikipedia.org/wiki/Jos%C3%A9_Bonif%C3%A1cio_de_Andrada_e_Silva), [Wikidata](https://www.wikidata.org/wiki/Q379631)    |
+| Barão do Rio Branco        | [Wikipédia](https://pt.wikipedia.org/wiki/Jos%C3%A9_Maria_da_Silva_Paranhos_J%C3%BAnior), [Wikidata](https://www.wikidata.org/wiki/Q1791364) |
+| Rui Barbosa                | [Wikipédia](https://pt.wikipedia.org/wiki/Ruy_Barbosa), [Wikidata](https://www.wikidata.org/wiki/Q916935)                                    |
+| Getúlio Vargas             | [Wikipédia](https://pt.wikipedia.org/wiki/Get%C3%BAlio_Vargas), [Wikidata](https://www.wikidata.org/wiki/Q156844)                            |
+| Juscelino Kubitschek       | [Wikipédia](https://pt.wikipedia.org/wiki/Juscelino_Kubitschek), [Wikidata](https://www.wikidata.org/wiki/Q155824)                           |
+| Maria Quitéria             | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Quit%C3%A9ria), [Wikidata](https://www.wikidata.org/wiki/Q2618916)                           |
+| Anita Garibaldi            | [Wikipédia](https://pt.wikipedia.org/wiki/Anita_Garibaldi), [Wikidata](https://www.wikidata.org/wiki/Q636688)                                |
+| Joana Angélica             | [Wikipédia](https://pt.wikipedia.org/wiki/Joana_Ang%C3%A9lica), [Wikidata](https://www.wikidata.org/wiki/Q10306986)                          |
+| Nísia Floresta             | [Wikipédia](https://pt.wikipedia.org/wiki/N%C3%ADsia_Floresta_%28escritora%29), [Wikidata](https://www.wikidata.org/wiki/Q2364565)           |
+| Bertha Lutz                | [Wikipédia](https://pt.wikipedia.org/wiki/Bertha_Lutz), [Wikidata](https://www.wikidata.org/wiki/Q1264246)                                   |
+| Carlota Pereira de Queirós | [Wikipédia](https://pt.wikipedia.org/wiki/Carlota_Pereira_de_Queir%C3%B3s), [Wikidata](https://www.wikidata.org/wiki/Q2817308)               |
+| Antonieta de Barros        | [Wikipédia](https://pt.wikipedia.org/wiki/Antonieta_de_Barros), [Wikidata](https://www.wikidata.org/wiki/Q9617883)                           |
+| Luís Gama                  | [Wikipédia](https://pt.wikipedia.org/wiki/Luiz_Gama), [Wikidata](https://www.wikidata.org/wiki/Q6706790)                                     |
+| André Rebouças             | [Wikipédia](https://pt.wikipedia.org/wiki/Andr%C3%A9_Rebou%C3%A7as), [Wikidata](https://www.wikidata.org/wiki/Q373313)                       |
+| José do Patrocínio         | [Wikipédia](https://pt.wikipedia.org/wiki/Jos%C3%A9_do_Patroc%C3%ADnio), [Wikidata](https://www.wikidata.org/wiki/Q359451)                   |
+| João Cândido               | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_C%C3%A2ndido), [Wikidata](https://www.wikidata.org/wiki/Q974355)                         |
+| Abdias do Nascimento       | [Wikipédia](https://pt.wikipedia.org/wiki/Abdias_do_Nascimento), [Wikidata](https://www.wikidata.org/wiki/Q2737040)                          |
+| Lélia Gonzalez             | [Wikipédia](https://pt.wikipedia.org/wiki/L%C3%A9lia_Gonzalez), [Wikidata](https://www.wikidata.org/wiki/Q10321947)                          |
+| Arariboia                  | [Wikipédia](https://pt.wikipedia.org/wiki/Arariboia), [Wikidata](https://www.wikidata.org/wiki/Q4784282)                                     |
+| Sepé Tiaraju               | [Wikipédia](https://pt.wikipedia.org/wiki/Sep%C3%A9_Tiaraju), [Wikidata](https://www.wikidata.org/wiki/Q949500)                              |
+| Marçal de Souza            | [Wikipédia](https://pt.wikipedia.org/wiki/Mar%C3%A7al_de_Souza), [Wikidata](https://www.wikidata.org/wiki/Q116822174)                        |
+| Santos Dumont              | [Wikipédia](https://pt.wikipedia.org/wiki/Santos_Dumont), [Wikidata](https://www.wikidata.org/wiki/Q313211)                                  |
+| Oswaldo Cruz               | [Wikipédia](https://pt.wikipedia.org/wiki/Oswaldo_Cruz), [Wikidata](https://www.wikidata.org/wiki/Q979554)                                   |
+| Carlos Chagas              | [Wikipédia](https://pt.wikipedia.org/wiki/Carlos_Chagas), [Wikidata](https://www.wikidata.org/wiki/Q438907)                                  |
+| Vital Brazil               | [Wikipédia](https://pt.wikipedia.org/wiki/Vital_Brazil), [Wikidata](https://www.wikidata.org/wiki/Q1797510)                                  |
+| Juliano Moreira            | [Wikipédia](https://pt.wikipedia.org/wiki/Juliano_Moreira), [Wikidata](https://www.wikidata.org/wiki/Q10312870)                              |
+| Milton Santos              | [Wikipédia](https://pt.wikipedia.org/wiki/Milton_Santos), [Wikidata](https://www.wikidata.org/wiki/Q945092)                                  |
+| Marechal Rondon            | [Wikipédia](https://pt.wikipedia.org/wiki/C%C3%A2ndido_Rondon), [Wikidata](https://www.wikidata.org/wiki/Q961743)                            |
+| Machado de Assis           | [Wikipédia](https://pt.wikipedia.org/wiki/Machado_de_Assis), [Wikidata](https://www.wikidata.org/wiki/Q311145)                               |
+| Carolina Maria de Jesus    | [Wikipédia](https://pt.wikipedia.org/wiki/Carolina_Maria_de_Jesus), [Wikidata](https://www.wikidata.org/wiki/Q440240)                        |
+| Clarice Lispector          | [Wikipédia](https://pt.wikipedia.org/wiki/Clarice_Lispector), [Wikidata](https://www.wikidata.org/wiki/Q235955)                              |
+| Cecília Meireles           | [Wikipédia](https://pt.wikipedia.org/wiki/Cec%C3%ADlia_Meireles), [Wikidata](https://www.wikidata.org/wiki/Q2607615)                         |
+| Carlos Drummond de Andrade | [Wikipédia](https://pt.wikipedia.org/wiki/Carlos_Drummond_de_Andrade), [Wikidata](https://www.wikidata.org/wiki/Q379745)                     |
+| Guimarães Rosa             | [Wikipédia](https://pt.wikipedia.org/wiki/Guimar%C3%A3es_Rosa), [Wikidata](https://www.wikidata.org/wiki/Q13012)                             |
+| Jorge Amado                | [Wikipédia](https://pt.wikipedia.org/wiki/Jorge_Amado), [Wikidata](https://www.wikidata.org/wiki/Q184440)                                    |
+| Aleijadinho                | [Wikipédia](https://pt.wikipedia.org/wiki/Aleijadinho), [Wikidata](https://www.wikidata.org/wiki/Q379714)                                    |
+| Tarsila do Amaral          | [Wikipédia](https://pt.wikipedia.org/wiki/Tarsila_do_Amaral), [Wikidata](https://www.wikidata.org/wiki/Q466627)                              |
+| Anita Malfatti             | [Wikipédia](https://pt.wikipedia.org/wiki/Anita_Malfatti), [Wikidata](https://www.wikidata.org/wiki/Q465919)                                 |
+| Candido Portinari          | [Wikipédia](https://pt.wikipedia.org/wiki/Candido_Portinari), [Wikidata](https://www.wikidata.org/wiki/Q319532)                              |
+| Chiquinha Gonzaga          | [Wikipédia](https://pt.wikipedia.org/wiki/Chiquinha_Gonzaga), [Wikidata](https://www.wikidata.org/wiki/Q465902)                              |
+| Carlos Gomes               | [Wikipédia](https://pt.wikipedia.org/wiki/Carlos_Gomes), [Wikidata](https://www.wikidata.org/wiki/Q263855)                                   |
+| Heitor Villa-Lobos         | [Wikipédia](https://pt.wikipedia.org/wiki/Heitor_Villa-Lobos), [Wikidata](https://www.wikidata.org/wiki/Q203514)                             |
+| Pixinguinha                | [Wikipédia](https://pt.wikipedia.org/wiki/Pixinguinha), [Wikidata](https://www.wikidata.org/wiki/Q281086)                                    |
+| Carmen Miranda             | [Wikipédia](https://pt.wikipedia.org/wiki/Carmen_Miranda), [Wikidata](https://www.wikidata.org/wiki/Q121655)                                 |
+| Ayrton Senna               | [Wikipédia](https://pt.wikipedia.org/wiki/Ayrton_Senna), [Wikidata](https://www.wikidata.org/wiki/Q10490)                                    |
+| Adhemar Ferreira da Silva  | [Wikipédia](https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q199631)                      |
+| Maria Lenk                 | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Lenk), [Wikidata](https://www.wikidata.org/wiki/Q451298)                                     |
+| Chico Mendes               | [Wikipédia](https://pt.wikipedia.org/wiki/Chico_Mendes), [Wikidata](https://www.wikidata.org/wiki/Q550176)                                   |

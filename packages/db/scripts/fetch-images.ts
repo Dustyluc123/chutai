@@ -102,6 +102,7 @@ const CROP_POSITION: Record<string, string | number> = {
   "futebol-atual": "top",
   "youtubers-e-streamers": "top",
   "famosos-da-tv": "top",
+  "historia-do-brasil": "top",
 };
 
 /** Recorta para quadrado e converte para WebP. */

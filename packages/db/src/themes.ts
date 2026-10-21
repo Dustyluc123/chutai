@@ -11,6 +11,7 @@ import musica from "../seed/musica-brasileira.json" with { type: "json" };
 import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
 import youtubers from "../seed/youtubers-e-streamers.json" with { type: "json" };
 import famososTv from "../seed/famosos-da-tv.json" with { type: "json" };
+import historia from "../seed/historia-do-brasil.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
 export const OFFICIAL_THEMES: readonly Theme[] = [
@@ -18,6 +19,7 @@ export const OFFICIAL_THEMES: readonly Theme[] = [
   musica,
   futebolAtual,
   famososTv,
+  historia,
   folclore,
   futebol,
   fauna,

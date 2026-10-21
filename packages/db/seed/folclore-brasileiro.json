@@ -410,6 +410,43 @@
         "periodo": "Noite",
         "comportamento": "Assustador"
       }
+    },
+    {
+      "id": "papa-figo",
+      "name": "Papa-figo",
+      "emoji": "🧛",
+      "values": {
+        "forma": "Humanoide",
+        "regiao": "Nordeste",
+        "habitat": ["Rua"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "capelobo",
+      "name": "Capelobo",
+      "emoji": "🐾",
+      "values": {
+        "forma": "Híbrido",
+        "regiao": "Norte",
+        "habitat": ["Mata"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
+    },
+    {
+      "id": "cumacanga",
+      "name": "Cumacanga",
+      "aliases": ["Curacanga"],
+      "emoji": "☄️",
+      "values": {
+        "forma": "Metamorfo",
+        "regiao": "Norte",
+        "habitat": ["Campo"],
+        "periodo": "Noite",
+        "comportamento": "Assustador"
+      }
     }
   ]
 }

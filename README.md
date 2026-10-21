@@ -53,11 +53,11 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 | Tema                     | Personagens | O que cada palpite compara                                                           | Modo Imagem                  |
 | ------------------------ | ----------: | ------------------------------------------------------------------------------------ | ---------------------------- |
 | YouTubers e streamers    |          57 | Conteúdo, plataforma, quando começou, estado natal, região, nascimento               | Parcial (50 com imagem)      |
-| Música brasileira        |          40 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira | Parcial (39 com imagem)      |
-| Futebol brasileiro atual |          41 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal            | Parcial (39 com imagem)      |
-| Famosos da TV            |          30 | Mais conhecido como, estado natal, região, nascimento, início da carreira            | Normal (todos com imagem)    |
-| Folclore brasileiro      |          24 | Forma, região, onde aparece, quando aparece, comportamento                           | Indisponível (16 com imagem) |
-| Lendas do futebol        |          49 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                | Parcial (47 com imagem)      |
+| Música brasileira        |          60 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira | Parcial (57 com imagem)      |
+| Futebol brasileiro atual |          54 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal            | Parcial (52 com imagem)      |
+| Famosos da TV            |          50 | Mais conhecido como, estado natal, região, nascimento, início da carreira            | Normal (todos com imagem)    |
+| Folclore brasileiro      |          27 | Forma, região, onde aparece, quando aparece, comportamento                           | Indisponível (16 com imagem) |
+| Lendas do futebol        |          60 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                | Parcial (58 com imagem)      |
 | Fauna brasileira         |          40 | Grupo, biomas, alimentação, onde vive, peso                                          | Normal (todos com imagem)    |
 
 Os temas com pessoas reais (os quatro primeiros) seguem regras próprias: só adultos, só fatos públicos e neutros, dados conferidos na Wikipédia em português e no Wikidata, com o link de cada pessoa em [`packages/db/seed/FONTES.md`](packages/db/seed/FONTES.md) e a data dos dados na página do tema. Quem aparece no site pode pedir para ser removido pelo e-mail da página de créditos.

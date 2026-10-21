@@ -10,7 +10,7 @@ confirmado ficou fora do tema.
 
 ## Música brasileira
 
-Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir dos gêneros listados no artigo. Estado de origem: onde a pessoa nasceu ou onde o grupo foi formado (com o nome atual do estado). Início da carreira: "período em atividade" do artigo; quando o artigo não traz, o ano citado no primeiro parágrafo ou o Wikidata.
+Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir dos gêneros listados no artigo. Estado de origem: onde a pessoa nasceu ou onde o grupo foi formado (com o nome atual do estado). Início da carreira: "período em atividade" do artigo; quando o artigo não traz, o ano citado no primeiro parágrafo ou o Wikidata. Em outubro de 2026 entraram mais 20 artistas, inclusive quem já morreu (Elis Regina, Tim Maia, Rita Lee, Gal Costa, Cazuza, Raul Seixas, Marília Mendonça, Tom Jobim), com o mesmo método; Martinho da Vila: início da carreira do Wikidata, porque o artigo não traz o período. Alguns nomes conhecidos ficaram fora por envolvimento em polêmicas recentes.
 
 | Personagem           | Fontes                                                                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -54,10 +54,30 @@ Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir
 | Alok                 | [Wikipédia](https://pt.wikipedia.org/wiki/Alok)                                                                                |
 | Wesley Safadão       | [Wikipédia](https://pt.wikipedia.org/wiki/Wesley_Safad%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q18379958)            |
 | Daniela Mercury      | [Wikipédia](https://pt.wikipedia.org/wiki/Daniela_Mercury), [Wikidata](https://www.wikidata.org/wiki/Q465927)                  |
+| Elis Regina          | [Wikipédia](https://pt.wikipedia.org/wiki/Elis_Regina), [Wikidata](https://www.wikidata.org/wiki/Q465877)                      |
+| Tim Maia             | [Wikipédia](https://pt.wikipedia.org/wiki/Tim_Maia), [Wikidata](https://www.wikidata.org/wiki/Q1262590)                        |
+| Rita Lee             | [Wikipédia](https://pt.wikipedia.org/wiki/Rita_Lee), [Wikidata](https://www.wikidata.org/wiki/Q265179)                         |
+| Gal Costa            | [Wikipédia](https://pt.wikipedia.org/wiki/Gal_Costa), [Wikidata](https://www.wikidata.org/wiki/Q236361)                        |
+| Cazuza               | [Wikipédia](https://pt.wikipedia.org/wiki/Cazuza), [Wikidata](https://www.wikidata.org/wiki/Q731775)                           |
+| Raul Seixas          | [Wikipédia](https://pt.wikipedia.org/wiki/Raul_Seixas), [Wikidata](https://www.wikidata.org/wiki/Q1392583)                     |
+| Marília Mendonça     | [Wikipédia](https://pt.wikipedia.org/wiki/Mar%C3%ADlia_Mendon%C3%A7a), [Wikidata](https://www.wikidata.org/wiki/Q24040310)     |
+| Tom Jobim            | [Wikipédia](https://pt.wikipedia.org/wiki/Tom_Jobim), [Wikidata](https://www.wikidata.org/wiki/Q200131)                        |
+| Legião Urbana        | [Wikipédia](https://pt.wikipedia.org/wiki/Legi%C3%A3o_Urbana), [Wikidata](https://www.wikidata.org/wiki/Q738110)               |
+| Titãs                | [Wikipédia](https://pt.wikipedia.org/wiki/Tit%C3%A3s_%28banda%29), [Wikidata](https://www.wikidata.org/wiki/Q1808409)          |
+| Skank                | [Wikipédia](https://pt.wikipedia.org/wiki/Skank), [Wikidata](https://www.wikidata.org/wiki/Q2245893)                           |
+| Charlie Brown Jr.    | [Wikipédia](https://pt.wikipedia.org/wiki/Charlie_Brown_Jr.), [Wikidata](https://www.wikidata.org/wiki/Q1066845)               |
+| Mamonas Assassinas   | [Wikipédia](https://pt.wikipedia.org/wiki/Mamonas_Assassinas), [Wikidata](https://www.wikidata.org/wiki/Q2740228)              |
+| Alcione              | [Wikipédia](https://pt.wikipedia.org/wiki/Alcione_%28cantora%29), [Wikidata](https://www.wikidata.org/wiki/Q438512)            |
+| Martinho da Vila     | [Wikipédia](https://pt.wikipedia.org/wiki/Martinho_da_Vila), [Wikidata](https://www.wikidata.org/wiki/Q385498)                 |
+| Léo Santana          | [Wikipédia](https://pt.wikipedia.org/wiki/Leo_Santana), [Wikidata](https://www.wikidata.org/wiki/Q10321962)                    |
+| João Gomes           | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_Gomes), [Wikidata](https://www.wikidata.org/wiki/Q107605286)               |
+| Marina Sena          | [Wikipédia](https://pt.wikipedia.org/wiki/Marina_Sena), [Wikidata](https://www.wikidata.org/wiki/Q109454019)                   |
+| Djonga               | [Wikipédia](https://pt.wikipedia.org/wiki/Djonga_%28rapper%29), [Wikidata](https://www.wikidata.org/wiki/Q56347761)            |
+| Menos é Mais         | [Wikipédia](https://pt.wikipedia.org/wiki/Menos_%C3%89_Mais), [Wikidata](https://www.wikidata.org/wiki/Q108088139)             |
 
 ## Futebol brasileiro atual
 
-Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a data da última atualização do clube). Liga atual: liga do clube atual (os clubes brasileiros estão na Série A de 2026). Estado ou país natal: local de nascimento, conferido no Wikidata. Seleção principal: se o jogador já atuou pela seleção principal do seu país (não conta base). Saíram da lista original, por envolvimento recente em casos de apostas: Bruno Henrique e Lucas Paquetá; entraram Gerson e Raphael Veiga.
+Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a data da última atualização do clube). Liga atual: liga do clube atual (os clubes brasileiros estão na Série A de 2026). Estado ou país natal: local de nascimento, conferido no Wikidata. Seleção principal: se o jogador já atuou pela seleção principal do seu país (não conta base). Saíram da lista original, por envolvimento recente em casos de apostas: Bruno Henrique e Lucas Paquetá; entraram Gerson e Raphael Veiga. Em outubro de 2026 entraram mais 13 jogadores, com o mesmo método (clube e seleção conferidos no código da caixa de informações quando o formato é outro); Pablo Vegetti, sugerido, ficou fora por jogar hoje no Paraguai.
 
 | Personagem         | Fontes                                                                                                                                   |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -102,10 +122,23 @@ Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a
 | Calleri            | [Wikipédia](https://pt.wikipedia.org/wiki/Jonathan_Calleri), [Wikidata](https://www.wikidata.org/wiki/Q16298050)                         |
 | Gerson             | [Wikipédia](https://pt.wikipedia.org/wiki/Gerson_Santos_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q18617137)                   |
 | Raphael Veiga      | [Wikipédia](https://pt.wikipedia.org/wiki/Raphael_Veiga), [Wikidata](https://www.wikidata.org/wiki/Q27443365)                            |
+| Gabriel Jesus      | [Wikipédia](https://pt.wikipedia.org/wiki/Gabriel_Jesus), [Wikidata](https://www.wikidata.org/wiki/Q19708656)                            |
+| Antony             | [Wikipédia](https://pt.wikipedia.org/wiki/Antony_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q59205608)                 |
+| Weverton           | [Wikipédia](https://pt.wikipedia.org/wiki/Weverton), [Wikidata](https://www.wikidata.org/wiki/Q8040741)                                  |
+| Bento              | [Wikipédia](https://pt.wikipedia.org/wiki/Bento_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q98265925)                  |
+| Hugo Souza         | [Wikipédia](https://pt.wikipedia.org/wiki/Hugo_Souza), [Wikidata](https://www.wikidata.org/wiki/Q64577950)                               |
+| Lucas Beraldo      | [Wikipédia](https://pt.wikipedia.org/wiki/Lucas_Beraldo), [Wikidata](https://www.wikidata.org/wiki/Q112604843)                           |
+| Andreas Pereira    | [Wikipédia](https://pt.wikipedia.org/wiki/Andreas_Pereira), [Wikidata](https://www.wikidata.org/wiki/Q17619350)                          |
+| João Gomes         | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_Gomes_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q103312425)       |
+| Joelinton          | [Wikipédia](https://pt.wikipedia.org/wiki/Joelinton), [Wikidata](https://www.wikidata.org/wiki/Q20047360)                                |
+| Douglas Luiz       | [Wikipédia](https://pt.wikipedia.org/wiki/Douglas_Luiz), [Wikidata](https://www.wikidata.org/wiki/Q28363823)                             |
+| Philippe Coutinho  | [Wikipédia](https://pt.wikipedia.org/wiki/Philippe_Coutinho), [Wikidata](https://www.wikidata.org/wiki/Q311872)                          |
+| Everton Cebolinha  | [Wikipédia](https://pt.wikipedia.org/wiki/Everton_Cebolinha), [Wikidata](https://www.wikidata.org/wiki/Q17385902)                        |
+| Germán Cano        | [Wikipédia](https://pt.wikipedia.org/wiki/Germ%C3%A1n_Cano), [Wikidata](https://www.wikidata.org/wiki/Q3761170)                          |
 
 ## YouTubers e streamers
 
-Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do Chutaí a partir do artigo de cada pessoa. Começou na internet: início do canal ou da atividade principal segundo o artigo. Estado natal e nascimento: caixa de informações e primeiro parágrafo, conferidos no Wikidata. O número de inscritos ficou de fora: não foi possível confirmar o dado, com data, para todos. Em outubro de 2026 entraram mais 23 criadores, conferidos do mesmo jeito; Thiago Asmar ficou fora por ter uma seção de controvérsias no artigo, Atila Iamarino e Danielle Noce por faltar local de nascimento ou ano de início, Thiago Ventura e Rafael Portugal por não haver data de início na internet. Flavia Calina e Felps, pedidos por jogadores, ficaram fora: não têm artigo na Wikipédia e não foi possível confirmar, em veículo grande, o ano de nascimento (Flavia Calina) ou nenhum dos dados (Felps). Saíram da lista original por não terem artigo ou dado confirmado na Wikipédia: Mari Maria, Jazzghost, Gabepeixe, Baiano, Tazercraft, Robin Hood Gamer, Rafa e Luiz, Tixinha, Bruna Vieira, Átila Iamarino, Lucas Rangel e Tauz. Gameplayrj e Davy Jones são a mesma pessoa.
+Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do Chutaí a partir do artigo de cada pessoa. Começou na internet: início do canal ou da atividade principal segundo o artigo. Estado natal e nascimento: caixa de informações e primeiro parágrafo, conferidos no Wikidata. O número de inscritos ficou de fora: não foi possível confirmar o dado, com data, para todos. Em outubro de 2026 entraram mais 23 criadores, conferidos do mesmo jeito; alguns nomes ficaram fora por envolvimento em polêmicas, Atila Iamarino e Danielle Noce por faltar local de nascimento ou ano de início, Thiago Ventura e Rafael Portugal por não haver data de início na internet. Flavia Calina e Felps, pedidos por jogadores, ficaram fora: não têm artigo na Wikipédia e não foi possível confirmar, em veículo grande, o ano de nascimento (Flavia Calina) ou nenhum dos dados (Felps). Saíram da lista original por não terem artigo ou dado confirmado na Wikipédia: Mari Maria, Jazzghost, Gabepeixe, Baiano, Tazercraft, Robin Hood Gamer, Rafa e Luiz, Tixinha, Bruna Vieira, Átila Iamarino, Lucas Rangel e Tauz. Gameplayrj e Davy Jones são a mesma pessoa.
 
 | Personagem           | Fontes                                                                                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -169,7 +202,7 @@ Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do C
 
 ## Famosos da TV
 
-Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descrição do artigo (apresentação, atuação ou jornalismo). Estado natal e nascimento: caixa de informações, conferidos no Wikidata. Início da carreira: período em atividade do artigo; sem ele, o Wikidata ou o primeiro parágrafo (Ratinho: estreia na TV, em 1991). A emissora atual ficou de fora: muitos artistas trabalham sem contrato fixo e o dado não pôde ser confirmado para todos.
+Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descrição do artigo (apresentação, atuação ou jornalismo). Estado natal e nascimento: caixa de informações, conferidos no Wikidata. Início da carreira: período em atividade do artigo; sem ele, o Wikidata ou o primeiro parágrafo (Ratinho: estreia na TV, em 1991). A emissora atual ficou de fora: muitos artistas trabalham sem contrato fixo e o dado não pôde ser confirmado para todos. Em outubro de 2026 entraram mais 20 nomes, inclusive quem já morreu (Silvio Santos, Hebe Camargo, Gugu Liberato, Jô Soares, Chico Anysio, Glória Maria, Cid Moreira), com o mesmo método; humorista e comediante contam como atuação. Início da carreira de Silvio Santos e Glória Maria: Wikidata (o artigo não traz o período).
 
 | Personagem           | Fontes                                                                                                                           |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -203,3 +236,51 @@ Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descriç
 | Selton Mello         | [Wikipédia](https://pt.wikipedia.org/wiki/Selton_Mello), [Wikidata](https://www.wikidata.org/wiki/Q4289700)                      |
 | Wagner Moura         | [Wikipédia](https://pt.wikipedia.org/wiki/Wagner_Moura), [Wikidata](https://www.wikidata.org/wiki/Q922503)                       |
 | Fernanda Torres      | [Wikipédia](https://pt.wikipedia.org/wiki/Fernanda_Torres), [Wikidata](https://www.wikidata.org/wiki/Q465907)                    |
+| Silvio Santos        | [Wikipédia](https://pt.wikipedia.org/wiki/Silvio_Santos), [Wikidata](https://www.wikidata.org/wiki/Q1395208)                     |
+| Hebe Camargo         | [Wikipédia](https://pt.wikipedia.org/wiki/Hebe_Camargo), [Wikidata](https://www.wikidata.org/wiki/Q6105)                         |
+| Gugu Liberato        | [Wikipédia](https://pt.wikipedia.org/wiki/Gugu_Liberato), [Wikidata](https://www.wikidata.org/wiki/Q1105361)                     |
+| Jô Soares            | [Wikipédia](https://pt.wikipedia.org/wiki/J%C3%B4_Soares), [Wikidata](https://www.wikidata.org/wiki/Q732513)                     |
+| Chico Anysio         | [Wikipédia](https://pt.wikipedia.org/wiki/Chico_Anysio), [Wikidata](https://www.wikidata.org/wiki/Q1789876)                      |
+| Renato Aragão        | [Wikipédia](https://pt.wikipedia.org/wiki/Renato_Arag%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q848556)                 |
+| Glória Maria         | [Wikipédia](https://pt.wikipedia.org/wiki/Gl%C3%B3ria_Maria), [Wikidata](https://www.wikidata.org/wiki/Q1791085)                 |
+| Cid Moreira          | [Wikipédia](https://pt.wikipedia.org/wiki/Cid_Moreira), [Wikidata](https://www.wikidata.org/wiki/Q1789894)                       |
+| Pedro Bial           | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_Bial), [Wikidata](https://www.wikidata.org/wiki/Q3374018)                        |
+| Adriane Galisteu     | [Wikipédia](https://pt.wikipedia.org/wiki/Adriane_Galisteu), [Wikidata](https://www.wikidata.org/wiki/Q2080462)                  |
+| Maisa Silva          | [Wikipédia](https://pt.wikipedia.org/wiki/Maisa_Silva), [Wikidata](https://www.wikidata.org/wiki/Q10323204)                      |
+| Grazi Massafera      | [Wikipédia](https://pt.wikipedia.org/wiki/Grazi_Massafera), [Wikidata](https://www.wikidata.org/wiki/Q3115883)                   |
+| Antônio Fagundes     | [Wikipédia](https://pt.wikipedia.org/wiki/Ant%C3%B4nio_Fagundes), [Wikidata](https://www.wikidata.org/wiki/Q772892)              |
+| Susana Vieira        | [Wikipédia](https://pt.wikipedia.org/wiki/Susana_Vieira), [Wikidata](https://www.wikidata.org/wiki/Q2640194)                     |
+| Lima Duarte          | [Wikipédia](https://pt.wikipedia.org/wiki/Lima_Duarte), [Wikidata](https://www.wikidata.org/wiki/Q1791430)                       |
+| Camila Pitanga       | [Wikipédia](https://pt.wikipedia.org/wiki/Camila_Pitanga), [Wikidata](https://www.wikidata.org/wiki/Q2934814)                    |
+| Deborah Secco        | [Wikipédia](https://pt.wikipedia.org/wiki/Deborah_Secco), [Wikidata](https://www.wikidata.org/wiki/Q2352306)                     |
+| Leandro Hassum       | [Wikipédia](https://pt.wikipedia.org/wiki/Leandro_Hassum), [Wikidata](https://www.wikidata.org/wiki/Q10316778)                   |
+| Marcelo Adnet        | [Wikipédia](https://pt.wikipedia.org/wiki/Marcelo_Adnet), [Wikidata](https://www.wikidata.org/wiki/Q6756484)                     |
+| Maju Coutinho        | [Wikipédia](https://pt.wikipedia.org/wiki/Maju_Coutinho), [Wikidata](https://www.wikidata.org/wiki/Q17490120)                    |
+
+## Lendas do futebol
+
+Esta seção cobre os 11 jogadores que entraram em outubro de 2026 (os outros 49 vêm de antes da regra de fontes). Posição e estado natal: primeiro parágrafo e caixa de informações, conferidos no Wikidata. Copas do Mundo: quantas o jogador ganhou, entre as que disputou segundo as categorias do artigo (o Brasil foi campeão em 1958, 1962, 1970, 1994 e 2002). Décadas na Seleção: anos na seleção principal, da caixa de informações.
+
+| Personagem     | Fontes                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Rogério Ceni   | [Wikipédia](https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni), [Wikidata](https://www.wikidata.org/wiki/Q1249859)                |
+| Dida           | [Wikipédia](https://pt.wikipedia.org/wiki/Dida_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q188544)            |
+| Raí            | [Wikipédia](https://pt.wikipedia.org/wiki/Ra%C3%AD), [Wikidata](https://www.wikidata.org/wiki/Q312895)                          |
+| Edmundo        | [Wikipédia](https://pt.wikipedia.org/wiki/Edmundo_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q445541)         |
+| Denílson       | [Wikipédia](https://pt.wikipedia.org/wiki/Den%C3%ADlson), [Wikidata](https://www.wikidata.org/wiki/Q311641)                     |
+| Gilberto Silva | [Wikipédia](https://pt.wikipedia.org/wiki/Gilberto_Silva), [Wikidata](https://www.wikidata.org/wiki/Q190142)                    |
+| Luís Fabiano   | [Wikipédia](https://pt.wikipedia.org/wiki/Lu%C3%ADs_Fabiano), [Wikidata](https://www.wikidata.org/wiki/Q192963)                 |
+| Fred           | [Wikipédia](https://pt.wikipedia.org/wiki/Frederico_Chaves_Guedes), [Wikidata](https://www.wikidata.org/wiki/Q312772)           |
+| Ademir da Guia | [Wikipédia](https://pt.wikipedia.org/wiki/Ademir_da_Guia), [Wikidata](https://www.wikidata.org/wiki/Q355742)                    |
+| Pepe           | [Wikipédia](https://pt.wikipedia.org/wiki/Pepe_%28futebolista_brasileiro%29), [Wikidata](https://www.wikidata.org/wiki/Q509491) |
+| Müller         | [Wikipédia](https://pt.wikipedia.org/wiki/M%C3%BCller_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q381729)     |
+
+## Folclore brasileiro
+
+Esta seção cobre os 3 personagens que entraram em outubro de 2026 (os outros 24 vêm de antes da regra de fontes). Cada valor sai do artigo da Wikipédia: forma (aparência descrita), região mais conhecida (estados citados), onde e quando aparece e comportamento. Ficaram fora candidatos sem artigo sobre a lenda (Cobra Norato, Labatut, Pé de garrafa, Porca dos Sete Leitões, Uirapuru) ou sem dado claro para algum atributo (Caboclo-d'Água, Ipupiara).
+
+| Personagem | Fontes                                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
+| Papa-figo  | [Wikipédia](https://pt.wikipedia.org/wiki/Papa-figo), [Wikidata](https://www.wikidata.org/wiki/Q10344281) |
+| Capelobo   | [Wikipédia](https://pt.wikipedia.org/wiki/Capelobo), [Wikidata](https://www.wikidata.org/wiki/Q9696177)   |
+| Cumacanga  | [Wikipédia](https://pt.wikipedia.org/wiki/Cumacanga), [Wikidata](https://www.wikidata.org/wiki/Q8352644)  |

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatValue } from "@chutai/game";
+import { formatCharacterValue, nounPhrases } from "@chutai/game";
 import type { AttributeType } from "@chutai/shared";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -106,7 +106,7 @@ export default async function ThemePage({ params }: PageProps) {
 
         <section aria-labelledby="personagens" className="flex flex-col gap-5">
           <h2 id="personagens" className="font-display text-3xl">
-            {characters.length} personagens
+            {nounPhrases(theme.noun).count(characters.length)}
           </h2>
           <div className="overflow-x-auto rounded-2xl border-2 border-tinta bg-white">
             <table className="w-full min-w-[40rem] text-left text-sm">
@@ -142,7 +142,7 @@ export default async function ThemePage({ params }: PageProps) {
                     </th>
                     {theme.attributes.map((attr) => (
                       <td key={attr.key} className="px-4 py-2.5 text-tinta-soft">
-                        {formatValue(attr, character.values[attr.key])}
+                        {formatCharacterValue(attr, character)}
                       </td>
                     ))}
                   </tr>

@@ -102,18 +102,27 @@ const CROP_POSITION: Record<string, string | number> = {
   "futebol-atual": "top",
   "youtubers-e-streamers": "top",
   "famosos-da-tv": "top",
+  "historia-do-brasil": "top",
 };
+
+/** Temas em que a imagem entra inteira no quadrado (bandeiras), com faixas brancas, sem cortar. */
+const CONTAIN = new Set(["estados-do-brasil"]);
 
 /** Recorta para quadrado e converte para WebP. */
 async function toWebp(bytes: Buffer, slug: string): Promise<Buffer> {
-  return sharp(bytes)
-    .rotate()
-    .resize(IMAGE_SIZE, IMAGE_SIZE, {
-      fit: "cover",
-      position: CROP_POSITION[slug] ?? sharp.strategy.attention,
-    })
-    .webp({ quality: 74, effort: 6 })
-    .toBuffer();
+  return (
+    sharp(bytes)
+      .rotate()
+      .resize(IMAGE_SIZE, IMAGE_SIZE, {
+        fit: CONTAIN.has(slug) ? "contain" : "cover",
+        position: CONTAIN.has(slug) ? "centre" : (CROP_POSITION[slug] ?? sharp.strategy.attention),
+        background: { r: 255, g: 255, b: 255, alpha: 1 },
+      })
+      // Só as bandeiras ganham fundo branco; as outras imagens ficam como sempre foram.
+      .flatten(CONTAIN.has(slug) ? { background: "#ffffff" } : false)
+      .webp({ quality: 74, effort: 6 })
+      .toBuffer()
+  );
 }
 
 /**

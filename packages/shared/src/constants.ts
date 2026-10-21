@@ -45,3 +45,9 @@ export const DEFAULT_SETTINGS: RoomSettings = {
 
 export const ROUND_SECONDS_OPTIONS = [45, 60, 90, 120, 180] as const;
 export const ROUNDS_OPTIONS = [3, 5, 7, 10] as const;
+
+/**
+ * Valor de atributo que as fontes não permitem saber (ex.: local de nascimento de Zumbi).
+ * Comparar com ele nunca dá erro: a peça fica cinza, "ninguém sabe ao certo".
+ */
+export const UNKNOWN_VALUE = "Incerto";

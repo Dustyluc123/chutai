@@ -2,8 +2,8 @@
 
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { Search } from "lucide-react";
-import type { CharacterOption } from "@chutai/shared";
-import { searchCharacters } from "@chutai/game";
+import type { CharacterOption, ThemeNoun } from "@chutai/shared";
+import { nounPhrases, searchCharacters } from "@chutai/game";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { cn } from "@/lib/cn";
 
@@ -20,6 +20,8 @@ interface GuessInputProps {
    * Padrão: true.
    */
   showPictures?: boolean;
+  /** Palavra do tema para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
 }
 
 /**
@@ -34,6 +36,7 @@ export function GuessInput({
   placeholder = "Digite um nome…",
   autoFocus,
   showPictures = true,
+  noun,
 }: GuessInputProps) {
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -98,7 +101,7 @@ export function GuessInput({
         ref={inputRef}
         type="text"
         role="combobox"
-        aria-label="Chutar um personagem"
+        aria-label={`Chutar ${nounPhrases(noun).one}`}
         aria-expanded={showList}
         aria-controls={listId}
         aria-autocomplete="list"
@@ -127,7 +130,7 @@ export function GuessInput({
         >
           {results.length === 0 ? (
             <li className="px-3 py-3 text-sm text-tinta-soft">
-              Nenhum personagem com esse nome (ou você já chutou).
+              Nenhum {noun?.singular ?? "personagem"} com esse nome (ou você já chutou).
             </li>
           ) : (
             results.map((option, index) => (

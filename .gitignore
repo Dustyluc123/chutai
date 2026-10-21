@@ -26,4 +26,4 @@ Thumbs.db
 .cache/
 
 # instruções locais para o Claude Code
-PROMPT.md
+PROMPT*.md

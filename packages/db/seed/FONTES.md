@@ -10,7 +10,7 @@ confirmado ficou fora do tema.
 
 ## Música brasileira
 
-Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir dos gêneros listados no artigo. Estado de origem: onde a pessoa nasceu ou onde o grupo foi formado (com o nome atual do estado). Início da carreira: "período em atividade" do artigo; quando o artigo não traz, o ano citado no primeiro parágrafo ou o Wikidata.
+Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir dos gêneros listados no artigo. Estado de origem: onde a pessoa nasceu ou onde o grupo foi formado (com o nome atual do estado). Início da carreira: "período em atividade" do artigo; quando o artigo não traz, o ano citado no primeiro parágrafo ou o Wikidata. Em outubro de 2026 entraram mais 20 artistas, inclusive quem já morreu (Elis Regina, Tim Maia, Rita Lee, Gal Costa, Cazuza, Raul Seixas, Marília Mendonça, Tom Jobim), com o mesmo método; Martinho da Vila: início da carreira do Wikidata, porque o artigo não traz o período. Alguns nomes conhecidos ficaram fora por envolvimento em polêmicas recentes.
 
 | Personagem           | Fontes                                                                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -54,10 +54,30 @@ Dados de outubro de 2026. Gênero principal: classificação do Chutaí a partir
 | Alok                 | [Wikipédia](https://pt.wikipedia.org/wiki/Alok)                                                                                |
 | Wesley Safadão       | [Wikipédia](https://pt.wikipedia.org/wiki/Wesley_Safad%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q18379958)            |
 | Daniela Mercury      | [Wikipédia](https://pt.wikipedia.org/wiki/Daniela_Mercury), [Wikidata](https://www.wikidata.org/wiki/Q465927)                  |
+| Elis Regina          | [Wikipédia](https://pt.wikipedia.org/wiki/Elis_Regina), [Wikidata](https://www.wikidata.org/wiki/Q465877)                      |
+| Tim Maia             | [Wikipédia](https://pt.wikipedia.org/wiki/Tim_Maia), [Wikidata](https://www.wikidata.org/wiki/Q1262590)                        |
+| Rita Lee             | [Wikipédia](https://pt.wikipedia.org/wiki/Rita_Lee), [Wikidata](https://www.wikidata.org/wiki/Q265179)                         |
+| Gal Costa            | [Wikipédia](https://pt.wikipedia.org/wiki/Gal_Costa), [Wikidata](https://www.wikidata.org/wiki/Q236361)                        |
+| Cazuza               | [Wikipédia](https://pt.wikipedia.org/wiki/Cazuza), [Wikidata](https://www.wikidata.org/wiki/Q731775)                           |
+| Raul Seixas          | [Wikipédia](https://pt.wikipedia.org/wiki/Raul_Seixas), [Wikidata](https://www.wikidata.org/wiki/Q1392583)                     |
+| Marília Mendonça     | [Wikipédia](https://pt.wikipedia.org/wiki/Mar%C3%ADlia_Mendon%C3%A7a), [Wikidata](https://www.wikidata.org/wiki/Q24040310)     |
+| Tom Jobim            | [Wikipédia](https://pt.wikipedia.org/wiki/Tom_Jobim), [Wikidata](https://www.wikidata.org/wiki/Q200131)                        |
+| Legião Urbana        | [Wikipédia](https://pt.wikipedia.org/wiki/Legi%C3%A3o_Urbana), [Wikidata](https://www.wikidata.org/wiki/Q738110)               |
+| Titãs                | [Wikipédia](https://pt.wikipedia.org/wiki/Tit%C3%A3s_%28banda%29), [Wikidata](https://www.wikidata.org/wiki/Q1808409)          |
+| Skank                | [Wikipédia](https://pt.wikipedia.org/wiki/Skank), [Wikidata](https://www.wikidata.org/wiki/Q2245893)                           |
+| Charlie Brown Jr.    | [Wikipédia](https://pt.wikipedia.org/wiki/Charlie_Brown_Jr.), [Wikidata](https://www.wikidata.org/wiki/Q1066845)               |
+| Mamonas Assassinas   | [Wikipédia](https://pt.wikipedia.org/wiki/Mamonas_Assassinas), [Wikidata](https://www.wikidata.org/wiki/Q2740228)              |
+| Alcione              | [Wikipédia](https://pt.wikipedia.org/wiki/Alcione_%28cantora%29), [Wikidata](https://www.wikidata.org/wiki/Q438512)            |
+| Martinho da Vila     | [Wikipédia](https://pt.wikipedia.org/wiki/Martinho_da_Vila), [Wikidata](https://www.wikidata.org/wiki/Q385498)                 |
+| Léo Santana          | [Wikipédia](https://pt.wikipedia.org/wiki/Leo_Santana), [Wikidata](https://www.wikidata.org/wiki/Q10321962)                    |
+| João Gomes           | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_Gomes), [Wikidata](https://www.wikidata.org/wiki/Q107605286)               |
+| Marina Sena          | [Wikipédia](https://pt.wikipedia.org/wiki/Marina_Sena), [Wikidata](https://www.wikidata.org/wiki/Q109454019)                   |
+| Djonga               | [Wikipédia](https://pt.wikipedia.org/wiki/Djonga_%28rapper%29), [Wikidata](https://www.wikidata.org/wiki/Q56347761)            |
+| Menos é Mais         | [Wikipédia](https://pt.wikipedia.org/wiki/Menos_%C3%89_Mais), [Wikidata](https://www.wikidata.org/wiki/Q108088139)             |
 
 ## Futebol brasileiro atual
 
-Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a data da última atualização do clube). Liga atual: liga do clube atual (os clubes brasileiros estão na Série A de 2026). Estado ou país natal: local de nascimento, conferido no Wikidata. Seleção principal: se o jogador já atuou pela seleção principal do seu país (não conta base). Saíram da lista original, por envolvimento recente em casos de apostas: Bruno Henrique e Lucas Paquetá; entraram Gerson e Raphael Veiga.
+Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a data da última atualização do clube). Liga atual: liga do clube atual (os clubes brasileiros estão na Série A de 2026). Estado ou país natal: local de nascimento, conferido no Wikidata. Seleção principal: se o jogador já atuou pela seleção principal do seu país (não conta base). Saíram da lista original, por envolvimento recente em casos de apostas: Bruno Henrique e Lucas Paquetá; entraram Gerson e Raphael Veiga. Em outubro de 2026 entraram mais 13 jogadores, com o mesmo método (clube e seleção conferidos no código da caixa de informações quando o formato é outro); Pablo Vegetti, sugerido, ficou fora por jogar hoje no Paraguai.
 
 | Personagem         | Fontes                                                                                                                                   |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -102,10 +122,23 @@ Dados de outubro de 2026, da caixa de informações de cada artigo (que mostra a
 | Calleri            | [Wikipédia](https://pt.wikipedia.org/wiki/Jonathan_Calleri), [Wikidata](https://www.wikidata.org/wiki/Q16298050)                         |
 | Gerson             | [Wikipédia](https://pt.wikipedia.org/wiki/Gerson_Santos_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q18617137)                   |
 | Raphael Veiga      | [Wikipédia](https://pt.wikipedia.org/wiki/Raphael_Veiga), [Wikidata](https://www.wikidata.org/wiki/Q27443365)                            |
+| Gabriel Jesus      | [Wikipédia](https://pt.wikipedia.org/wiki/Gabriel_Jesus), [Wikidata](https://www.wikidata.org/wiki/Q19708656)                            |
+| Antony             | [Wikipédia](https://pt.wikipedia.org/wiki/Antony_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q59205608)                 |
+| Weverton           | [Wikipédia](https://pt.wikipedia.org/wiki/Weverton), [Wikidata](https://www.wikidata.org/wiki/Q8040741)                                  |
+| Bento              | [Wikipédia](https://pt.wikipedia.org/wiki/Bento_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q98265925)                  |
+| Hugo Souza         | [Wikipédia](https://pt.wikipedia.org/wiki/Hugo_Souza), [Wikidata](https://www.wikidata.org/wiki/Q64577950)                               |
+| Lucas Beraldo      | [Wikipédia](https://pt.wikipedia.org/wiki/Lucas_Beraldo), [Wikidata](https://www.wikidata.org/wiki/Q112604843)                           |
+| Andreas Pereira    | [Wikipédia](https://pt.wikipedia.org/wiki/Andreas_Pereira), [Wikidata](https://www.wikidata.org/wiki/Q17619350)                          |
+| João Gomes         | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_Gomes_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q103312425)       |
+| Joelinton          | [Wikipédia](https://pt.wikipedia.org/wiki/Joelinton), [Wikidata](https://www.wikidata.org/wiki/Q20047360)                                |
+| Douglas Luiz       | [Wikipédia](https://pt.wikipedia.org/wiki/Douglas_Luiz), [Wikidata](https://www.wikidata.org/wiki/Q28363823)                             |
+| Philippe Coutinho  | [Wikipédia](https://pt.wikipedia.org/wiki/Philippe_Coutinho), [Wikidata](https://www.wikidata.org/wiki/Q311872)                          |
+| Everton Cebolinha  | [Wikipédia](https://pt.wikipedia.org/wiki/Everton_Cebolinha), [Wikidata](https://www.wikidata.org/wiki/Q17385902)                        |
+| Germán Cano        | [Wikipédia](https://pt.wikipedia.org/wiki/Germ%C3%A1n_Cano), [Wikidata](https://www.wikidata.org/wiki/Q3761170)                          |
 
 ## YouTubers e streamers
 
-Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do Chutaí a partir do artigo de cada pessoa. Começou na internet: início do canal ou da atividade principal segundo o artigo. Estado natal e nascimento: caixa de informações e primeiro parágrafo, conferidos no Wikidata. O número de inscritos ficou de fora: não foi possível confirmar o dado, com data, para todos. Saíram da lista original por não terem artigo ou dado confirmado na Wikipédia: Mari Maria, Jazzghost, Gabepeixe, Baiano, Tazercraft, Robin Hood Gamer, Rafa e Luiz, Tixinha, Bruna Vieira, Átila Iamarino, Lucas Rangel e Tauz. Gameplayrj e Davy Jones são a mesma pessoa.
+Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do Chutaí a partir do artigo de cada pessoa. Começou na internet: início do canal ou da atividade principal segundo o artigo. Estado natal e nascimento: caixa de informações e primeiro parágrafo, conferidos no Wikidata. O número de inscritos ficou de fora: não foi possível confirmar o dado, com data, para todos. Em outubro de 2026 entraram mais 23 criadores, conferidos do mesmo jeito; alguns nomes ficaram fora por envolvimento em polêmicas, Atila Iamarino e Danielle Noce por faltar local de nascimento ou ano de início, Thiago Ventura e Rafael Portugal por não haver data de início na internet. Flavia Calina e Felps, pedidos por jogadores, ficaram fora por enquanto: não têm artigo na Wikipédia; o g1 e um artigo da SciELO confirmam o canal de Flavia Calina desde 2009 e o nascimento em São Paulo, e o vídeo "FIZ 43 ANOS E CELEBREI EM UMA CASA TEMÁTICA EM ORLANDO" do canal dela dá a idade, mas não foi possível confirmar a data de publicação do vídeo (e portanto o ano de nascimento); do Felps não se achou declaração própria nem matéria de veículo grande com os dados. Saíram da lista original por não terem artigo ou dado confirmado na Wikipédia: Mari Maria, Jazzghost, Gabepeixe, Baiano, Tazercraft, Robin Hood Gamer, Rafa e Luiz, Tixinha, Bruna Vieira, Átila Iamarino, Lucas Rangel e Tauz. Gameplayrj e Davy Jones são a mesma pessoa.
 
 | Personagem           | Fontes                                                                                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -143,10 +176,33 @@ Dados de outubro de 2026. Conteúdo e plataforma principal: classificação do C
 | Nath Finanças        | [Wikipédia](https://pt.wikipedia.org/wiki/Nath_Finan%C3%A7as), [Wikidata](https://www.wikidata.org/wiki/Q115011771)                                                                                    |
 | Rato Borrachudo      | [Wikipédia](https://pt.wikipedia.org/wiki/Rato_Borrachudo), [Wikidata](https://www.wikidata.org/wiki/Q123586839)                                                                                       |
 | Fred Bruno           | [Wikipédia](https://pt.wikipedia.org/wiki/Fred_Bruno), [Wikidata](https://www.wikidata.org/wiki/Q97179057)                                                                                             |
+| Jout Jout            | [Wikipédia](https://pt.wikipedia.org/wiki/Jout_Jout), [Wikidata](https://www.wikidata.org/wiki/Q30932535)                                                                                              |
+| Malena               | [Wikipédia](https://pt.wikipedia.org/wiki/Malena_Nunes), [Wikidata](https://www.wikidata.org/wiki/Q103815786)                                                                                          |
+| Maju Trindade        | [Wikipédia](https://pt.wikipedia.org/wiki/Maju_Trindade), [Wikidata](https://www.wikidata.org/wiki/Q29959370)                                                                                          |
+| Niina Secrets        | [Wikipédia](https://pt.wikipedia.org/wiki/Niina_Secrets), [Wikidata](https://www.wikidata.org/wiki/Q105546462)                                                                                         |
+| Camila Coelho        | [Wikipédia](https://pt.wikipedia.org/wiki/Camila_Coelho), [Wikidata](https://www.wikidata.org/wiki/Q21290186)                                                                                          |
+| Flavia Pavanelli     | [Wikipédia](https://pt.wikipedia.org/wiki/Flavia_Pavanelli), [Wikidata](https://www.wikidata.org/wiki/Q56347251)                                                                                       |
+| Pequena Lo           | [Wikipédia](https://pt.wikipedia.org/wiki/Pequena_Lo), [Wikidata](https://www.wikidata.org/wiki/Q111088072)                                                                                            |
+| BRKsEDU              | [Wikipédia](https://pt.wikipedia.org/wiki/BRKsEDU), [Wikidata](https://www.wikidata.org/wiki/Q111918092)                                                                                               |
+| VenomExtreme         | [Wikipédia](https://pt.wikipedia.org/wiki/VenomExtreme), [Wikidata](https://www.wikidata.org/wiki/Q111918095)                                                                                          |
+| Bruno PlayHard       | [Wikipédia](https://pt.wikipedia.org/wiki/PlayHard), [Wikidata](https://www.wikidata.org/wiki/Q106547266)                                                                                              |
+| Nilce Moretto        | [Wikipédia](https://pt.wikipedia.org/wiki/Nilce_Moretto), [Wikidata](https://www.wikidata.org/wiki/Q115868200), [Coisa de Nerd (Wikipédia)](https://pt.wikipedia.org/wiki/Coisa_de_Nerd)               |
+| Marcos Castro        | [Wikipédia](https://pt.wikipedia.org/wiki/Marcos_Castro), [Wikidata](https://www.wikidata.org/wiki/Q97162794)                                                                                          |
+| Fábio Porchat        | [Wikipédia](https://pt.wikipedia.org/wiki/F%C3%A1bio_Porchat), [Wikidata](https://www.wikidata.org/wiki/Q10286900)                                                                                     |
+| Pirula               | [Wikipédia](https://pt.wikipedia.org/wiki/Pirula), [Wikidata](https://www.wikidata.org/wiki/Q48867131)                                                                                                 |
+| Sérgio Sacani        | [Wikipédia](https://pt.wikipedia.org/wiki/S%C3%A9rgio_Sacani), [Wikidata](https://www.wikidata.org/wiki/Q116180184)                                                                                    |
+| Professor Jubilut    | [Wikipédia](https://pt.wikipedia.org/wiki/Professor_Jubilut), [Wikidata](https://www.wikidata.org/wiki/Q97164473)                                                                                      |
+| Nathalia Arcuri      | [Wikipédia](https://pt.wikipedia.org/wiki/Nathalia_Arcuri), [Wikidata](https://www.wikidata.org/wiki/Q61000448)                                                                                        |
+| Luva de Pedreiro     | [Wikipédia](https://pt.wikipedia.org/wiki/Luva_de_Pedreiro), [Wikidata](https://www.wikidata.org/wiki/Q111363722)                                                                                      |
+| Rodrigo Góes         | [Wikipédia](https://pt.wikipedia.org/wiki/Rodrigo_G%C3%B3es), [Wikidata](https://www.wikidata.org/wiki/Q121363847)                                                                                     |
+| KondZilla            | [Wikipédia](https://pt.wikipedia.org/wiki/KondZilla), [Wikidata](https://www.wikidata.org/wiki/Q16940180)                                                                                              |
+| Mariana Nolasco      | [Wikipédia](https://pt.wikipedia.org/wiki/Mariana_Nolasco), [Wikidata](https://www.wikidata.org/wiki/Q51351026)                                                                                        |
+| Lorelay Fox          | [Wikipédia](https://pt.wikipedia.org/wiki/Lorelay_Fox), [Wikidata](https://www.wikidata.org/wiki/Q94788170)                                                                                            |
+| Ednaldo Pereira      | [Wikipédia](https://pt.wikipedia.org/wiki/Ednaldo_Pereira), [Wikidata](https://www.wikidata.org/wiki/Q123118482)                                                                                       |
 
 ## Famosos da TV
 
-Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descrição do artigo (apresentação, atuação ou jornalismo). Estado natal e nascimento: caixa de informações, conferidos no Wikidata. Início da carreira: período em atividade do artigo; sem ele, o Wikidata ou o primeiro parágrafo (Ratinho: estreia na TV, em 1991). A emissora atual ficou de fora: muitos artistas trabalham sem contrato fixo e o dado não pôde ser confirmado para todos.
+Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descrição do artigo (apresentação, atuação ou jornalismo). Estado natal e nascimento: caixa de informações, conferidos no Wikidata. Início da carreira: período em atividade do artigo; sem ele, o Wikidata ou o primeiro parágrafo (Ratinho: estreia na TV, em 1991). A emissora atual ficou de fora: muitos artistas trabalham sem contrato fixo e o dado não pôde ser confirmado para todos. Em outubro de 2026 entraram mais 20 nomes, inclusive quem já morreu (Silvio Santos, Hebe Camargo, Gugu Liberato, Jô Soares, Chico Anysio, Glória Maria, Cid Moreira), com o mesmo método; humorista e comediante contam como atuação. Início da carreira de Silvio Santos e Glória Maria: Wikidata (o artigo não traz o período).
 
 | Personagem           | Fontes                                                                                                                           |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -180,3 +236,150 @@ Dados de outubro de 2026. Mais conhecido como: a primeira ocupação da descriç
 | Selton Mello         | [Wikipédia](https://pt.wikipedia.org/wiki/Selton_Mello), [Wikidata](https://www.wikidata.org/wiki/Q4289700)                      |
 | Wagner Moura         | [Wikipédia](https://pt.wikipedia.org/wiki/Wagner_Moura), [Wikidata](https://www.wikidata.org/wiki/Q922503)                       |
 | Fernanda Torres      | [Wikipédia](https://pt.wikipedia.org/wiki/Fernanda_Torres), [Wikidata](https://www.wikidata.org/wiki/Q465907)                    |
+| Silvio Santos        | [Wikipédia](https://pt.wikipedia.org/wiki/Silvio_Santos), [Wikidata](https://www.wikidata.org/wiki/Q1395208)                     |
+| Hebe Camargo         | [Wikipédia](https://pt.wikipedia.org/wiki/Hebe_Camargo), [Wikidata](https://www.wikidata.org/wiki/Q6105)                         |
+| Gugu Liberato        | [Wikipédia](https://pt.wikipedia.org/wiki/Gugu_Liberato), [Wikidata](https://www.wikidata.org/wiki/Q1105361)                     |
+| Jô Soares            | [Wikipédia](https://pt.wikipedia.org/wiki/J%C3%B4_Soares), [Wikidata](https://www.wikidata.org/wiki/Q732513)                     |
+| Chico Anysio         | [Wikipédia](https://pt.wikipedia.org/wiki/Chico_Anysio), [Wikidata](https://www.wikidata.org/wiki/Q1789876)                      |
+| Renato Aragão        | [Wikipédia](https://pt.wikipedia.org/wiki/Renato_Arag%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q848556)                 |
+| Glória Maria         | [Wikipédia](https://pt.wikipedia.org/wiki/Gl%C3%B3ria_Maria), [Wikidata](https://www.wikidata.org/wiki/Q1791085)                 |
+| Cid Moreira          | [Wikipédia](https://pt.wikipedia.org/wiki/Cid_Moreira), [Wikidata](https://www.wikidata.org/wiki/Q1789894)                       |
+| Pedro Bial           | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_Bial), [Wikidata](https://www.wikidata.org/wiki/Q3374018)                        |
+| Adriane Galisteu     | [Wikipédia](https://pt.wikipedia.org/wiki/Adriane_Galisteu), [Wikidata](https://www.wikidata.org/wiki/Q2080462)                  |
+| Maisa Silva          | [Wikipédia](https://pt.wikipedia.org/wiki/Maisa_Silva), [Wikidata](https://www.wikidata.org/wiki/Q10323204)                      |
+| Grazi Massafera      | [Wikipédia](https://pt.wikipedia.org/wiki/Grazi_Massafera), [Wikidata](https://www.wikidata.org/wiki/Q3115883)                   |
+| Antônio Fagundes     | [Wikipédia](https://pt.wikipedia.org/wiki/Ant%C3%B4nio_Fagundes), [Wikidata](https://www.wikidata.org/wiki/Q772892)              |
+| Susana Vieira        | [Wikipédia](https://pt.wikipedia.org/wiki/Susana_Vieira), [Wikidata](https://www.wikidata.org/wiki/Q2640194)                     |
+| Lima Duarte          | [Wikipédia](https://pt.wikipedia.org/wiki/Lima_Duarte), [Wikidata](https://www.wikidata.org/wiki/Q1791430)                       |
+| Camila Pitanga       | [Wikipédia](https://pt.wikipedia.org/wiki/Camila_Pitanga), [Wikidata](https://www.wikidata.org/wiki/Q2934814)                    |
+| Deborah Secco        | [Wikipédia](https://pt.wikipedia.org/wiki/Deborah_Secco), [Wikidata](https://www.wikidata.org/wiki/Q2352306)                     |
+| Leandro Hassum       | [Wikipédia](https://pt.wikipedia.org/wiki/Leandro_Hassum), [Wikidata](https://www.wikidata.org/wiki/Q10316778)                   |
+| Marcelo Adnet        | [Wikipédia](https://pt.wikipedia.org/wiki/Marcelo_Adnet), [Wikidata](https://www.wikidata.org/wiki/Q6756484)                     |
+| Maju Coutinho        | [Wikipédia](https://pt.wikipedia.org/wiki/Maju_Coutinho), [Wikidata](https://www.wikidata.org/wiki/Q17490120)                    |
+
+## Lendas do futebol
+
+Esta seção cobre os 11 jogadores que entraram em outubro de 2026 (os outros 49 vêm de antes da regra de fontes). Posição e estado natal: primeiro parágrafo e caixa de informações, conferidos no Wikidata. Copas do Mundo: quantas o jogador ganhou, entre as que disputou segundo as categorias do artigo (o Brasil foi campeão em 1958, 1962, 1970, 1994 e 2002). Décadas na Seleção: anos na seleção principal, da caixa de informações.
+
+| Personagem     | Fontes                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Rogério Ceni   | [Wikipédia](https://pt.wikipedia.org/wiki/Rog%C3%A9rio_Ceni), [Wikidata](https://www.wikidata.org/wiki/Q1249859)                |
+| Dida           | [Wikipédia](https://pt.wikipedia.org/wiki/Dida_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q188544)            |
+| Raí            | [Wikipédia](https://pt.wikipedia.org/wiki/Ra%C3%AD), [Wikidata](https://www.wikidata.org/wiki/Q312895)                          |
+| Edmundo        | [Wikipédia](https://pt.wikipedia.org/wiki/Edmundo_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q445541)         |
+| Denílson       | [Wikipédia](https://pt.wikipedia.org/wiki/Den%C3%ADlson), [Wikidata](https://www.wikidata.org/wiki/Q311641)                     |
+| Gilberto Silva | [Wikipédia](https://pt.wikipedia.org/wiki/Gilberto_Silva), [Wikidata](https://www.wikidata.org/wiki/Q190142)                    |
+| Luís Fabiano   | [Wikipédia](https://pt.wikipedia.org/wiki/Lu%C3%ADs_Fabiano), [Wikidata](https://www.wikidata.org/wiki/Q192963)                 |
+| Fred           | [Wikipédia](https://pt.wikipedia.org/wiki/Frederico_Chaves_Guedes), [Wikidata](https://www.wikidata.org/wiki/Q312772)           |
+| Ademir da Guia | [Wikipédia](https://pt.wikipedia.org/wiki/Ademir_da_Guia), [Wikidata](https://www.wikidata.org/wiki/Q355742)                    |
+| Pepe           | [Wikipédia](https://pt.wikipedia.org/wiki/Pepe_%28futebolista_brasileiro%29), [Wikidata](https://www.wikidata.org/wiki/Q509491) |
+| Müller         | [Wikipédia](https://pt.wikipedia.org/wiki/M%C3%BCller_%28futebolista%29), [Wikidata](https://www.wikidata.org/wiki/Q381729)     |
+
+## Folclore brasileiro
+
+Esta seção cobre os 3 personagens que entraram em outubro de 2026 (os outros 24 vêm de antes da regra de fontes). Cada valor sai do artigo da Wikipédia: forma (aparência descrita), região mais conhecida (estados citados), onde e quando aparece e comportamento. Ficaram fora candidatos sem artigo sobre a lenda (Cobra Norato, Labatut, Pé de garrafa, Porca dos Sete Leitões, Uirapuru) ou sem dado claro para algum atributo (Caboclo-d'Água, Ipupiara).
+
+| Personagem | Fontes                                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
+| Papa-figo  | [Wikipédia](https://pt.wikipedia.org/wiki/Papa-figo), [Wikidata](https://www.wikidata.org/wiki/Q10344281) |
+| Capelobo   | [Wikipédia](https://pt.wikipedia.org/wiki/Capelobo), [Wikidata](https://www.wikidata.org/wiki/Q9696177)   |
+| Cumacanga  | [Wikipédia](https://pt.wikipedia.org/wiki/Cumacanga), [Wikidata](https://www.wikidata.org/wiki/Q8352644)  |
+
+## Personagens da história do Brasil
+
+Dados de outubro de 2026. Só pessoas já falecidas, da Colônia ao século XX, e só fatos neutros. Área: classificação do Chutaí a partir da descrição do artigo. Nasceu no período: calculado pela data de nascimento (Colônia até 7/9/1822, Império até 15/11/1889, República depois). Estado de nascimento: local de nascimento com o nome atual do estado; "Exterior" para quem nasceu fora do Brasil. Nascimento e morte: caixa de informações e primeiro parágrafo, conferidos no Wikidata; anos aproximados no próprio artigo (Arariboia, c. 1520; Sepé Tiaraju, c. 1723; Aleijadinho, "mais provavelmente" 1738) valem com a tolerância de 10 anos. Dandara ficou fora: a existência dela é contestada (o Wikidata a descreve como personagem literária criada em 1962). Valores aproximados ou incertos (pedido para este tema, porque a data e o local de nascimento de muitas pessoas negras e indígenas da época não foram registrados): o ano aproximado aparece como "c. 1655" e usa a tolerância de 10 anos; local ou ano desconhecido fica "Incerto" e nunca conta como erro. Zumbi dos Palmares: o artigo diz que não há fontes contemporâneas para a data e o local de nascimento; 1655 é o ano mais citado (vem de cartas atribuídas ao padre António Melo, de autenticidade discutida); local Incerto. Tereza de Benguela: só a morte (1770) está documentada; nascimento Incerto; origem no Reino de Benguela (Exterior). Ajuricaba: nascido no séc. XVII na aldeia de Mariuá (atual Barcelos, AM); ano Incerto; morte em 1727 no artigo (o Wikidata diz 1728). Filipe Camarão: c. 1600 ("entre 1600 e 1601" no artigo; o Wikidata diz 1580); a naturalidade é disputada por Ceará, Pernambuco, Paraíba e Rio Grande do Norte, então o estado fica Incerto e a região, Nordeste. Maria Firmina dos Reis: nascida em 11/3/1822 segundo o artigo (a certidão de justificação de batismo corrigiu a data); o Wikidata traz 1825, ano do batismo. Com 1822, o período é Colônia; com 1825 seria Império. Imagens de Zumbi e Ajuricaba são representações artísticas (não há retratos de época); Tereza de Benguela fica sem imagem.
+
+| Personagem                 | Fontes                                                                                                                                       |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tiradentes                 | [Wikipédia](https://pt.wikipedia.org/wiki/Tiradentes), [Wikidata](https://www.wikidata.org/wiki/Q527112)                                     |
+| Dom Pedro I                | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_I_do_Brasil), [Wikidata](https://www.wikidata.org/wiki/Q939)                                 |
+| Dom Pedro II               | [Wikipédia](https://pt.wikipedia.org/wiki/Pedro_II_do_Brasil), [Wikidata](https://www.wikidata.org/wiki/Q156774)                             |
+| Maria Leopoldina           | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Leopoldina_da_%C3%81ustria), [Wikidata](https://www.wikidata.org/wiki/Q84239)                |
+| Princesa Isabel            | [Wikipédia](https://pt.wikipedia.org/wiki/Isabel%2C_Princesa_Imperial_do_Brasil), [Wikidata](https://www.wikidata.org/wiki/Q464449)          |
+| José Bonifácio             | [Wikipédia](https://pt.wikipedia.org/wiki/Jos%C3%A9_Bonif%C3%A1cio_de_Andrada_e_Silva), [Wikidata](https://www.wikidata.org/wiki/Q379631)    |
+| Barão do Rio Branco        | [Wikipédia](https://pt.wikipedia.org/wiki/Jos%C3%A9_Maria_da_Silva_Paranhos_J%C3%BAnior), [Wikidata](https://www.wikidata.org/wiki/Q1791364) |
+| Rui Barbosa                | [Wikipédia](https://pt.wikipedia.org/wiki/Ruy_Barbosa), [Wikidata](https://www.wikidata.org/wiki/Q916935)                                    |
+| Getúlio Vargas             | [Wikipédia](https://pt.wikipedia.org/wiki/Get%C3%BAlio_Vargas), [Wikidata](https://www.wikidata.org/wiki/Q156844)                            |
+| Juscelino Kubitschek       | [Wikipédia](https://pt.wikipedia.org/wiki/Juscelino_Kubitschek), [Wikidata](https://www.wikidata.org/wiki/Q155824)                           |
+| Maria Quitéria             | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Quit%C3%A9ria), [Wikidata](https://www.wikidata.org/wiki/Q2618916)                           |
+| Anita Garibaldi            | [Wikipédia](https://pt.wikipedia.org/wiki/Anita_Garibaldi), [Wikidata](https://www.wikidata.org/wiki/Q636688)                                |
+| Joana Angélica             | [Wikipédia](https://pt.wikipedia.org/wiki/Joana_Ang%C3%A9lica), [Wikidata](https://www.wikidata.org/wiki/Q10306986)                          |
+| Nísia Floresta             | [Wikipédia](https://pt.wikipedia.org/wiki/N%C3%ADsia_Floresta_%28escritora%29), [Wikidata](https://www.wikidata.org/wiki/Q2364565)           |
+| Bertha Lutz                | [Wikipédia](https://pt.wikipedia.org/wiki/Bertha_Lutz), [Wikidata](https://www.wikidata.org/wiki/Q1264246)                                   |
+| Carlota Pereira de Queirós | [Wikipédia](https://pt.wikipedia.org/wiki/Carlota_Pereira_de_Queir%C3%B3s), [Wikidata](https://www.wikidata.org/wiki/Q2817308)               |
+| Antonieta de Barros        | [Wikipédia](https://pt.wikipedia.org/wiki/Antonieta_de_Barros), [Wikidata](https://www.wikidata.org/wiki/Q9617883)                           |
+| Luís Gama                  | [Wikipédia](https://pt.wikipedia.org/wiki/Luiz_Gama), [Wikidata](https://www.wikidata.org/wiki/Q6706790)                                     |
+| André Rebouças             | [Wikipédia](https://pt.wikipedia.org/wiki/Andr%C3%A9_Rebou%C3%A7as), [Wikidata](https://www.wikidata.org/wiki/Q373313)                       |
+| José do Patrocínio         | [Wikipédia](https://pt.wikipedia.org/wiki/Jos%C3%A9_do_Patroc%C3%ADnio), [Wikidata](https://www.wikidata.org/wiki/Q359451)                   |
+| João Cândido               | [Wikipédia](https://pt.wikipedia.org/wiki/Jo%C3%A3o_C%C3%A2ndido), [Wikidata](https://www.wikidata.org/wiki/Q974355)                         |
+| Abdias do Nascimento       | [Wikipédia](https://pt.wikipedia.org/wiki/Abdias_do_Nascimento), [Wikidata](https://www.wikidata.org/wiki/Q2737040)                          |
+| Lélia Gonzalez             | [Wikipédia](https://pt.wikipedia.org/wiki/L%C3%A9lia_Gonzalez), [Wikidata](https://www.wikidata.org/wiki/Q10321947)                          |
+| Arariboia                  | [Wikipédia](https://pt.wikipedia.org/wiki/Arariboia), [Wikidata](https://www.wikidata.org/wiki/Q4784282)                                     |
+| Sepé Tiaraju               | [Wikipédia](https://pt.wikipedia.org/wiki/Sep%C3%A9_Tiaraju), [Wikidata](https://www.wikidata.org/wiki/Q949500)                              |
+| Marçal de Souza            | [Wikipédia](https://pt.wikipedia.org/wiki/Mar%C3%A7al_de_Souza), [Wikidata](https://www.wikidata.org/wiki/Q116822174)                        |
+| Santos Dumont              | [Wikipédia](https://pt.wikipedia.org/wiki/Santos_Dumont), [Wikidata](https://www.wikidata.org/wiki/Q313211)                                  |
+| Oswaldo Cruz               | [Wikipédia](https://pt.wikipedia.org/wiki/Oswaldo_Cruz), [Wikidata](https://www.wikidata.org/wiki/Q979554)                                   |
+| Carlos Chagas              | [Wikipédia](https://pt.wikipedia.org/wiki/Carlos_Chagas), [Wikidata](https://www.wikidata.org/wiki/Q438907)                                  |
+| Vital Brazil               | [Wikipédia](https://pt.wikipedia.org/wiki/Vital_Brazil), [Wikidata](https://www.wikidata.org/wiki/Q1797510)                                  |
+| Juliano Moreira            | [Wikipédia](https://pt.wikipedia.org/wiki/Juliano_Moreira), [Wikidata](https://www.wikidata.org/wiki/Q10312870)                              |
+| Milton Santos              | [Wikipédia](https://pt.wikipedia.org/wiki/Milton_Santos), [Wikidata](https://www.wikidata.org/wiki/Q945092)                                  |
+| Marechal Rondon            | [Wikipédia](https://pt.wikipedia.org/wiki/C%C3%A2ndido_Rondon), [Wikidata](https://www.wikidata.org/wiki/Q961743)                            |
+| Machado de Assis           | [Wikipédia](https://pt.wikipedia.org/wiki/Machado_de_Assis), [Wikidata](https://www.wikidata.org/wiki/Q311145)                               |
+| Carolina Maria de Jesus    | [Wikipédia](https://pt.wikipedia.org/wiki/Carolina_Maria_de_Jesus), [Wikidata](https://www.wikidata.org/wiki/Q440240)                        |
+| Clarice Lispector          | [Wikipédia](https://pt.wikipedia.org/wiki/Clarice_Lispector), [Wikidata](https://www.wikidata.org/wiki/Q235955)                              |
+| Cecília Meireles           | [Wikipédia](https://pt.wikipedia.org/wiki/Cec%C3%ADlia_Meireles), [Wikidata](https://www.wikidata.org/wiki/Q2607615)                         |
+| Carlos Drummond de Andrade | [Wikipédia](https://pt.wikipedia.org/wiki/Carlos_Drummond_de_Andrade), [Wikidata](https://www.wikidata.org/wiki/Q379745)                     |
+| Guimarães Rosa             | [Wikipédia](https://pt.wikipedia.org/wiki/Guimar%C3%A3es_Rosa), [Wikidata](https://www.wikidata.org/wiki/Q13012)                             |
+| Jorge Amado                | [Wikipédia](https://pt.wikipedia.org/wiki/Jorge_Amado), [Wikidata](https://www.wikidata.org/wiki/Q184440)                                    |
+| Aleijadinho                | [Wikipédia](https://pt.wikipedia.org/wiki/Aleijadinho), [Wikidata](https://www.wikidata.org/wiki/Q379714)                                    |
+| Tarsila do Amaral          | [Wikipédia](https://pt.wikipedia.org/wiki/Tarsila_do_Amaral), [Wikidata](https://www.wikidata.org/wiki/Q466627)                              |
+| Anita Malfatti             | [Wikipédia](https://pt.wikipedia.org/wiki/Anita_Malfatti), [Wikidata](https://www.wikidata.org/wiki/Q465919)                                 |
+| Candido Portinari          | [Wikipédia](https://pt.wikipedia.org/wiki/Candido_Portinari), [Wikidata](https://www.wikidata.org/wiki/Q319532)                              |
+| Chiquinha Gonzaga          | [Wikipédia](https://pt.wikipedia.org/wiki/Chiquinha_Gonzaga), [Wikidata](https://www.wikidata.org/wiki/Q465902)                              |
+| Carlos Gomes               | [Wikipédia](https://pt.wikipedia.org/wiki/Carlos_Gomes), [Wikidata](https://www.wikidata.org/wiki/Q263855)                                   |
+| Heitor Villa-Lobos         | [Wikipédia](https://pt.wikipedia.org/wiki/Heitor_Villa-Lobos), [Wikidata](https://www.wikidata.org/wiki/Q203514)                             |
+| Pixinguinha                | [Wikipédia](https://pt.wikipedia.org/wiki/Pixinguinha), [Wikidata](https://www.wikidata.org/wiki/Q281086)                                    |
+| Carmen Miranda             | [Wikipédia](https://pt.wikipedia.org/wiki/Carmen_Miranda), [Wikidata](https://www.wikidata.org/wiki/Q121655)                                 |
+| Ayrton Senna               | [Wikipédia](https://pt.wikipedia.org/wiki/Ayrton_Senna), [Wikidata](https://www.wikidata.org/wiki/Q10490)                                    |
+| Adhemar Ferreira da Silva  | [Wikipédia](https://pt.wikipedia.org/wiki/Adhemar_Ferreira_da_Silva), [Wikidata](https://www.wikidata.org/wiki/Q199631)                      |
+| Maria Lenk                 | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Lenk), [Wikidata](https://www.wikidata.org/wiki/Q451298)                                     |
+| Chico Mendes               | [Wikipédia](https://pt.wikipedia.org/wiki/Chico_Mendes), [Wikidata](https://www.wikidata.org/wiki/Q550176)                                   |
+| Zumbi dos Palmares         | [Wikipédia](https://pt.wikipedia.org/wiki/Zumbi_dos_Palmares), [Wikidata](https://www.wikidata.org/wiki/Q229682)                             |
+| Tereza de Benguela         | [Wikipédia](https://pt.wikipedia.org/wiki/Tereza_de_Benguela), [Wikidata](https://www.wikidata.org/wiki/Q10380540)                           |
+| Ajuricaba                  | [Wikipédia](https://pt.wikipedia.org/wiki/Ajuricaba_%28ind%C3%ADgena%29), [Wikidata](https://www.wikidata.org/wiki/Q9593270)                 |
+| Filipe Camarão             | [Wikipédia](https://pt.wikipedia.org/wiki/Filipe_Camar%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q610884)                            |
+| Maria Firmina dos Reis     | [Wikipédia](https://pt.wikipedia.org/wiki/Maria_Firmina_dos_Reis), [Wikidata](https://www.wikidata.org/wiki/Q1895866)                        |
+
+## Estados do Brasil
+
+Dados de outubro de 2026, de fontes oficiais. População: Censo Demográfico 2022 do IBGE (tabela 4709, população residente), em milhões. Área: Censo 2022 do IBGE (tabela 4714, área da unidade territorial), em mil km². Biomas: Tabela 1 de "Biomas e Sistema Costeiro-Marinho do Brasil" (IBGE, 2019), contando os biomas com área maior que zero no estado. Litoral e fronteira: artigos "Litoral do Brasil" (17 estados costeiros) e "Fronteiras do Brasil" (11 unidades com fronteira internacional) da Wikipédia. Imagem: a bandeira de cada unidade (domínio público, Wikimedia Commons). Fontes gerais: [IBGE, Censo 2022 (SIDRA)](https://sidra.ibge.gov.br/tabela/4709), [IBGE, área territorial (SIDRA)](https://sidra.ibge.gov.br/tabela/4714), [IBGE, Biomas e Sistema Costeiro-Marinho do Brasil](https://biblioteca.ibge.gov.br/visualizacao/livros/liv101676.pdf).
+
+| Personagem          | Fontes                                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Rondônia            | [Wikipédia](https://pt.wikipedia.org/wiki/Rond%C3%B4nia), [Wikidata](https://www.wikidata.org/wiki/Q43235)                  |
+| Acre                | [Wikipédia](https://pt.wikipedia.org/wiki/Acre), [Wikidata](https://www.wikidata.org/wiki/Q40780)                           |
+| Amazonas            | [Wikipédia](https://pt.wikipedia.org/wiki/Amazonas), [Wikidata](https://www.wikidata.org/wiki/Q40040)                       |
+| Roraima             | [Wikipédia](https://pt.wikipedia.org/wiki/Roraima), [Wikidata](https://www.wikidata.org/wiki/Q42508)                        |
+| Pará                | [Wikipédia](https://pt.wikipedia.org/wiki/Par%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q39517)                      |
+| Amapá               | [Wikipédia](https://pt.wikipedia.org/wiki/Amap%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q40130)                     |
+| Tocantins           | [Wikipédia](https://pt.wikipedia.org/wiki/Tocantins), [Wikidata](https://www.wikidata.org/wiki/Q43695)                      |
+| Maranhão            | [Wikipédia](https://pt.wikipedia.org/wiki/Maranh%C3%A3o), [Wikidata](https://www.wikidata.org/wiki/Q42362)                  |
+| Piauí               | [Wikipédia](https://pt.wikipedia.org/wiki/Piau%C3%AD), [Wikidata](https://www.wikidata.org/wiki/Q42722)                     |
+| Ceará               | [Wikipédia](https://pt.wikipedia.org/wiki/Cear%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q40123)                     |
+| Rio Grande do Norte | [Wikipédia](https://pt.wikipedia.org/wiki/Rio_Grande_do_Norte), [Wikidata](https://www.wikidata.org/wiki/Q43255)            |
+| Paraíba             | [Wikipédia](https://pt.wikipedia.org/wiki/Para%C3%ADba), [Wikidata](https://www.wikidata.org/wiki/Q38088)                   |
+| Pernambuco          | [Wikipédia](https://pt.wikipedia.org/wiki/Pernambuco), [Wikidata](https://www.wikidata.org/wiki/Q40942)                     |
+| Alagoas             | [Wikipédia](https://pt.wikipedia.org/wiki/Alagoas), [Wikidata](https://www.wikidata.org/wiki/Q40885)                        |
+| Sergipe             | [Wikipédia](https://pt.wikipedia.org/wiki/Sergipe), [Wikidata](https://www.wikidata.org/wiki/Q43783)                        |
+| Bahia               | [Wikipédia](https://pt.wikipedia.org/wiki/Bahia), [Wikidata](https://www.wikidata.org/wiki/Q40430)                          |
+| Minas Gerais        | [Wikipédia](https://pt.wikipedia.org/wiki/Minas_Gerais), [Wikidata](https://www.wikidata.org/wiki/Q39109)                   |
+| Espírito Santo      | [Wikipédia](https://pt.wikipedia.org/wiki/Esp%C3%ADrito_Santo), [Wikidata](https://www.wikidata.org/wiki/Q37302)            |
+| Rio de Janeiro      | [Wikipédia](https://pt.wikipedia.org/wiki/Rio_de_Janeiro_%28estado%29), [Wikidata](https://www.wikidata.org/wiki/Q41428)    |
+| São Paulo           | [Wikipédia](https://pt.wikipedia.org/wiki/S%C3%A3o_Paulo_%28estado%29), [Wikidata](https://www.wikidata.org/wiki/Q175)      |
+| Paraná              | [Wikipédia](https://pt.wikipedia.org/wiki/Paran%C3%A1), [Wikidata](https://www.wikidata.org/wiki/Q15499)                    |
+| Santa Catarina      | [Wikipédia](https://pt.wikipedia.org/wiki/Santa_Catarina), [Wikidata](https://www.wikidata.org/wiki/Q41115)                 |
+| Rio Grande do Sul   | [Wikipédia](https://pt.wikipedia.org/wiki/Rio_Grande_do_Sul), [Wikidata](https://www.wikidata.org/wiki/Q40030)              |
+| Mato Grosso do Sul  | [Wikipédia](https://pt.wikipedia.org/wiki/Mato_Grosso_do_Sul), [Wikidata](https://www.wikidata.org/wiki/Q43319)             |
+| Mato Grosso         | [Wikipédia](https://pt.wikipedia.org/wiki/Mato_Grosso), [Wikidata](https://www.wikidata.org/wiki/Q42824)                    |
+| Goiás               | [Wikipédia](https://pt.wikipedia.org/wiki/Goi%C3%A1s), [Wikidata](https://www.wikidata.org/wiki/Q41587)                     |
+| Distrito Federal    | [Wikipédia](https://pt.wikipedia.org/wiki/Distrito_Federal_%28Brasil%29), [Wikidata](https://www.wikidata.org/wiki/Q119158) |

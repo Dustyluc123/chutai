@@ -32,6 +32,12 @@ export function SiteFooter() {
           <Link href="/criar-tema" className="text-tinta-soft hover:text-tinta">
             Criar um tema
           </Link>
+          <Link href="/diario" className="text-tinta-soft hover:text-tinta">
+            Desafio do dia
+          </Link>
+          <Link href="/professores" className="text-tinta-soft hover:text-tinta">
+            Para professores
+          </Link>
           <Link href="/creditos" className="text-tinta-soft hover:text-tinta">
             Créditos das imagens
           </Link>

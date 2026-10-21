@@ -597,6 +597,398 @@
         "nascimento": 1965,
         "inicio": 1979
       }
+    },
+    {
+      "id": "silvio-santos",
+      "name": "Silvio Santos",
+      "image": "/temas/famosos-da-tv/silvio-santos.webp",
+      "imageCredit": {
+        "author": "Palácio do Planalto",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Silvio_Santos_em_maio_de_2019.jpg"
+      },
+      "aliases": ["Senor Abravanel"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1930,
+        "inicio": 1962
+      }
+    },
+    {
+      "id": "hebe-camargo",
+      "name": "Hebe Camargo",
+      "image": "/temas/famosos-da-tv/hebe-camargo.webp",
+      "imageCredit": {
+        "author": "Sergio Savarese",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hebe_Camargo.jpg"
+      },
+      "aliases": ["Hebe"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1929,
+        "inicio": 1943
+      }
+    },
+    {
+      "id": "gugu-liberato",
+      "name": "Gugu Liberato",
+      "image": "/temas/famosos-da-tv/gugu-liberato.webp",
+      "imageCredit": {
+        "author": "Renato Cipriano",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Renato_Cipriano_e_Gugu_Liberato.jpg"
+      },
+      "aliases": ["Gugu"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1959,
+        "inicio": 1981
+      }
+    },
+    {
+      "id": "jo-soares",
+      "name": "Jô Soares",
+      "image": "/temas/famosos-da-tv/jo-soares.webp",
+      "imageCredit": {
+        "author": "Fm P@s, remix de Olimor.",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Josoares_flickr_(cropped_2).jpg"
+      },
+      "aliases": ["Jô"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1938,
+        "inicio": 1954
+      }
+    },
+    {
+      "id": "chico-anysio",
+      "name": "Chico Anysio",
+      "image": "/temas/famosos-da-tv/chico-anysio.webp",
+      "imageCredit": {
+        "author": "Andrelucashumor",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chico_Anysio_e_o_filho_Andr%C3%A9_Lucas_(cropped).jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Ceará",
+        "regiao": "Nordeste",
+        "nascimento": 1931,
+        "inicio": 1948
+      }
+    },
+    {
+      "id": "renato-aragao",
+      "name": "Renato Aragão",
+      "image": "/temas/famosos-da-tv/renato-aragao.webp",
+      "imageCredit": {
+        "author": "Michel Temer",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Renato_Arag%C3%A3o_(2017)_2.jpg"
+      },
+      "aliases": ["Didi"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Ceará",
+        "regiao": "Nordeste",
+        "nascimento": 1935,
+        "inicio": 1960
+      }
+    },
+    {
+      "id": "gloria-maria",
+      "name": "Glória Maria",
+      "image": "/temas/famosos-da-tv/gloria-maria.webp",
+      "imageCredit": {
+        "author": "Fátima Bernardes 25º Prêmio da Música Brasileira",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Gl%C3%B3ria_Maria,_2014.jpg"
+      },
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1949,
+        "inicio": 1970
+      }
+    },
+    {
+      "id": "cid-moreira",
+      "name": "Cid Moreira",
+      "image": "/temas/famosos-da-tv/cid-moreira.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Cid_Moreira,_sem_data_(cropped).tif"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1927,
+        "inicio": 1947
+      }
+    },
+    {
+      "id": "pedro-bial",
+      "name": "Pedro Bial",
+      "image": "/temas/famosos-da-tv/pedro-bial.webp",
+      "imageCredit": {
+        "author": "Fronteiras do Pensamento",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2025-05-30_Entrevista_com_Fabr%C3%ADcio_Carpinejar_e_Pedro_Bial_(54558497240)_(cropped).jpg"
+      },
+      "aliases": ["Bial"],
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1958,
+        "inicio": 1981
+      }
+    },
+    {
+      "id": "adriane-galisteu",
+      "name": "Adriane Galisteu",
+      "image": "/temas/famosos-da-tv/adriane-galisteu.webp",
+      "imageCredit": {
+        "author": "Record TV Goiás",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Adriane_Galisteu.png"
+      },
+      "aliases": ["Galisteu"],
+      "emoji": "🎙️",
+      "values": {
+        "funcao": "Apresentação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1973,
+        "inicio": 1984
+      }
+    },
+    {
+      "id": "maisa-silva",
+      "name": "Maisa Silva",
+      "image": "/temas/famosos-da-tv/maisa-silva.webp",
+      "imageCredit": {
+        "author": "https://www.youtube.com/@HumorMultishow Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Maisa_no_Lady_Night_em_2017.jpg"
+      },
+      "aliases": ["Maisa"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 2002,
+        "inicio": 2005
+      }
+    },
+    {
+      "id": "grazi-massafera",
+      "name": "Grazi Massafera",
+      "image": "/temas/famosos-da-tv/grazi-massafera.webp",
+      "imageCredit": {
+        "author": "Globoplay Novelas",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Grazi_Massafera_como_D%C3%A9bora_no_Travessia.png"
+      },
+      "aliases": ["Grazi"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1982,
+        "inicio": 2005
+      }
+    },
+    {
+      "id": "antonio-fagundes",
+      "name": "Antônio Fagundes",
+      "image": "/temas/famosos-da-tv/antonio-fagundes.webp",
+      "imageCredit": {
+        "author": "Ministério da Cultura",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ant%C3%B4nio_Fagundes_(2013).jpg"
+      },
+      "aliases": ["Fagundes"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1949,
+        "inicio": 1965
+      }
+    },
+    {
+      "id": "susana-vieira",
+      "name": "Susana Vieira",
+      "image": "/temas/famosos-da-tv/susana-vieira.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Susanavieira.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1942,
+        "inicio": 1962
+      }
+    },
+    {
+      "id": "lima-duarte",
+      "name": "Lima Duarte",
+      "image": "/temas/famosos-da-tv/lima-duarte.webp",
+      "imageCredit": {
+        "author": "Sérgio (Savaman) Savarese",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Limaduarte.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1930,
+        "inicio": 1949
+      }
+    },
+    {
+      "id": "camila-pitanga",
+      "name": "Camila Pitanga",
+      "image": "/temas/famosos-da-tv/camila-pitanga.webp",
+      "imageCredit": {
+        "author": "Kacy Bao",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Camila_Pitanga_at_2025_Cannes_Red_Carpet_for_O_Agente_Secreto_2.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1977,
+        "inicio": 1984
+      }
+    },
+    {
+      "id": "deborah-secco",
+      "name": "Deborah Secco",
+      "image": "/temas/famosos-da-tv/deborah-secco.webp",
+      "imageCredit": {
+        "author": "Arezzo Brasil - YouTube",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Arezzo_Inverno_2020_por_Deborah_Secco_-_28.jpg"
+      },
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1979,
+        "inicio": 1989
+      }
+    },
+    {
+      "id": "leandro-hassum",
+      "name": "Leandro Hassum",
+      "image": "/temas/famosos-da-tv/leandro-hassum.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Leandro_Hassum_-_Os_Hassuns.jpg"
+      },
+      "aliases": ["Hassum"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1973,
+        "inicio": 1990
+      }
+    },
+    {
+      "id": "marcelo-adnet",
+      "name": "Marcelo Adnet",
+      "image": "/temas/famosos-da-tv/marcelo-adnet.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Marcelo_Adnet_Lady_Night.jpg"
+      },
+      "aliases": ["Adnet"],
+      "emoji": "🎭",
+      "values": {
+        "funcao": "Atuação",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1981,
+        "inicio": 2004
+      }
+    },
+    {
+      "id": "maju-coutinho",
+      "name": "Maju Coutinho",
+      "image": "/temas/famosos-da-tv/maju-coutinho.webp",
+      "imageCredit": {
+        "author": "Web Summit Rio from Rio de Janeiro, Brazil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Maju_Coutinho,_2023.jpg"
+      },
+      "aliases": ["Maju"],
+      "emoji": "📰",
+      "values": {
+        "funcao": "Jornalismo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1978,
+        "inicio": 2005
+      }
     }
   ]
 }

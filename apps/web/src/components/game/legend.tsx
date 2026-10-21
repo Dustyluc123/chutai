@@ -8,7 +8,16 @@ const items = [
 ];
 
 /** Explica as cores das peças. */
-export function Legend({ className, tapTip = true }: { className?: string; tapTip?: boolean }) {
+export function Legend({
+  className,
+  tapTip = true,
+  unknown = false,
+}: {
+  className?: string;
+  tapTip?: boolean;
+  /** Mostra o cinza ("ninguém sabe ao certo") quando ele aparece no tabuleiro. */
+  unknown?: boolean;
+}) {
   return (
     <ul className={cn("flex flex-wrap gap-x-4 gap-y-2 text-sm text-tinta-soft", className)}>
       {items.map((item) => (
@@ -26,6 +35,12 @@ export function Legend({ className, tapTip = true }: { className?: string; tapTi
         </span>
         O secreto é maior ou mais recente
       </li>
+      {unknown ? (
+        <li className="inline-flex items-center gap-2">
+          <span aria-hidden className="size-4 rounded-md border-2 border-linha bg-linha" />
+          Ninguém sabe ao certo (não conta como erro)
+        </li>
+      ) : null}
       {tapTip ? <li className="font-semibold text-tinta">Toque numa peça para entender.</li> : null}
     </ul>
   );

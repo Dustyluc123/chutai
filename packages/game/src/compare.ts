@@ -1,4 +1,5 @@
 import type { AttributeFeedback, AttributeValue, Character, ThemeAttribute } from "@chutai/shared";
+import { UNKNOWN_VALUE } from "@chutai/shared";
 import { formatValue, normalizeText } from "./format";
 
 function toList(value: AttributeValue | undefined): string[] {
@@ -26,6 +27,10 @@ export function compareAttribute(
 
   if (guessValue === undefined || answerValue === undefined) {
     return { ...base, status: "wrong" };
+  }
+  // "Incerto" em qualquer um dos dois: ninguém sabe ao certo, não conta como erro.
+  if (guessValue === UNKNOWN_VALUE || answerValue === UNKNOWN_VALUE) {
+    return { ...base, status: "unknown" };
   }
 
   switch (attribute.type) {
@@ -68,9 +73,17 @@ export function compareCharacters(
   answer: Character,
   attributes: ThemeAttribute[],
 ): AttributeFeedback[] {
-  return attributes.map((attribute) =>
-    compareAttribute(attribute, guess.values[attribute.key], answer.values[attribute.key]),
-  );
+  return attributes.map((attribute) => {
+    const feedback = compareAttribute(
+      attribute,
+      guess.values[attribute.key],
+      answer.values[attribute.key],
+    );
+    // Valor aproximado do personagem chutado: a peça mostra "c. 1655".
+    return guess.approx?.includes(attribute.key)
+      ? { ...feedback, display: `c. ${feedback.display}` }
+      : feedback;
+  });
 }
 
 /** Quantos atributos ficaram verdes num palpite. */

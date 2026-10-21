@@ -835,6 +835,272 @@
         "nascimento": 1995,
         "selecao": "Sim"
       }
+    },
+    {
+      "id": "gabriel-jesus",
+      "name": "Gabriel Jesus",
+      "image": "/temas/futebol-atual/gabriel-jesus.webp",
+      "imageCredit": {
+        "author": "Granada",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20180610_FIFA_Friendly_Match_Austria_vs._Brazil_Gabriel_Jesus_850_1688.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Barcelona",
+        "liga": "La Liga",
+        "natal": "São Paulo",
+        "nascimento": 1997,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "antony",
+      "name": "Antony",
+      "image": "/temas/futebol-atual/antony.webp",
+      "imageCredit": {
+        "author": "FotosLaLiga",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Antony_(cropped).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Betis",
+        "liga": "La Liga",
+        "natal": "São Paulo",
+        "nascimento": 2000,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "weverton",
+      "name": "Weverton",
+      "image": "/temas/futebol-atual/weverton.webp",
+      "imageCredit": {
+        "author": "Bryan Berlin",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Weverton_Brazil_V_Morocco_13_June_2026-67_(cropped).jpg"
+      },
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Grêmio",
+        "liga": "Brasileirão",
+        "natal": "Acre",
+        "nascimento": 1987,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "bento",
+      "name": "Bento",
+      "image": "/temas/futebol-atual/bento.webp",
+      "imageCredit": {
+        "author": "Fatemeh Amuzad/Ali Haddadi Asl",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Esteghlal_F.C._v_Al_Nassr_FC,_3_March_2025_(Bento_Matheus_Krepski).jpg"
+      },
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Al-Nassr",
+        "liga": "Liga saudita",
+        "natal": "Paraná",
+        "nascimento": 1999,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "hugo-souza",
+      "name": "Hugo Souza",
+      "image": "/temas/futebol-atual/hugo-souza.webp",
+      "imageCredit": {
+        "author": "TV Central do Timão",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Hugo_Souza_2025_(cropped).jpg"
+      },
+      "aliases": ["Neneca"],
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "clube": "Corinthians",
+        "liga": "Brasileirão",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1999,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "lucas-beraldo",
+      "name": "Lucas Beraldo",
+      "image": "/temas/futebol-atual/lucas-beraldo.webp",
+      "imageCredit": {
+        "author": "Paté kroute",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Beraldo_asse_psg_2425.png"
+      },
+      "aliases": ["Beraldo"],
+      "emoji": "🛡️",
+      "values": {
+        "posicao": "Zagueiro",
+        "clube": "PSG",
+        "liga": "Ligue 1",
+        "natal": "São Paulo",
+        "nascimento": 2003,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "andreas-pereira",
+      "name": "Andreas Pereira",
+      "image": "/temas/futebol-atual/andreas-pereira.webp",
+      "imageCredit": {
+        "author": "NullReason",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Andreas-Pereira-Palmeiras-Internacional-sep2025_(cropped).jpg"
+      },
+      "aliases": ["Andreas"],
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Palmeiras",
+        "liga": "Brasileirão",
+        "natal": "Bélgica",
+        "nascimento": 1996,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "joao-gomes",
+      "name": "João Gomes",
+      "image": "/temas/futebol-atual/joao-gomes.webp",
+      "imageCredit": {
+        "author": "Timmy96",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Jo%C3%A3o_Gomes_01112025_(7)_(croped).jpg"
+      },
+      "emoji": "🧱",
+      "values": {
+        "posicao": "Volante",
+        "clube": "Aston Villa",
+        "liga": "Premier League",
+        "natal": "Rio de Janeiro",
+        "nascimento": 2001,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "joelinton",
+      "name": "Joelinton",
+      "image": "/temas/futebol-atual/joelinton.webp",
+      "imageCredit": {
+        "author": "Silesia711",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Joelinton_(cropped).jpg"
+      },
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Newcastle",
+        "liga": "Premier League",
+        "natal": "Pernambuco",
+        "nascimento": 1996,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "douglas-luiz",
+      "name": "Douglas Luiz",
+      "image": "/temas/futebol-atual/douglas-luiz.webp",
+      "imageCredit": {
+        "author": "MintyGel",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Douglas_Luiz_April_2026_(cropped).jpg"
+      },
+      "emoji": "🧱",
+      "values": {
+        "posicao": "Volante",
+        "clube": "Juventus",
+        "liga": "Serie A italiana",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1998,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "philippe-coutinho",
+      "name": "Philippe Coutinho",
+      "image": "/temas/futebol-atual/philippe-coutinho.webp",
+      "imageCredit": {
+        "author": "Granada",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20180610_FIFA_Friendly_Match_Austria_vs._Brazil_Philippe_Coutinho_850_1692.jpg"
+      },
+      "aliases": ["Coutinho"],
+      "emoji": "🎯",
+      "values": {
+        "posicao": "Meia",
+        "clube": "Santos",
+        "liga": "Brasileirão",
+        "natal": "Rio de Janeiro",
+        "nascimento": 1992,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "everton-cebolinha",
+      "name": "Everton Cebolinha",
+      "image": "/temas/futebol-atual/everton-cebolinha.webp",
+      "imageCredit": {
+        "author": "Sport Lisboa e Benfica",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:EvertonBenfica1.jpg"
+      },
+      "aliases": ["Cebolinha", "Everton"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Santos",
+        "liga": "Brasileirão",
+        "natal": "Ceará",
+        "nascimento": 1996,
+        "selecao": "Sim"
+      }
+    },
+    {
+      "id": "german-cano",
+      "name": "Germán Cano",
+      "image": "/temas/futebol-atual/german-cano.webp",
+      "imageCredit": {
+        "author": "Fernandoferreiramarchezi",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:German_Cano_Fluminense.jpg"
+      },
+      "aliases": ["Cano"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "clube": "Fluminense",
+        "liga": "Brasileirão",
+        "natal": "Argentina",
+        "nascimento": 1988,
+        "selecao": "Não"
+      }
     }
   ]
 }

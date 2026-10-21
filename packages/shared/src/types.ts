@@ -57,12 +57,27 @@ export interface Character {
   /** Autor e licença da imagem. Viaja junto com o personagem (JSON, banco e, no futuro, uploads). */
   imageCredit?: ImageCredit;
   values: Record<string, AttributeValue>;
+  /**
+   * Atributos numéricos com valor aproximado (ex.: ano de nascimento "c. 1655"). O número
+   * continua valendo para comparar (com a tolerância do atributo); a tela mostra "c." antes.
+   */
+  approx?: string[];
 }
 
 export type ThemeVisibility = "official" | "public" | "private";
 
 /** Cores de destaque disponíveis para temas (mapeadas para tokens de cor no site). */
 export type ThemeColor = "anil" | "gema" | "chiclete" | "folha" | "laranja";
+
+/**
+ * Como chamar o que se adivinha num tema. Padrão: "personagem". No tema de Estados,
+ * por exemplo: { singular: "estado", plural: "estados", gender: "m" } ("o estado secreto").
+ */
+export interface ThemeNoun {
+  singular: string;
+  plural: string;
+  gender: "m" | "f";
+}
 
 export interface Theme {
   slug: string;
@@ -76,6 +91,8 @@ export interface Theme {
    * (clube atual, inscritos...). A página do tema mostra "Dados de outubro de 2026".
    */
   dataUpdatedAt?: string;
+  /** Palavra para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
   attributes: ThemeAttribute[];
   characters: Character[];
 }
@@ -99,6 +116,8 @@ export interface ThemeSummary {
   imageMode: ImageModeAvailability;
   /** Quantos personagens têm imagem. */
   imageCharacterCount: number;
+  /** Palavra para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
   attributes: Pick<ThemeAttribute, "key" | "label">[];
 }
 
@@ -115,7 +134,8 @@ export interface CharacterOption {
 // Palpites e dicas
 // ---------------------------------------------------------------------------
 
-export type FeedbackStatus = "correct" | "partial" | "wrong";
+/** unknown: o valor de um dos dois é "Incerto" (ninguém sabe ao certo); nunca conta como erro. */
+export type FeedbackStatus = "correct" | "partial" | "wrong" | "unknown";
 
 /** "up" = a resposta é MAIOR que o palpite; "down" = a resposta é MENOR. */
 export type FeedbackDirection = "up" | "down";

@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-182_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-197_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -50,17 +50,21 @@ Jogos "dle" (Wordle, Loldle e companhia) são divertidos, mas quase sempre solit
 
 O projeto foi pensado para o público brasileiro, com temas nacionais desde o lançamento:
 
-| Tema                     | Personagens | O que cada palpite compara                                                           | Modo Imagem                  |
-| ------------------------ | ----------: | ------------------------------------------------------------------------------------ | ---------------------------- |
-| YouTubers e streamers    |          34 | Conteúdo, plataforma, quando começou, estado natal, região, nascimento               | Parcial (31 com imagem)      |
-| Música brasileira        |          40 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira | Parcial (39 com imagem)      |
-| Futebol brasileiro atual |          41 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal            | Parcial (39 com imagem)      |
-| Famosos da TV            |          30 | Mais conhecido como, estado natal, região, nascimento, início da carreira            | Normal (todos com imagem)    |
-| Folclore brasileiro      |          24 | Forma, região, onde aparece, quando aparece, comportamento                           | Indisponível (16 com imagem) |
-| Lendas do futebol        |          49 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                | Parcial (47 com imagem)      |
-| Fauna brasileira         |          40 | Grupo, biomas, alimentação, onde vive, peso                                          | Normal (todos com imagem)    |
+| Tema                              | Personagens | O que cada palpite compara                                                                   | Modo Imagem                  |
+| --------------------------------- | ----------: | -------------------------------------------------------------------------------------------- | ---------------------------- |
+| YouTubers e streamers             |          57 | Conteúdo, plataforma, quando começou, estado natal, região, nascimento                       | Parcial (50 com imagem)      |
+| Música brasileira                 |          60 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira         | Parcial (57 com imagem)      |
+| Futebol brasileiro atual          |          54 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal                    | Parcial (52 com imagem)      |
+| Famosos da TV                     |          50 | Mais conhecido como, estado natal, região, nascimento, início da carreira                    | Normal (todos com imagem)    |
+| Personagens da história do Brasil |          58 | Área, período de nascimento (Colônia, Império, República), estado, região, nascimento, morte | Parcial (55 com imagem)      |
+| Estados do Brasil                 |          27 | Região, população e área (IBGE), biomas, litoral, fronteira com outro país                   | Normal (todas as bandeiras)  |
+| Folclore brasileiro               |          27 | Forma, região, onde aparece, quando aparece, comportamento                                   | Indisponível (16 com imagem) |
+| Lendas do futebol                 |          60 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                        | Parcial (58 com imagem)      |
+| Fauna brasileira                  |          40 | Grupo, biomas, alimentação, onde vive, peso                                                  | Normal (todos com imagem)    |
 
-Os temas com pessoas reais (os quatro primeiros) seguem regras próprias: só adultos, só fatos públicos e neutros, dados conferidos na Wikipédia em português e no Wikidata, com o link de cada pessoa em [`packages/db/seed/FONTES.md`](packages/db/seed/FONTES.md) e a data dos dados na página do tema. Quem aparece no site pode pedir para ser removido pelo e-mail da página de créditos.
+Os temas com pessoas reais (YouTubers, música, futebol atual, TV, história e lendas do futebol) seguem regras próprias: só adultos, só fatos públicos e neutros, dados conferidos na Wikipédia em português e no Wikidata, com o link de cada pessoa em [`packages/db/seed/FONTES.md`](packages/db/seed/FONTES.md) e a data dos dados na página do tema. Quem aparece no site pode pedir para ser removido pelo e-mail da página de créditos.
+
+Na história do Brasil, alguns fatos não são conhecidos com certeza. Um ano aproximado aparece como "c. 1655" e vale com a margem de 10 anos; um local desconhecido aparece como "Incerto" em cinza e nunca conta como erro de quem chutou.
 
 ## Como se joga
 
@@ -95,7 +99,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Três modos de jogo: **Clássico** (atributos coloridos), **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica) e **Misto** (alterna uma rodada Clássica e uma de Imagem; o intervalo avisa "Próxima: Imagem")
 - [x] Modo Imagem parcial para temas com 75% ou mais de imagens; o lobby avisa quantos personagens ficam de fora
 - [x] No modo Imagem, as opções mostram só o nome: sem miniatura nem emoji para comparar com a imagem borrada
-- [x] Sete temas oficiais, quatro deles com pessoas reais (YouTubers, música, futebol atual e TV), com fontes e data dos dados
+- [x] Nove temas oficiais: seis com pessoas reais (YouTubers, música, futebol atual, TV, lendas do futebol e história do Brasil), Estados do Brasil com dados do IBGE e bandeiras, folclore e fauna, com fontes e data dos dados
 - [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou (ou, no modo Imagem, a nitidez de cada um), nunca o personagem
 - [x] Dicas (revelar atributo, primeira letra) liberadas depois de 3 chutes, custando pontos
 - [x] **Como jogar** na sala e no treino (abas Clássico e Imagem, com exemplo animado); na primeira vez numa sala, a explicação aparece sozinha no lobby
@@ -105,6 +109,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
+- [x] Página **Para professores** (`/professores`): como usar o jogo numa aula, configurações sugeridas e temas que combinam com a escola
 - [x] **Desafio do dia** (`/diario`): um personagem por tema, o mesmo para todo mundo, que muda à meia-noite de Brasília. Sem tempo, com sequência de dias seguidos e resultado para compartilhar em quadradinhos, sem revelar o personagem
 - [x] Imagem de cada personagem no autocompletar, no tabuleiro, na revelação, no treino e na página do tema; sem imagem, aparece o emoji
 - [x] Imagens só com licença livre (Wikimedia Commons), com autor e licença de cada uma na página [/creditos](apps/web/public/temas/CREDITOS.md)
@@ -365,10 +370,10 @@ pnpm test
 
 | Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------ | -----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     57 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
+| `@chutai/game`     |     60 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
 | `@chutai/realtime` |     74 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
 | `@chutai/web`      |     39 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva, emojis das imagens geradas (sem CDN, a imagem sai sem emoji) e texto do pódio com empates                                                                                                                                                                                                      |
-| `@chutai/db`       |     18 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
+| `@chutai/db`       |     19 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
 
 ## Deploy
 

@@ -6,12 +6,13 @@ import type { Character, CharacterOption, RoundKind, GuessResult, Theme } from "
 import {
   compareCharacters,
   drawCharacter,
-  formatValue,
+  formatCharacterValue,
   MAX_ROUND_IMAGE_LEVEL,
   drawZoomCenter,
   imageLevel,
   imageModeAvailability,
   imageModeCharacters,
+  nounPhrases,
   supportsImageMode,
   type ZoomCenter,
 } from "@chutai/game";
@@ -113,7 +114,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             </Button>
           ) : null}
           <Button variant="secondary" onClick={() => next()} disabled={!answer}>
-            <Shuffle aria-hidden className="size-4" /> Outro personagem
+            <Shuffle aria-hidden className="size-4" /> Outro {theme.noun?.singular ?? "personagem"}
           </Button>
         </div>
       </div>
@@ -173,13 +174,13 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
                   {guesses.length} {guesses.length === 1 ? "chute" : "chutes"}!
                 </>
               ) : (
-                "O personagem era"
+                nounPhrases(theme.noun).itWas
               )}
             </p>
             <p className="font-display text-3xl">{answer.name}</p>
             <p className="text-sm text-tinta-soft">
               {theme.attributes
-                .map((attr) => `${attr.label}: ${formatValue(attr, answer.values[attr.key])}`)
+                .map((attr) => `${attr.label}: ${formatCharacterValue(attr, answer)}`)
                 .join(". ")}
             </p>
           </div>
@@ -190,6 +191,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
           options={visibleOptions}
           guessedIds={guessedIds}
           showPictures={!imageMode}
+          noun={theme.noun}
           onGuess={guess}
           disabled={!answer}
           autoFocus
@@ -208,7 +210,8 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             attributes={theme.attributes}
             guesses={guesses}
             animateLatest
-            emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
+            noun={theme.noun}
+            emptyMessage={`Chute ${nounPhrases(theme.noun).any}. As cores mostram o quanto você chegou perto.`}
           />
         </>
       )}

@@ -3,6 +3,7 @@
  * Este arquivo não depende de banco: pode ser usado em qualquer lugar.
  */
 import type { CharacterOption, Theme, ThemeSummary } from "@chutai/shared";
+import { UNKNOWN_VALUE } from "@chutai/shared";
 import { imageModeAvailability } from "@chutai/game";
 import folclore from "../seed/folclore-brasileiro.json" with { type: "json" };
 import futebol from "../seed/lendas-do-futebol.json" with { type: "json" };
@@ -11,6 +12,8 @@ import musica from "../seed/musica-brasileira.json" with { type: "json" };
 import futebolAtual from "../seed/futebol-atual.json" with { type: "json" };
 import youtubers from "../seed/youtubers-e-streamers.json" with { type: "json" };
 import famososTv from "../seed/famosos-da-tv.json" with { type: "json" };
+import historia from "../seed/historia-do-brasil.json" with { type: "json" };
+import estados from "../seed/estados-do-brasil.json" with { type: "json" };
 
 /** Ordem em que aparecem no site. */
 export const OFFICIAL_THEMES: readonly Theme[] = [
@@ -18,6 +21,8 @@ export const OFFICIAL_THEMES: readonly Theme[] = [
   musica,
   futebolAtual,
   famososTv,
+  historia,
+  estados,
   folclore,
   futebol,
   fauna,
@@ -34,6 +39,7 @@ export function toThemeSummary(theme: Theme): ThemeSummary {
     characterCount: theme.characters.length,
     imageMode: imageModeAvailability(theme.characters),
     imageCharacterCount: theme.characters.filter((character) => !!character.image).length,
+    ...(theme.noun ? { noun: theme.noun } : {}),
     attributes: theme.attributes.map(({ key, label }) => ({ key, label })),
   };
 }
@@ -71,6 +77,9 @@ export function validateTheme(theme: Theme): string[] {
   const problems: string[] = [];
   if (theme.attributes.length < 2) problems.push("O tema precisa de pelo menos 2 atributos.");
   if (theme.characters.length < 5) problems.push("O tema precisa de pelo menos 5 personagens.");
+  if (theme.noun && (!theme.noun.singular.trim() || !theme.noun.plural.trim())) {
+    problems.push("noun precisa de singular e plural.");
+  }
   if (theme.dataUpdatedAt !== undefined && !/^\d{4}-(0[1-9]|1[0-2])$/.test(theme.dataUpdatedAt)) {
     problems.push("dataUpdatedAt precisa estar no formato AAAA-MM (ex.: 2026-10).");
   }
@@ -91,6 +100,14 @@ export function validateTheme(theme: Theme): string[] {
       if (!character.image)
         problems.push(`${character.name}: tem crédito de imagem, mas não tem imagem.`);
     }
+    for (const key of character.approx ?? []) {
+      const attr = theme.attributes.find((item) => item.key === key);
+      if (!attr || (attr.type !== "number" && attr.type !== "range")) {
+        problems.push(`${character.name}: "${key}" em approx precisa ser um atributo numérico.`);
+      } else if (typeof character.values[key] !== "number") {
+        problems.push(`${character.name}: "${key}" é aproximado, mas não tem número.`);
+      }
+    }
     for (const key of attributeKeys) {
       if (character.values[key] === undefined) {
         problems.push(`${character.name} não tem valor para "${key}".`);
@@ -100,7 +117,7 @@ export function validateTheme(theme: Theme): string[] {
       const value = character.values[attr.key];
       if (value === undefined) continue;
       const isNumeric = attr.type === "number" || attr.type === "range";
-      if (isNumeric && typeof value !== "number") {
+      if (isNumeric && typeof value !== "number" && value !== UNKNOWN_VALUE) {
         problems.push(`${character.name}: "${attr.key}" deveria ser número.`);
       }
       if (attr.type === "list" && !Array.isArray(value)) {

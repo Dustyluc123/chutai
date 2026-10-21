@@ -2,8 +2,14 @@
 
 import { CalendarDays, Copy, Flame, PartyPopper, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import type { CharacterOption, DailyRequest, DailyResponse, HintType } from "@chutai/shared";
-import { msUntilNextDaily } from "@chutai/game";
+import type {
+  CharacterOption,
+  DailyRequest,
+  DailyResponse,
+  HintType,
+  ThemeNoun,
+} from "@chutai/shared";
+import { msUntilNextDaily, nounPhrases } from "@chutai/game";
 import { GuessBoard } from "@/components/game/guess-board";
 import { GuessInput } from "@/components/game/guess-input";
 import { HintBar } from "@/components/game/hint-bar";
@@ -33,6 +39,8 @@ interface DailyGameProps {
   options: CharacterOption[];
   /** Número do desafio de hoje (Chutaí #N), calculado no servidor. */
   day: number;
+  /** Palavra do tema para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
 }
 
 /** O pedido sem o número do dia (que o componente completa). */
@@ -70,6 +78,7 @@ export function DailyGame({
   attributes,
   options,
   day,
+  noun,
 }: DailyGameProps) {
   const toast = useToast();
   const [progress, setProgress] = useState<DailyProgress>({ day, guesses: [], hints: [] });
@@ -240,6 +249,7 @@ export function DailyGame({
           <GuessInput
             options={options}
             guessedIds={guessedIds}
+            noun={noun}
             onGuess={guess}
             disabled={busy}
             autoFocus
@@ -272,7 +282,8 @@ export function DailyGame({
         attributes={attributes}
         guesses={progress.guesses}
         animateLatest
-        emptyMessage="Chute qualquer personagem. As cores mostram o quanto você chegou perto."
+        noun={noun}
+        emptyMessage={`Chute ${nounPhrases(noun).any}. As cores mostram o quanto você chegou perto.`}
       />
     </>
   );

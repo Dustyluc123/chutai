@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { DailyCards } from "@/components/daily/daily-cards";
-import { dailyThemes, today } from "@/lib/daily/server";
+import { dailyStartsLater, dailyThemes, today } from "@/lib/daily/server";
 
 export const dynamic = "force-dynamic";
 
@@ -14,13 +14,14 @@ export const metadata: Metadata = {
 
 /** Lista dos desafios do dia, um por tema. */
 export default function DailyIndexPage() {
-  const { number } = today();
-  const themes = dailyThemes().map(({ slug, name, emoji, color, characters }) => ({
-    slug,
-    name,
-    emoji,
-    color,
-    characterCount: characters.length,
+  const { number, dateKey } = today();
+  const themes = dailyThemes().map((theme) => ({
+    slug: theme.slug,
+    name: theme.name,
+    emoji: theme.emoji,
+    color: theme.color,
+    characterCount: theme.characters.length,
+    startsOn: dailyStartsLater(theme, dateKey),
   }));
   return (
     <>

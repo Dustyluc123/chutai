@@ -9,6 +9,7 @@ import {
   type RoomSettings,
   type ThemeSummary,
 } from "@chutai/shared";
+import { nounPhrases } from "@chutai/game";
 import { OptionGroup } from "@/components/ui/option-group";
 import { Switch } from "@/components/ui/switch";
 import { THEME_COLORS } from "@/lib/colors";
@@ -105,7 +106,7 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
                 <span className="flex flex-col">
                   <span className="font-semibold">{theme.name}</span>
                   <span className="text-sm text-tinta-soft">
-                    {theme.characterCount} personagens
+                    {nounPhrases(theme.noun).count(theme.characterCount)}
                     {theme.imageMode === "full"
                       ? " · tem modo Imagem"
                       : theme.imageMode === "partial"
@@ -166,8 +167,8 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
             className="mt-1 rounded-2xl border-2 border-gema bg-gema-soft px-3 py-2.5 text-sm font-semibold"
           >
             {settings.mode === "image"
-              ? `Modo Imagem parcial: ${theme.imageCharacterCount} de ${theme.characterCount} personagens têm imagem. Os outros ficam de fora desta partida.`
-              : `Imagem parcial: nas rodadas de Imagem, só entram os ${theme.imageCharacterCount} de ${theme.characterCount} personagens que têm imagem.`}
+              ? `Modo Imagem parcial: ${theme.imageCharacterCount} de ${nounPhrases(theme.noun).count(theme.characterCount)} têm imagem. Os outros ficam de fora desta partida.`
+              : `Imagem parcial: nas rodadas de Imagem, só entram os ${theme.imageCharacterCount} de ${nounPhrases(theme.noun).count(theme.characterCount)} que têm imagem.`}
           </p>
         ) : null}
       </fieldset>

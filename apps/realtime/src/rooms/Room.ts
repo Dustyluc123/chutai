@@ -34,7 +34,7 @@ import {
   computeRoundPoints,
   countCorrect,
   drawCharacter,
-  formatValue,
+  formatCharacterValue,
   imageLevel,
   imageModeCharacters,
   modeNeedsImages,
@@ -644,7 +644,7 @@ export class Room {
         values: this.theme.attributes.map((attr) => ({
           key: attr.key,
           label: attr.label,
-          display: formatValue(attr, round.character.values[attr.key]),
+          display: formatCharacterValue(attr, round.character),
         })),
       },
       results: [...this.players.values()]

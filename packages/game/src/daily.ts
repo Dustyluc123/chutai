@@ -84,20 +84,47 @@ export interface DailyPickInput {
   launchDate?: string;
 }
 
+/**
+ * Primeiro dia (AAAA-MM-DD) em que o diário de um tema tem personagens: o lançamento ou, para um
+ * tema novo, o dia em que os personagens dele passam a valer. Null se o roster estiver vazio.
+ */
+export function dailyStartDate(
+  roster: readonly DailyRosterEntry[],
+  launchDate: string = DAILY.launchDate,
+): string | null {
+  if (roster.length === 0) return null;
+  const first = roster.reduce(
+    (min, entry) => (entry.since < min ? entry.since : min),
+    roster[0]!.since,
+  );
+  return first > launchDate ? first : launchDate;
+}
+
+/** O diário deste tema ainda não começou (tema novo): só a partir de `from`. */
+export class DailyNotStarted extends Error {
+  constructor(readonly from: string) {
+    super(`O desafio diário deste tema começa em ${from}.`);
+  }
+}
+
 /** Id do personagem do dia. */
 export function dailyAnswerId(input: DailyPickInput): string {
   const launch = input.launchDate ?? DAILY.launchDate;
-  const target = Math.max(0, daysBetween(launch, input.dateKey));
-  let cycleStart = 0; // em dias desde o lançamento
+  const start = dailyStartDate(input.roster, launch);
+  if (!start) throw new Error("O diário deste tema não tem personagens no roster.");
+  // Tema novo: os ciclos começam no primeiro dia com personagens (para os temas do lançamento,
+  // é o próprio lançamento, e nada muda).
+  // Antes do lançamento, os temas do lançamento mostram o desafio #1 (como sempre foi).
+  const dateKey = input.dateKey < start && start === launch ? start : input.dateKey;
+  if (dateKey < start) throw new DailyNotStarted(start);
+  const target = daysBetween(start, dateKey);
+  let cycleStart = 0; // em dias desde o início do diário deste tema
   for (let cycle = 0; ; cycle++) {
-    const startKey = addDays(launch, cycleStart);
+    const startKey = addDays(start, cycleStart);
     const members = input.roster
       .filter((entry) => entry.since <= startKey)
       .map((entry) => ({ id: entry.id, rank: input.rank(cycle, entry.id) }))
       .sort((a, b) => (a.rank < b.rank ? -1 : a.rank > b.rank ? 1 : a.id < b.id ? -1 : 1));
-    if (members.length === 0) {
-      throw new Error("O diário deste tema não tem personagens no roster.");
-    }
     if (target < cycleStart + members.length) {
       const position = target - cycleStart;
       // Personagem removido do tema: pega o próximo da ordem que ainda existe (só este dia muda).

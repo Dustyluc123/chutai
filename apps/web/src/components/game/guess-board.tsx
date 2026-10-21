@@ -1,4 +1,4 @@
-import type { GuessResult } from "@chutai/shared";
+import type { GuessResult, ThemeNoun } from "@chutai/shared";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { cn } from "@/lib/cn";
 import { Legend } from "./legend";
@@ -12,6 +12,8 @@ interface GuessBoardProps {
   animateLatest?: boolean;
   emptyMessage?: string;
   className?: string;
+  /** Palavra do tema para o que se adivinha (padrão: personagem). */
+  noun?: ThemeNoun;
 }
 
 /** Tabuleiro de palpites: uma coluna por atributo do tema, uma fileira por chute. */
@@ -21,6 +23,7 @@ export function GuessBoard({
   animateLatest,
   emptyMessage,
   className,
+  noun,
 }: GuessBoardProps) {
   const columns = `minmax(8rem, 1.3fr) repeat(${attributes.length}, minmax(5rem, 1fr))`;
   const rows = [...guesses].reverse();
@@ -51,7 +54,7 @@ export function GuessBoard({
         >
           <div role="row" className="grid gap-2" style={{ gridTemplateColumns: columns }}>
             <div role="columnheader" className="px-1 text-xs font-semibold text-tinta-soft">
-              Personagem
+              {(noun?.singular ?? "personagem").replace(/^./, (c) => c.toUpperCase())}
             </div>
             {attributes.map((attr) => (
               <div
@@ -98,6 +101,7 @@ export function GuessBoard({
                     feedback={feedback}
                     index={index + 1}
                     animate={animate}
+                    noun={noun}
                   />
                 ))}
               </div>
@@ -110,7 +114,9 @@ export function GuessBoard({
           Deslize o tabuleiro para o lado para ver todas as colunas.
         </p>
       ) : null}
-      <Legend />
+      <Legend
+        unknown={guesses.some((guess) => guess.feedback.some((f) => f.status === "unknown"))}
+      />
     </div>
   );
 }

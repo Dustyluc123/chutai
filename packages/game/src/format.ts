@@ -1,4 +1,4 @@
-import type { AttributeValue, ThemeAttribute } from "@chutai/shared";
+import type { AttributeValue, Character, ThemeAttribute } from "@chutai/shared";
 
 const numberFormatter = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 2 });
 
@@ -17,6 +17,15 @@ export function formatValue(attribute: ThemeAttribute, value: AttributeValue | u
     return attribute.unit ? `${text} ${attribute.unit}` : text;
   }
   return value;
+}
+
+/** Valor de um atributo de um personagem, com "c." quando o valor é aproximado ("c. 1655"). */
+export function formatCharacterValue(
+  attribute: ThemeAttribute,
+  character: Pick<Character, "values" | "approx">,
+): string {
+  const text = formatValue(attribute, character.values[attribute.key]);
+  return character.approx?.includes(attribute.key) ? `c. ${text}` : text;
 }
 
 /** Remove acentos e deixa minúsculo: "São Paulo" → "sao paulo". */

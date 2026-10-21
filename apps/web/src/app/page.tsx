@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { AttributeFeedback } from "@chutai/shared";
+import { nounPhrases } from "@chutai/game";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { StartPanel } from "@/components/home/start-panel";
@@ -153,7 +154,7 @@ export default async function HomePage() {
                       <span className="flex min-w-0 flex-col">
                         <span className="truncate font-bold">{theme.name}</span>
                         <span className="text-sm text-tinta-soft">
-                          {theme.characterCount} personagens
+                          {nounPhrases(theme.noun).count(theme.characterCount)}
                         </span>
                       </span>
                     </Link>

@@ -1,7 +1,15 @@
 import "server-only";
 import { createHmac } from "node:crypto";
 import type { Character, CharacterReveal, Theme } from "@chutai/shared";
-import { addDays, dailyAnswerId, dailyDateKey, dailyNumber, formatValue } from "@chutai/game";
+import {
+  DailyNotStarted,
+  addDays,
+  dailyAnswerId,
+  dailyDateKey,
+  dailyNumber,
+  dailyStartDate,
+  formatCharacterValue,
+} from "@chutai/game";
 import { DAILY_THEME_SLUGS, OFFICIAL_THEMES, dailyRoster } from "@chutai/db";
 
 /** Falta a chave secreta: o diário não funciona (de propósito, sem chave padrão). */
@@ -54,11 +62,22 @@ export function dailyAnswer(theme: Theme, dateKey: string, secret = dailySecret(
   return theme.characters.find((character) => character.id === id)!;
 }
 
-/** O personagem de ontem (já é passado, pode ser mostrado). Null no primeiro dia. */
+/** O personagem de ontem (já é passado, pode ser mostrado). Null no primeiro dia do tema. */
 export function yesterdayAnswer(theme: Theme, dateKey: string, secret = dailySecret()) {
   if (dailyNumber(dateKey) <= 1) return null;
-  const character = dailyAnswer(theme, addDays(dateKey, -1), secret);
-  return { name: character.name, emoji: character.emoji, image: character.image };
+  try {
+    const character = dailyAnswer(theme, addDays(dateKey, -1), secret);
+    return { name: character.name, emoji: character.emoji, image: character.image };
+  } catch (error) {
+    if (error instanceof DailyNotStarted) return null; // tema novo: ontem ainda não tinha diário
+    throw error;
+  }
+}
+
+/** Tema novo cujo diário ainda não começou: a data (AAAA-MM-DD) em que começa. Null se já começou. */
+export function dailyStartsLater(theme: Theme, dateKey: string): string | null {
+  const start = dailyStartDate(dailyRoster(theme.slug) ?? []);
+  return start && start > dateKey && dailyNumber(start) > 1 ? start : null;
 }
 
 export function revealOf(theme: Theme, character: Character): CharacterReveal {
@@ -70,7 +89,7 @@ export function revealOf(theme: Theme, character: Character): CharacterReveal {
     values: theme.attributes.map((attr) => ({
       key: attr.key,
       label: attr.label,
-      display: formatValue(attr, character.values[attr.key]),
+      display: formatCharacterValue(attr, character),
     })),
   };
 }

@@ -6,36 +6,12 @@
   "color": "gema",
   "visibility": "official",
   "attributes": [
-    {
-      "key": "posicao",
-      "label": "Posição",
-      "type": "text"
-    },
-    {
-      "key": "regiao",
-      "label": "Região natal",
-      "type": "text"
-    },
-    {
-      "key": "estado",
-      "label": "Estado natal",
-      "type": "text"
-    },
-    {
-      "key": "nascimento",
-      "label": "Nascimento",
-      "type": "number"
-    },
-    {
-      "key": "copas",
-      "label": "Copas do Mundo",
-      "type": "number"
-    },
-    {
-      "key": "decadas",
-      "label": "Décadas na Seleção",
-      "type": "list"
-    }
+    { "key": "posicao", "label": "Posição", "type": "text" },
+    { "key": "regiao", "label": "Região natal", "type": "text" },
+    { "key": "estado", "label": "Estado natal", "type": "text" },
+    { "key": "nascimento", "label": "Nascimento", "type": "number" },
+    { "key": "copas", "label": "Copas do Mundo", "type": "number" },
+    { "key": "decadas", "label": "Décadas na Seleção", "type": "list" }
   ],
   "characters": [
     {
@@ -1010,6 +986,230 @@
         "nascimento": 1921,
         "copas": 0,
         "decadas": ["anos 1940", "anos 1950"]
+      }
+    },
+    {
+      "id": "rogerio-ceni",
+      "name": "Rogério Ceni",
+      "image": "/temas/lendas-do-futebol/rogerio-ceni.webp",
+      "imageCredit": {
+        "author": "SOCCER DIGITAL",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Rogerio-Ceni-Sao-Paulo-Juventude-jun-2022_(cropped).jpg"
+      },
+      "aliases": ["Ceni"],
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Sul",
+        "estado": "PR",
+        "nascimento": 1973,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "dida",
+      "name": "Dida",
+      "image": "/temas/lendas-do-futebol/dida.webp",
+      "imageCredit": {
+        "author": "NullReason",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Dida-wikipedia_(cropped_2).png"
+      },
+      "emoji": "🧤",
+      "values": {
+        "posicao": "Goleiro",
+        "regiao": "Nordeste",
+        "estado": "BA",
+        "nascimento": 1973,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "rai",
+      "name": "Raí",
+      "image": "/temas/lendas-do-futebol/rai.webp",
+      "imageCredit": {
+        "author": "Rai_em_2009.jpg: Elza Fiúza/ABr derivative work: Yanguas",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Rai_em_2009_cropped.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1965,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990"]
+      }
+    },
+    {
+      "id": "edmundo",
+      "name": "Edmundo",
+      "image": "/temas/lendas-do-futebol/edmundo.webp",
+      "imageCredit": {
+        "author": "Alex Carvalho",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:EdmundoVasco2008_(cropped_2).jpg"
+      },
+      "aliases": ["Animal"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1971,
+        "copas": 0,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "denilson",
+      "name": "Denílson",
+      "image": "/temas/lendas-do-futebol/denilson.webp",
+      "imageCredit": {
+        "author": "RicardoGuedesP",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:CASA_ONZE_-_DENILSON_(cropped).jpg"
+      },
+      "aliases": ["Denílson Show"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1977,
+        "copas": 1,
+        "decadas": ["anos 1990", "anos 2000"]
+      }
+    },
+    {
+      "id": "gilberto-silva",
+      "name": "Gilberto Silva",
+      "image": "/temas/lendas-do-futebol/gilberto-silva.webp",
+      "imageCredit": {
+        "author": "Web Summit",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:2021_-_Press_conferences_SM7_0168_(51649502936)_(cropped).jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Volante",
+        "regiao": "Sudeste",
+        "estado": "MG",
+        "nascimento": 1976,
+        "copas": 1,
+        "decadas": ["anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "luis-fabiano",
+      "name": "Luís Fabiano",
+      "image": "/temas/lendas-do-futebol/luis-fabiano.webp",
+      "imageCredit": {
+        "author": "Oberlandi",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:JSP_0799_(cropped).JPG"
+      },
+      "aliases": ["Fabuloso"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1980,
+        "copas": 0,
+        "decadas": ["anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "fred",
+      "name": "Fred",
+      "image": "/temas/lendas-do-futebol/fred.webp",
+      "imageCredit": {
+        "author": "Onda Solidária TV",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Fred_2022.png"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "MG",
+        "nascimento": 1983,
+        "copas": 0,
+        "decadas": ["anos 2000", "anos 2010"]
+      }
+    },
+    {
+      "id": "ademir-da-guia",
+      "name": "Ademir da Guia",
+      "image": "/temas/lendas-do-futebol/ademir-da-guia.webp",
+      "imageCredit": {
+        "author": "Rob Mieremet / Anefo",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:WK_74,_training_Brazilie_Ademir_da_Guia,_Bestanddeelnr_927-2956.jpg"
+      },
+      "aliases": ["Divino"],
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Meia",
+        "regiao": "Sudeste",
+        "estado": "RJ",
+        "nascimento": 1942,
+        "copas": 0,
+        "decadas": ["anos 1960", "anos 1970"]
+      }
+    },
+    {
+      "id": "pepe",
+      "name": "Pepe",
+      "image": "/temas/lendas-do-futebol/pepe.webp",
+      "imageCredit": {
+        "author": "Fabio Rodrigues Pozzebom",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Pepe_22.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Sudeste",
+        "estado": "SP",
+        "nascimento": 1935,
+        "copas": 2,
+        "decadas": ["anos 1950", "anos 1960"]
+      }
+    },
+    {
+      "id": "muller",
+      "name": "Müller",
+      "image": "/temas/lendas-do-futebol/muller.webp",
+      "imageCredit": {
+        "author": "Júnior Faria/flickr (cropped by tales.ebner)",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Lu%C3%ADs_Ant%C3%B4nio_Corr%C3%AAa_da_Costa_(M%C3%BCller)_01.jpg"
+      },
+      "emoji": "⚽",
+      "values": {
+        "posicao": "Atacante",
+        "regiao": "Centro-Oeste",
+        "estado": "MS",
+        "nascimento": 1966,
+        "copas": 1,
+        "decadas": ["anos 1980", "anos 1990"]
       }
     }
   ]

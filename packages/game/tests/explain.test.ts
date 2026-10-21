@@ -52,3 +52,36 @@ describe("explicação das peças do tabuleiro", () => {
     );
   });
 });
+
+describe("explicação com a palavra do tema", () => {
+  it("estado (masculino) e cidade (feminino)", () => {
+    const estado = { singular: "estado", plural: "estados", gender: "m" as const };
+    expect(
+      explainFeedback(
+        "Área",
+        { key: "a", display: "1,2 mil km²", status: "wrong", direction: "up" },
+        estado,
+      ),
+    ).toBe("Área: 1,2 mil km². O do estado secreto é maior que 1,2 mil km².");
+    const cidade = { singular: "cidade", plural: "cidades", gender: "f" as const };
+    expect(explainFeedback("Região", { key: "r", display: "Sul", status: "correct" }, cidade)).toBe(
+      "Região: Sul. Igual ao da cidade secreta.",
+    );
+    expect(
+      explainFeedback("Biomas", { key: "b", display: "Cerrado", status: "partial" }, cidade),
+    ).toBe("Biomas: Cerrado. Tem algo em comum com a cidade secreta, mas não tudo.");
+  });
+});
+
+describe("anos antigos", () => {
+  it("anos da Colônia também viram antes/depois", () => {
+    expect(
+      explainFeedback("Nascimento", {
+        key: "n",
+        display: "1746",
+        status: "wrong",
+        direction: "down",
+      }),
+    ).toBe("Nascimento: 1746. O do personagem secreto é antes de 1746.");
+  });
+});

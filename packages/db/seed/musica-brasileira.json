@@ -789,6 +789,375 @@
         "regiao": "Nordeste",
         "inicio": 1989
       }
+    },
+    {
+      "id": "elis-regina",
+      "name": "Elis Regina",
+      "image": "/temas/musica-brasileira/elis-regina.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Elis_Regina_1972.tif"
+      },
+      "aliases": ["Pimentinha"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "inicio": 1956
+      }
+    },
+    {
+      "id": "tim-maia",
+      "name": "Tim Maia",
+      "image": "/temas/musica-brasileira/tim-maia.webp",
+      "imageCredit": {
+        "author": "Gemini",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Tim_Maia_em_1970_crop_restored.png"
+      },
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1957
+      }
+    },
+    {
+      "id": "rita-lee",
+      "name": "Rita Lee",
+      "image": "/temas/musica-brasileira/rita-lee.webp",
+      "imageCredit": {
+        "author": "CaioWebb",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Rita_Lee_(cropped).jpg"
+      },
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Solo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 1963
+      }
+    },
+    {
+      "id": "gal-costa",
+      "name": "Gal Costa",
+      "image": "/temas/musica-brasileira/gal-costa.webp",
+      "imageCredit": {
+        "author": "Milly barzellai",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Salvagalcosta_(cropped).jpg"
+      },
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1964
+      }
+    },
+    {
+      "id": "cazuza",
+      "name": "Cazuza",
+      "image": "/temas/musica-brasileira/cazuza.webp",
+      "imageCredit": {
+        "author": "There's no indication of the author of the image.",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Cazuza_em_1987.jpg"
+      },
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1981
+      }
+    },
+    {
+      "id": "raul-seixas",
+      "name": "Raul Seixas",
+      "image": "/temas/musica-brasileira/raul-seixas.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Raul_Seixas_(1972)_colorized.tif"
+      },
+      "aliases": ["Raulzito"],
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 1963
+      }
+    },
+    {
+      "id": "marilia-mendonca",
+      "name": "Marília Mendonça",
+      "image": "/temas/musica-brasileira/marilia-mendonca.webp",
+      "imageCredit": {
+        "author": "Record Goiás",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Marilia_Mendonca_Pecuaria_de_Goiania_2018_2.jpg"
+      },
+      "emoji": "🤠",
+      "values": {
+        "genero": "Sertanejo",
+        "formato": "Solo",
+        "estado": "Goiás",
+        "regiao": "Centro-Oeste",
+        "inicio": 2011
+      }
+    },
+    {
+      "id": "tom-jobim",
+      "name": "Tom Jobim",
+      "image": "/temas/musica-brasileira/tom-jobim.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Ant%C3%B4nio_Carlos_Jobim_(cropped).jpg"
+      },
+      "aliases": ["Antônio Carlos Jobim"],
+      "emoji": "🎶",
+      "values": {
+        "genero": "MPB",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1948
+      }
+    },
+    {
+      "id": "legiao-urbana",
+      "name": "Legião Urbana",
+      "aliases": ["Renato Russo"],
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Grupo",
+        "estado": "Distrito Federal",
+        "regiao": "Centro-Oeste",
+        "inicio": 1982
+      }
+    },
+    {
+      "id": "titas",
+      "name": "Titãs",
+      "image": "/temas/musica-brasileira/titas.webp",
+      "imageCredit": {
+        "author": "Showlivre",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tit%C3%A3s_2019.png"
+      },
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Grupo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 1982
+      }
+    },
+    {
+      "id": "skank",
+      "name": "Skank",
+      "image": "/temas/musica-brasileira/skank.webp",
+      "imageCredit": {
+        "author": "Skank",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Skank_Divulgacao.jpg"
+      },
+      "aliases": ["Samuel Rosa"],
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Grupo",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "inicio": 1991
+      }
+    },
+    {
+      "id": "charlie-brown-jr",
+      "name": "Charlie Brown Jr.",
+      "image": "/temas/musica-brasileira/charlie-brown-jr.webp",
+      "imageCredit": {
+        "author": "Thiago Prazeres",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:CBJr_Bras%C3%ADlia_2012_Champignon_e_Chor%C3%A3o.png"
+      },
+      "aliases": ["Chorão", "CBJR"],
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Grupo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 1992
+      }
+    },
+    {
+      "id": "mamonas-assassinas",
+      "name": "Mamonas Assassinas",
+      "aliases": ["Mamonas"],
+      "emoji": "🎸",
+      "values": {
+        "genero": "Rock",
+        "formato": "Grupo",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "inicio": 1989
+      }
+    },
+    {
+      "id": "alcione",
+      "name": "Alcione",
+      "image": "/temas/musica-brasileira/alcione.webp",
+      "imageCredit": {
+        "author": "BrunoGuedes1",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Alcione_SJDR_2025.jpg"
+      },
+      "aliases": ["Marrom"],
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Solo",
+        "estado": "Maranhão",
+        "regiao": "Nordeste",
+        "inicio": 1971
+      }
+    },
+    {
+      "id": "martinho-da-vila",
+      "name": "Martinho da Vila",
+      "image": "/temas/musica-brasileira/martinho-da-vila.webp",
+      "imageCredit": {
+        "author": "Relicarium EstudioCriativo",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Martinho-Fantastico048_(cropped).jpg"
+      },
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Solo",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "inicio": 1967
+      }
+    },
+    {
+      "id": "leo-santana",
+      "name": "Léo Santana",
+      "image": "/temas/musica-brasileira/leo-santana.webp",
+      "imageCredit": {
+        "author": "NTV Patos",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:L%C3%A9o_Santana_2019.jpg"
+      },
+      "emoji": "🎺",
+      "values": {
+        "genero": "Axé",
+        "formato": "Solo",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "inicio": 2001
+      }
+    },
+    {
+      "id": "joao-gomes",
+      "name": "João Gomes",
+      "image": "/temas/musica-brasileira/joao-gomes.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Jo%C3%A3o_Gomes_-_Se_Joga_no_Vulc%C3%A3o_2024.png"
+      },
+      "emoji": "🪗",
+      "values": {
+        "genero": "Forró",
+        "formato": "Solo",
+        "estado": "Pernambuco",
+        "regiao": "Nordeste",
+        "inicio": 2021
+      }
+    },
+    {
+      "id": "marina-sena",
+      "name": "Marina Sena",
+      "image": "/temas/musica-brasileira/marina-sena.webp",
+      "imageCredit": {
+        "author": "Festival Sensacional",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:SENSACIONAL!_2024_-_MARINA_SENA_(54312729181)_(cropped).jpg"
+      },
+      "emoji": "🎤",
+      "values": {
+        "genero": "Pop",
+        "formato": "Solo",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "inicio": 2014
+      }
+    },
+    {
+      "id": "djonga",
+      "name": "Djonga",
+      "image": "/temas/musica-brasileira/djonga.webp",
+      "imageCredit": {
+        "author": "Fora do Eixo",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Djonga_visita_a_NAVE_e_lan%C3%A7a_seu_sexto_%C3%A1lbum_%E2%80%9CO_Dono_do_Lugar%E2%80%9D_%C2%B7_11_10_2022_%C2%B7_S%C3%A3o_Paulo_(SP)_(52438097382)_(cropped).jpg"
+      },
+      "emoji": "🎙️",
+      "values": {
+        "genero": "Rap",
+        "formato": "Solo",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "inicio": 2010
+      }
+    },
+    {
+      "id": "menos-e-mais",
+      "name": "Menos é Mais",
+      "image": "/temas/musica-brasileira/menos-e-mais.webp",
+      "imageCredit": {
+        "author": "Canal do Jeferson Almeida",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Grupo_Menos_%C3%A9_Mais.png"
+      },
+      "emoji": "🥁",
+      "values": {
+        "genero": "Samba e pagode",
+        "formato": "Grupo",
+        "estado": "Distrito Federal",
+        "regiao": "Centro-Oeste",
+        "inicio": 2016
+      }
     }
   ]
 }

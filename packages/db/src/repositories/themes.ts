@@ -70,6 +70,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
         characterCount: themeCharacters.length,
         imageMode: imageModeAvailability(themeCharacters),
         imageCharacterCount: themeCharacters.filter((c) => !!c.image).length,
+        ...(row.noun ? { noun: row.noun } : {}),
         attributes: attributeRows
           .filter((attr) => attr.themeId === row.id)
           .map((attr) => ({ key: attr.key, label: attr.label })),
@@ -113,6 +114,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
       color: row.color as ThemeColor,
       visibility: row.visibility as ThemeVisibility,
       ...(row.dataUpdatedAt ? { dataUpdatedAt: row.dataUpdatedAt } : {}),
+      ...(row.noun ? { noun: row.noun } : {}),
       attributes: attributeRows.map((attr) => ({
         key: attr.key,
         label: attr.label,
@@ -129,6 +131,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
         ...(character.emoji ? { emoji: character.emoji } : {}),
         ...(character.imageUrl ? { image: character.imageUrl } : {}),
         ...(character.imageCredit ? { imageCredit: character.imageCredit } : {}),
+        ...(character.approx.length ? { approx: character.approx } : {}),
         values: Object.fromEntries(
           valueRows
             .filter((value) => value.characterId === character.id)
@@ -156,6 +159,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
         visibility: theme.visibility,
         moderationStatus: theme.visibility === "official" ? "approved" : "pending",
         dataUpdatedAt: theme.dataUpdatedAt ?? null,
+        noun: theme.noun ?? null,
       })
       .onConflictDoUpdate({
         target: themes.slug,
@@ -166,6 +170,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
           color: theme.color,
           visibility: theme.visibility,
           dataUpdatedAt: theme.dataUpdatedAt ?? null,
+          noun: theme.noun ?? null,
         },
       })
       .returning({ id: themes.id });
@@ -203,6 +208,7 @@ export async function upsertTheme(db: Database, theme: Theme): Promise<void> {
           emoji: character.emoji ?? null,
           imageUrl: character.image ?? null,
           imageCredit: character.imageCredit ?? null,
+          approx: character.approx ?? [],
         })),
       )
       .returning({ id: characters.id, externalId: characters.externalId });

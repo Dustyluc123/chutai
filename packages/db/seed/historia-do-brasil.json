@@ -1,0 +1,1150 @@
+{
+  "slug": "historia-do-brasil",
+  "name": "Personagens da história do Brasil",
+  "description": "Gente que marcou o país, da Colônia ao século XX: política, ciência, literatura, artes, música, esporte e movimentos sociais.",
+  "emoji": "📜",
+  "color": "gema",
+  "visibility": "official",
+  "dataUpdatedAt": "2026-10",
+  "attributes": [
+    { "key": "area", "label": "Área", "type": "text" },
+    { "key": "periodo", "label": "Nasceu no período", "type": "text" },
+    { "key": "estado", "label": "Estado de nascimento", "type": "text" },
+    { "key": "regiao", "label": "Região", "type": "text" },
+    {
+      "key": "nascimento",
+      "label": "Nascimento",
+      "type": "range",
+      "tolerance": 10,
+      "toleranceIsPercent": false
+    },
+    {
+      "key": "morte",
+      "label": "Morte",
+      "type": "range",
+      "tolerance": 10,
+      "toleranceIsPercent": false
+    }
+  ],
+  "characters": [
+    {
+      "id": "tiradentes",
+      "name": "Tiradentes",
+      "image": "/temas/historia-do-brasil/tiradentes.webp",
+      "imageCredit": {
+        "author": "José Wasth Rodrigues",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Alferes_Tiradentes_01.jpg"
+      },
+      "aliases": ["Joaquim José da Silva Xavier"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Colônia",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1746,
+        "morte": 1792
+      }
+    },
+    {
+      "id": "dom-pedro-i",
+      "name": "Dom Pedro I",
+      "image": "/temas/historia-do-brasil/dom-pedro-i.webp",
+      "imageCredit": {
+        "author": "Simplício Rodrigues de Sá",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:DpedroI-brasil-full.jpg"
+      },
+      "aliases": ["Pedro I"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Colônia",
+        "estado": "Exterior",
+        "regiao": "Exterior",
+        "nascimento": 1798,
+        "morte": 1834
+      }
+    },
+    {
+      "id": "dom-pedro-ii",
+      "name": "Dom Pedro II",
+      "image": "/temas/historia-do-brasil/dom-pedro-ii.webp",
+      "imageCredit": {
+        "author": "Mathew Benjamin Brady / Levin Corbin Handy",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Pedro_II_of_Brazil_-_Brady-Handy.jpg"
+      },
+      "aliases": ["Pedro II"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1825,
+        "morte": 1891
+      }
+    },
+    {
+      "id": "maria-leopoldina",
+      "name": "Maria Leopoldina",
+      "image": "/temas/historia-do-brasil/maria-leopoldina.webp",
+      "imageCredit": {
+        "author": "Joseph Kreutzinger",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:29-_Imperatriz_rainha_D._Leopoldina.jpg"
+      },
+      "aliases": ["Leopoldina"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Colônia",
+        "estado": "Exterior",
+        "regiao": "Exterior",
+        "nascimento": 1797,
+        "morte": 1826
+      }
+    },
+    {
+      "id": "princesa-isabel",
+      "name": "Princesa Isabel",
+      "image": "/temas/historia-do-brasil/princesa-isabel.webp",
+      "imageCredit": {
+        "author": "Joaquim Insley Pacheco",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Isabel_Princess_Imperial_of_Brazil_c_1887.jpg"
+      },
+      "aliases": ["Isabel"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1846,
+        "morte": 1921
+      }
+    },
+    {
+      "id": "jose-bonifacio",
+      "name": "José Bonifácio",
+      "image": "/temas/historia-do-brasil/jose-bonifacio.webp",
+      "imageCredit": {
+        "author": "S. A. Sisson",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Jose_bonifacio_de_andrada_e_silva_(cropped).jpg"
+      },
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Colônia",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1763,
+        "morte": 1838
+      }
+    },
+    {
+      "id": "barao-do-rio-branco",
+      "name": "Barão do Rio Branco",
+      "image": "/temas/historia-do-brasil/barao-do-rio-branco.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Maria_da_Silva_Paranhos_J%C3%BAnior_-_Bar%C3%A3o_do_Rio_Branco.jpg"
+      },
+      "aliases": ["Rio Branco"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1845,
+        "morte": 1912
+      }
+    },
+    {
+      "id": "rui-barbosa",
+      "name": "Rui Barbosa",
+      "image": "/temas/historia-do-brasil/rui-barbosa.webp",
+      "imageCredit": {
+        "author": "Fitz Gerald",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Ruy_Barbosa_1907.jpg"
+      },
+      "aliases": ["Ruy Barbosa"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Império",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1849,
+        "morte": 1923
+      }
+    },
+    {
+      "id": "getulio-vargas",
+      "name": "Getúlio Vargas",
+      "image": "/temas/historia-do-brasil/getulio-vargas.webp",
+      "imageCredit": {
+        "author": "Governo do Brasil",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Getulio_Vargas_(1930).jpg"
+      },
+      "aliases": ["Getúlio"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Império",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "nascimento": 1882,
+        "morte": 1954
+      }
+    },
+    {
+      "id": "juscelino-kubitschek",
+      "name": "Juscelino Kubitschek",
+      "image": "/temas/historia-do-brasil/juscelino-kubitschek.webp",
+      "imageCredit": {
+        "author": "Governo do Brasil",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Juscelino_Kubitschek_in_1956.jpg"
+      },
+      "aliases": ["JK"],
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "República",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1902,
+        "morte": 1976
+      }
+    },
+    {
+      "id": "maria-quiteria",
+      "name": "Maria Quitéria",
+      "image": "/temas/historia-do-brasil/maria-quiteria.webp",
+      "imageCredit": {
+        "author": "Augustus Earle",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:A_female_soldier_of_South_America.png"
+      },
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1792,
+        "morte": 1853
+      }
+    },
+    {
+      "id": "anita-garibaldi",
+      "name": "Anita Garibaldi",
+      "image": "/temas/historia-do-brasil/anita-garibaldi.webp",
+      "imageCredit": {
+        "author": "Gerolamo Induno",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Anita_Garibaldi_1849.jpg"
+      },
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Santa Catarina",
+        "regiao": "Sul",
+        "nascimento": 1821,
+        "morte": 1849
+      }
+    },
+    {
+      "id": "joana-angelica",
+      "name": "Joana Angélica",
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "Colônia",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1761,
+        "morte": 1822
+      }
+    },
+    {
+      "id": "nisia-floresta",
+      "name": "Nísia Floresta",
+      "image": "/temas/historia-do-brasil/nisia-floresta.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Nizia_Floresta_Augusta_(Mulheres_illustres_do_Brazil).jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Colônia",
+        "estado": "Rio Grande do Norte",
+        "regiao": "Nordeste",
+        "nascimento": 1810,
+        "morte": 1885
+      }
+    },
+    {
+      "id": "bertha-lutz",
+      "name": "Bertha Lutz",
+      "image": "/temas/historia-do-brasil/bertha-lutz.webp",
+      "imageCredit": {
+        "author": "Adam Cuerden",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Bertha_Lutz_1925.jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1894,
+        "morte": 1976
+      }
+    },
+    {
+      "id": "carlota-pereira-de-queiros",
+      "name": "Carlota Pereira de Queirós",
+      "image": "/temas/historia-do-brasil/carlota-pereira-de-queiros.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Carlota_Pereira_de_Queiroz_1920%27s.jpg"
+      },
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1892,
+        "morte": 1982
+      }
+    },
+    {
+      "id": "antonieta-de-barros",
+      "name": "Antonieta de Barros",
+      "image": "/temas/historia-do-brasil/antonieta-de-barros.webp",
+      "imageCredit": {
+        "author": "INSTITUTO HISTÓRICO E GEOGRÁFICO DE SANTA CATARINA",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Antonieta_de_Barros.webp"
+      },
+      "emoji": "🏛️",
+      "values": {
+        "area": "Política",
+        "periodo": "República",
+        "estado": "Santa Catarina",
+        "regiao": "Sul",
+        "nascimento": 1901,
+        "morte": 1952
+      }
+    },
+    {
+      "id": "luis-gama",
+      "name": "Luís Gama",
+      "image": "/temas/historia-do-brasil/luis-gama.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Luiz_Gama.jpg"
+      },
+      "aliases": ["Luiz Gama"],
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Império",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1831,
+        "morte": 1882
+      }
+    },
+    {
+      "id": "andre-reboucas",
+      "name": "André Rebouças",
+      "image": "/temas/historia-do-brasil/andre-reboucas.webp",
+      "imageCredit": {
+        "author": "Rodolfo Bernardelli",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Andr%C3%A9_Pinto_Rebou%C3%A7as,_da_cole%C3%A7%C3%A3o_Museu_Hist%C3%B3rico_Nacional,_Brasil.jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Império",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1838,
+        "morte": 1898
+      }
+    },
+    {
+      "id": "jose-do-patrocinio",
+      "name": "José do Patrocínio",
+      "image": "/temas/historia-do-brasil/jose-do-patrocinio.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_do_Patroc%C3%ADnio.jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1853,
+        "morte": 1905
+      }
+    },
+    {
+      "id": "joao-candido",
+      "name": "João Cândido",
+      "image": "/temas/historia-do-brasil/joao-candido.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Jo%C3%A3o_C%C3%A2ndido,_1910.jpg"
+      },
+      "aliases": ["Almirante Negro"],
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Império",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "nascimento": 1880,
+        "morte": 1969
+      }
+    },
+    {
+      "id": "abdias-do-nascimento",
+      "name": "Abdias do Nascimento",
+      "image": "/temas/historia-do-brasil/abdias-do-nascimento.webp",
+      "imageCredit": {
+        "author": "Senado Federal",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Abdias_do_Nascimento_senador.jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1914,
+        "morte": 2011
+      }
+    },
+    {
+      "id": "lelia-gonzalez",
+      "name": "Lélia Gonzalez",
+      "image": "/temas/historia-do-brasil/lelia-gonzalez.webp",
+      "imageCredit": {
+        "author": "Cezar Loureiro",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:L%C3%A9lia_Gonzalez_by_Cezar_Loureiro.jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "República",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1935,
+        "morte": 1994
+      }
+    },
+    {
+      "id": "arariboia",
+      "name": "Arariboia",
+      "image": "/temas/historia-do-brasil/arariboia.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Martim_Affonso,_Ararygboia_(cobra_feroz),_chefe_dos_Triminin%C3%B3s.jpg"
+      },
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1520,
+        "morte": 1589
+      }
+    },
+    {
+      "id": "sepe-tiaraju",
+      "name": "Sepé Tiaraju",
+      "image": "/temas/historia-do-brasil/sepe-tiaraju.webp",
+      "imageCredit": {
+        "author": "Danúbio Gonçalves foto de Eugenio Hansen, OFS",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Memorial_da_Epopeia_Riograndense_80a.jpg"
+      },
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Rio Grande do Sul",
+        "regiao": "Sul",
+        "nascimento": 1723,
+        "morte": 1756
+      }
+    },
+    {
+      "id": "marcal-de-souza",
+      "name": "Marçal de Souza",
+      "aliases": ["Marçal Tupã-Y"],
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "República",
+        "estado": "Mato Grosso do Sul",
+        "regiao": "Centro-Oeste",
+        "nascimento": 1920,
+        "morte": 1983
+      }
+    },
+    {
+      "id": "santos-dumont",
+      "name": "Santos Dumont",
+      "image": "/temas/historia-do-brasil/santos-dumont.webp",
+      "imageCredit": {
+        "author": "Zaida Ben-Yusuf",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Alberto_Santos-Dumont_portrait.jpg"
+      },
+      "aliases": ["Alberto Santos Dumont"],
+      "emoji": "🔬",
+      "values": {
+        "area": "Ciência",
+        "periodo": "Império",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1873,
+        "morte": 1932
+      }
+    },
+    {
+      "id": "oswaldo-cruz",
+      "name": "Oswaldo Cruz",
+      "image": "/temas/historia-do-brasil/oswaldo-cruz.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Oswcruz.jpg"
+      },
+      "emoji": "🔬",
+      "values": {
+        "area": "Ciência",
+        "periodo": "Império",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1872,
+        "morte": 1917
+      }
+    },
+    {
+      "id": "carlos-chagas",
+      "name": "Carlos Chagas",
+      "image": "/temas/historia-do-brasil/carlos-chagas.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Carlos_Chagas,_sem_data.tif"
+      },
+      "emoji": "🔬",
+      "values": {
+        "area": "Ciência",
+        "periodo": "Império",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1878,
+        "morte": 1934
+      }
+    },
+    {
+      "id": "vital-brazil",
+      "name": "Vital Brazil",
+      "image": "/temas/historia-do-brasil/vital-brazil.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:VitalBrazil1892.jpg"
+      },
+      "emoji": "🔬",
+      "values": {
+        "area": "Ciência",
+        "periodo": "Império",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1865,
+        "morte": 1950
+      }
+    },
+    {
+      "id": "juliano-moreira",
+      "name": "Juliano Moreira",
+      "image": "/temas/historia-do-brasil/juliano-moreira.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Juliano_Moreira,_sem_data.tif"
+      },
+      "emoji": "🔬",
+      "values": {
+        "area": "Ciência",
+        "periodo": "Império",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1872,
+        "morte": 1933
+      }
+    },
+    {
+      "id": "milton-santos",
+      "name": "Milton Santos",
+      "image": "/temas/historia-do-brasil/milton-santos.webp",
+      "imageCredit": {
+        "author": "TV Brasil",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Milton_Santos_(TV_Brasil).jpg"
+      },
+      "emoji": "🔬",
+      "values": {
+        "area": "Ciência",
+        "periodo": "República",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1926,
+        "morte": 2001
+      }
+    },
+    {
+      "id": "candido-rondon",
+      "name": "Marechal Rondon",
+      "image": "/temas/historia-do-brasil/candido-rondon.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:C%C3%A2ndido_Mariano_da_Silva_Rondon,_c._1910.jpg"
+      },
+      "aliases": ["Cândido Rondon", "Rondon"],
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Império",
+        "estado": "Mato Grosso",
+        "regiao": "Centro-Oeste",
+        "nascimento": 1865,
+        "morte": 1958
+      }
+    },
+    {
+      "id": "machado-de-assis",
+      "name": "Machado de Assis",
+      "image": "/temas/historia-do-brasil/machado-de-assis.webp",
+      "imageCredit": {
+        "author": "Marc Ferrez / Adam Cuerden",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Machado_de_Assis_by_Marc_Ferrez.jpg"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1839,
+        "morte": 1908
+      }
+    },
+    {
+      "id": "carolina-maria-de-jesus",
+      "name": "Carolina Maria de Jesus",
+      "image": "/temas/historia-do-brasil/carolina-maria-de-jesus.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Carolina_Maria_de_Jesus,_1960_cr.jpg"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "República",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1914,
+        "morte": 1977
+      }
+    },
+    {
+      "id": "clarice-lispector",
+      "name": "Clarice Lispector",
+      "image": "/temas/historia-do-brasil/clarice-lispector.webp",
+      "imageCredit": {
+        "author": "Ishiai",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:(1920-1977)_Clarice_Lispector_6zxkp_please_credit(palette.fm)_(cropped).png"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "República",
+        "estado": "Exterior",
+        "regiao": "Exterior",
+        "nascimento": 1920,
+        "morte": 1977
+      }
+    },
+    {
+      "id": "cecilia-meireles",
+      "name": "Cecília Meireles",
+      "image": "/temas/historia-do-brasil/cecilia-meireles.webp",
+      "imageCredit": {
+        "author": "Folhapress",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Cec%C3%ADlia-Meireles.jpg"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "República",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1901,
+        "morte": 1964
+      }
+    },
+    {
+      "id": "carlos-drummond",
+      "name": "Carlos Drummond de Andrade",
+      "image": "/temas/historia-do-brasil/carlos-drummond.webp",
+      "imageCredit": {
+        "author": "Autor Desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Foto_Carlos_Drummond_de_Andrade_(restaurada).png"
+      },
+      "aliases": ["Drummond"],
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "República",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1902,
+        "morte": 1987
+      }
+    },
+    {
+      "id": "guimaraes-rosa",
+      "name": "Guimarães Rosa",
+      "image": "/temas/historia-do-brasil/guimaraes-rosa.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Guimar%C3%A3es_Rosa,_anos_1960.jpg"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "República",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1908,
+        "morte": 1967
+      }
+    },
+    {
+      "id": "jorge-amado",
+      "name": "Jorge Amado",
+      "image": "/temas/historia-do-brasil/jorge-amado.webp",
+      "imageCredit": {
+        "author": "Bernard Gotfryd",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Jorge_Amado,_Headshot_2,_1988_(cropped).png"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "República",
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 1912,
+        "morte": 2001
+      }
+    },
+    {
+      "id": "aleijadinho",
+      "name": "Aleijadinho",
+      "image": "/temas/historia-do-brasil/aleijadinho.webp",
+      "imageCredit": {
+        "author": "Euclásio Ventura",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Suposto_retrato_de_Aleijadinho_(cropped).png"
+      },
+      "aliases": ["Antônio Francisco Lisboa"],
+      "emoji": "🎨",
+      "values": {
+        "area": "Artes",
+        "periodo": "Colônia",
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1738,
+        "morte": 1814
+      }
+    },
+    {
+      "id": "tarsila-do-amaral",
+      "name": "Tarsila do Amaral",
+      "image": "/temas/historia-do-brasil/tarsila-do-amaral.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Tarsila_do_Amaral,_ca._1925.jpg"
+      },
+      "aliases": ["Tarsila"],
+      "emoji": "🎨",
+      "values": {
+        "area": "Artes",
+        "periodo": "Império",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1886,
+        "morte": 1973
+      }
+    },
+    {
+      "id": "anita-malfatti",
+      "name": "Anita Malfatti",
+      "image": "/temas/historia-do-brasil/anita-malfatti.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Anita_Malfatti_jovem_(1912).jpg"
+      },
+      "emoji": "🎨",
+      "values": {
+        "area": "Artes",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1889,
+        "morte": 1964
+      }
+    },
+    {
+      "id": "candido-portinari",
+      "name": "Candido Portinari",
+      "image": "/temas/historia-do-brasil/candido-portinari.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:C%C3%A2ndido_Portinari_(1962).tif"
+      },
+      "aliases": ["Portinari"],
+      "emoji": "🎨",
+      "values": {
+        "area": "Artes",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1903,
+        "morte": 1962
+      }
+    },
+    {
+      "id": "chiquinha-gonzaga",
+      "name": "Chiquinha Gonzaga",
+      "image": "/temas/historia-do-brasil/chiquinha-gonzaga.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Chiquinha_6a.jpg"
+      },
+      "emoji": "🎼",
+      "values": {
+        "area": "Música",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1847,
+        "morte": 1935
+      }
+    },
+    {
+      "id": "carlos-gomes",
+      "name": "Carlos Gomes",
+      "image": "/temas/historia-do-brasil/carlos-gomes.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Carlos_Gomes_portrait,_1886.tif"
+      },
+      "emoji": "🎼",
+      "values": {
+        "area": "Música",
+        "periodo": "Império",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1836,
+        "morte": 1896
+      }
+    },
+    {
+      "id": "villa-lobos",
+      "name": "Heitor Villa-Lobos",
+      "image": "/temas/historia-do-brasil/villa-lobos.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Heitor_Vila-Lobos_(c._1922)part.jpg"
+      },
+      "aliases": ["Villa-Lobos"],
+      "emoji": "🎼",
+      "values": {
+        "area": "Música",
+        "periodo": "Império",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1887,
+        "morte": 1959
+      }
+    },
+    {
+      "id": "pixinguinha",
+      "name": "Pixinguinha",
+      "image": "/temas/historia-do-brasil/pixinguinha.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Pixinguinha_(2).jpg"
+      },
+      "emoji": "🎼",
+      "values": {
+        "area": "Música",
+        "periodo": "República",
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1897,
+        "morte": 1973
+      }
+    },
+    {
+      "id": "carmen-miranda",
+      "name": "Carmen Miranda",
+      "image": "/temas/historia-do-brasil/carmen-miranda.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Carmen_Miranda_in_That_Night_in_Rio_(1941).jpg"
+      },
+      "emoji": "🎼",
+      "values": {
+        "area": "Música",
+        "periodo": "República",
+        "estado": "Exterior",
+        "regiao": "Exterior",
+        "nascimento": 1909,
+        "morte": 1955
+      }
+    },
+    {
+      "id": "ayrton-senna",
+      "name": "Ayrton Senna",
+      "image": "/temas/historia-do-brasil/ayrton-senna.webp",
+      "imageCredit": {
+        "author": "Martin Lee from London, UK",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Ayrton_Senna_in_the_paddock_before_the_1993_British_Grand_Prix_(33686752075)_(cropped).jpg"
+      },
+      "aliases": ["Senna"],
+      "emoji": "🏅",
+      "values": {
+        "area": "Esporte",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1960,
+        "morte": 1994
+      }
+    },
+    {
+      "id": "adhemar-ferreira-da-silva",
+      "name": "Adhemar Ferreira da Silva",
+      "image": "/temas/historia-do-brasil/adhemar-ferreira-da-silva.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Ademar_Ferreira_da_Silva_(1956).tif"
+      },
+      "emoji": "🏅",
+      "values": {
+        "area": "Esporte",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1927,
+        "morte": 2001
+      }
+    },
+    {
+      "id": "maria-lenk",
+      "name": "Maria Lenk",
+      "image": "/temas/historia-do-brasil/maria-lenk.webp",
+      "imageCredit": {
+        "author": "Rose Brasil/ABr",
+        "license": "CC BY 3.0 br",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:MariaLenk.jpg"
+      },
+      "emoji": "🏅",
+      "values": {
+        "area": "Esporte",
+        "periodo": "República",
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1915,
+        "morte": 2007
+      }
+    },
+    {
+      "id": "chico-mendes",
+      "name": "Chico Mendes",
+      "image": "/temas/historia-do-brasil/chico-mendes.webp",
+      "imageCredit": {
+        "author": "Miranda Smith, Miranda Productions, Inc.",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chico_Mendes_in_1988_(cropped).jpg"
+      },
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "República",
+        "estado": "Acre",
+        "regiao": "Norte",
+        "nascimento": 1944,
+        "morte": 1988
+      }
+    },
+    {
+      "id": "zumbi-dos-palmares",
+      "name": "Zumbi dos Palmares",
+      "image": "/temas/historia-do-brasil/zumbi-dos-palmares.webp",
+      "imageCredit": {
+        "author": "Antônio Parreiras",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Ant%C3%B4nio_Parreiras_-_Zumbi_2.jpg"
+      },
+      "aliases": ["Zumbi"],
+      "emoji": "✊",
+      "approx": ["nascimento"],
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Colônia",
+        "estado": "Incerto",
+        "regiao": "Incerto",
+        "nascimento": 1655,
+        "morte": 1695
+      }
+    },
+    {
+      "id": "tereza-de-benguela",
+      "name": "Tereza de Benguela",
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Colônia",
+        "estado": "Exterior",
+        "regiao": "Exterior",
+        "nascimento": "Incerto",
+        "morte": 1770
+      }
+    },
+    {
+      "id": "ajuricaba",
+      "name": "Ajuricaba",
+      "image": "/temas/historia-do-brasil/ajuricaba.webp",
+      "imageCredit": {
+        "author": "Americo Makk / Eva Holusa",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Americo_Makk,_Portait_of_Chief_Ajuricaba.jpg"
+      },
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Amazonas",
+        "regiao": "Norte",
+        "nascimento": "Incerto",
+        "morte": 1727
+      }
+    },
+    {
+      "id": "filipe-camarao",
+      "name": "Filipe Camarão",
+      "image": "/temas/historia-do-brasil/filipe-camarao.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:An%C3%B4nimo_-_Retrato_de_Filipe_Camar%C3%A3o.jpg"
+      },
+      "aliases": ["Felipe Camarão", "Poti"],
+      "emoji": "⚔️",
+      "approx": ["nascimento"],
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Incerto",
+        "regiao": "Nordeste",
+        "nascimento": 1600,
+        "morte": 1648
+      }
+    },
+    {
+      "id": "maria-firmina-dos-reis",
+      "name": "Maria Firmina dos Reis",
+      "image": "/temas/historia-do-brasil/maria-firmina-dos-reis.webp",
+      "imageCredit": {
+        "author": "Ramsessantos",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Maria_firmina_(detailed).jpg"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "Colônia",
+        "estado": "Maranhão",
+        "regiao": "Nordeste",
+        "nascimento": 1822,
+        "morte": 1917
+      }
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { toCharacterOptions } from "@chutai/db";
 import { SiteHeader } from "@/components/layout/site-header";
 import { DailyGame } from "@/components/daily/daily-game";
-import { dailyTheme, today } from "@/lib/daily/server";
+import { dailyStartsLater, dailyTheme, today } from "@/lib/daily/server";
 
 export const dynamic = "force-dynamic";
 
@@ -26,8 +26,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function DailyPage({ params }: PageProps) {
   const theme = dailyTheme((await params).slug);
   if (!theme) notFound();
-  const { number } = today();
+  const { number, dateKey } = today();
   const configured = !!process.env.DAILY_SECRET?.trim();
+  const later = dailyStartsLater(theme, dateKey);
   return (
     <>
       <SiteHeader />
@@ -35,7 +36,15 @@ export default async function DailyPage({ params }: PageProps) {
         id="conteudo"
         className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-4 pt-4 pb-16 sm:px-6"
       >
-        {configured ? (
+        {later ? (
+          <p
+            role="status"
+            className="rounded-2xl border-2 border-tinta bg-gema-soft p-5 font-semibold"
+          >
+            O desafio diário de {theme.name} começa em {later.split("-").reverse().join("/")}. Até
+            lá, dá para jogar os outros temas.
+          </p>
+        ) : configured ? (
           <DailyGame
             slug={theme.slug}
             themeName={theme.name}
@@ -43,6 +52,7 @@ export default async function DailyPage({ params }: PageProps) {
             attributes={theme.attributes.map(({ key, label }) => ({ key, label }))}
             options={toCharacterOptions(theme)}
             day={number}
+            noun={theme.noun}
           />
         ) : (
           <p

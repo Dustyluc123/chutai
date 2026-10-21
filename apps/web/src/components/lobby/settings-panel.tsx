@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Image as ImageIcon, LayoutGrid } from "lucide-react";
+import { Image as ImageIcon, LayoutGrid, Shuffle } from "lucide-react";
 import {
   ROUND_SECONDS_OPTIONS,
   ROUNDS_OPTIONS,
@@ -40,6 +40,12 @@ const MODES: {
     label: "Imagem",
     description: "A imagem começa borrada e fica mais nítida a cada erro ou dica.",
     Icon: ImageIcon,
+  },
+  {
+    value: "mixed",
+    label: "Misto",
+    description: "Alterna as rodadas: uma Clássica, uma de Imagem.",
+    Icon: Shuffle,
   },
 ];
 
@@ -118,7 +124,7 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
         <div className="grid gap-2 sm:grid-cols-2">
           {MODES.map(({ value, label, description, Icon }) => {
             const selected = settings.mode === value;
-            const unavailable = value === "image" && theme.imageMode === "none";
+            const unavailable = value !== "classic" && theme.imageMode === "none";
             const reasonId = `modo-${value}-motivo`;
             return (
               <label
@@ -154,13 +160,14 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
             );
           })}
         </div>
-        {settings.mode === "image" && theme.imageMode === "partial" ? (
+        {settings.mode !== "classic" && theme.imageMode === "partial" ? (
           <p
             role="status"
             className="mt-1 rounded-2xl border-2 border-gema bg-gema-soft px-3 py-2.5 text-sm font-semibold"
           >
-            Modo Imagem parcial: {theme.imageCharacterCount} de {theme.characterCount} personagens
-            têm imagem. Os outros ficam de fora desta partida.
+            {settings.mode === "image"
+              ? `Modo Imagem parcial: ${theme.imageCharacterCount} de ${theme.characterCount} personagens têm imagem. Os outros ficam de fora desta partida.`
+              : `Imagem parcial: nas rodadas de Imagem, só entram os ${theme.imageCharacterCount} de ${theme.characterCount} personagens que têm imagem.`}
           </p>
         ) : null}
       </fieldset>

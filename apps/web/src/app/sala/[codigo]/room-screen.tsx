@@ -62,6 +62,7 @@ export function RoomScreen({ code }: { code: string }) {
               serverOffset={room.serverOffset}
               themeName={state.theme.name}
               themeEmoji={state.theme.emoji}
+              mixed={state.settings.mode === "mixed"}
             />
           ) : null}
           {state.phase === "round" || state.phase === "intermission" ? (

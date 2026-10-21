@@ -1,4 +1,4 @@
-import type { Character, ImageModeAvailability } from "@chutai/shared";
+import type { Character, GameMode, ImageModeAvailability, RoundKind } from "@chutai/shared";
 import { IMAGE_MODE } from "./config";
 
 /** Maior nível que um jogador pode alcançar durante a rodada (o nítido fica para a revelação). */
@@ -40,6 +40,20 @@ export function imageModeAvailability(
 /** true quando o modo Imagem pode ser escolhido (normal ou parcial). */
 export function supportsImageMode(characters: readonly Pick<Character, "image">[]): boolean {
   return imageModeAvailability(characters) !== "none";
+}
+
+/**
+ * Tipo de uma rodada. Clássico e Imagem: sempre o próprio modo. Misto: alterna,
+ * começando pela Clássica (rodada 1 Clássica, 2 Imagem, 3 Clássica...).
+ */
+export function roundKind(mode: GameMode, roundNumber: number): RoundKind {
+  if (mode === "mixed") return roundNumber % 2 === 1 ? "classic" : "image";
+  return mode;
+}
+
+/** Modos que precisam de imagens (o Misto tem rodadas de Imagem). */
+export function modeNeedsImages(mode: GameMode): boolean {
+  return mode === "image" || mode === "mixed";
 }
 
 /** Personagens que entram numa partida do modo Imagem: só os que têm imagem. */

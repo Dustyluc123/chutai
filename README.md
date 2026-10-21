@@ -92,7 +92,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Sala abandonada no meio da partida (ninguém conectado por 60 s) é encerrada; sem ninguém, não começa rodada nova
 - [x] Autocompletar acessível (teclado e leitor de tela) que ignora acentos e aceita apelidos ("Fenômeno" → Ronaldo)
 - [x] Tabuleiro com peças que viram uma de cada vez, setas para números e tolerância para valores aproximados
-- [x] Dois modos de jogo: **Clássico** (atributos coloridos) e **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica)
+- [x] Três modos de jogo: **Clássico** (atributos coloridos), **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica) e **Misto** (alterna uma rodada Clássica e uma de Imagem; o intervalo avisa "Próxima: Imagem")
 - [x] Modo Imagem parcial para temas com 75% ou mais de imagens; o lobby avisa quantos personagens ficam de fora
 - [x] No modo Imagem, as opções mostram só o nome: sem miniatura nem emoji para comparar com a imagem borrada
 - [x] Sete temas oficiais, quatro deles com pessoas reais (YouTubers, música, futebol atual e TV), com fontes e data dos dados
@@ -324,7 +324,7 @@ Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/
 | `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                     |
 | `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                 |
 | `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                     |
-| `round:start` / `round:end` / `game:end` | servidor → todos              | Início, revelação e fim                                                                               |
+| `round:start` / `round:end` / `game:end` | servidor → todos              | Início (com o tipo da rodada: Clássica ou Imagem), revelação e fim                                    |
 | `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                 |
 | `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                 |
 

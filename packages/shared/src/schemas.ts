@@ -21,7 +21,7 @@ export const roomCodeSchema = z
   .length(ROOM_CODE_LENGTH, `O código tem ${ROOM_CODE_LENGTH} caracteres.`)
   .refine((code) => [...code].every((ch) => ROOM_CODE_ALPHABET.includes(ch)), "Código inválido.");
 
-export const gameModeSchema = z.enum(["classic", "image"]);
+export const gameModeSchema = z.enum(["classic", "image", "mixed"]);
 
 export const roomSettingsSchema = z.object({
   themeSlug: z.string().min(1).max(64),

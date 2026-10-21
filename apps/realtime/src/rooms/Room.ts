@@ -19,6 +19,7 @@ import type {
   RoomResult,
   RoomSettings,
   RoomState,
+  RoundKind,
   RoundSummary,
   ServerToClientEvents,
   Theme,
@@ -36,6 +37,8 @@ import {
   formatValue,
   imageLevel,
   imageModeCharacters,
+  modeNeedsImages,
+  roundKind,
   supportsImageMode,
 } from "@chutai/game";
 import { toCharacterOptions, toThemeSummary, type MatchRecord } from "@chutai/db";
@@ -63,6 +66,8 @@ interface RoundPlayer {
 
 interface ActiveRound {
   number: number;
+  /** Clássica ou Imagem (no Misto, alterna a cada rodada). */
+  kind: RoundKind;
   character: Character;
   startedAt: number;
   endsAt: number;
@@ -312,12 +317,12 @@ export class Room {
       throw new GameError("Já tem mais jogadores na sala do que esse limite.");
     }
     const nextTheme = theme ?? this.theme;
-    if (changes.mode === "image" && !supportsImageMode(nextTheme.characters)) {
+    if (changes.mode && modeNeedsImages(changes.mode) && !supportsImageMode(nextTheme.characters)) {
       throw new GameError(
         "O modo Imagem precisa de um tema em que pelo menos 75% dos personagens (e no mínimo 10) têm imagem.",
       );
     }
-    const before = `${this.theme.slug}:${this.settings.mode}`;
+    const before = `${this.theme.slug}:${this.listKind}`;
     this.theme = nextTheme;
     // Trocar para um tema sem todas as imagens volta o modo para Clássico.
     this.settings = this.normalizeMode({
@@ -327,7 +332,7 @@ export class Room {
     });
     this.changed();
     // Tema ou modo novo: a lista do autocompletar muda para todo mundo.
-    if (`${this.theme.slug}:${this.settings.mode}` !== before) {
+    if (`${this.theme.slug}:${this.listKind}` !== before) {
       this.emitter.broadcast("room:characters", this.characterOptions());
     }
   }
@@ -338,8 +343,29 @@ export class Room {
    */
   characterOptions(): CharacterOption[] {
     const options = toCharacterOptions({ ...this.theme, characters: this.playableCharacters });
-    if (this.settings.mode !== "image") return options;
+    if (this.listKind !== "image") return options;
     return options.map(({ id, name, aliases }) => ({ id, name, aliases }));
+  }
+
+  /**
+   * Tipo da rodada que vale para o autocompletar e o sorteio agora: a rodada em andamento ou,
+   * fora dela, a próxima (no lobby e na contagem, a 1ª; no intervalo, a seguinte).
+   */
+  private get listKind(): RoundKind {
+    if (this.round && this.phase === "round") return this.round.kind;
+    return roundKind(this.settings.mode, this.nextRoundNumber);
+  }
+
+  private get nextRoundNumber(): number {
+    if (this.phase === "intermission" || this.phase === "finished") {
+      return (this.lastRound?.number ?? 0) + 1;
+    }
+    return 1;
+  }
+
+  /** A rodada em andamento é de Imagem? */
+  private get imageRound(): boolean {
+    return this.phase === "round" && this.round?.kind === "image";
   }
 
   /**
@@ -347,7 +373,7 @@ export class Room {
    * outros de fora do sorteio e do autocompletar). O servidor decide; o navegador só recebe a lista.
    */
   get playableCharacters(): Character[] {
-    return this.settings.mode === "image"
+    return this.listKind === "image"
       ? imageModeCharacters(this.theme.characters)
       : this.theme.characters;
   }
@@ -357,7 +383,8 @@ export class Room {
   }
 
   private normalizeMode(settings: RoomSettings): RoomSettings {
-    const mode = settings.mode === "image" && this.imageModeAvailable ? "image" : "classic";
+    const mode =
+      modeNeedsImages(settings.mode) && this.imageModeAvailable ? settings.mode : "classic";
     return { ...settings, mode };
   }
 
@@ -408,6 +435,8 @@ export class Room {
 
   private startRound(number: number): void {
     this.cancelTimer?.();
+    const kind = roundKind(this.settings.mode, number);
+    const previousKind = this.round?.kind;
     const character = drawCharacter(this.playableCharacters, this.usedCharacterIds, this.random);
     this.usedCharacterIds.add(character.id);
 
@@ -415,6 +444,7 @@ export class Room {
     const endsAt = startedAt + this.settings.roundSeconds * 1000;
     const round: ActiveRound = {
       number,
+      kind,
       character,
       startedAt,
       endsAt,
@@ -426,9 +456,13 @@ export class Room {
     this.intermissionEndsAt = undefined;
     this.countdownEndsAt = undefined;
     this.cancelTimer = this.schedule(() => this.endRound(), endsAt - startedAt);
-    if (this.settings.mode === "image") this.prepareImages(round);
+    if (kind === "image") this.prepareImages(round);
 
-    this.emitter.broadcast("round:start", { number, endsAt });
+    this.emitter.broadcast("round:start", { number, endsAt, kind });
+    // Misto: o tipo mudou, então a lista do autocompletar também (sem imagens nas de Imagem).
+    if (this.settings.mode === "mixed" && kind !== previousKind) {
+      this.emitter.broadcast("room:characters", this.characterOptions());
+    }
     for (const player of this.players.values()) this.sendPrivate(player.id);
     this.changed();
   }
@@ -473,7 +507,7 @@ export class Room {
    */
   sendRoundImage(playerId: string): void {
     const round = this.round;
-    if (this.settings.mode !== "image" || this.phase !== "round" || !round?.images) return;
+    if (!this.imageRound || !round?.images) return;
     if (!this.players.has(playerId)) return;
     const level = this.imageLevelOf(round.players.get(playerId));
     const data = round.images[level];
@@ -512,7 +546,7 @@ export class Room {
       throw new GameError("Você já chutou esse personagem.");
     }
 
-    const imageMode = this.settings.mode === "image";
+    const imageMode = round.kind === "image";
     const levelBefore = this.imageLevelOf(state);
     // No modo Imagem não há atributos coloridos: o palpite só diz se acertou.
     const feedback = imageMode
@@ -542,7 +576,7 @@ export class Room {
         guesses: state.guesses.length,
         hintsUsed: state.hints.length,
         solveRank: state.solveRank,
-        mode: this.settings.mode,
+        mode: round.kind,
       });
       player.score += state.points;
       this.emitter.broadcast("player:solved", {
@@ -574,7 +608,7 @@ export class Room {
     const hint = buildHint(type, round.character, this.theme.attributes, state.guesses);
     const levelBefore = this.imageLevelOf(state);
     state.hints.push(hint);
-    if (this.settings.mode === "image" && this.imageLevelOf(state) !== levelBefore) {
+    if (round.kind === "image" && this.imageLevelOf(state) !== levelBefore) {
       this.sendRoundImage(playerId);
     }
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
@@ -728,7 +762,7 @@ export class Room {
       solveRank: state?.solveRank,
       hintsUsed: state?.hints.length ?? 0,
       // O nível sai dos chutes e dicas, que já são públicos: não revela nada novo.
-      ...(this.settings.mode === "image" ? { imageLevel: this.imageLevelOf(state) } : {}),
+      ...(this.imageRound ? { imageLevel: this.imageLevelOf(state) } : {}),
     };
   }
 
@@ -754,6 +788,7 @@ export class Room {
       round: this.round
         ? {
             number: this.round.number,
+            kind: this.round.kind,
             totalRounds: this.settings.rounds,
             startedAt: this.round.startedAt,
             endsAt: this.round.endsAt,
@@ -764,6 +799,11 @@ export class Room {
       lastRound: this.phase === "lobby" ? undefined : this.lastRound,
       intermissionEndsAt: this.intermissionEndsAt,
       countdownEndsAt: this.phase === "countdown" ? this.countdownEndsAt : undefined,
+      nextRoundKind:
+        this.phase === "countdown" ||
+        (this.phase === "intermission" && this.nextRoundNumber <= this.settings.rounds)
+          ? roundKind(this.settings.mode, this.nextRoundNumber)
+          : undefined,
       standings: this.phase === "finished" ? this.standings : undefined,
       serverNow: this.now(),
     };
@@ -807,7 +847,7 @@ export class Room {
       guesses: state?.guesses ?? [],
       hints: state?.hints ?? [],
       solved: state?.solvedAt !== undefined,
-      ...(inRound && this.settings.mode === "image"
+      ...(inRound && inRound.kind === "image"
         ? {
             image: {
               level: this.imageLevelOf(state),

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Eye, PartyPopper, Shuffle } from "lucide-react";
-import type { Character, CharacterOption, GameMode, GuessResult, Theme } from "@chutai/shared";
+import type { Character, CharacterOption, RoundKind, GuessResult, Theme } from "@chutai/shared";
 import {
   compareCharacters,
   drawCharacter,
@@ -32,14 +32,14 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const [guesses, setGuesses] = useState<GuessResult[]>([]);
   const [revealed, setRevealed] = useState(false);
   const [played, setPlayed] = useState<Set<string>>(new Set());
-  const [mode, setMode] = useState<GameMode>("classic");
+  const [mode, setMode] = useState<RoundKind>("classic");
   const imageAvailable = supportsImageMode(theme.characters);
   const imageMode = mode === "image" && imageAvailable;
   const [zoomCenter, setZoomCenter] = useState<ZoomCenter>({ x: 0.5, y: 0.5 });
   // No modo Imagem, o autocompletar mostra só o nome (a miniatura entregaria a resposta).
   const partial = imageMode && imageModeAvailability(theme.characters) === "partial";
   // Personagens do jogo: no modo Imagem, só quem tem imagem (no parcial, os outros ficam de fora).
-  const poolFor = (value: GameMode) =>
+  const poolFor = (value: RoundKind) =>
     value === "image" && imageAvailable ? imageModeCharacters(theme.characters) : theme.characters;
   const visibleOptions = useMemo(() => {
     if (!imageMode) return options;
@@ -81,7 +81,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     ]);
   }
 
-  function next(value: GameMode = mode) {
+  function next(value: RoundKind = mode) {
     if (!answer) return;
     const used = new Set(played).add(answer.id);
     setPlayed(used);
@@ -91,7 +91,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
     setRevealed(false);
   }
 
-  function changeMode(value: GameMode) {
+  function changeMode(value: RoundKind) {
     setMode(value);
     next(value);
   }

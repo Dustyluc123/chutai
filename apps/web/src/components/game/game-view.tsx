@@ -41,7 +41,11 @@ export function GameView({ state, room }: GameViewProps) {
 
   const inRound = state.phase === "round" && state.round;
   const solved = me?.solved ?? false;
-  const imageMode = state.settings.mode === "image";
+  // Tipo da rodada atual (ou da que acabou, no intervalo). No Misto muda a cada rodada.
+  const kind = state.round?.kind ?? (state.settings.mode === "image" ? "image" : "classic");
+  const imageMode = kind === "image";
+  const mixed = state.settings.mode === "mixed";
+  const nextKind = mixed ? state.nextRoundKind : undefined;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -51,6 +55,7 @@ export function GameView({ state, room }: GameViewProps) {
           serverOffset={room.serverOffset}
           from={TIMING.betweenRoundsCountdownSeconds}
           nextRound={roundNumber + 1}
+          nextKind={nextKind}
         />
       ) : null}
       {inRound ? (
@@ -67,6 +72,11 @@ export function GameView({ state, room }: GameViewProps) {
               Rodada {roundNumber}
               <span className="text-tinta-soft"> / {state.settings.rounds}</span>
             </p>
+            {mixed ? (
+              <span className="rounded-full border-2 border-tinta bg-anil-soft px-2.5 py-0.5 text-xs font-bold">
+                {imageMode ? "Rodada de Imagem" : "Rodada Clássica"}
+              </span>
+            ) : null}
             {imageMode && state.theme.imageMode === "partial" ? (
               <span
                 title={`Só os ${state.theme.imageCharacterCount} personagens com imagem estão nesta partida.`}
@@ -98,6 +108,7 @@ export function GameView({ state, room }: GameViewProps) {
               players={state.players}
               totalRounds={state.settings.rounds}
               nextAt={state.intermissionEndsAt}
+              nextKind={nextKind}
               serverOffset={room.serverOffset}
               meId={meId}
             />

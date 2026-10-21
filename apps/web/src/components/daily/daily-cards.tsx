@@ -14,6 +14,8 @@ interface CardTheme {
   emoji: string;
   color: ThemeColor;
   characterCount: number;
+  /** Tema novo: dia (AAAA-MM-DD) em que o diário começa. */
+  startsOn?: string | null;
 }
 
 type Status = ReturnType<typeof dailyStatus>;
@@ -49,7 +51,11 @@ export function DailyCards({ themes, day }: { themes: CardTheme[]; day: number }
                 </span>
               </span>
               <span className="mt-auto flex flex-wrap items-center gap-2 text-sm font-semibold">
-                {s?.solved ? (
+                {theme.startsOn ? (
+                  <span className="rounded-full border-2 border-tinta bg-white px-2.5 py-0.5 text-tinta">
+                    Começa em {theme.startsOn.split("-").reverse().join("/")}
+                  </span>
+                ) : s?.solved ? (
                   <span className="inline-flex items-center gap-1 rounded-full border-2 border-tinta bg-folha px-2.5 py-0.5 text-white">
                     <Check aria-hidden className="size-4" strokeWidth={3} /> Acertou em {s.guesses}{" "}
                     {s.guesses === 1 ? "chute" : "chutes"}

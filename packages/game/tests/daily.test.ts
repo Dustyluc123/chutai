@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
+  DailyNotStarted,
   addDays,
   dailyAnswerId,
   dailyDateKey,
+  dailyStartDate,
   dailyNumber,
   msUntilNextDaily,
   type DailyRosterEntry,
@@ -117,5 +119,38 @@ describe("desafio diário: sorteio", () => {
     );
     expect(withRemoval.filter((id, day) => id !== base[day])).toHaveLength(1);
     expect(withRemoval).not.toContain(removed);
+  });
+});
+
+describe("desafio diário: tema novo", () => {
+  it("só começa quando os personagens dele passam a valer, e não mexe nos temas antigos", () => {
+    const start = addDays(LAUNCH, 30);
+    const fresh = roster(6, start);
+    expect(() =>
+      dailyAnswerId({
+        dateKey: addDays(LAUNCH, 29),
+        roster: fresh,
+        rank: rankWith("s"),
+        launchDate: LAUNCH,
+      }),
+    ).toThrow(DailyNotStarted);
+    expect(dailyStartDate(fresh, LAUNCH)).toBe(start);
+    // A partir do primeiro dia, um ciclo inteiro sem repetir.
+    const days = Array.from({ length: 6 }, (_, i) =>
+      dailyAnswerId({
+        dateKey: addDays(start, i),
+        roster: fresh,
+        rank: rankWith("s"),
+        launchDate: LAUNCH,
+      }),
+    );
+    expect(new Set(days).size).toBe(6);
+  });
+
+  it("antes do lançamento, os temas do lançamento continuam mostrando o desafio #1", () => {
+    const entries = roster(10);
+    const pick = (dateKey: string) =>
+      dailyAnswerId({ dateKey, roster: entries, rank: rankWith("s"), launchDate: LAUNCH });
+    expect(pick(addDays(LAUNCH, -1))).toBe(pick(LAUNCH));
   });
 });

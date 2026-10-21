@@ -4,6 +4,7 @@ import { buildHint, canRequestHint, compareCharacters } from "@chutai/game";
 import {
   DailySecretMissing,
   dailyAnswer,
+  dailyStartsLater,
   dailySecret,
   dailyTheme,
   revealOf,
@@ -47,6 +48,14 @@ export async function POST(request: Request, { params }: { params: Promise<{ slu
     );
   }
 
+  const later = dailyStartsLater(theme, now.dateKey);
+  if (later) {
+    const [year, month, day] = later.split("-");
+    return reply(
+      { ok: false, error: `O desafio deste tema começa em ${day}/${month}/${year}.` },
+      409,
+    );
+  }
   const answer = dailyAnswer(theme, now.dateKey, secret);
   const find = (id: string) => theme.characters.find((character) => character.id === id);
   const judge = (id: string, index: number): GuessResult | undefined => {

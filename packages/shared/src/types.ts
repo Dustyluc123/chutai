@@ -172,7 +172,8 @@ export interface RoomSettings {
  * intermission → personagem revelado, contagem para a próxima rodada
  * finished     → partida terminou, pódio na tela
  */
-export type RoomPhase = "lobby" | "round" | "intermission" | "finished";
+/** `countdown`: contagem antes da primeira rodada (5, 4, 3, 2, 1, Vai!). */
+export type RoomPhase = "lobby" | "countdown" | "round" | "intermission" | "finished";
 
 export interface PublicPlayer {
   id: string;
@@ -232,6 +233,31 @@ export interface RoundSummary {
   results: RoundPlayerResult[];
 }
 
+/**
+ * Dados públicos de uma sala para a prévia do link (WhatsApp, redes).
+ * Vem da rota HTTP `GET /rooms/:codigo/preview`. Nunca tem nada da rodada.
+ */
+export interface RoomPreview {
+  code: string;
+  host: { nickname: string; avatar: string } | null;
+  theme: { name: string; emoji: string };
+  players: number;
+  maxPlayers: number;
+  phase: RoomPhase;
+}
+
+/**
+ * Pódio de uma partida terminada, para a imagem de compartilhar.
+ * Vem da rota HTTP `GET /rooms/:codigo/result` (só enquanto a sala está no pódio).
+ */
+export interface RoomResult {
+  code: string;
+  theme: { name: string; emoji: string };
+  rounds: number;
+  playerCount: number;
+  standings: { position: number; nickname: string; avatar: string; score: number }[];
+}
+
 export interface FinalStanding {
   playerId: string;
   nickname: string;
@@ -251,6 +277,8 @@ export interface RoomState {
   round?: RoundPublic;
   lastRound?: RoundSummary;
   intermissionEndsAt?: number;
+  /** Fase `countdown`: quando a contagem termina e a primeira rodada começa (horário do servidor). */
+  countdownEndsAt?: number;
   standings?: FinalStanding[];
   /** Relógio do servidor, para o navegador corrigir a diferença no cronômetro. */
   serverNow: number;

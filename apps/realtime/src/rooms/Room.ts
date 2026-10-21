@@ -15,6 +15,8 @@ import type {
   PrivateState,
   PublicPlayer,
   RoomPhase,
+  RoomPreview,
+  RoomResult,
   RoomSettings,
   RoomState,
   RoundSummary,
@@ -23,6 +25,7 @@ import type {
 } from "@chutai/shared";
 import {
   MAX_ROUND_IMAGE_LEVEL,
+  ROOM_LIFECYCLE,
   TIMING,
   buildHint,
   canRequestHint,
@@ -87,6 +90,8 @@ export interface RoomDeps {
   random?: () => number;
   disconnectGraceMs?: number;
   intermissionMs?: number;
+  /** Contagem antes da primeira rodada. Com 0, a rodada começa na hora (usado em testes). */
+  countdownMs?: number;
   /** Chamado quando a partida termina (para salvar o histórico). */
   onFinished?: (record: MatchRecord) => void;
   /** Chamado quando o estado muda (para salvar retrato no Redis, por exemplo). */
@@ -95,6 +100,10 @@ export interface RoomDeps {
   renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
   /** Chamado se não der para gerar as imagens de uma rodada (para registrar no log). */
   onImageError?: (error: unknown, character: Character) => void;
+  /** Quanto tempo a partida espera sem ninguém conectado antes de encerrar a sala. */
+  abandonedMs?: number;
+  /** Chamado quando a sala é encerrada por abandono (o gerenciador apaga a sala). */
+  onAbandoned?: (room: Room) => void;
 }
 
 const defaultSchedule = (fn: () => void, ms: number) => {
@@ -115,10 +124,15 @@ export class Room {
   private lastRound?: RoundSummary;
   private standings?: FinalStanding[];
   private intermissionEndsAt?: number;
+  private countdownEndsAt?: number;
   private usedCharacterIds = new Set<string>();
   private history: { summary: RoundSummary; record: MatchRecord["rounds"][number] }[] = [];
   private matchStartedAt?: number;
   private cancelTimer?: () => void;
+  /** Prazo para encerrar a sala, ligado quando o último jogador conectado sai no meio da partida. */
+  private cancelAbandonTimer?: () => void;
+  /** Rodada que deveria ter começado, mas ficou parada porque não havia ninguém conectado. */
+  private pausedRound?: number;
 
   private readonly emitter: RoomEmitter;
   private readonly now: () => number;
@@ -126,10 +140,13 @@ export class Room {
   private readonly random: () => number;
   private readonly disconnectGraceMs: number;
   private readonly intermissionMs: number;
+  private readonly countdownMs: number;
   private readonly onFinished?: (record: MatchRecord) => void;
   private readonly onChange?: (room: Room) => void;
   private readonly renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
   private readonly onImageError?: (error: unknown, character: Character) => void;
+  private readonly abandonedMs: number;
+  private readonly onAbandoned?: (room: Room) => void;
 
   constructor(code: string, theme: Theme, settings: RoomSettings, deps: RoomDeps) {
     this.code = code;
@@ -141,10 +158,13 @@ export class Room {
     this.random = deps.random ?? Math.random;
     this.disconnectGraceMs = deps.disconnectGraceMs ?? 20_000;
     this.intermissionMs = deps.intermissionMs ?? TIMING.intermissionSeconds * 1000;
+    this.countdownMs = deps.countdownMs ?? TIMING.startCountdownSeconds * 1000;
     this.onFinished = deps.onFinished;
     this.onChange = deps.onChange;
     this.renderRoundImages = deps.renderRoundImages;
     this.onImageError = deps.onImageError;
+    this.abandonedMs = deps.abandonedMs ?? ROOM_LIFECYCLE.abandonedSeconds * 1000;
+    this.onAbandoned = deps.onAbandoned;
     this.createdAt = this.now();
   }
 
@@ -199,8 +219,58 @@ export class Room {
     }
 
     this.changed();
+    this.watchAbandonment();
     // Se todo mundo que ainda está conectado já acertou, não precisa esperar o cronômetro.
     if (this.phase === "round") this.endRoundIfEveryoneSolved();
+  }
+
+  /** A partida está andando (contagem, rodada ou intervalo)? */
+  get inMatch(): boolean {
+    return this.phase === "countdown" || this.phase === "round" || this.phase === "intermission";
+  }
+
+  /**
+   * Liga ou desliga o prazo de abandono. Sem ninguém conectado no meio da partida, a sala
+   * espera `abandonedMs`; se alguém voltar antes (recarregou a página, a internet caiu), segue.
+   */
+  private watchAbandonment(): void {
+    const empty = this.connectedPlayers.length === 0;
+    if (!empty || !this.inMatch) {
+      this.cancelAbandonTimer?.();
+      this.cancelAbandonTimer = undefined;
+      if (!empty) this.resumeIfPaused();
+      return;
+    }
+    if (this.cancelAbandonTimer) return;
+    this.cancelAbandonTimer = this.schedule(() => {
+      this.cancelAbandonTimer = undefined;
+      if (this.connectedPlayers.length > 0 || !this.inMatch) return;
+      this.dispose();
+      this.onAbandoned?.(this);
+    }, this.abandonedMs);
+  }
+
+  /** Alguém voltou para uma sala parada: a rodada que faltava começa daqui a pouco. */
+  private resumeIfPaused(): void {
+    const number = this.pausedRound;
+    if (number === undefined || (this.phase !== "intermission" && this.phase !== "countdown")) {
+      return;
+    }
+    this.pausedRound = undefined;
+    const delay = ROOM_LIFECYCLE.resumeSeconds * 1000;
+    if (this.phase === "countdown") this.countdownEndsAt = this.now() + delay;
+    else this.intermissionEndsAt = this.now() + delay;
+    this.cancelTimer = this.schedule(() => this.startRoundIfSomeoneIsHere(number), delay);
+    this.changed();
+  }
+
+  /** Sem ninguém conectado, não começa rodada nova (nem gera imagens): a sala fica parada. */
+  private startRoundIfSomeoneIsHere(number: number): void {
+    if (this.connectedPlayers.length === 0) {
+      this.pausedRound = number;
+      return;
+    }
+    this.startRound(number);
   }
 
   removePlayer(playerId: string): void {
@@ -210,6 +280,7 @@ export class Room {
     this.players.delete(playerId);
     this.migrateHostIfNeeded();
     this.changed();
+    this.watchAbandonment();
     if (this.phase === "round") this.endRoundIfEveryoneSolved();
   }
 
@@ -305,7 +376,16 @@ export class Room {
     this.lastRound = undefined;
     this.standings = undefined;
     this.matchStartedAt = this.now();
-    this.startRound(1);
+    if (this.countdownMs <= 0) {
+      this.startRound(1);
+      return;
+    }
+    // Contagem controlada pelo servidor: a rodada (sorteio, cronômetro, imagens) só nasce no fim.
+    this.cancelTimer?.();
+    this.phase = "countdown";
+    this.countdownEndsAt = this.now() + this.countdownMs;
+    this.cancelTimer = this.schedule(() => this.startRoundIfSomeoneIsHere(1), this.countdownMs);
+    this.changed();
   }
 
   /** Depois do pódio, o anfitrião leva todo mundo de volta ao lobby. */
@@ -344,6 +424,7 @@ export class Room {
     this.round = round;
     this.phase = "round";
     this.intermissionEndsAt = undefined;
+    this.countdownEndsAt = undefined;
     this.cancelTimer = this.schedule(() => this.endRound(), endsAt - startedAt);
     if (this.settings.mode === "image") this.prepareImages(round);
 
@@ -573,12 +654,17 @@ export class Room {
 
     this.phase = "intermission";
     this.intermissionEndsAt = this.now() + this.intermissionMs;
-    this.cancelTimer = this.schedule(() => this.startRound(round.number + 1), this.intermissionMs);
+    this.cancelTimer = this.schedule(
+      () => this.startRoundIfSomeoneIsHere(round.number + 1),
+      this.intermissionMs,
+    );
     this.changed();
   }
 
   private finish(): void {
     this.phase = "finished";
+    this.cancelAbandonTimer?.();
+    this.cancelAbandonTimer = undefined;
     this.round = undefined;
     this.intermissionEndsAt = undefined;
     this.standings = this.computeStandings();
@@ -677,8 +763,39 @@ export class Room {
         : undefined,
       lastRound: this.phase === "lobby" ? undefined : this.lastRound,
       intermissionEndsAt: this.intermissionEndsAt,
+      countdownEndsAt: this.phase === "countdown" ? this.countdownEndsAt : undefined,
       standings: this.phase === "finished" ? this.standings : undefined,
       serverNow: this.now(),
+    };
+  }
+
+  /** Só o que pode aparecer na prévia pública do link: nada da rodada, nada de token. */
+  toPreview(): RoomPreview {
+    const host = this.players.get(this.hostId);
+    return {
+      code: this.code,
+      host: host ? { nickname: host.nickname, avatar: host.avatar } : null,
+      theme: { name: this.theme.name, emoji: this.theme.emoji },
+      players: this.players.size,
+      maxPlayers: this.settings.maxPlayers,
+      phase: this.phase,
+    };
+  }
+
+  /** Pódio público da partida terminada (para a imagem de compartilhar). Fora do pódio: null. */
+  toResult(): RoomResult | null {
+    if (this.phase !== "finished" || !this.standings) return null;
+    return {
+      code: this.code,
+      theme: { name: this.theme.name, emoji: this.theme.emoji },
+      rounds: this.history.length,
+      playerCount: this.standings.length,
+      standings: this.standings.map(({ position, nickname, avatar, score }) => ({
+        position,
+        nickname,
+        avatar,
+        score,
+      })),
     };
   }
 
@@ -713,6 +830,8 @@ export class Room {
 
   dispose(): void {
     this.cancelTimer?.();
+    this.cancelAbandonTimer?.();
+    this.cancelAbandonTimer = undefined;
     for (const player of this.players.values()) player.disconnectTimer?.();
   }
 
@@ -732,6 +851,7 @@ export class Room {
   }
 
   private requireRound(): ActiveRound {
+    if (this.phase === "countdown") throw new GameError("A rodada ainda não começou.");
     if (this.phase !== "round" || !this.round) throw new GameError("Não há rodada em andamento.");
     return this.round;
   }

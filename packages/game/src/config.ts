@@ -72,4 +72,22 @@ export const IMAGE_MODE = {
 export const TIMING = {
   /** Segundos mostrando o personagem revelado antes da próxima rodada. */
   intermissionSeconds: 10,
+  /**
+   * Contagem antes da primeira rodada (5, 4, 3, 2, 1, Vai!). O servidor controla: o cronômetro
+   * da rodada só começa depois dela, e nada da rodada é enviado antes.
+   */
+  startCountdownSeconds: 5,
+  /** Entre rodadas, os últimos segundos do intervalo mostram 3, 2, 1 (sem aumentar o intervalo). */
+  betweenRoundsCountdownSeconds: 3,
+} as const;
+
+/** Ciclo de vida das salas durante a partida. */
+export const ROOM_LIFECYCLE = {
+  /**
+   * Se ninguém estiver conectado por este tempo no meio da partida (contagem, rodada ou
+   * intervalo), a partida termina e a sala é apagada. Quem só recarregou a página volta antes.
+   */
+  abandonedSeconds: 60,
+  /** Quando alguém volta para uma sala parada (sem rodada nova por falta de gente), a próxima começa depois disto. */
+  resumeSeconds: 3,
 } as const;

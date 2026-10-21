@@ -3,7 +3,8 @@ import { OFFICIAL_THEMES } from "@chutai/db";
 import type { MatchRecord } from "@chutai/db";
 import { Room, type RoomDeps, type RoomEmitter } from "../src/rooms/Room";
 
-export const theme: Theme = OFFICIAL_THEMES[0]!;
+/** Tema sem imagens suficientes para o modo Imagem (16 de 24): só Clássico. */
+export const theme: Theme = OFFICIAL_THEMES.find((t) => t.slug === "folclore-brasileiro")!;
 /** Tema com imagem para todos os personagens (modo Imagem normal). */
 export const imageTheme: Theme = OFFICIAL_THEMES.find((t) => t.slug === "fauna-brasileira")!;
 /** Tema com imagem para quase todos (47 de 49): modo Imagem parcial. */
@@ -54,12 +55,15 @@ export function createTestRoom(
     theme?: Theme;
     renderRoundImages?: RoomDeps["renderRoundImages"];
     random?: () => number;
+    /** Contagem antes da 1ª rodada. Por padrão 0 (a rodada começa na hora, como nos testes antigos). */
+    countdownMs?: number;
   } = {},
 ) {
   const roomTheme = options.theme ?? theme;
   const clock = new FakeClock();
   const sent: Sent[] = [];
   const finished: MatchRecord[] = [];
+  const abandoned: Room[] = [];
   const emitter: RoomEmitter = {
     broadcast: (event, ...args) => sent.push({ to: "all", event, args }),
     toPlayer: (playerId, event, ...args) => sent.push({ to: playerId, event, args }),
@@ -83,11 +87,13 @@ export function createTestRoom(
       random: options.random ?? (() => 0),
       disconnectGraceMs: 5_000,
       intermissionMs: 3_000,
+      countdownMs: options.countdownMs ?? 0,
       onFinished: (record) => finished.push(record),
       renderRoundImages: options.renderRoundImages,
+      onAbandoned: (closed) => abandoned.push(closed),
     },
   );
-  return { room, clock, sent, finished };
+  return { room, clock, sent, finished, abandoned };
 }
 
 /** Um personagem do tema que NÃO é a resposta atual. */

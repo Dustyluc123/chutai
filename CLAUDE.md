@@ -32,7 +32,7 @@ Env vars are read from the root `.env` (see `.env.example`); none are required l
 
 Theme images: `pnpm images:fetch` downloads the files listed in `packages/db/seed/image-sources.json` from Wikimedia Commons, rejects non-free licenses, writes `apps/web/public/temas/<slug>/<id>.webp`, fills `image`/`imageCredit` in the theme JSON and regenerates `CREDITOS.md`. Downloads are cached in `packages/db/.cache/` (gitignored).
 
-Deploy: realtime on Railway (`railway.json` at the repo root, Node 22 via `.nvmrc`), web on Vercel (Root Directory `apps/web`). Step by step in `docs/DEPLOY.md`.
+Deploy (live: site https://chutai-bay.vercel.app, realtime https://chutairealtime-production.up.railway.app): realtime on Railway, configured by hand in the dashboard (no `railway.json`; build/start/healthcheck/watch paths are listed in `docs/DEPLOY.md`), Node 22 via `.nvmrc`; web on Vercel (Root Directory `apps/web`). Vercel preview deploys can't reach the realtime server (not in `CORS_ORIGIN`) — expected. A Railway deploy drops all in-memory rooms.
 
 ## Architecture
 
@@ -48,7 +48,18 @@ Two apps + three internal packages. Internal packages are **not built** — they
   - `socket/handlers/*` — each handler is wrapped with `withValidation(schema, fn)` / `withoutPayload(fn)` from `safe.ts`, which Zod-validates input and replies via ack `{ ok, data } | { ok: false, error }`. Throw `GameError` (`lib/errors.ts`) for player-facing errors; anything else is logged and replaced with a generic message. `middleware/identify.ts` resolves the socket's room/player.
 - `apps/web` — Next.js 16 App Router + React 19 + Tailwind 4. Routes use pt-BR paths (`sala/[codigo]`, `temas`, `treino`, `criar-tema`). Server-side theme access goes through `src/lib/themes.ts` (`server-only`, uses `createRepositories`). All realtime communication for a room is encapsulated in `src/hooks/useRoom.ts` (socket client in `lib/socket.ts`, reconnect token/profile in localStorage via `lib/identity.ts`). Path alias `@/` → `apps/web/src`.
 
+Phases: `lobby` → `countdown` (`TIMING.startCountdownSeconds`, server-timed via `countdownEndsAt`; the round — draw, timer, images — is only created when it ends, guesses are rejected) → `round` ⇄ `intermission` (the web shows 3, 2, 1 in the last `TIMING.betweenRoundsCountdownSeconds` of `intermissionEndsAt`, no extra time) → `finished`. Tests: `createTestRoom` defaults `countdownMs` to 0 (round starts immediately); pass `countdownMs` to test the countdown.
+
+Abandoned rooms: if nobody is connected for `ROOM_LIFECYCLE.abandonedSeconds` (60 s) during a match, `Room` calls `onAbandoned` and the manager deletes the room (logged). While nobody is connected no new round starts (no images rendered); whoever returns gets the next round after `resumeSeconds`. Lobby/finished rooms are left to the periodic sweep (`EMPTY_ROOM_MINUTES`).
+
 Server → client flow: `room:state` is the source of truth broadcast to everyone; `you:state` is per-player private state (guesses, hints); `player:progress` is spoiler-free progress. Full event table is in README.md.
+
+## Link previews (Open Graph)
+
+- `apps/web/src/app/opengraph-image.tsx` (site default) and `app/sala/[codigo]/opengraph-image.tsx` (room card) use `ImageResponse`. Room data comes from the realtime read-only route `GET /rooms/:codigo/preview` (`Room.toPreview()`: host nickname/avatar, theme, player count, limit, phase — never anything from the round; rate-limited per IP) via `lib/room-preview.ts` (2 s timeout, `null` → generic "Essa sala já acabou" card).
+- Shared pieces in `apps/web/src/lib/og/`: static Archivo TTFs in `src/assets/og` (OFL; the site's variable woff2 doesn't work in `ImageResponse`), brand components, and emojis as Twemoji `<img>` data URIs fetched with a timeout. **Never put emoji characters as text in an `ImageResponse`** (it would fetch them itself and fail the whole image if the CDN is down); if the fetch fails the image renders without the emoji. `ogText` strips glyphs the fonts don't have.
+- `metadataBase` comes from `NEXT_PUBLIC_SITE_URL` (`lib/site.ts`).
+- Share result: `app/sala/[codigo]/resultado/route.tsx` renders the podium PNG (1080×1350, `lib/og/podium-image.tsx`) from the realtime route `GET /rooms/:codigo/result` (`Room.toResult()`, only in `finished`). `components/scoreboard/share-result.tsx` prefetches the PNG when the podium appears (it disappears on restart, and iOS needs `navigator.share` right after the tap); touch devices with `canShare({files})` use the native share sheet, otherwise it downloads and offers "Copiar texto". Podium/tie/text rules in `lib/podium.ts`.
 
 ## Image mode (rules that must keep holding)
 

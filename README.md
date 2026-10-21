@@ -6,13 +6,17 @@
 </p>
 
 <p align="center">
+  <strong>Jogue agora: <a href="https://chutai-bay.vercel.app">chutai-bay.vercel.app</a></strong>
+</p>
+
+<p align="center">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white" />
   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white" />
   <img alt="Socket.IO" src="https://img.shields.io/badge/Socket.IO-4.8-010101?logo=socketdotio&logoColor=white" />
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-119_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-143_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -80,9 +84,12 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 ## Funcionalidades
 
 - [x] Salas privadas com código de 6 caracteres e link de convite (copiar ou compartilhar)
+- [x] Prévia bonita do link da sala no WhatsApp e nas redes: quem chamou, tema, jogadores e código (imagem gerada com `ImageResponse`)
 - [x] Entrar como convidado, só com apelido e avatar
 - [x] Lobby com lista de jogadores, vagas, regras editáveis pelo anfitrião e botão de expulsar
 - [x] Rodadas com cronômetro controlado pelo servidor
+- [x] Contagem **5, 4, 3, 2, 1, Vai!** antes da primeira rodada (controlada pelo servidor: palpites recusados e nada da rodada enviado antes) e **3, 2, 1** no fim de cada intervalo
+- [x] Sala abandonada no meio da partida (ninguém conectado por 60 s) é encerrada; sem ninguém, não começa rodada nova
 - [x] Autocompletar acessível (teclado e leitor de tela) que ignora acentos e aceita apelidos ("Fenômeno" → Ronaldo)
 - [x] Tabuleiro com peças que viram uma de cada vez, setas para números e tolerância para valores aproximados
 - [x] Dois modos de jogo: **Clássico** (atributos coloridos) e **Imagem** (imagem borrada que fica mais nítida a cada erro ou dica)
@@ -92,6 +99,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Placar ao vivo **sem spoiler**: mostra chutes e quantos atributos cada um já acertou (ou, no modo Imagem, a nitidez de cada um), nunca o personagem
 - [x] Dicas (revelar atributo, primeira letra) liberadas depois de 3 chutes, custando pontos
 - [x] Revelação do personagem ao fim de cada rodada, pódio final e "jogar de novo"
+- [x] **Compartilhar resultado**: imagem do pódio (1080×1350, boa para WhatsApp e feed do Instagram) com o compartilhamento nativo do celular; no computador, baixa o PNG e oferece "Copiar texto"
 - [x] Reconexão: recarregou a página ou a internet caiu? Volta para a mesma sala, com os mesmos pontos
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
@@ -261,6 +269,7 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 | Variável                   | Padrão                  | Para quê                                                            |
 | -------------------------- | ----------------------- | ------------------------------------------------------------------- |
 | `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                  |
+| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar  |
 | `PORT`                     | `3001`                  | Porta do servidor de tempo real                                     |
 | `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)               |
 | `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem |
@@ -297,23 +306,32 @@ Guarda um retrato de cada sala. Se o servidor reiniciar (um deploy, por exemplo)
 
 Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/src/events.ts).
 
-| Evento                                   | Direção                       | Para quê                                                              |
-| ---------------------------------------- | ----------------------------- | --------------------------------------------------------------------- |
-| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                 |
-| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                              |
-| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                               |
-| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                      |
-| `game:start`                             | anfitrião → servidor          | Começar a partida                                                     |
-| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                   |
-| `hint:request`                           | navegador → servidor          | Pedir dica                                                            |
-| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                       |
-| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase, placar                             |
-| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                     |
-| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                 |
-| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                     |
-| `round:start` / `round:end` / `game:end` | servidor → todos              | Início, revelação e fim                                               |
-| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou |
-| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome) |
+| Evento                                   | Direção                       | Para quê                                                                                              |
+| ---------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                                                 |
+| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                                                              |
+| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                                                               |
+| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                                                      |
+| `game:start`                             | anfitrião → servidor          | Começar a partida                                                                                     |
+| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                                                   |
+| `hint:request`                           | navegador → servidor          | Pedir dica                                                                                            |
+| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                                                       |
+| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase (`lobby`, `countdown`, `round`, `intermission`, `finished`), placar |
+| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                     |
+| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                 |
+| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                     |
+| `round:start` / `round:end` / `game:end` | servidor → todos              | Início, revelação e fim                                                                               |
+| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                 |
+| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                 |
+
+### Rotas HTTP do servidor de tempo real
+
+| Rota                         | Para quê                                                                                                                          |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /health`                | Saúde do servidor                                                                                                                 |
+| `GET /themes`                | Lista de temas                                                                                                                    |
+| `GET /rooms/:codigo/preview` | Prévia do link: só dados públicos (apelido e avatar do anfitrião, tema, jogadores, limite e fase). Nada da rodada. Limite por IP. |
+| `GET /rooms/:codigo/result`  | Pódio da partida terminada (posição, apelido, avatar e pontos), para a imagem de compartilhar. Só enquanto a sala está no pódio.  |
 
 ## Pontuação
 
@@ -331,25 +349,25 @@ Bônus de +100 para o primeiro a acertar e +50 para o segundo. Exemplo: acertou 
 pnpm test
 ```
 
-| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                      |
-| ------------------ | -----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                             |
-| `@chutai/realtime` |     53 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
-| `@chutai/web`      |      4 | Componentes de palpite: no modo Imagem, nada de imagem nem emoji                                                                                                                                                                                                                                                  |
-| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                      |
+| Pacote             | Testes | O que cobrem                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------ | -----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@chutai/game`     |     46 | Comparação de cada tipo de atributo, fórmula de pontos, dicas, sorteio, busca sem acento, níveis e zoom do modo Imagem, regra dos 75%                                                                                                                                                                                                                                                  |
+| `@chutai/realtime` |     67 | Sala com relógio falso (rodadas, empates, reconexão, anfitrião, contagem antes da largada, sala abandonada encerrada depois de 60 s), modo Imagem e Imagem parcial (ninguém recebe um nível acima do que alcançou, nada vaza, sorteio só com quem tem imagem), geração das imagens com `sharp`, leitura das imagens do disco e **partidas inteiras com dois clientes Socket.IO reais** |
+| `@chutai/web`      |     14 | Componentes de palpite (no modo Imagem, nada de imagem nem emoji), contagem regressiva, emojis das imagens geradas (sem CDN, a imagem sai sem emoji) e texto do pódio com empates                                                                                                                                                                                                      |
+| `@chutai/db`       |     16 | Migrações e repositórios num PostgreSQL real em memória (PGlite), consistência dos temas, imagens, créditos e data dos dados                                                                                                                                                                                                                                                           |
 
 ## Deploy
 
 O passo a passo completo, para quem nunca fez deploy, está em [`docs/DEPLOY.md`](docs/DEPLOY.md). Resumo:
 
-| Peça                         | Onde             | Observação                                                                                                                                                       |
-| ---------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tempo real (`apps/realtime`) | Railway          | Configurado pelo `railway.json` (build, start e `/health`). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
-| Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                      |
-| PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                            |
-| Redis                        | Upstash          | Opcional                                                                                                                                                         |
+| Peça                         | Onde             | Observação                                                                                                                                                                                |
+| ---------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tempo real (`apps/realtime`) | Railway          | Build, start, `/health` e watch paths preenchidos à mão no painel (valores no guia). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
+| Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                                               |
+| PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                                                     |
+| Redis                        | Upstash          | Opcional                                                                                                                                                                                  |
 
-Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site em `CORS_ORIGIN`.
+Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site (o de **Domains**, `https://chutai-bay.vercel.app`) em `CORS_ORIGIN`. Os deploys de preview da Vercel não conectam ao servidor, porque o endereço deles não está no `CORS_ORIGIN`; é esperado.
 
 ## Criar um tema
 
@@ -394,7 +412,7 @@ Depois, adicione o arquivo à lista em `packages/db/src/themes.ts`. O teste `tem
 - [x] **Fase 2** — Multiplayer: salas, lobby, rodadas com cronômetro, placar ao vivo, pódio e reconexão
 - [x] **Fase 2.5** — Imagem de cada personagem (licença livre, com créditos) e modo de jogo Imagem
 - [x] **Fase 2.6** — Modo Imagem parcial, opções sem imagem no modo Imagem, quatro temas brasileiros com pessoas reais e projeto pronto para o deploy ([`docs/DEPLOY.md`](docs/DEPLOY.md))
-- [ ] **Fase 3** — Lançamento: colocar no ar seguindo o `docs/DEPLOY.md`, domínio, monitoramento de erros (Sentry) e testes com grupos de amigos
+- [ ] **Fase 3** — Lançamento: no ar em [chutai-bay.vercel.app](https://chutai-bay.vercel.app); faltam domínio próprio, monitoramento de erros (Sentry) e testes com grupos de amigos
 - [ ] **Fase 4** — Comunidade: login com Google e Discord, editor de temas com upload de imagens, moderação e salas públicas
 - [ ] **Fase 5** — Crescimento: modo streamer (chat da Twitch contra o streamer), modo emoji, plano premium
 

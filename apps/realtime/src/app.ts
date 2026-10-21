@@ -6,6 +6,8 @@ import { existsSync } from "node:fs";
 import { createServer, type Server as HttpServer } from "node:http";
 import { Server } from "socket.io";
 import { createRepositories } from "@chutai/db";
+import { roomCodeSchema } from "@chutai/shared";
+import { HttpRateLimiter } from "./lib/httpRateLimit";
 import type { Config } from "./config";
 import { RoomManager } from "./rooms/RoomManager";
 import { createRoomStore } from "./rooms/store";
@@ -34,6 +36,7 @@ export async function createRealtimeServer(
   config: Config,
   options: {
     intermissionMs?: number;
+    countdownMs?: number;
     /** Troca o jeito de buscar as imagens originais (os testes leem do disco). */
     imageLoader?: ImageLoader;
   } = {},
@@ -48,6 +51,9 @@ export async function createRealtimeServer(
   const assetsOnDisk = existsSync(config.assetsDir);
 
   const startedAt = Date.now();
+  // Prévia do link e pódio: quem gera as imagens é o site (servidor da Vercel) quando alguém cola o link num app.
+  // Um limite folgado por IP basta para impedir varredura de códigos.
+  const previewLimiter = new HttpRateLimiter(30, 1);
   // O gerenciador depende do Socket.IO, que depende do servidor HTTP: guardamos a referência aqui.
   const ref: { manager?: RoomManager } = {};
 
@@ -75,6 +81,27 @@ export async function createRealtimeServer(
       res.end(JSON.stringify(await themes.list()));
       return;
     }
+    const roomRoute = /^\/rooms\/([^/?#]+)\/(preview|result)(?:\?.*)?$/.exec(req.url ?? "");
+    if (roomRoute && req.method === "GET") {
+      res.setHeader("Cache-Control", "no-store");
+      if (!previewLimiter.allow(req)) {
+        res.statusCode = 429;
+        res.end(JSON.stringify({ ok: false, error: "Muitas requisições. Tente de novo já já." }));
+        return;
+      }
+      // O código só tem letras e números: nada para decodificar (e nada de exceção com % solto).
+      const code = roomCodeSchema.safeParse(roomRoute[1]);
+      const room = code.success ? ref.manager?.get(code.data) : undefined;
+      // Prévia: dados públicos da sala. Resultado: o pódio, só enquanto a sala está nele.
+      const body = roomRoute[2] === "preview" ? room?.toPreview() : room?.toResult();
+      if (!body) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ ok: false, error: "Sala não encontrada." }));
+        return;
+      }
+      res.end(JSON.stringify(body));
+      return;
+    }
     res.statusCode = 404;
     res.end(JSON.stringify({ ok: false, error: "Rota não encontrada." }));
   });
@@ -99,6 +126,7 @@ export async function createRealtimeServer(
     disconnectGraceMs: config.disconnectGraceMs,
     emptyRoomTtlMs: config.emptyRoomTtlMs,
     intermissionMs: options.intermissionMs,
+    countdownMs: options.countdownMs,
   });
   ref.manager = manager;
   await manager.restore();

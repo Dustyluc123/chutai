@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Raiz do monorepo: o build (local ou na Vercel) precisa enxergar os pacotes de ../../packages.
   outputFileTracingRoot: path.resolve(process.cwd(), "../.."),
+  // Fontes das imagens geradas (prévia do link e pódio), lidas do disco em tempo de execução.
+  outputFileTracingIncludes: { "/**": ["./src/assets/og/*.ttf"] },
 };
 
 export default nextConfig;

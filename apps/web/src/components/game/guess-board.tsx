@@ -54,7 +54,7 @@ export function GuessBoard({
         >
           <div role="row" className="grid gap-2" style={{ gridTemplateColumns: columns }}>
             <div role="columnheader" className="px-1 text-xs font-semibold text-tinta-soft">
-              Personagem
+              {(noun?.singular ?? "personagem").replace(/^./, (c) => c.toUpperCase())}
             </div>
             {attributes.map((attr) => (
               <div

@@ -6,6 +6,7 @@
   "color": "folha",
   "visibility": "official",
   "dataUpdatedAt": "2026-10",
+  "noun": { "singular": "estado", "plural": "estados", "gender": "m" },
   "attributes": [
     { "key": "regiao", "label": "Região", "type": "text" },
     {

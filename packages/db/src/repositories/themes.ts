@@ -70,6 +70,7 @@ export class DrizzleThemeRepository implements ThemeRepository {
         characterCount: themeCharacters.length,
         imageMode: imageModeAvailability(themeCharacters),
         imageCharacterCount: themeCharacters.filter((c) => !!c.image).length,
+        ...(row.noun ? { noun: row.noun } : {}),
         attributes: attributeRows
           .filter((attr) => attr.themeId === row.id)
           .map((attr) => ({ key: attr.key, label: attr.label })),

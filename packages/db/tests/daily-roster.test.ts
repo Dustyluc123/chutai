@@ -20,3 +20,12 @@ describe("roster do desafio diário", () => {
     }
   });
 });
+
+describe("palavra do tema", () => {
+  it("Estados do Brasil chama o que se adivinha de estado", async () => {
+    const { OFFICIAL_THEMES: themes, toThemeSummary } = await import("../src");
+    const estados = themes.find((theme) => theme.slug === "estados-do-brasil")!;
+    expect(estados.noun).toEqual({ singular: "estado", plural: "estados", gender: "m" });
+    expect(toThemeSummary(estados).noun?.singular).toBe("estado");
+  });
+});

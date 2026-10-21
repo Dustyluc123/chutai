@@ -52,7 +52,7 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 
 | Tema                     | Personagens | O que cada palpite compara                                                           | Modo Imagem                  |
 | ------------------------ | ----------: | ------------------------------------------------------------------------------------ | ---------------------------- |
-| YouTubers e streamers    |          34 | Conteúdo, plataforma, quando começou, estado natal, região, nascimento               | Parcial (31 com imagem)      |
+| YouTubers e streamers    |          57 | Conteúdo, plataforma, quando começou, estado natal, região, nascimento               | Parcial (50 com imagem)      |
 | Música brasileira        |          40 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira | Parcial (39 com imagem)      |
 | Futebol brasileiro atual |          41 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal            | Parcial (39 com imagem)      |
 | Famosos da TV            |          30 | Mais conhecido como, estado natal, região, nascimento, início da carreira            | Normal (todos com imagem)    |

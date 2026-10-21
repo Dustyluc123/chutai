@@ -1,7 +1,7 @@
 {
   "slug": "youtubers-e-streamers",
   "name": "YouTubers e streamers",
-  "description": "Criadores de conteúdo brasileiros do YouTube, da Twitch e dos podcasts.",
+  "description": "Criadores de conteúdo brasileiros do YouTube, da Twitch, do TikTok, do Instagram e dos podcasts.",
   "emoji": "📺",
   "color": "anil",
   "visibility": "official",
@@ -697,6 +697,451 @@
         "estado": "São Paulo",
         "regiao": "Sudeste",
         "nascimento": 1989
+      }
+    },
+    {
+      "id": "jout-jout",
+      "name": "Jout Jout",
+      "image": "/temas/youtubers-e-streamers/jout-jout.webp",
+      "imageCredit": {
+        "author": "TEDx Parque Das Nações Women",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Palestrante_Julia_Tolezano_(JoutJout_Pazer)_-_TEDx_Parque_das_Na%C3%A7%C3%B5es_Woman_(cropped).jpg"
+      },
+      "aliases": ["JoutJout", "Julia Tolezano"],
+      "emoji": "📹",
+      "values": {
+        "conteudo": "Vlog",
+        "plataforma": "YouTube",
+        "inicio": 2014,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1991
+      }
+    },
+    {
+      "id": "malena-nunes",
+      "name": "Malena",
+      "image": "/temas/youtubers-e-streamers/malena-nunes.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:MalenaNunes2020.jpg"
+      },
+      "aliases": ["Malena Nunes", "Malena0202"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1995
+      }
+    },
+    {
+      "id": "maju-trindade",
+      "name": "Maju Trindade",
+      "emoji": "📹",
+      "values": {
+        "conteudo": "Vlog",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1998
+      }
+    },
+    {
+      "id": "niina-secrets",
+      "name": "Niina Secrets",
+      "image": "/temas/youtubers-e-streamers/niina-secrets.webp",
+      "imageCredit": {
+        "author": "Kim RosaCuca",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Niina_Secrets,_Junho_de_2017,_02.jpg"
+      },
+      "aliases": ["NiinaSecrets"],
+      "emoji": "💄",
+      "values": {
+        "conteudo": "Beleza",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1994
+      }
+    },
+    {
+      "id": "camila-coelho",
+      "name": "Camila Coelho",
+      "image": "/temas/youtubers-e-streamers/camila-coelho.webp",
+      "imageCredit": {
+        "author": "meshugas",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Camila_Coelho_2015.jpg"
+      },
+      "emoji": "💄",
+      "values": {
+        "conteudo": "Beleza",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1988
+      }
+    },
+    {
+      "id": "flavia-pavanelli",
+      "name": "Flavia Pavanelli",
+      "image": "/temas/youtubers-e-streamers/flavia-pavanelli.webp",
+      "imageCredit": {
+        "author": "Cortes PODDELAS [OFICIAL] (it's a official channel from the same creators of the program)",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Flavia_Pavanelli_PodDelas.png"
+      },
+      "emoji": "💄",
+      "values": {
+        "conteudo": "Beleza",
+        "plataforma": "YouTube",
+        "inicio": 2013,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1998
+      }
+    },
+    {
+      "id": "pequena-lo",
+      "name": "Pequena Lo",
+      "image": "/temas/youtubers-e-streamers/pequena-lo.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pequena_Lo.png"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2015,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1996
+      }
+    },
+    {
+      "id": "brksedu",
+      "name": "BRKsEDU",
+      "image": "/temas/youtubers-e-streamers/brksedu.webp",
+      "imageCredit": {
+        "author": "Grande Prêmio",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:BRKsEDU_em_2021.jpg"
+      },
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2010,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1985
+      }
+    },
+    {
+      "id": "venomextreme",
+      "name": "VenomExtreme",
+      "image": "/temas/youtubers-e-streamers/venomextreme.webp",
+      "imageCredit": {
+        "author": "Venom Extreme",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Venom_Extreme_2023_(cropped).png"
+      },
+      "aliases": ["Venom"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1981
+      }
+    },
+    {
+      "id": "bruno-playhard",
+      "name": "Bruno PlayHard",
+      "image": "/temas/youtubers-e-streamers/bruno-playhard.webp",
+      "imageCredit": {
+        "author": "Bruno Clash",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:PlayHard_na_Brasil_Game_Show_2016.png"
+      },
+      "aliases": ["PlayHard"],
+      "emoji": "🎮",
+      "values": {
+        "conteudo": "Games",
+        "plataforma": "YouTube",
+        "inicio": 2014,
+        "estado": "Minas Gerais",
+        "regiao": "Sudeste",
+        "nascimento": 1994
+      }
+    },
+    {
+      "id": "nilce-moretto",
+      "name": "Nilce Moretto",
+      "image": "/temas/youtubers-e-streamers/nilce-moretto.webp",
+      "imageCredit": {
+        "author": "Nilcelaine Moretto Martins",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:Nilcelaine_Moretto_Martins.webp"
+      },
+      "aliases": ["Nilce"],
+      "emoji": "🦸",
+      "values": {
+        "conteudo": "Cultura pop",
+        "plataforma": "YouTube",
+        "inicio": 2009,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1980
+      }
+    },
+    {
+      "id": "marcos-castro",
+      "name": "Marcos Castro",
+      "image": "/temas/youtubers-e-streamers/marcos-castro.webp",
+      "imageCredit": {
+        "author": "Marcos Castro",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Marcos_Castro_-_Foto_4x5_(cropped).png"
+      },
+      "aliases": ["Castro Brothers"],
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2006,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1986
+      }
+    },
+    {
+      "id": "fabio-porchat",
+      "name": "Fábio Porchat",
+      "image": "/temas/youtubers-e-streamers/fabio-porchat.webp",
+      "imageCredit": {
+        "author": "Humor Multishow",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:F%C3%A1bio_Porchat_at_Lady_Night_by_Humor_Multishow.jpg"
+      },
+      "aliases": ["Porchat"],
+      "emoji": "😂",
+      "values": {
+        "conteudo": "Humor",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "Rio de Janeiro",
+        "regiao": "Sudeste",
+        "nascimento": 1983
+      }
+    },
+    {
+      "id": "pirula",
+      "name": "Pirula",
+      "image": "/temas/youtubers-e-streamers/pirula.webp",
+      "imageCredit": {
+        "author": "TVSIMI - INOVAÇÃO",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Pirula_em_entrevista_%C3%A0_TVSIMI_(cropped).jpg"
+      },
+      "aliases": ["Pirulla"],
+      "emoji": "🔬",
+      "values": {
+        "conteudo": "Ciência",
+        "plataforma": "YouTube",
+        "inicio": 2006,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1981
+      }
+    },
+    {
+      "id": "sergio-sacani",
+      "name": "Sérgio Sacani",
+      "image": "/temas/youtubers-e-streamers/sergio-sacani.webp",
+      "imageCredit": {
+        "author": "Campus Party Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9rgio_Sacani_na_Campus_Party_Brasil_2015_(cropped).jpg"
+      },
+      "aliases": ["Space Today"],
+      "emoji": "🔬",
+      "values": {
+        "conteudo": "Ciência",
+        "plataforma": "YouTube",
+        "inicio": 2015,
+        "estado": "Paraná",
+        "regiao": "Sul",
+        "nascimento": 1975
+      }
+    },
+    {
+      "id": "professor-jubilut",
+      "name": "Professor Jubilut",
+      "image": "/temas/youtubers-e-streamers/professor-jubilut.webp",
+      "imageCredit": {
+        "author": "Paulo Jubilut",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Paulo_Jubilut.png"
+      },
+      "aliases": ["Jubilut"],
+      "emoji": "📚",
+      "values": {
+        "conteudo": "Educação",
+        "plataforma": "YouTube",
+        "inicio": 2009,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1980
+      }
+    },
+    {
+      "id": "nathalia-arcuri",
+      "name": "Nathalia Arcuri",
+      "image": "/temas/youtubers-e-streamers/nathalia-arcuri.webp",
+      "imageCredit": {
+        "author": "Campus Party Brasil",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:GAM8176_(53041651401).jpg"
+      },
+      "aliases": ["Me Poupe!"],
+      "emoji": "💰",
+      "values": {
+        "conteudo": "Finanças",
+        "plataforma": "YouTube",
+        "inicio": 2015,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1985
+      }
+    },
+    {
+      "id": "luva-de-pedreiro",
+      "name": "Luva de Pedreiro",
+      "emoji": "⚽",
+      "values": {
+        "conteudo": "Esporte",
+        "plataforma": "Instagram",
+        "inicio": 2021,
+        "estado": "Bahia",
+        "regiao": "Nordeste",
+        "nascimento": 2001
+      }
+    },
+    {
+      "id": "rodrigo-goes",
+      "name": "Rodrigo Góes",
+      "emoji": "💪",
+      "values": {
+        "conteudo": "Fitness",
+        "plataforma": "TikTok",
+        "inicio": 2022,
+        "estado": "Distrito Federal",
+        "regiao": "Centro-Oeste",
+        "nascimento": 1987
+      }
+    },
+    {
+      "id": "kondzilla",
+      "name": "KondZilla",
+      "image": "/temas/youtubers-e-streamers/kondzilla.webp",
+      "imageCredit": {
+        "author": "Web Summit Rio from Rio de Janeiro, Brazil",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:KondZilla_(52864335157)_(cropped).jpg"
+      },
+      "aliases": ["Konrad Dantas"],
+      "emoji": "🎹",
+      "values": {
+        "conteudo": "Música",
+        "plataforma": "YouTube",
+        "inicio": 2012,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1988
+      }
+    },
+    {
+      "id": "mariana-nolasco",
+      "name": "Mariana Nolasco",
+      "image": "/temas/youtubers-e-streamers/mariana-nolasco.webp",
+      "imageCredit": {
+        "author": "Mariana Nolasco",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Mariana_Nolasco_-_Pra_Todas_as_Mulheres.png"
+      },
+      "emoji": "🎹",
+      "values": {
+        "conteudo": "Música",
+        "plataforma": "YouTube",
+        "inicio": 2011,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1998
+      }
+    },
+    {
+      "id": "lorelay-fox",
+      "name": "Lorelay Fox",
+      "image": "/temas/youtubers-e-streamers/lorelay-fox.webp",
+      "imageCredit": {
+        "author": "Multishow",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source": "https://commons.wikimedia.org/wiki/File:LorelayFox.jpg"
+      },
+      "emoji": "🎬",
+      "values": {
+        "conteudo": "Entretenimento",
+        "plataforma": "YouTube",
+        "inicio": 2015,
+        "estado": "São Paulo",
+        "regiao": "Sudeste",
+        "nascimento": 1987
+      }
+    },
+    {
+      "id": "ednaldo-pereira",
+      "name": "Ednaldo Pereira",
+      "emoji": "🎹",
+      "values": {
+        "conteudo": "Música",
+        "plataforma": "YouTube",
+        "inicio": 2008,
+        "estado": "Paraíba",
+        "regiao": "Nordeste",
+        "nascimento": 1973
       }
     }
   ]

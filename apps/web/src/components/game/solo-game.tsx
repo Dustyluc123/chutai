@@ -6,7 +6,7 @@ import type { Character, CharacterOption, RoundKind, GuessResult, Theme } from "
 import {
   compareCharacters,
   drawCharacter,
-  formatValue,
+  formatCharacterValue,
   MAX_ROUND_IMAGE_LEVEL,
   drawZoomCenter,
   imageLevel,
@@ -180,7 +180,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
             <p className="font-display text-3xl">{answer.name}</p>
             <p className="text-sm text-tinta-soft">
               {theme.attributes
-                .map((attr) => `${attr.label}: ${formatValue(attr, answer.values[attr.key])}`)
+                .map((attr) => `${attr.label}: ${formatCharacterValue(attr, answer)}`)
                 .join(". ")}
             </p>
           </div>

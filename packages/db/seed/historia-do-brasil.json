@@ -1050,6 +1050,101 @@
         "nascimento": 1944,
         "morte": 1988
       }
+    },
+    {
+      "id": "zumbi-dos-palmares",
+      "name": "Zumbi dos Palmares",
+      "image": "/temas/historia-do-brasil/zumbi-dos-palmares.webp",
+      "imageCredit": {
+        "author": "Antônio Parreiras",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:Ant%C3%B4nio_Parreiras_-_Zumbi_2.jpg"
+      },
+      "aliases": ["Zumbi"],
+      "emoji": "✊",
+      "approx": ["nascimento"],
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Colônia",
+        "estado": "Incerto",
+        "regiao": "Incerto",
+        "nascimento": 1655,
+        "morte": 1695
+      }
+    },
+    {
+      "id": "tereza-de-benguela",
+      "name": "Tereza de Benguela",
+      "emoji": "✊",
+      "values": {
+        "area": "Movimentos sociais",
+        "periodo": "Colônia",
+        "estado": "Exterior",
+        "regiao": "Exterior",
+        "nascimento": "Incerto",
+        "morte": 1770
+      }
+    },
+    {
+      "id": "ajuricaba",
+      "name": "Ajuricaba",
+      "image": "/temas/historia-do-brasil/ajuricaba.webp",
+      "imageCredit": {
+        "author": "Americo Makk / Eva Holusa",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Americo_Makk,_Portait_of_Chief_Ajuricaba.jpg"
+      },
+      "emoji": "⚔️",
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Amazonas",
+        "regiao": "Norte",
+        "nascimento": "Incerto",
+        "morte": 1727
+      }
+    },
+    {
+      "id": "filipe-camarao",
+      "name": "Filipe Camarão",
+      "image": "/temas/historia-do-brasil/filipe-camarao.webp",
+      "imageCredit": {
+        "author": "Autor desconhecido",
+        "license": "Domínio público",
+        "source": "https://commons.wikimedia.org/wiki/File:An%C3%B4nimo_-_Retrato_de_Filipe_Camar%C3%A3o.jpg"
+      },
+      "aliases": ["Felipe Camarão", "Poti"],
+      "emoji": "⚔️",
+      "approx": ["nascimento"],
+      "values": {
+        "area": "Militar",
+        "periodo": "Colônia",
+        "estado": "Incerto",
+        "regiao": "Nordeste",
+        "nascimento": 1600,
+        "morte": 1648
+      }
+    },
+    {
+      "id": "maria-firmina-dos-reis",
+      "name": "Maria Firmina dos Reis",
+      "image": "/temas/historia-do-brasil/maria-firmina-dos-reis.webp",
+      "imageCredit": {
+        "author": "Ramsessantos",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Maria_firmina_(detailed).jpg"
+      },
+      "emoji": "📖",
+      "values": {
+        "area": "Literatura",
+        "periodo": "Colônia",
+        "estado": "Maranhão",
+        "regiao": "Nordeste",
+        "nascimento": 1822,
+        "morte": 1917
+      }
     }
   ]
 }

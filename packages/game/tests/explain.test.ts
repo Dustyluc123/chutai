@@ -72,3 +72,16 @@ describe("explicação com a palavra do tema", () => {
     ).toBe("Biomas: Cerrado. Tem algo em comum com a cidade secreta, mas não tudo.");
   });
 });
+
+describe("anos antigos", () => {
+  it("anos da Colônia também viram antes/depois", () => {
+    expect(
+      explainFeedback("Nascimento", {
+        key: "n",
+        display: "1746",
+        status: "wrong",
+        direction: "down",
+      }),
+    ).toBe("Nascimento: 1746. O do personagem secreto é antes de 1746.");
+  });
+});

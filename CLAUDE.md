@@ -91,6 +91,7 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 - Adults only (18+). Only public, neutral facts: no religion, politics, sexual orientation, health, relationships, controversies or lawsuits. People with a big recent controversy are swapped for a reserve.
 - Never invent data. Every value is checked against pt.wikipedia (infobox/lead) and Wikidata; if a fact can't be confirmed, the person leaves the theme. Sources per person go in `packages/db/seed/FONTES.md`.
 - Data that changes (clubs, etc.) needs `dataUpdatedAt` ("AAAA-MM") on the theme; the theme page shows "Dados de <mês> de <ano>". Avoid attributes that change weekly. Fuzzy years use `range` with a tolerance.
+- Uncertain facts (only where a theme explicitly allows it, e.g. history): an approximate year is a number listed in the character's `approx` (shown as "c. 1655", still compared with the attribute tolerance); an unknown value is the string `UNKNOWN_VALUE` ("Incerto") and compares as status `unknown` (gray, "ninguém sabe ao certo", never an error). Record every divergence in `FONTES.md`.
 - Images: only free licenses (Wikimedia Commons: public domain, CC0, CC BY, CC BY-SA — government sources like Agência Brasil, Senado and Planalto are fine), credits recorded; no agency/club/social-media photos without a free license, no photos from political events. Without a free image the character falls back to its emoji.
 - Anyone shown can ask to be removed via the e-mail on the credits page.
 

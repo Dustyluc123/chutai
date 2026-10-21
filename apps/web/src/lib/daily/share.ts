@@ -1,6 +1,11 @@
 import type { FeedbackStatus, GuessResult } from "@chutai/shared";
 
-const SQUARE: Record<FeedbackStatus, string> = { correct: "🟩", partial: "🟨", wrong: "🟥" };
+const SQUARE: Record<FeedbackStatus, string> = {
+  correct: "🟩",
+  partial: "🟨",
+  wrong: "🟥",
+  unknown: "⬜",
+};
 
 /**
  * Texto de compartilhar do diário, no estilo do Wordle, sem revelar o personagem:

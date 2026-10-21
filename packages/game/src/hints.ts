@@ -1,6 +1,7 @@
 import type { Character, GuessResult, HintReveal, HintType, ThemeAttribute } from "@chutai/shared";
 import { HINTS } from "./config";
-import { formatValue } from "./format";
+import { UNKNOWN_VALUE } from "@chutai/shared";
+import { formatCharacterValue } from "./format";
 
 export interface HintContext {
   hintsEnabled: boolean;
@@ -53,9 +54,11 @@ export function buildHint(
       guess.feedback.filter((item) => item.status === "correct").map((item) => item.key),
     ),
   );
-  const target = attributes.find((attr) => !alreadyCorrect.has(attr.key)) ?? attributes[0];
+  // Não revela atributo "Incerto": a dica não ajudaria em nada.
+  const known = attributes.filter((attr) => answer.values[attr.key] !== UNKNOWN_VALUE);
+  const target = known.find((attr) => !alreadyCorrect.has(attr.key)) ?? known[0];
   if (!target) return { type, text: "Este tema não tem atributos para revelar." };
 
-  const value = formatValue(target, answer.values[target.key]);
+  const value = formatCharacterValue(target, answer);
   return { type, attributeKey: target.key, text: `${target.label}: ${value}` };
 }

@@ -8,7 +8,7 @@ import {
   dailyDateKey,
   dailyNumber,
   dailyStartDate,
-  formatValue,
+  formatCharacterValue,
 } from "@chutai/game";
 import { DAILY_THEME_SLUGS, OFFICIAL_THEMES, dailyRoster } from "@chutai/db";
 
@@ -89,7 +89,7 @@ export function revealOf(theme: Theme, character: Character): CharacterReveal {
     values: theme.attributes.map((attr) => ({
       key: attr.key,
       label: attr.label,
-      display: formatValue(attr, character.values[attr.key]),
+      display: formatCharacterValue(attr, character),
     })),
   };
 }

@@ -3,6 +3,7 @@
  * Este arquivo não depende de banco: pode ser usado em qualquer lugar.
  */
 import type { CharacterOption, Theme, ThemeSummary } from "@chutai/shared";
+import { UNKNOWN_VALUE } from "@chutai/shared";
 import { imageModeAvailability } from "@chutai/game";
 import folclore from "../seed/folclore-brasileiro.json" with { type: "json" };
 import futebol from "../seed/lendas-do-futebol.json" with { type: "json" };
@@ -99,6 +100,14 @@ export function validateTheme(theme: Theme): string[] {
       if (!character.image)
         problems.push(`${character.name}: tem crédito de imagem, mas não tem imagem.`);
     }
+    for (const key of character.approx ?? []) {
+      const attr = theme.attributes.find((item) => item.key === key);
+      if (!attr || (attr.type !== "number" && attr.type !== "range")) {
+        problems.push(`${character.name}: "${key}" em approx precisa ser um atributo numérico.`);
+      } else if (typeof character.values[key] !== "number") {
+        problems.push(`${character.name}: "${key}" é aproximado, mas não tem número.`);
+      }
+    }
     for (const key of attributeKeys) {
       if (character.values[key] === undefined) {
         problems.push(`${character.name} não tem valor para "${key}".`);
@@ -108,7 +117,7 @@ export function validateTheme(theme: Theme): string[] {
       const value = character.values[attr.key];
       if (value === undefined) continue;
       const isNumeric = attr.type === "number" || attr.type === "range";
-      if (isNumeric && typeof value !== "number") {
+      if (isNumeric && typeof value !== "number" && value !== UNKNOWN_VALUE) {
         problems.push(`${character.name}: "${attr.key}" deveria ser número.`);
       }
       if (attr.type === "list" && !Array.isArray(value)) {

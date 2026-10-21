@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatValue, nounPhrases } from "@chutai/game";
+import { formatCharacterValue, nounPhrases } from "@chutai/game";
 import type { AttributeType } from "@chutai/shared";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -142,7 +142,7 @@ export default async function ThemePage({ params }: PageProps) {
                     </th>
                     {theme.attributes.map((attr) => (
                       <td key={attr.key} className="px-4 py-2.5 text-tinta-soft">
-                        {formatValue(attr, character.values[attr.key])}
+                        {formatCharacterValue(attr, character)}
                       </td>
                     ))}
                   </tr>

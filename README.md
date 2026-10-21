@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-192_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-197_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -56,13 +56,15 @@ O projeto foi pensado para o público brasileiro, com temas nacionais desde o la
 | Música brasileira                 |          60 | Gênero, formato (solo, dupla ou grupo), estado de origem, região, início da carreira         | Parcial (57 com imagem)      |
 | Futebol brasileiro atual          |          54 | Posição, clube, liga, estado ou país natal, nascimento, seleção principal                    | Parcial (52 com imagem)      |
 | Famosos da TV                     |          50 | Mais conhecido como, estado natal, região, nascimento, início da carreira                    | Normal (todos com imagem)    |
-| Personagens da história do Brasil |          53 | Área, período de nascimento (Colônia, Império, República), estado, região, nascimento, morte | Parcial (51 com imagem)      |
+| Personagens da história do Brasil |          58 | Área, período de nascimento (Colônia, Império, República), estado, região, nascimento, morte | Parcial (55 com imagem)      |
 | Estados do Brasil                 |          27 | Região, população e área (IBGE), biomas, litoral, fronteira com outro país                   | Normal (todas as bandeiras)  |
 | Folclore brasileiro               |          27 | Forma, região, onde aparece, quando aparece, comportamento                                   | Indisponível (16 com imagem) |
 | Lendas do futebol                 |          60 | Posição, região e estado natal, nascimento, Copas, décadas na Seleção                        | Parcial (58 com imagem)      |
 | Fauna brasileira                  |          40 | Grupo, biomas, alimentação, onde vive, peso                                                  | Normal (todos com imagem)    |
 
-Os temas com pessoas reais (os quatro primeiros) seguem regras próprias: só adultos, só fatos públicos e neutros, dados conferidos na Wikipédia em português e no Wikidata, com o link de cada pessoa em [`packages/db/seed/FONTES.md`](packages/db/seed/FONTES.md) e a data dos dados na página do tema. Quem aparece no site pode pedir para ser removido pelo e-mail da página de créditos.
+Os temas com pessoas reais (YouTubers, música, futebol atual, TV, história e lendas do futebol) seguem regras próprias: só adultos, só fatos públicos e neutros, dados conferidos na Wikipédia em português e no Wikidata, com o link de cada pessoa em [`packages/db/seed/FONTES.md`](packages/db/seed/FONTES.md) e a data dos dados na página do tema. Quem aparece no site pode pedir para ser removido pelo e-mail da página de créditos.
+
+Na história do Brasil, alguns fatos não são conhecidos com certeza. Um ano aproximado aparece como "c. 1655" e vale com a margem de 10 anos; um local desconhecido aparece como "Incerto" em cinza e nunca conta como erro de quem chutou.
 
 ## Como se joga
 

@@ -1,11 +1,12 @@
 import type { AttributeFeedback, ThemeNoun } from "@chutai/shared";
 import { DEFAULT_NOUN, nounPhrases } from "./noun";
 
-/** Um número de 4 dígitos entre 1800 e 2100 é tratado como ano ("antes"/"depois"). */
+/** Um número de 4 dígitos entre 1000 e 2100 (com ou sem "c.") é tratado como ano ("antes"/"depois"). */
 function looksLikeYear(display: string): boolean {
+  display = display.replace(/^c\.\s*/, "");
   if (!/^\d{4}$/.test(display.trim())) return false;
   const year = Number(display);
-  return year >= 1800 && year <= 2100;
+  return year >= 1000 && year <= 2100;
 }
 
 /**
@@ -21,7 +22,9 @@ export function explainFeedback(
   const value = feedback.display;
   const { theSecret, ofTheSecret } = nounPhrases(noun);
   let sentence: string;
-  if (feedback.status === "correct") {
+  if (feedback.status === "unknown") {
+    sentence = "Ninguém sabe ao certo, então não conta como erro.";
+  } else if (feedback.status === "correct") {
     sentence = `Igual ao ${ofTheSecret}.`;
   } else if (feedback.direction) {
     const year = looksLikeYear(value);

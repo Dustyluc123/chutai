@@ -29,6 +29,13 @@
       "when": 1792594002109,
       "tag": "0003_palavra_do_tema",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792596860023,
+      "tag": "0004_valores_aproximados",
+      "breakpoints": true
     }
   ]
 }

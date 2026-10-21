@@ -114,7 +114,9 @@ export function GuessBoard({
           Deslize o tabuleiro para o lado para ver todas as colunas.
         </p>
       ) : null}
-      <Legend />
+      <Legend
+        unknown={guesses.some((guess) => guess.feedback.some((f) => f.status === "unknown"))}
+      />
     </div>
   );
 }

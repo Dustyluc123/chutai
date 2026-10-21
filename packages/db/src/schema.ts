@@ -110,6 +110,11 @@ export const characters = pgTable(
     imageUrl: text("image_url"),
     /** Autor e licença da imagem (temas oficiais: Wikimedia Commons; no futuro, uploads). */
     imageCredit: jsonb("image_credit").$type<ImageCredit>(),
+    /** Atributos com valor aproximado ("c. 1655"). */
+    approx: text("approx")
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
   },
   (table) => [uniqueIndex("characters_theme_external_idx").on(table.themeId, table.externalId)],
 );

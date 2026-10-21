@@ -1,0 +1,1 @@
+ALTER TABLE "characters" ADD COLUMN "approx" text[] DEFAULT '{}'::text[] NOT NULL;

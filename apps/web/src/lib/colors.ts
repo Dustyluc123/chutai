@@ -14,12 +14,14 @@ export const STATUS_STYLES: Record<FeedbackStatus, string> = {
   correct: "bg-folha text-white border-folha",
   partial: "bg-gema text-tinta border-gema",
   wrong: "bg-pitanga text-white border-pitanga",
+  unknown: "bg-linha text-tinta border-linha",
 };
 
 export const STATUS_LABEL: Record<FeedbackStatus, string> = {
   correct: "igual",
   partial: "perto",
   wrong: "diferente",
+  unknown: "ninguém sabe ao certo",
 };
 
 /** Fundo do círculo do avatar, sempre o mesmo para o mesmo emoji. */

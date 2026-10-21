@@ -57,6 +57,11 @@ export interface Character {
   /** Autor e licença da imagem. Viaja junto com o personagem (JSON, banco e, no futuro, uploads). */
   imageCredit?: ImageCredit;
   values: Record<string, AttributeValue>;
+  /**
+   * Atributos numéricos com valor aproximado (ex.: ano de nascimento "c. 1655"). O número
+   * continua valendo para comparar (com a tolerância do atributo); a tela mostra "c." antes.
+   */
+  approx?: string[];
 }
 
 export type ThemeVisibility = "official" | "public" | "private";
@@ -129,7 +134,8 @@ export interface CharacterOption {
 // Palpites e dicas
 // ---------------------------------------------------------------------------
 
-export type FeedbackStatus = "correct" | "partial" | "wrong";
+/** unknown: o valor de um dos dois é "Incerto" (ninguém sabe ao certo); nunca conta como erro. */
+export type FeedbackStatus = "correct" | "partial" | "wrong" | "unknown";
 
 /** "up" = a resposta é MAIOR que o palpite; "down" = a resposta é MENOR. */
 export type FeedbackDirection = "up" | "down";

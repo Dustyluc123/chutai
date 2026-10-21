@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import "@/styles/globals.css";
 import { SITE_URL } from "@/lib/site";
 import { Providers } from "./providers";
@@ -45,6 +46,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           Pular para o conteúdo
         </a>
         <Providers>{children}</Providers>
+        {/* Vercel Web Analytics: só conta visualizações de página. Sem cookies e sem dados pessoais. */}
+        <Analytics />
       </body>
     </html>
   );

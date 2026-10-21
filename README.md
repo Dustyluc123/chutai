@@ -105,6 +105,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
 - [x] Imagem de cada personagem no autocompletar, no tabuleiro, na revelação, no treino e na página do tema; sem imagem, aparece o emoji
 - [x] Imagens só com licença livre (Wikimedia Commons), com autor e licença de cada uma na página [/creditos](apps/web/public/temas/CREDITOS.md)
+- [x] Contagem de visitas com Vercel Web Analytics (só visualizações de página, sem cookies e sem dados pessoais)
 - [x] Segurança: servidor autoritativo, validação com Zod, limite de ações por segundo e filtro de apelidos
 - [x] Banco de dados (PostgreSQL + Drizzle) e Redis **já programados e testados**, prontos para ligar
 

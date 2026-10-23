@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-255_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-270_passando-12a85f" />
 </p>
 
 <p align="center">

@@ -7,11 +7,16 @@ import { afterAll, describe, expect, it } from "vitest";
 import RedisMock from "ioredis-mock";
 import { Redis } from "ioredis";
 import type { Redis as RedisClient } from "ioredis";
-import { MemoryRoomStore, type RoomSnapshot, type RoomStore } from "../src/rooms/store";
+import {
+  MemoryRoomStore,
+  SNAPSHOT_VERSION,
+  type RoomSnapshot,
+  type RoomStore,
+} from "../src/rooms/store";
 import { RedisRoomStore } from "../src/rooms/store/redis";
 
 const snapshot = (code: string, phase: RoomSnapshot["phase"] = "lobby"): RoomSnapshot => ({
-  version: 2,
+  version: SNAPSHOT_VERSION,
   code,
   themeSlug: "folclore-brasileiro",
   settings: {
@@ -28,26 +33,80 @@ const snapshot = (code: string, phase: RoomSnapshot["phase"] = "lobby"): RoomSna
   phase,
 });
 
-const stores: { name: string; make: () => RoomStore }[] = [
-  { name: "memória", make: () => new MemoryRoomStore() },
-  {
-    name: "Redis (mock)",
-    make: () => new RedisRoomStore(new RedisMock() as unknown as RedisClient),
+/** Cada store vem com um jeito de gravar texto cru (um retrato antigo ou quebrado). */
+interface StoreCase {
+  name: string;
+  make: () => { store: RoomStore; putRaw: (code: string, raw: string) => Promise<void> };
+}
+
+const redisCase = (client: RedisClient) => () => ({
+  store: new RedisRoomStore(client),
+  putRaw: async (code: string, raw: string) => {
+    await client.set(`chutai:sala:${code}`, raw);
   },
+});
+
+const stores: StoreCase[] = [
+  {
+    name: "memória",
+    make: () => {
+      const store = new MemoryRoomStore();
+      return { store, putRaw: async (code, raw) => store.putRawForTests(code, raw) };
+    },
+  },
+  { name: "Redis (mock)", make: redisCase(new RedisMock() as unknown as RedisClient) },
 ];
 if (process.env.REDIS_TEST_URL) {
-  stores.push({
-    name: "Redis real",
-    make: () => new RedisRoomStore(new Redis(process.env.REDIS_TEST_URL!)),
-  });
+  stores.push({ name: "Redis real", make: redisCase(new Redis(process.env.REDIS_TEST_URL)) });
 }
 
 let counter = 0;
 const code = () => `T${Date.now().toString(36).slice(-4).toUpperCase()}${counter++}`;
 
 describe.each(stores)("store de salas: $name", ({ make }) => {
-  const store = make();
+  const { store, putRaw } = make();
   afterAll(() => store.close());
+
+  it.each([
+    [
+      "sem versão (formato antigo, só o lobby)",
+      () => {
+        const { version: _version, ...old } = snapshot("X");
+        return JSON.stringify({ ...old, phase: undefined });
+      },
+    ],
+    ["versão desconhecida", () => JSON.stringify({ ...snapshot("X"), version: 3 })],
+    ["versão 1", () => JSON.stringify({ ...snapshot("X"), version: 1 })],
+    ["JSON quebrado", () => '{"version":2,"code":'],
+    [
+      "campo faltando",
+      () => {
+        const { players: _players, ...broken } = snapshot("X");
+        return JSON.stringify(broken);
+      },
+    ],
+    [
+      "rodada sem a resposta",
+      () =>
+        JSON.stringify({
+          ...snapshot("X"),
+          phase: "round",
+          round: {
+            number: 1,
+            kind: "classic",
+            startedAt: 1,
+            endsAt: 2,
+            solveCount: 0,
+            players: [],
+          },
+        }),
+    ],
+  ])("ignora e apaga retrato %s, sem lançar erro", async (_label, raw) => {
+    const c = code();
+    await putRaw(c, raw());
+    await expect(store.load(c)).resolves.toBeUndefined();
+    expect(await store.exists(c)).toBe(false);
+  });
 
   it("só um servidor consegue a posse; o mesmo dono renova", async () => {
     const c = code();
@@ -97,5 +156,18 @@ describe.each(stores)("store de salas: $name", ({ make }) => {
     const saved = snapshot(c, "round");
     await store.save(saved, "a", 60_000);
     expect(await store.load(c)).toEqual(saved);
+  });
+});
+
+describe("Redis: chaves do formato antigo", () => {
+  it("apaga as chaves chutai:room:* ao ligar, sem mexer nas novas", async () => {
+    const client = new RedisMock() as unknown as RedisClient;
+    await client.set("chutai:room:ABC234", JSON.stringify({ code: "ABC234", players: [] }));
+    await client.set("chutai:room:XYZ789", "lixo");
+    await client.set("chutai:sala:NOVA22", JSON.stringify(snapshot("NOVA22")));
+    const store = new RedisRoomStore(client);
+    expect(await store.purgeLegacy()).toBe(2);
+    expect(await client.keys("chutai:room:*")).toEqual([]);
+    expect((await store.load("NOVA22"))?.code).toBe("NOVA22");
   });
 });

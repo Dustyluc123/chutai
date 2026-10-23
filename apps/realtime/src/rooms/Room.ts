@@ -43,7 +43,7 @@ import {
 } from "@chutai/game";
 import { toCharacterOptions, toThemeSummary, type MatchRecord } from "@chutai/db";
 import { GameError } from "../lib/errors";
-import type { RoomSnapshot } from "./store/types";
+import { SNAPSHOT_VERSION, type RoomSnapshot } from "./store/types";
 
 export interface PlayerState {
   id: string;
@@ -896,7 +896,7 @@ export class Room {
   toSnapshot(): RoomSnapshot {
     const round = this.round;
     return {
-      version: 2,
+      version: SNAPSHOT_VERSION,
       code: this.code,
       themeSlug: this.theme.slug,
       settings: this.settings,
@@ -946,8 +946,9 @@ export class Room {
   /**
    * Continua a sala a partir de um retrato (servidor reiniciou). Todos voltam desconectados e
    * reconectam pelo token. Os cronômetros seguem pelo horário de término salvo: se a rodada
-   * venceu enquanto o servidor estava fora, ela termina agora. Retrato antigo, ou com um
-   * personagem que saiu do tema, volta para o lobby (com os pontos zerados, como antes).
+   * venceu enquanto o servidor estava fora, ela termina agora. Retrato com um personagem que
+   * saiu do tema volta para o lobby (com os pontos zerados). Retratos de outra versão nem chegam
+   * aqui: o store os apaga ao ler (parseSnapshot).
    */
   restoreFrom(snapshot: RoomSnapshot): void {
     this.createdAt = snapshot.createdAt;
@@ -960,11 +961,11 @@ export class Room {
         avatar: saved.avatar,
         token: saved.token,
         joinedAt: saved.joinedAt,
-        score: snapshot.version === 2 ? (saved.score ?? 0) : 0,
+        score: saved.score ?? 0,
         connected: false,
       });
     }
-    if (snapshot.version !== 2 || !snapshot.phase || !this.restoreMatch(snapshot)) {
+    if (!this.restoreMatch(snapshot)) {
       this.phase = "lobby";
       this.round = undefined;
       for (const player of this.players.values()) player.score = 0;
@@ -976,7 +977,7 @@ export class Room {
 
   /** Devolve false se não der para continuar a partida (e a sala volta para o lobby). */
   private restoreMatch(snapshot: RoomSnapshot): boolean {
-    const phase = snapshot.phase!;
+    const phase = snapshot.phase;
     const byId = new Map(this.theme.characters.map((character) => [character.id, character]));
     let round: ActiveRound | undefined;
     if (snapshot.round) {

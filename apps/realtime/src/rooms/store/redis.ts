@@ -1,8 +1,10 @@
 import { Redis } from "ioredis";
-import type { RoomSnapshot, RoomStore } from "./types";
+import { parseSnapshot, type RoomSnapshot, type RoomStore } from "./types";
 
 const SNAPSHOT = "chutai:sala:";
 const LEASE = "chutai:dono:";
+/** Prefixo do formato antigo (só o lobby, sem versão). Nunca é lido: é apagado ao ligar. */
+const LEGACY = "chutai:room:";
 
 /**
  * Scripts Lua rodam de uma vez no Redis (ninguém mexe na chave no meio): é isso que garante
@@ -98,7 +100,23 @@ export class RedisRoomStore implements RoomStore {
 
   async load(code: string): Promise<RoomSnapshot | undefined> {
     const raw = await this.redis.get(SNAPSHOT + code);
-    return raw ? (JSON.parse(raw) as RoomSnapshot) : undefined;
+    if (raw === null) return undefined;
+    const snapshot = parseSnapshot(raw);
+    // Formato antigo, versão desconhecida ou quebrado: apaga e trata como sala inexistente.
+    if (!snapshot) await this.redis.del(SNAPSHOT + code);
+    return snapshot;
+  }
+
+  /** Apaga as chaves do formato antigo (`chutai:room:*`). Devolve quantas apagou. */
+  async purgeLegacy(): Promise<number> {
+    let cursor = "0";
+    let removed = 0;
+    do {
+      const [next, keys] = await this.redis.scan(cursor, "MATCH", `${LEGACY}*`, "COUNT", 100);
+      cursor = next;
+      if (keys.length) removed += await this.redis.del(...keys);
+    } while (cursor !== "0");
+    return removed;
   }
 
   async exists(code: string): Promise<boolean> {

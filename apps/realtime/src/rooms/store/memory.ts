@@ -1,4 +1,4 @@
-import type { RoomSnapshot, RoomStore } from "./types";
+import { parseSnapshot, type RoomSnapshot, type RoomStore } from "./types";
 
 interface Expiring<T> {
   value: T;
@@ -68,7 +68,16 @@ export class MemoryRoomStore implements RoomStore {
 
   async load(code: string): Promise<RoomSnapshot | undefined> {
     const raw = this.alive(this.snapshots, code);
-    return raw ? (JSON.parse(raw) as RoomSnapshot) : undefined;
+    if (raw === undefined) return undefined;
+    const snapshot = parseSnapshot(raw);
+    // Formato antigo, versão desconhecida ou quebrado: apaga e trata como sala inexistente.
+    if (!snapshot) this.snapshots.delete(code);
+    return snapshot;
+  }
+
+  /** Só para testes: grava o texto como veio, sem conferir (simula um retrato antigo ou quebrado). */
+  putRawForTests(code: string, raw: string, ttlMs = 60_000): void {
+    this.snapshots.set(code, { value: raw, expiresAt: this.now() + ttlMs });
   }
 
   async exists(code: string): Promise<boolean> {

@@ -143,7 +143,18 @@ export class RoomManager {
     const room = this.build(code, theme, { ...DEFAULT_SETTINGS, ...latest.settings });
     this.rooms.set(code, room);
     this.emptySince.set(code, this.now());
-    room.restoreFrom(latest);
+    try {
+      room.restoreFrom(latest);
+    } catch (error) {
+      // Retrato que passou na conferência mas não deu para restaurar: descarta a sala em vez de
+      // derrubar o servidor (o jogador vê "Sala não encontrada").
+      logger.warn(`Sala ${code}: retrato inválido, descartado.`, error);
+      room.dispose();
+      this.rooms.delete(code);
+      this.emptySince.delete(code);
+      await this.deps.store.delete(code, this.instanceId).catch(() => undefined);
+      return undefined;
+    }
     logger.info(
       `Sala ${code} carregada do ${this.deps.store.kind} (fase: ${room.phase}, salva há ${
         latest.savedAt ? Math.round((this.now() - latest.savedAt) / 1000) : "?"

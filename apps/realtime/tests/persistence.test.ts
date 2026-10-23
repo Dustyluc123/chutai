@@ -2,7 +2,7 @@
  * Salas que sobrevivem a reinícios: retrato completo no store, cronômetros pelo horário salvo,
  * posse (só um servidor por sala) e jogadores reconectando pelo token depois do deploy.
  */
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { io as connect, type Socket } from "socket.io-client";
 import type {
   Ack,
@@ -201,19 +201,16 @@ describe("retrato da sala no meio da rodada", () => {
     expect(next.privateState(ana.id).image?.status).toBe("ready");
   });
 
-  it("retrato antigo (só lobby) ou com personagem que saiu do tema volta para o lobby", () => {
+  it("retrato com personagem que saiu do tema volta para o lobby", () => {
     const { room } = createTestRoom();
     const ana = room.addPlayer("Ana", "🦜");
     room.start(ana.id);
     const snapshot = room.toSnapshot();
 
     const removed = { ...snapshot, round: { ...snapshot.round!, characterId: "nao-existe" } };
-    expect(restored(removed, new FakeClock()).room.phase).toBe("lobby");
-
-    const { phase: _phase, round: _round, version: _version, ...old } = snapshot;
-    const legacy = restored(old as RoomSnapshot, new FakeClock()).room;
-    expect(legacy.phase).toBe("lobby");
-    expect(legacy.players.get(ana.id)?.score).toBe(0);
+    const next = restored(removed, new FakeClock()).room;
+    expect(next.phase).toBe("lobby");
+    expect(next.players.get(ana.id)?.score).toBe(0);
   });
 });
 
@@ -437,5 +434,59 @@ describe("deploy com jogadores conectados", () => {
     expect(
       fresh.server.manager.get(created.code)!.players.get(created.playerId)!.score,
     ).toBeGreaterThan(0);
+  });
+});
+
+describe("retrato inválido no store", () => {
+  it("entrar numa sala com retrato antigo: sala não encontrada, e o servidor segue", async () => {
+    const store = new MemoryRoomStore();
+    store.putRawForTests(
+      "OLD234",
+      JSON.stringify({ code: "OLD234", themeSlug: theme.slug, players: [{ id: "a" }] }),
+    );
+    const manager = await managerOn(store, "novo");
+    await expect(manager.load("OLD234")).resolves.toBeUndefined();
+    expect(await store.exists("OLD234")).toBe(false);
+    // Continua funcionando normalmente.
+    const room = await manager.create(theme, {
+      themeSlug: theme.slug,
+      mode: "classic",
+      rounds: 1,
+      roundSeconds: 60,
+      hintsEnabled: true,
+      maxPlayers: 8,
+    });
+    expect(manager.get(room.code)).toBe(room);
+    await manager.close();
+  });
+
+  it("se restaurar der erro, descarta a sala (retrato e posse) sem derrubar nada", async () => {
+    const store = new MemoryRoomStore();
+    const { old, room } = await (async () => {
+      const m = await managerOn(store, "antigo");
+      const r = await m.create(theme, {
+        themeSlug: theme.slug,
+        mode: "classic",
+        rounds: 2,
+        roundSeconds: 60,
+        hintsEnabled: true,
+        maxPlayers: 8,
+      });
+      r.addPlayer("Ana", "🦜");
+      await m.flush();
+      return { old: m, room: r };
+    })();
+    await old.shutdown();
+    const spy = vi.spyOn(Room.prototype, "restoreFrom").mockImplementation(() => {
+      throw new Error("retrato estranho");
+    });
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const fresh = await managerOn(store, "novo");
+    await expect(fresh.load(room.code)).resolves.toBeUndefined();
+    expect(fresh.get(room.code)).toBeUndefined();
+    expect(await store.exists(room.code)).toBe(false);
+    spy.mockRestore();
+    vi.restoreAllMocks();
+    await fresh.close();
   });
 });

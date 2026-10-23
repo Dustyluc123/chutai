@@ -8,6 +8,7 @@ import type {
   RoundSummary,
 } from "@chutai/shared";
 import type { MatchRecord } from "@chutai/db";
+import { z } from "zod";
 
 /** Retrato de um jogador. `score` e `connected` só existem nos retratos novos. */
 export interface PlayerSnapshot {
@@ -41,21 +42,25 @@ export interface RoundSnapshot {
 }
 
 /**
- * Retrato de uma sala que dá para salvar fora da memória (Redis).
- *
- * Desde a versão 2 entra a partida inteira (fase, rodada, chutes, pontos e os horários de término):
- * depois de um reinício, a sala continua de onde parou e os cronômetros seguem pelo horário salvo.
- * Retratos antigos (sem `version`) só têm o lobby: voltam para o lobby, como antes.
+ * Versão do formato do retrato. Mude quando o formato mudar de um jeito que o código novo não
+ * saiba ler: retratos de outra versão (ou sem versão) são ignorados e apagados ao serem lidos.
+ */
+export const SNAPSHOT_VERSION = 2;
+
+/**
+ * Retrato de uma sala que dá para salvar fora da memória (Redis): a partida inteira (fase,
+ * rodada, chutes, pontos e os horários de término). Depois de um reinício, a sala continua de
+ * onde parou e os cronômetros seguem pelo horário salvo. Lido sempre por `parseSnapshot`.
  */
 export interface RoomSnapshot {
-  version?: 2;
+  version: typeof SNAPSHOT_VERSION;
   code: string;
   themeSlug: string;
   settings: RoomSettings;
   hostId: string;
   createdAt: number;
   players: PlayerSnapshot[];
-  phase?: RoomPhase;
+  phase: RoomPhase;
   round?: RoundSnapshot;
   lastRound?: RoundSummary;
   standings?: FinalStanding[];
@@ -91,4 +96,72 @@ export interface RoomStore {
   /** Apaga retrato e posse (se a posse for de `owner` ou de ninguém). */
   delete(code: string, owner: string): Promise<void>;
   close(): Promise<void>;
+}
+
+/**
+ * Formato mínimo que um retrato precisa ter para ser restaurado. Confere a versão e os campos
+ * que a sala usa ao voltar; o resto (resultados de chutes, pódio) passa como veio.
+ */
+const snapshotSchema = z
+  .object({
+    version: z.literal(SNAPSHOT_VERSION),
+    code: z.string().min(1),
+    themeSlug: z.string().min(1),
+    settings: z.object({}).passthrough(),
+    hostId: z.string(),
+    createdAt: z.number(),
+    players: z.array(
+      z
+        .object({
+          id: z.string(),
+          nickname: z.string(),
+          avatar: z.string(),
+          token: z.string(),
+          joinedAt: z.number(),
+          score: z.number().optional(),
+        })
+        .passthrough(),
+    ),
+    phase: z.enum(["lobby", "countdown", "round", "intermission", "finished"]),
+    round: z
+      .object({
+        number: z.number(),
+        kind: z.enum(["classic", "image"]),
+        characterId: z.string(),
+        startedAt: z.number(),
+        endsAt: z.number(),
+        solveCount: z.number(),
+        imageSeed: z.number().optional(),
+        players: z.array(
+          z
+            .object({
+              playerId: z.string(),
+              guesses: z.array(z.object({ characterId: z.string() }).passthrough()),
+              guessTimes: z.array(z.number()),
+              hints: z.array(z.object({}).passthrough()),
+              points: z.number(),
+            })
+            .passthrough(),
+        ),
+      })
+      .passthrough()
+      .optional(),
+    usedCharacterIds: z.array(z.string()).optional(),
+    history: z.array(z.object({}).passthrough()).optional(),
+  })
+  .passthrough();
+
+/**
+ * Lê um retrato salvo. Devolve `undefined` (nunca lança) se não for JSON, se for de uma versão
+ * antiga ou desconhecida, ou se faltar algum campo: quem chamou apaga a chave.
+ */
+export function parseSnapshot(raw: string): RoomSnapshot | undefined {
+  let value: unknown;
+  try {
+    value = JSON.parse(raw);
+  } catch {
+    return undefined;
+  }
+  const parsed = snapshotSchema.safeParse(value);
+  return parsed.success ? (value as RoomSnapshot) : undefined;
 }

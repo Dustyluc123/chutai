@@ -112,7 +112,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
 - [x] Página **Para professores** (`/professores`): como usar o jogo numa aula, configurações sugeridas e temas que combinam com a escola
-- [x] **Desafio do dia** (`/diario`): um personagem por tema, o mesmo para todo mundo, que muda à meia-noite de Brasília. Sem tempo, com sequência de dias seguidos e resultado para compartilhar em quadradinhos, sem revelar o personagem
+- [x] **Desafio do dia** (`/diario`): um personagem por tema, o mesmo para todo mundo, que muda à meia-noite de Brasília. Sem tempo, com **8 corações** (cada chute errado gasta um; perdeu todos, a tela revela quem era), sequência de dias seguidos, vitórias e derrotas, e resultado para compartilhar em quadradinhos e corações (❤️❤️❤️❤️❤️🖤🖤🖤), sem revelar o personagem
 - [x] Imagem de cada personagem no autocompletar, no tabuleiro, na revelação, no treino e na página do tema; sem imagem, aparece o emoji
 - [x] Imagens só com licença livre (Wikimedia Commons), com autor e licença de cada uma na página [/creditos](apps/web/public/temas/CREDITOS.md)
 - [x] Sons gerados no navegador (Web Audio API, sem arquivos): chute errado e certo, alguém acertou, contagem, últimos 5 segundos, fim da rodada e pódio; música calma opcional. Botão **Som** com efeitos e música separados
@@ -361,7 +361,7 @@ Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/
 
 ## Desafio do dia
 
-- Os chutes vão para a rota do próprio site `POST /api/diario/[slug]` (na Vercel), que confere o chute e só devolve a resposta depois do acerto. Funciona mesmo com o servidor de tempo real fora do ar.
+- Os chutes vão para a rota do próprio site `POST /api/diario/[slug]` (na Vercel), que confere o chute e só devolve a resposta depois do acerto ou do último coração (o navegador manda os chutes anteriores e a rota confere cada um de novo; quem inventar chutes só engana a si mesmo). Funciona mesmo com o servidor de tempo real fora do ar.
 - O personagem do dia sai de ciclos que passam por todo o tema sem repetir. A ordem de cada ciclo vem de um HMAC com a chave `DAILY_SECRET`: sem ela, não dá para prever.
 - [`packages/db/seed/daily-roster.json`](packages/db/seed/daily-roster.json) guarda só quais personagens entram no diário e desde quando (nada sobre os dias). Personagem novo entra no próximo ciclo, então adicionar personagens não muda a resposta de hoje nem a de ontem. Depois de adicionar personagens a um tema, rode `pnpm daily:roster` (um teste avisa se esquecer).
 - O dia do Chutaí #1 fica em `DAILY.launchDate`, em [`packages/game/src/config.ts`](packages/game/src/config.ts).

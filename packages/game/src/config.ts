@@ -107,4 +107,11 @@ export const DAILY = {
   launchDate: "2026-10-22",
   /** O dia vira à meia-noite deste fuso. */
   timeZone: "America/Sao_Paulo",
+  /** Corações por desafio: cada chute errado gasta um; sem corações, fim de jogo. */
+  lives: 8,
+  /**
+   * Primeiro dia (AAAA-MM-DD) com corações. Quem começou um desafio antes disso (sem corações)
+   * termina sem limite. CONFIRA ANTES DO MERGE: tem que ser o dia seguinte ao deploy.
+   */
+  livesFromDate: "2026-10-24",
 } as const;

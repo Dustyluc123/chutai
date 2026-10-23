@@ -137,3 +137,33 @@ export function dailyAnswerId(input: DailyPickInput): string {
     cycleStart += members.length;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Corações
+// ---------------------------------------------------------------------------
+
+/** O desafio deste dia (AAAA-MM-DD) tem corações? (Os dias antes de DAILY.livesFromDate, não.) */
+export function dailyHasLives(dateKey: string, livesFrom: string = DAILY.livesFromDate): boolean {
+  return dateKey >= livesFrom;
+}
+
+/** Corações que sobram: cada chute errado gasta um (acertar não gasta). */
+export function dailyLivesLeft(
+  guesses: readonly { correct: boolean }[],
+  lives: number = DAILY.lives,
+): number {
+  return Math.max(0, lives - guesses.filter((guess) => !guess.correct).length);
+}
+
+export type DailyOutcome = "playing" | "won" | "lost";
+
+/** Como está o desafio: acertou, perdeu os corações (só com corações) ou ainda jogando. */
+export function dailyOutcome(
+  guesses: readonly { correct: boolean }[],
+  withLives: boolean,
+  lives: number = DAILY.lives,
+): DailyOutcome {
+  if (guesses.some((guess) => guess.correct)) return "won";
+  if (withLives && dailyLivesLeft(guesses, lives) === 0) return "lost";
+  return "playing";
+}

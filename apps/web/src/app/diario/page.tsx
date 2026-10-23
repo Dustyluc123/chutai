@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { DAILY, dailyHasLives } from "@chutai/game";
 import { DailyCards } from "@/components/daily/daily-cards";
 import { dailyStartsLater, dailyThemes, today } from "@/lib/daily/server";
 
@@ -39,8 +40,11 @@ export default function DailyIndexPage() {
           <p className="text-sm font-semibold text-tinta-soft">Chutaí #{number}</p>
           <h1 className="font-display text-5xl sm:text-6xl">Desafio do dia</h1>
           <p className="max-w-[60ch] text-lg text-tinta-soft">
-            Um personagem por tema, o mesmo para todo mundo. Sem tempo e sem limite de chutes. O
-            desafio muda à meia-noite de Brasília.
+            Um personagem por tema, o mesmo para todo mundo.{" "}
+            {dailyHasLives(dateKey)
+              ? `Sem tempo, com ${DAILY.lives} corações: cada chute errado gasta um.`
+              : "Sem tempo e sem limite de chutes."}{" "}
+            O desafio muda à meia-noite de Brasília.
           </p>
         </div>
         <DailyCards themes={themes} day={number} />

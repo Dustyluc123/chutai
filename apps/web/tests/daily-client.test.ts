@@ -59,3 +59,60 @@ describe("diário: sequência de dias seguidos", () => {
     expect(stats).toMatchObject({ streak: 1, maxStreak: 2, wins: 3 });
   });
 });
+
+describe("diário com corações: compartilhar e estatísticas", () => {
+  const miss = row(["wrong", "partial"]);
+  const hit = row(["correct", "correct"], true);
+
+  it("acerto: no Nº chute, com os corações que sobraram em vermelho", () => {
+    const text = dailyShareText({
+      number: 3,
+      themeName: "Fauna",
+      guesses: [miss, miss, miss, hit],
+      hintsUsed: 0,
+      url: "u",
+      lives: true,
+    });
+    expect(text.split("\n")[1]).toBe("Acertei no 4º chute ❤️❤️❤️❤️❤️🖤🖤🖤");
+    expect(text).not.toContain("Segredo");
+  });
+
+  it("derrota: não consegui, com os 8 corações pretos", () => {
+    const text = dailyShareText({
+      number: 3,
+      themeName: "Fauna",
+      guesses: Array(8).fill(miss),
+      hintsUsed: 1,
+      url: "u",
+      lives: true,
+    });
+    expect(text.split("\n")[1]).toBe("Não consegui 🖤🖤🖤🖤🖤🖤🖤🖤 · usei 1 dica");
+    expect(text.split("\n")).toHaveLength(2 + 8 + 1);
+  });
+
+  it("derrota quebra a sequência e conta uma vez; estatísticas antigas continuam valendo", async () => {
+    const { statsAfterLoss } = await import("@/lib/daily/storage");
+    let stats = statsAfterWin(statsAfterWin(EMPTY_STATS, 5), 6);
+    expect(stats.streak).toBe(2);
+    stats = statsAfterLoss(stats, 7);
+    expect(stats).toMatchObject({ played: 3, wins: 2, losses: 1, streak: 0, maxStreak: 2 });
+    expect(statsAfterLoss(stats, 7)).toBe(stats);
+    expect(statsAfterWin(stats, 7)).toBe(stats); // perdeu hoje: não vira vitória depois
+    expect(statsAfterWin(stats, 8)).toMatchObject({ streak: 1, wins: 3 });
+    // Formato antigo (sem derrotas) segue funcionando.
+    const old = { played: 4, wins: 4, streak: 4, maxStreak: 4, lastWin: 9 };
+    expect(statsAfterLoss(old, 10)).toMatchObject({ played: 5, wins: 4, losses: 1, streak: 0 });
+  });
+
+  it("regras do progresso: desafio começado sem corações termina sem corações", async () => {
+    const { progressRules, progressOutcome } = await import("@/lib/daily/storage");
+    const legacy = { day: 3, guesses: Array(9).fill(miss), hints: [] };
+    expect(progressRules(legacy, "2026-10-24")).toBe("livre");
+    expect(progressOutcome(legacy, "2026-10-24")).toBe("playing");
+    const fresh = { day: 3, guesses: [], hints: [] };
+    expect(progressRules(fresh, "2026-10-24")).toBe("coracoes");
+    expect(progressRules(fresh, "2026-10-23")).toBe("livre");
+    const lost = { day: 3, guesses: Array(8).fill(miss), hints: [], rules: "coracoes" as const };
+    expect(progressOutcome(lost, "2026-10-24")).toBe("lost");
+  });
+});

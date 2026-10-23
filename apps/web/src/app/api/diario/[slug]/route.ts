@@ -1,6 +1,6 @@
 import type { DailyResponse, GuessResult } from "@chutai/shared";
 import { dailyRequestSchema, firstZodError } from "@chutai/shared";
-import { buildHint, canRequestHint, compareCharacters } from "@chutai/game";
+import { DAILY, buildHint, canRequestHint, compareCharacters, dailyHasLives } from "@chutai/game";
 import {
   DailySecretMissing,
   dailyAnswer,
@@ -75,7 +75,25 @@ export async function POST(request: Request, { params }: { params: Promise<{ slu
   if (body.action === "guess") {
     const guess = judge(body.characterId, 0);
     if (!guess) return reply({ ok: false, error: "Esse personagem não faz parte do tema." }, 400);
-    if (!guess.correct) return reply({ ok: true, guess });
+    if (!guess.correct) {
+      // Corações: confere os chutes anteriores. No 8º erro diferente, fim de jogo e a resposta
+      // vem junto (como no acerto). Quem mandar chutes inventados só engana a si mesmo.
+      const wrongIds = new Set(
+        [...(body.previous ?? []), guess.characterId].filter(
+          (id) => id !== answer.id && find(id) !== undefined,
+        ),
+      );
+      if (!dailyHasLives(now.dateKey) || wrongIds.size < DAILY.lives) {
+        return reply({ ok: true, guess });
+      }
+      return reply({
+        ok: true,
+        guess,
+        lost: true,
+        answer: revealOf(theme, answer),
+        yesterday: yesterdayAnswer(theme, now.dateKey, secret),
+      });
+    }
     return reply({
       ok: true,
       guess,

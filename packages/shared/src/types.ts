@@ -290,8 +290,10 @@ export type DailyResponse =
       ok: true;
       guess?: GuessResult;
       hint?: HintReveal;
-      /** Só depois de acertar: o personagem do dia e o de ontem. */
+      /** Só depois de acertar (ou de perder todos os corações): o personagem do dia e o de ontem. */
       answer?: CharacterReveal;
+      /** Perdeu o último coração: fim de jogo (a resposta vem junto). */
+      lost?: boolean;
       yesterday?: { name: string; emoji?: string; image?: string } | null;
     }
   | {

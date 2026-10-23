@@ -4,7 +4,12 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { DailyCards } from "@/components/daily/daily-cards";
 import { dailyStartsLater, dailyThemes, today } from "@/lib/daily/server";
 
-export const dynamic = "force-dynamic";
+/**
+ * Página guardada em cache por 60 s (em vez de gerada a cada visita): numa live com muita gente,
+ * isso poupa o processamento do plano gratuito da Vercel. Na virada do dia, quem pegar a página
+ * do dia anterior recebe "Já tem desafio novo" da rota e a página recarrega sozinha.
+ */
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Desafio do dia",

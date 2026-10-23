@@ -206,6 +206,52 @@ O Railway cobra a memória usada (US$ 10 por GB por mês) e um pouco de CPU. Um 
 
 Durante um deploy, o Railway deixa o servidor antigo e o novo ligados juntos por alguns segundos. Cada sala tem um **dono** gravado no Redis, com validade de 15 s renovada a cada 5 s. Só o dono roda os cronômetros e grava. O servidor novo só pega uma sala quando alguém entra nela, e só depois de o antigo soltar (no `SIGTERM`) ou de a posse vencer (se o antigo caiu sem avisar).
 
+## Parte 6: Sentry (saber quando algo quebra)
+
+O Sentry recebe os erros do site e do servidor, para você saber que algo quebrou sem depender de print dos amigos. O Chutaí manda **só o erro**: sem usuário, sem IP, sem apelidos, sem chutes, sem cabeçalhos e sem gravação de tela (Session Replay desligado). Sem as variáveis, nada muda.
+
+### 6.1. Criar a conta e os projetos
+
+1. Entre em [sentry.io](https://sentry.io) → **Get started** (dá para entrar com o GitHub). Escolha o plano gratuito (**Developer**).
+2. Crie o primeiro projeto: **Projects** → **Create Project** → plataforma **Next.js** → nome `chutai-web` → **Create Project**. Na tela de instruções que aparece, **não rode o assistente** (o código já está pronto): só copie o **DSN** (um endereço que começa com `https://` e termina com `.ingest.sentry.io/...`). Se não aparecer, ele fica em **Settings** → **Projects** → `chutai-web` → **Client Keys (DSN)**.
+3. Crie o segundo projeto: plataforma **Node.js** → nome `chutai-realtime`. Copie o DSN dele também.
+4. Nos **dois** projetos: **Settings** → **Projects** → (projeto) → **Security & Privacy** → ligue **Prevent Storing of IP Addresses** e confira que **Data Scrubber** está ligado.
+5. (Opcional) Em **Settings** → **Organization** → **Slug**, anote o nome curto da organização (para o `SENTRY_ORG`).
+
+### 6.2. Variáveis
+
+| Onde                                      | Nome                     | Valor                                                        | Secreta?                         |
+| ----------------------------------------- | ------------------------ | ------------------------------------------------------------ | -------------------------------- |
+| Vercel (Settings → Environment Variables) | `NEXT_PUBLIC_SENTRY_DSN` | DSN do projeto `chutai-web`                                  | Não (vai no código do navegador) |
+| Railway (`@chutai/realtime` → Variables)  | `SENTRY_DSN`             | DSN do projeto `chutai-realtime`                             | Não                              |
+| Vercel (opcional)                         | `SENTRY_AUTH_TOKEN`      | Token criado em **Settings** → **Auth Tokens** (organização) | **Sim** (marque como Sensitive)  |
+| Vercel (opcional, junto com o token)      | `SENTRY_ORG`             | slug da organização                                          | Não                              |
+| Vercel (opcional, junto com o token)      | `SENTRY_PROJECT`         | `chutai-web`                                                 | Não                              |
+
+O token é opcional: sem ele, os erros do site chegam do mesmo jeito, só que com o código minificado (nomes curtos e linhas longas) em vez do código original. Na Vercel, as variáveis `NEXT_PUBLIC_*` entram no build: depois de criar, faça um **Redeploy**.
+
+### 6.3. Conferir
+
+- Site: abra o console do navegador no site publicado e rode `setTimeout(() => { throw new Error("teste do Sentry") })`. Em um ou dois minutos o erro aparece em **Issues** do `chutai-web`.
+- Servidor: nos **Deploy Logs** do Railway aparece `Sentry: ligado`.
+
+O plano gratuito inclui 5 mil erros por mês; o Chutaí mede desempenho só em 1% das visitas no site e nunca no servidor.
+
+## Limites do plano gratuito da Vercel (Hobby)
+
+Se o projeto passar de um limite do Hobby, a Vercel pode **pausar o recurso (ou o projeto) até completar 30 dias**. Conferido em outubro de 2026 em [vercel.com/docs/plans/hobby](https://vercel.com/docs/plans/hobby):
+
+| Recurso                   | Limite por mês | O Chutaí                                                                                                                                                                                                                                                                                                                     |
+| ------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Transformações de imagem  | 5 mil          | **Zero**: as imagens dos temas (405 `.webp` de ~11 KB) vão direto, sem otimização. Antes, cada imagem gerava até 6 tamanhos (~2.400 no total), refeitos sempre que o cache vencia.                                                                                                                                           |
+| Requisições à CDN         | 1 milhão       | **O limite mais apertado.** Uma primeira visita faz ~27 requisições (scripts, fonte, pré-carregamento dos links do cabeçalho); navegar depois faz bem menos. Dá umas 30 a 40 mil visitas novas por mês. As imagens dos temas ficam 1 dia no cache do navegador e os links do rodapé não são pré-carregados, para economizar. |
+| Transferência (Fast Data) | 100 GB         | Folgado: uma visita baixa uns 300 a 500 KB.                                                                                                                                                                                                                                                                                  |
+| Execuções de função       | 1 milhão       | Folgado: cada chute do diário é uma execução; as páginas do diário ficam 60 s em cache.                                                                                                                                                                                                                                      |
+| CPU ativa                 | 4 horas        | Atenção: as imagens de prévia do link da sala e do pódio são geradas na hora (uma por link colado). A imagem padrão do site é gerada no build.                                                                                                                                                                               |
+| Eventos do Web Analytics  | 50 mil         | Cada visualização de página é um evento. Se passar, só a coleta do Analytics pausa por 7 dias; o site continua no ar.                                                                                                                                                                                                        |
+
+Acompanhe em **Usage** no painel da Vercel. Se uma live trouxer muito tráfego e algum item passar de ~70%, o próximo passo é o plano Pro (US$ 20 por mês).
+
 ## Atualizações depois do primeiro deploy
 
 - Cada `git push` no `main` faz os dois sites atualizarem sozinhos. O Railway só refaz o servidor quando mudam arquivos dos **Watch Paths**.

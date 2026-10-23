@@ -60,6 +60,11 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 - `components/help/how-to-play.tsx`: "Como jogar" dialog (room top bar and practice) and the first-visit panel in the lobby (`localStorage` key `chutai:como-jogar-visto`; inline, never blocks starting). The example board uses real Fauna data and `compareCharacters`.
 - Board tiles are buttons with a tooltip portal; the text comes from `explainFeedback` in `packages/game/src/explain.ts` (only uses the guess feedback, never the answer).
 
+## Errors (Sentry) and Vercel limits
+
+- Sentry is off unless `NEXT_PUBLIC_SENTRY_DSN` (web: `src/instrumentation-client.ts`, `src/instrumentation.ts`, options in `lib/sentry.ts`; `next.config.ts` only wraps with `withSentryConfig` from `@sentry/nextjs/config` when the DSN exists) or `SENTRY_DSN` (realtime: `src/lib/sentry.ts`, dynamic import; `logger.error` reports via `setErrorReporter`). Privacy is mandatory: `SENTRY_DATA_COLLECTION` (Sentry 11 replaced `sendDefaultPii` with `dataCollection`, whose defaults collect a lot — keep everything off), no Session Replay, no browser sessions, `scrubSentryEvent` (`packages/shared/src/privacy.ts`) drops user/extra/request data/query and ui/console/fetch breadcrumbs. Never put nicknames or guesses in error messages.
+- Vercel Hobby: images are served as-is (`images.unoptimized`; 5k transformations/month would run out), `/temas/*.webp` get a 1-day browser cache, `/diario` and `/diario/[slug]` are ISR (`revalidate = 60`), footer links don't prefetch. The tightest limit is 1M CDN requests/month (~27 per first visit).
+
 ## Sound
 
 - `apps/web/src/lib/sound/`: `director.ts` (pure: which state change plays which sound; tested with a fake player), `engine.ts` (Web Audio synth: effects + generative background music; nothing plays before the first pointer/key interaction or with the tab hidden), `settings.ts` (`localStorage` key `chutai:som`, effects on / music off by default), `index.ts` (`useSoundSetup` in `Providers`, `useRoomSounds` in the room screen, `playSound`). My own guess sound comes from the guess ack (`guessSound`), not from state diffs.

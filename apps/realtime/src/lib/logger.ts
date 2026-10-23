@@ -1,11 +1,19 @@
-/** Logger mínimo com horário. Trocável por pino/Sentry no futuro sem mudar quem usa. */
+/** Logger mínimo com horário. Os erros também vão para o Sentry quando ele estiver ligado. */
 type Level = "info" | "warn" | "error";
+
+/** Para onde vão os erros além do console (o Sentry liga isso em src/lib/sentry.ts). */
+let reportError: ((message: string, extra?: unknown) => void) | undefined;
+
+export function setErrorReporter(reporter: typeof reportError): void {
+  reportError = reporter;
+}
 
 function write(level: Level, message: string, extra?: unknown) {
   const line = `[${new Date().toISOString()}] ${level.toUpperCase()} ${message}`;
   const out = level === "error" ? console.error : level === "warn" ? console.warn : console.log;
   if (extra === undefined) out(line);
   else out(line, extra);
+  if (level === "error") reportError?.(message, extra);
 }
 
 export const logger = {

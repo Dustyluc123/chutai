@@ -276,17 +276,21 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 
 ### Variáveis de ambiente
 
-| Variável                   | Padrão                  | Para quê                                                                                                                        |
-| -------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                                                                              |
-| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar                                                              |
-| `DAILY_SECRET`             | (vazio)                 | Chave do sorteio do desafio diário (só no servidor). Sem ela, o diário fica indisponível. **Nunca troque depois do lançamento** |
-| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                                                                                 |
-| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                                                                           |
-| `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem                                                             |
-| `ASSETS_BASE_URL`          | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco                                                             |
-| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                                                                                  |
-| `REDIS_URL`                | (vazio)                 | Liga o Redis: as salas sobrevivem a deploys e quedas. Sem ela, ficam só na memória                                              |
+| Variável                       | Padrão                  | Para quê                                                                                                                        |
+| ------------------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_REALTIME_URL`     | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                                                                              |
+| `NEXT_PUBLIC_SITE_URL`         | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar                                                              |
+| `DAILY_SECRET`                 | (vazio)                 | Chave do sorteio do desafio diário (só no servidor). Sem ela, o diário fica indisponível. **Nunca troque depois do lançamento** |
+| `PORT`                         | `3001`                  | Porta do servidor de tempo real                                                                                                 |
+| `CORS_ORIGIN`                  | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                                                                           |
+| `ASSETS_DIR`                   | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem                                                             |
+| `ASSETS_BASE_URL`              | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco                                                             |
+| `DATABASE_URL`                 | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                                                                                  |
+| `REDIS_URL`                    | (vazio)                 | Liga o Redis: as salas sobrevivem a deploys e quedas. Sem ela, ficam só na memória                                              |
+| `NEXT_PUBLIC_SENTRY_DSN`       | (vazio)                 | Liga o Sentry no site (erros do navegador e do servidor da Vercel). Sem ela, nada é enviado                                     |
+| `SENTRY_DSN`                   | (vazio)                 | Liga o Sentry no servidor de tempo real                                                                                         |
+| `SENTRY_AUTH_TOKEN`            | (vazio)                 | Opcional e **secreta**: envia os mapas do código no build, para os erros do site mostrarem o código original                    |
+| `SENTRY_ORG`, `SENTRY_PROJECT` | (vazio)                 | Usadas junto com o `SENTRY_AUTH_TOKEN` (organização e projeto do site no Sentry)                                                |
 
 ## Banco de dados e Redis
 

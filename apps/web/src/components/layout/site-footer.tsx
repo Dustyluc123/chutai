@@ -9,6 +9,10 @@ export const AUTHOR = {
   linkedin: "https://www.linkedin.com/in/lucas-barreto-santana-67aa932b6/",
 };
 
+/**
+ * Os links do rodapé não são pré-carregados: cada pré-carregamento é uma requisição à mais na
+ * Vercel (o plano gratuito tem limite de requisições por mês), e quase ninguém clica neles.
+ */
 export function SiteFooter() {
   return (
     <footer className="mt-auto border-t-2 border-tinta bg-white">
@@ -23,22 +27,22 @@ export function SiteFooter() {
 
         <nav aria-label="Rodapé" className="flex flex-col gap-2 text-sm">
           <span className="font-semibold">Jogo</span>
-          <Link href="/" className="text-tinta-soft hover:text-tinta">
+          <Link prefetch={false} href="/" className="text-tinta-soft hover:text-tinta">
             Criar sala
           </Link>
-          <Link href="/temas" className="text-tinta-soft hover:text-tinta">
+          <Link prefetch={false} href="/temas" className="text-tinta-soft hover:text-tinta">
             Temas
           </Link>
-          <Link href="/criar-tema" className="text-tinta-soft hover:text-tinta">
+          <Link prefetch={false} href="/criar-tema" className="text-tinta-soft hover:text-tinta">
             Criar um tema
           </Link>
-          <Link href="/diario" className="text-tinta-soft hover:text-tinta">
+          <Link prefetch={false} href="/diario" className="text-tinta-soft hover:text-tinta">
             Desafio do dia
           </Link>
-          <Link href="/professores" className="text-tinta-soft hover:text-tinta">
+          <Link prefetch={false} href="/professores" className="text-tinta-soft hover:text-tinta">
             Para professores
           </Link>
-          <Link href="/creditos" className="text-tinta-soft hover:text-tinta">
+          <Link prefetch={false} href="/creditos" className="text-tinta-soft hover:text-tinta">
             Créditos das imagens
           </Link>
         </nav>

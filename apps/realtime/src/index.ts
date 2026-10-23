@@ -1,8 +1,11 @@
 import { createRealtimeServer } from "./app";
 import { loadConfig } from "./config";
 import { logger } from "./lib/logger";
+import { initSentry } from "./lib/sentry";
 
 async function main() {
+  // Antes de tudo, para pegar também os erros da inicialização.
+  const sentry = await initSentry();
   const config = loadConfig();
   const server = await createRealtimeServer(config);
   const port = await server.listen();
@@ -12,6 +15,7 @@ async function main() {
     `Temas: ${server.mode.data === "json" ? "arquivos JSON" : "PostgreSQL"} · Salas: ${server.mode.rooms}`,
   );
   logger.info(`Origens permitidas: ${config.corsOrigins.join(", ")}`);
+  logger.info(`Sentry: ${sentry ? "ligado" : "desligado (sem SENTRY_DSN)"}`);
 
   let stopping = false;
   const shutdown = async (signal: string) => {

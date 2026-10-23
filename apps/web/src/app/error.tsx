@@ -1,9 +1,15 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
-/** Erro inesperado numa página: explica e oferece tentar de novo. */
-export default function ErrorPage({ reset }: { error: Error; reset: () => void }) {
+/** Erro inesperado numa página: avisa o Sentry, explica e oferece tentar de novo. */
+export default function ErrorPage({ error, reset }: { error: Error; reset: () => void }) {
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <main
       id="conteudo"

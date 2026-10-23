@@ -24,8 +24,8 @@ interface CharacterPictureProps {
 
 /**
  * Imagem do personagem; sem imagem, mostra o emoji (e sem emoji, um ponto de interrogação).
- * Caminhos locais ("/temas/...") passam pela otimização do Next; URLs externas, no futuro,
- * vêm de armazenamento próprio e são mostradas como estão.
+ * As imagens são servidas como estão (`images.unoptimized` no next.config): os .webp dos temas
+ * já são pequenos, e a otimização da Vercel tem limite baixo no plano gratuito.
  */
 export function CharacterPicture({
   name,
@@ -61,7 +61,6 @@ export function CharacterPicture({
       alt={decorative ? "" : name}
       width={px}
       height={px}
-      unoptimized={/^https?:\/\//.test(image)}
       className={cn(
         "shrink-0 rounded-xl border-2 border-tinta bg-papel object-cover",
         size === "sm" && "rounded-lg",

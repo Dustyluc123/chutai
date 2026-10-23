@@ -4,11 +4,14 @@ import sharp from "sharp";
 import { MAX_ROUND_IMAGE_LEVEL } from "@chutai/game";
 import type { Character } from "@chutai/shared";
 import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { loadConfig } from "../src/config";
 import {
   ROUND_IMAGE_SIZE,
   RoundImageService,
   diskImageLoader,
+  seededRandom,
 } from "../src/services/roundImageService";
 
 const character: Character = {
@@ -18,26 +21,58 @@ const character: Character = {
   values: {},
 };
 
-/** Imagem com ruído (bastante detalhe) e um metadado que não pode sair do servidor. */
-async function sourceImage(): Promise<Buffer> {
-  return sharp({
-    create: {
-      width: 400,
-      height: 400,
-      channels: 3,
-      background: "#2338d6",
-      noise: { type: "gaussian", mean: 128, sigma: 60 },
-    },
-  })
+/**
+ * Imagem com ruído (bastante detalhe) e um metadado que não pode sair do servidor. O ruído vem de
+ * uma semente fixa: a mesma imagem em toda execução (o ruído do próprio sharp muda a cada vez).
+ */
+async function sourceImage(seed = 2024): Promise<Buffer> {
+  const random = seededRandom(seed);
+  const pixels = Buffer.alloc(400 * 400 * 3);
+  for (let i = 0; i < pixels.length; i++) pixels[i] = Math.floor(random() * 256);
+  return sharp(pixels, { raw: { width: 400, height: 400, channels: 3 } })
     .withMetadata({ exif: { IFD0: { ImageDescription: "capivara" } } })
     .jpeg()
     .toBuffer();
 }
 
-/** Diferença média entre dois quadros, de 0 a 255 (usada para medir "o quanto está borrado"). */
+/**
+ * Quanto detalhe uma imagem mostra: diferença média entre pixels vizinhos (bordas). Blocos menores
+ * e menos desfoque dão mais bordas. Medida em imagens reais: em ruído puro, a média de cada bloco
+ * apaga quase tudo e a diferença entre níveis vizinhos fica no limite do acaso.
+ */
+async function detail(image: Buffer): Promise<number> {
+  const { data, info } = await sharp(image).greyscale().raw().toBuffer({ resolveWithObject: true });
+  let total = 0;
+  for (let y = 0; y < info.height; y++) {
+    for (let x = 1; x < info.width; x++) {
+      total += Math.abs(data[y * info.width + x]! - data[y * info.width + x - 1]!);
+    }
+  }
+  return total / (info.height * (info.width - 1));
+}
+
+const publicDir = fileURLToPath(new URL("../../web/public", import.meta.url));
+/** Imagens reais de temas (fotos e ilustração), para medir o detalhe como no jogo. */
+const REAL_IMAGES = [
+  "/temas/fauna-brasileira/capivara.webp",
+  "/temas/fauna-brasileira/arara-azul.webp",
+  "/temas/fauna-brasileira/anta.webp",
+];
+/** Sementes do disfarce testadas. Para conferir mais: IMAGE_TEST_SEEDS=50 pnpm test. */
+const SEEDS = Array.from(
+  { length: Number(process.env.IMAGE_TEST_SEEDS ?? 5) },
+  (_, i) => 101 + i * 7919,
+);
+
+/**
+ * Diferença média entre dois quadros, de 0 a 255, no tamanho real da rodada (reduzir antes
+ * apagaria o ruído e deixaria as duas imagens parecidas por acaso).
+ */
 async function distance(a: Buffer, b: Buffer): Promise<number> {
   const [ra, rb] = await Promise.all(
-    [a, b].map((img) => sharp(img).removeAlpha().resize(64, 64).raw().toBuffer()),
+    [a, b].map((img) =>
+      sharp(img).removeAlpha().resize(ROUND_IMAGE_SIZE, ROUND_IMAGE_SIZE).raw().toBuffer(),
+    ),
   );
   let total = 0;
   for (let i = 0; i < ra!.length; i++) total += Math.abs(ra![i]! - rb![i]!);
@@ -62,24 +97,43 @@ describe("RoundImageService", () => {
     }
   });
 
-  it("cada nível tem mais detalhe que o anterior, e nenhum é a original", async () => {
+  it("nenhum nível é a original", async () => {
     const source = await sourceImage();
-    // random fixo: o disfarce é sempre o mesmo, só o nível muda.
-    const service = new RoundImageService(
-      async () => source,
-      () => 0.99,
-    );
-    const levels = await service.render(character);
+    const service = new RoundImageService(async () => source);
+    const levels = await service.render(character, 7);
     const original = await sharp(source).resize(ROUND_IMAGE_SIZE, ROUND_IMAGE_SIZE).toBuffer();
     const distances = await Promise.all(levels.map((level) => distance(level, original)));
     // Com ruído puro, nenhum nível é parecido com o original: o borrado apaga o detalhe.
+    // (Medido: ~30 em todos os níveis; o limite é 10.)
     for (const d of distances) expect(d).toBeGreaterThan(10);
-    const sharpness = await Promise.all(
-      levels.map(async (level) => (await sharp(level).stats()).channels[0]!.stdev),
-    );
-    for (let i = 1; i < sharpness.length; i++) {
-      expect(sharpness[i]!).toBeGreaterThan(sharpness[i - 1]!);
-    }
+  });
+
+  it.each(REAL_IMAGES)(
+    "cada nível tem mais detalhe que o anterior (%s)",
+    async (image) => {
+      const source = await readFile(publicDir + image);
+      const service = new RoundImageService(async () => source);
+      for (const seed of SEEDS) {
+        const levels = await service.render({ ...character, image }, seed);
+        const details = await Promise.all(levels.map(detail));
+        for (let i = 1; i < details.length; i++) {
+          // Folga grande: medindo 10 imagens reais × 20 sementes (e estas 3 × 50), o menor ganho
+          // de um nível para o seguinte foi de 11%.
+          expect(
+            details[i]! / details[i - 1]!,
+            `semente ${seed}, nível ${i}: ${details.map((d) => d.toFixed(2)).join(" → ")}`,
+          ).toBeGreaterThan(1.03);
+        }
+      }
+    },
+    5_000 + SEEDS.length * 1_500,
+  );
+
+  it("a mesma semente gera exatamente as mesmas imagens", async () => {
+    const source = await readFile(publicDir + REAL_IMAGES[0]);
+    const service = new RoundImageService(async () => source);
+    const [a, b] = [await service.render(character, 42), await service.render(character, 42)];
+    a.forEach((level, i) => expect(Buffer.compare(level, b[i]!)).toBe(0));
   });
 
   it("começa ampliado perto do centro e vai afastando o zoom", async () => {

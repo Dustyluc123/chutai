@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { FinalStanding } from "@chutai/shared";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toaster";
-import { shareText } from "@/lib/podium";
+import { podiumVersion, shareText } from "@/lib/podium";
 import { SITE_URL } from "@/lib/site";
 
 type Status = "loading" | "ready" | "error";
@@ -30,14 +30,15 @@ export function ShareResult({
   const [offerCopy, setOfferCopy] = useState(false);
   const text = useMemo(() => shareText(themeName, standings, SITE_URL), [themeName, standings]);
   // Muda quando outra partida termina na mesma sala (revanche): baixa a imagem de novo.
-  const signature = standings.map((s) => `${s.playerId}:${s.score}`).join(",");
+  const version = podiumVersion(standings);
 
   // Baixa a imagem assim que o pódio aparece: o pódio some se o anfitrião chamar a revanche,
   // e o iPhone só abre o compartilhamento se ele vier logo depois do toque, sem esperar a rede.
   useEffect(() => {
     let cancelled = false;
     setStatus("loading");
-    fetch(`/sala/${code}/resultado`, { cache: "no-store" })
+    // Com a versão na URL, a CDN entrega a mesma imagem para a sala toda (gera uma vez só).
+    fetch(`/sala/${code}/resultado?v=${version}`, { cache: "no-store" })
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const blob = await response.blob();
@@ -51,7 +52,7 @@ export function ShareResult({
     return () => {
       cancelled = true;
     };
-  }, [code, signature]);
+  }, [code, version]);
 
   async function share() {
     const touch = window.matchMedia("(pointer: coarse)").matches;

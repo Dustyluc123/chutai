@@ -44,3 +44,16 @@ describe("pódio de compartilhar", () => {
     );
   });
 });
+
+describe("versão do pódio (cache da imagem)", () => {
+  it("o mesmo pódio dá a mesma versão; outro resultado dá outra", async () => {
+    const { podiumVersion } = await import("@/lib/podium");
+    const a = [
+      { playerId: "a", score: 1200 },
+      { playerId: "b", score: 900 },
+    ];
+    expect(podiumVersion(a)).toBe(podiumVersion([...a.map((s) => ({ ...s }))]));
+    expect(podiumVersion(a)).not.toBe(podiumVersion([{ ...a[0]!, score: 1250 }, a[1]!]));
+    expect(podiumVersion(a)).toMatch(/^[0-9a-z]{1,8}$/);
+  });
+});

@@ -17,7 +17,8 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-3 text-sm rounded-lg gap-1.5",
+  // Pequeno no desenho, mas com área de toque de 44 px (hit-44).
+  sm: "h-9 px-3 text-sm rounded-lg gap-1.5 hit-44",
   md: "h-11 px-5 text-base rounded-xl gap-2",
   lg: "h-14 px-7 text-lg rounded-2xl gap-2.5",
 };

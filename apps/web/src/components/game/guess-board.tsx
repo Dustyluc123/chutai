@@ -1,6 +1,8 @@
+import type { CSSProperties } from "react";
 import type { GuessResult, ThemeNoun } from "@chutai/shared";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { cn } from "@/lib/cn";
+import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 import { Legend } from "./legend";
 import { Tile } from "./tile";
 
@@ -25,7 +27,18 @@ export function GuessBoard({
   className,
   noun,
 }: GuessBoardProps) {
-  const columns = `minmax(8rem, 1.3fr) repeat(${attributes.length}, minmax(5rem, 1fr))`;
+  // Computador: as colunas dividem a largura. Celular: largura fixa e compacta (o texto quebra
+  // em linhas), com a coluna do nome presa à esquerda enquanto o resto rola para o lado.
+  // (Com `fr` no celular, uma coluna de texto comprido, como a lista de biomas, esticava todas.)
+  const columns = {
+    "--board-cols": `minmax(8rem, 1.3fr) repeat(${attributes.length}, minmax(5rem, 1fr))`,
+    "--board-cols-mobile": `5.75rem repeat(${attributes.length}, 5.5rem)`,
+  } as CSSProperties;
+  const grid =
+    "grid gap-1.5 [grid-template-columns:var(--board-cols-mobile)] sm:gap-2 sm:[grid-template-columns:var(--board-cols)]";
+  // Fica por cima das peças que passam por baixo ao arrastar (e cobre a margem à esquerda).
+  const sticky =
+    "max-sm:sticky max-sm:left-0 max-sm:z-10 max-sm:shadow-[-1.25rem_0_0_var(--color-papel)]";
   const rows = [...guesses].reverse();
 
   // Antes do primeiro chute: só a frase e as cores, fora da área que rola para o lado
@@ -46,14 +59,17 @@ export function GuessBoard({
 
   return (
     <div className={cn("flex flex-col gap-3", className)}>
-      <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+      <HorizontalScroll scrollClassName="px-4 pb-2 sm:px-0" className="-mx-4 sm:mx-0">
         <div
           role="table"
           aria-label="Seus palpites"
-          className="flex min-w-max flex-col gap-2 sm:min-w-0"
+          className="flex w-max flex-col gap-1.5 pr-4 sm:w-auto sm:gap-2 sm:pr-0"
         >
-          <div role="row" className="grid gap-2" style={{ gridTemplateColumns: columns }}>
-            <div role="columnheader" className="px-1 text-xs font-semibold text-tinta-soft">
+          <div role="row" className={grid} style={columns}>
+            <div
+              role="columnheader"
+              className={cn("bg-papel px-1 text-xs font-semibold text-tinta-soft", sticky)}
+            >
               {(noun?.singular ?? "personagem").replace(/^./, (c) => c.toUpperCase())}
             </div>
             {attributes.map((attr) => (
@@ -71,28 +87,29 @@ export function GuessBoard({
           {rows.map((guess, rowIndex) => {
             const animate = animateLatest && rowIndex === 0;
             return (
-              <div
-                key={guess.characterId}
-                role="row"
-                className="grid gap-2"
-                style={{ gridTemplateColumns: columns }}
-              >
+              <div key={guess.characterId} role="row" className={grid} style={columns}>
                 <div
                   role="rowheader"
                   className={cn(
-                    "flex min-h-16 items-center gap-2 rounded-xl border-2 px-2.5 py-2",
+                    "flex min-h-16 flex-col items-center justify-center gap-1 rounded-xl border-2 px-1.5 py-1.5 text-center sm:flex-row sm:justify-start sm:gap-2 sm:px-2.5 sm:py-2 sm:text-left",
                     guess.correct ? "border-folha bg-folha-soft" : "border-tinta bg-white",
                     animate && "animate-pop",
+                    sticky,
                   )}
                 >
                   <CharacterPicture
                     name={guess.characterName}
                     image={guess.image}
                     emoji={guess.emoji}
-                    size="md"
+                    size="board"
                     decorative
                   />
-                  <span className="text-sm leading-tight font-semibold">{guess.characterName}</span>
+                  <span
+                    lang="pt-BR"
+                    className="text-xs leading-tight font-semibold [overflow-wrap:anywhere] hyphens-auto sm:text-sm"
+                  >
+                    {guess.characterName}
+                  </span>
                 </div>
                 {guess.feedback.map((feedback, index) => (
                   <Tile
@@ -108,12 +125,7 @@ export function GuessBoard({
             );
           })}
         </div>
-      </div>
-      {attributes.length > 2 ? (
-        <p className="text-xs font-semibold text-tinta-soft sm:hidden">
-          Deslize o tabuleiro para o lado para ver todas as colunas.
-        </p>
-      ) : null}
+      </HorizontalScroll>
       <Legend
         unknown={guesses.some((guess) => guess.feedback.some((f) => f.status === "unknown"))}
       />

@@ -20,6 +20,7 @@ import {
   type Profile,
 } from "@/lib/identity";
 import { useToast } from "@/components/ui/toaster";
+import { solvedToastText, type SolvedNotice } from "@/lib/solved-toast";
 
 export type RoomStatus =
   | "connecting" // abrindo conexão / tentando voltar para a sala
@@ -36,6 +37,21 @@ export interface MysteryImageState {
   maxLevel: number;
   /** URL local (blob:) criada a partir dos bytes recebidos; não diz nada sobre o personagem. */
   url: string;
+}
+
+/**
+ * Num deploy do servidor, a sala leva alguns segundos para mudar de um servidor para o outro
+ * ("mudando de servidor"). Nesse caso tenta de novo em vez de dizer que a sala não existe.
+ */
+async function rejoinWithRetry<T>(attempt: () => Promise<T>, retries = 5): Promise<T> {
+  for (let i = 0; ; i++) {
+    try {
+      return await attempt();
+    } catch (err) {
+      if (i >= retries || !(err as Error).message.includes("mudando de servidor")) throw err;
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
 }
 
 /**
@@ -95,6 +111,8 @@ export function useRoom(code: string) {
       setState(next);
     };
     const onPrivate = (next: PrivateState) => setMe(next);
+    let solvedBatch: SolvedNotice[] = [];
+    let solvedTimer: ReturnType<typeof setTimeout> | undefined;
     const onImage = (image: RoundImage) => {
       const url = URL.createObjectURL(new Blob([image.data as BlobPart], { type: image.mimeType }));
       if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
@@ -111,7 +129,13 @@ export function useRoom(code: string) {
       rank: number;
     }) => {
       if (playerId === sessionRef.current?.playerId) return;
-      toast(`${nickname} acertou${rank === 1 ? " primeiro" : ""}!`, "success");
+      // Acertos quase ao mesmo tempo viram um aviso só (sala cheia não vira pilha de avisos).
+      solvedBatch.push({ nickname, rank });
+      solvedTimer ??= setTimeout(() => {
+        toast(solvedToastText(solvedBatch), "success");
+        solvedBatch = [];
+        solvedTimer = undefined;
+      }, 1200);
     };
     const onKicked = () => {
       clearRoomSession(code);
@@ -123,7 +147,9 @@ export function useRoom(code: string) {
       // Reconectou (queda de internet, servidor reiniciou): volta para a mesma sala.
       const current = sessionRef.current;
       const who = profileRef.current;
-      if (current && who) void join(who, current.token).catch(() => setStatus("not-found"));
+      if (current && who) {
+        void rejoinWithRetry(() => join(who, current.token)).catch(() => setStatus("not-found"));
+      }
     };
     const onDisconnect = () => setConnected(false);
 
@@ -146,7 +172,7 @@ export function useRoom(code: string) {
       }
       if (saved && savedProfile) {
         try {
-          await join(savedProfile, saved.token);
+          await rejoinWithRetry(() => join(savedProfile, saved.token));
           return;
         } catch {
           clearRoomSession(code);
@@ -164,6 +190,7 @@ export function useRoom(code: string) {
       imageUrlRef.current = null;
       socket.off("player:solved", onSolved);
       socket.off("room:kicked", onKicked);
+      if (solvedTimer) clearTimeout(solvedTimer);
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
     };

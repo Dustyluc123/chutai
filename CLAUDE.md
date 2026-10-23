@@ -44,9 +44,10 @@ Two apps + three internal packages. Internal packages are **not built** — they
 - `apps/realtime` — Node + Socket.IO game server, **authoritative**: clients never receive the round's answer, only computed guess comparisons.
   - `src/app.ts` builds HTTP + Socket.IO + RoomManager (also used by tests to spin up a real server); `index.ts` just starts it.
   - `rooms/Room.ts` holds one room's state and rules and knows nothing about Socket.IO — it talks out through an injected `RoomEmitter` and takes injectable `now`/`schedule`/`random`, so `tests/room.test.ts` drives whole matches with `FakeClock` (`tests/helpers.ts`). `tests/server.test.ts` runs a full match with two real socket.io clients.
-  - `rooms/store/` — room snapshot store: memory by default, Redis when `REDIS_URL` is set (rooms restored to lobby after restart; players reconnect via token).
+  - `rooms/store/` — room snapshot store: memory by default, Redis when `REDIS_URL` is set. The snapshot (`Room.toSnapshot()` / `restoreFrom`) holds the whole match (phase, round with answer id, guesses, scores, `endsAt`/`intermissionEndsAt`/`countdownEndsAt`, image seed); after a restart timers resume from the saved end times (a round that expired while down ends at once) and players reconnect via token. Snapshots carry `version: SNAPSHOT_VERSION`; `parseSnapshot` (Zod) rejects other versions, old-format or broken JSON and the store deletes them on read (never throws); `RedisRoomStore.purgeLegacy()` deletes old `chutai:room:*` keys at startup. Bump `SNAPSHOT_VERSION` when the format changes incompatibly.
+  - Deploy safety: each room has an owner lease in the store (`LEASE_MS` 15 s, renewed every 5 s; saves are fenced by a Lua check). A new server never loads rooms at boot — `RoomManager.load(code)` loads lazily on join and waits for the lease. `SIGTERM` → `server.shutdown()`: stop timers, save, release leases, close sockets (the web client reconnects and retries "mudando de servidor"). `manager.close()` is the no-save version for tests. Tests share one `MemoryRoomStore` between two managers/servers to simulate a deploy (`tests/persistence.test.ts`); `tests/room-store.test.ts` runs the same contract on memory and `ioredis-mock`.
   - `socket/handlers/*` — each handler is wrapped with `withValidation(schema, fn)` / `withoutPayload(fn)` from `safe.ts`, which Zod-validates input and replies via ack `{ ok, data } | { ok: false, error }`. Throw `GameError` (`lib/errors.ts`) for player-facing errors; anything else is logged and replaced with a generic message. `middleware/identify.ts` resolves the socket's room/player.
-- `apps/web` — Next.js 16 App Router + React 19 + Tailwind 4. Routes use pt-BR paths (`sala/[codigo]`, `temas`, `treino`, `criar-tema`, `diario`, `professores`). Server-side theme access goes through `src/lib/themes.ts` (`server-only`, uses `createRepositories`). All realtime communication for a room is encapsulated in `src/hooks/useRoom.ts` (socket client in `lib/socket.ts`, reconnect token/profile in localStorage via `lib/identity.ts`). Path alias `@/` → `apps/web/src`.
+- `apps/web` — Next.js 16 App Router + React 19 + Tailwind 4. Routes use pt-BR paths (`sala/[codigo]`, `temas`, `treino`, `criar-tema`, `diario`, `professores`, `apoie`). Server-side theme access goes through `src/lib/themes.ts` (`server-only`, uses `createRepositories`). All realtime communication for a room is encapsulated in `src/hooks/useRoom.ts` (socket client in `lib/socket.ts`, reconnect token/profile in localStorage via `lib/identity.ts`). Path alias `@/` → `apps/web/src`.
 
 Phases: `lobby` → `countdown` (`TIMING.startCountdownSeconds`, server-timed via `countdownEndsAt`; the round — draw, timer, images — is only created when it ends, guesses are rejected) → `round` ⇄ `intermission` (the web shows 3, 2, 1 in the last `TIMING.betweenRoundsCountdownSeconds` of `intermissionEndsAt`, no extra time) → `finished`. Tests: `createTestRoom` defaults `countdownMs` to 0 (round starts immediately); pass `countdownMs` to test the countdown.
 
@@ -58,6 +59,28 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 
 - `components/help/how-to-play.tsx`: "Como jogar" dialog (room top bar and practice) and the first-visit panel in the lobby (`localStorage` key `chutai:como-jogar-visto`; inline, never blocks starting). The example board uses real Fauna data and `compareCharacters`.
 - Board tiles are buttons with a tooltip portal; the text comes from `explainFeedback` in `packages/game/src/explain.ts` (only uses the guess feedback, never the answer).
+
+## Errors (Sentry) and Vercel limits
+
+- Sentry is off unless `NEXT_PUBLIC_SENTRY_DSN` (web: `src/instrumentation-client.ts`, `src/instrumentation.ts`, options in `lib/sentry.ts`; `next.config.ts` only wraps with `withSentryConfig` from `@sentry/nextjs/config` when the DSN exists) or `SENTRY_DSN` (realtime: `src/lib/sentry.ts`, dynamic import; `logger.error` reports via `setErrorReporter`). Privacy is mandatory: `SENTRY_DATA_COLLECTION` (Sentry 11 replaced `sendDefaultPii` with `dataCollection`, whose defaults collect a lot — keep everything off), no Session Replay, no browser sessions, `scrubSentryEvent` (`packages/shared/src/privacy.ts`) drops user/extra/request data/query and ui/console/fetch breadcrumbs. Never put nicknames or guesses in error messages.
+- Vercel Hobby: images are served as-is (`images.unoptimized`; 5k transformations/month would run out), `/temas/*.webp` get a 1-day browser cache, `/diario` and `/diario/[slug]` are ISR (`revalidate = 60`), footer links don't prefetch. The tightest limit is 1M CDN requests/month (~27 per first visit).
+
+## Support ("Apoie o projeto")
+
+- `/apoie`: Pix key, "Copiar chave Pix", "Copiar Pix copia e cola" and the static QR (`public/apoie/pix-qr-code.png`, shown at its native 182 px — scaling by fractions breaks the modules). The payload lives in `lib/support.ts`; `tests/support.test.ts` checks it is static (no URL/amount), points to the key and has a valid CRC. If the QR changes, change `PIX_PAYLOAD` too.
+- Footer link + `SupportNudge` (podium and end of the daily): at most once a day, closing it hides it forever (`localStorage` key `chutai:apoie`). No pop-ups.
+
+## Mobile (rules that must keep holding)
+
+- Board (`guess-board.tsx`): below `sm`, fixed column widths (`--board-cols-mobile`) and a sticky name column; `fr` columns only from `sm` up (with `fr` on mobile a long text column stretched every column). Wide content scrolls inside `HorizontalScroll` (`components/ui/horizontal-scroll.tsx`), which shows the "Arraste" fade while there is more to the right — use it for any new wide table.
+- Keyboard: `useKeyboardFit` (`hooks/useKeyboardFit.ts`) uses the visual viewport (iPhone Safari ignores `interactive-widget`, which only helps Chrome on Android). It only acts when the visible area actually shrinks (programmatic `autoFocus` at round start must not scroll the page), scrolls the field (or the mystery image, via `keepVisible`, shrunk through `--teclado-imagem`) to the top and sizes the suggestion list to what's left.
+- Touch targets ≥ 44 px: use the `hit-44` utility (invisible halo, no visual change) for small buttons/links; `Button size="sm"` already has it. Toasts: max 2 on mobile, transparent while the guess field is focused, consecutive solves merged (`lib/solved-toast.ts`).
+- Screenshots for visual checks: 360×740 and 390×844 (plus desktop), with a real match driven by simulated players.
+
+## Big rooms (lives)
+
+- Up to 30 players (`LIMITS.maxPlayers.max`, options `MAX_PLAYERS_OPTIONS`, default still 8; the host picks it in the lobby). Guesses and hints coalesce `room:state` into one broadcast per `TIMING.stateBroadcastMs` (250 ms); any other change broadcasts at once and flushes the pending one (`Room.changed({ coalesce })`; tests default `stateBroadcastMs` to 0). `player:progress` still goes out per guess.
+- UI: lists of players use `visibleEntries` (`lib/long-list.ts`: first N + me, "Ver todos" via `ShowAllButton`) in the live scoreboard, round reveal and podium; the lobby switches to compact rows after 8 players. Podium PNG URL carries `?v=podiumVersion(...)` so the Vercel CDN caches one image per match (`s-maxage=900`) instead of 30 renders.
 
 ## Sound
 
@@ -84,6 +107,7 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 - Pure logic in `packages/game/src/daily.ts` (`dailyDateKey`, `dailyNumber`, `dailyAnswerId`: cycles over the roster without repeats, order from an injected `rank`). The secret part lives only in the web server: `apps/web/src/lib/daily/server.ts` ranks with HMAC-SHA256 of `DAILY_SECRET` (no default value: without it the route answers 503 with a clear message).
 - `POST /api/diario/[slug]` (`dailyRequestSchema`) judges guesses and hints statelessly (hints re-judge the guesses the browser sends). The answer is only returned after a correct guess. Progress/streak/stats live in `localStorage` (`lib/daily/storage.ts`).
 - `packages/db/seed/daily-roster.json` lists each character and the date it joins the daily — nothing about which day gets which character (the repo is public). New characters join at the next cycle, so today/yesterday never change. After adding characters run `pnpm daily:roster` (a db test fails otherwise). Entries not yet on `origin/main` get tomorrow's date on every run, so **run `git fetch && pnpm daily:roster` and commit right before merging** a branch that adds characters. A brand-new theme's daily starts on the first day its characters are valid (`dailyStartDate`; before that the page says when it starts).
+- Hearts: `DAILY.lives` (8) from `DAILY.livesFromDate` on (`dailyHasLives`, `dailyLivesLeft`, `dailyOutcome` in `daily.ts`). A wrong guess spends one; the hint is free. The guess request carries `previous` (optional, for old open pages); the route re-judges them and on the 8th distinct wrong guess returns `lost: true` + the answer. Saved progress records `rules` ("coracoes" | "livre"); progress with guesses but no `rules` (started before the change) stays unlimited — never break it. Stats gained `losses`/`lastLoss` (old stats without them still load); a loss breaks the streak. Share text: `Acertei no Nº chute ❤️…🖤` or `Não consegui 🖤×8`.
 - **Never change `DAILY_SECRET` after launch** (every answer changes, including today's) and **avoid removing characters from themes with a daily** (that day's answer changes; the roster keeps removed ids and the day falls to the next character).
 
 ## Themes with real people (mandatory rules)
@@ -102,6 +126,8 @@ Optional `noun` (`{ singular, plural, gender }`, e.g. the states theme: `estado`
 Add a JSON file to `packages/db/seed/` (attribute types: `text`, `list`, `number`, `range` with `tolerance`/`unit`), then register it in `packages/db/src/themes.ts`. The db test "temas oficiais estão todos consistentes" catches missing values.
 
 ## Conventions
+
+- Tests must not depend on luck or the wall clock: seed anything random (`seededRandom`, a fixed `random`), use `FakeClock` / `vi.useFakeTimers` for time, and for images measure with real theme files and a wide margin (sharp's own `noise` changes every run, and CI runs on Linux). `IMAGE_TEST_SEEDS=50` runs the image-detail test with more seeds.
 
 - ESLint enforces `consistent-type-imports` (use `import type`), unused vars allowed only with `_` prefix.
 - Prettier: double quotes, semicolons, trailing commas, printWidth 100.

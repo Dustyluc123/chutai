@@ -3,7 +3,7 @@
  * dos jogadores, aplica as regras de @chutai/game e avisa o mundo pelo `emitter`.
  * Isso deixa a sala fácil de testar (tests/room.test.ts usa relógio falso).
  */
-import { randomUUID } from "node:crypto";
+import { randomInt, randomUUID } from "node:crypto";
 import type {
   Character,
   CharacterOption,
@@ -43,6 +43,7 @@ import {
 } from "@chutai/game";
 import { toCharacterOptions, toThemeSummary, type MatchRecord } from "@chutai/db";
 import { GameError } from "../lib/errors";
+import { SNAPSHOT_VERSION, type RoomSnapshot } from "./store/types";
 
 export interface PlayerState {
   id: string;
@@ -76,6 +77,8 @@ interface ActiveRound {
   /** Modo Imagem: versões degradadas da imagem secreta, uma por nível (geradas em segundo plano). */
   images?: Uint8Array[];
   imageStatus?: "loading" | "ready" | "error";
+  /** Semente do disfarce: depois de um reinício, as imagens saem iguais. */
+  imageSeed?: number;
 }
 
 type EventName = keyof ServerToClientEvents;
@@ -101,14 +104,19 @@ export interface RoomDeps {
   onFinished?: (record: MatchRecord) => void;
   /** Chamado quando o estado muda (para salvar retrato no Redis, por exemplo). */
   onChange?: (room: Room) => void;
-  /** Modo Imagem: gera as versões degradadas da imagem do personagem, do nível 0 ao máximo. */
-  renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
+  /**
+   * Modo Imagem: gera as versões degradadas da imagem do personagem, do nível 0 ao máximo.
+   * A mesma semente gera as mesmas imagens (para refazê-las depois de um reinício).
+   */
+  renderRoundImages?: (character: Character, seed: number) => Promise<Uint8Array[]>;
   /** Chamado se não der para gerar as imagens de uma rodada (para registrar no log). */
   onImageError?: (error: unknown, character: Character) => void;
   /** Quanto tempo a partida espera sem ninguém conectado antes de encerrar a sala. */
   abandonedMs?: number;
   /** Chamado quando a sala é encerrada por abandono (o gerenciador apaga a sala). */
   onAbandoned?: (room: Room) => void;
+  /** Junta os envios do estado depois de chutes e dicas (0 = envia na hora, como nos testes). */
+  stateBroadcastMs?: number;
 }
 
 const defaultSchedule = (fn: () => void, ms: number) => {
@@ -118,7 +126,7 @@ const defaultSchedule = (fn: () => void, ms: number) => {
 
 export class Room {
   readonly code: string;
-  readonly createdAt: number;
+  createdAt: number;
   settings: RoomSettings;
   theme: Theme;
   hostId = "";
@@ -138,6 +146,8 @@ export class Room {
   private cancelAbandonTimer?: () => void;
   /** Rodada que deveria ter começado, mas ficou parada porque não havia ninguém conectado. */
   private pausedRound?: number;
+  /** Envio do estado esperando para juntar vários chutes num só. */
+  private cancelStateBroadcast?: () => void;
 
   private readonly emitter: RoomEmitter;
   private readonly now: () => number;
@@ -148,10 +158,14 @@ export class Room {
   private readonly countdownMs: number;
   private readonly onFinished?: (record: MatchRecord) => void;
   private readonly onChange?: (room: Room) => void;
-  private readonly renderRoundImages?: (character: Character) => Promise<Uint8Array[]>;
+  private readonly renderRoundImages?: (
+    character: Character,
+    seed: number,
+  ) => Promise<Uint8Array[]>;
   private readonly onImageError?: (error: unknown, character: Character) => void;
   private readonly abandonedMs: number;
   private readonly onAbandoned?: (room: Room) => void;
+  private readonly stateBroadcastMs: number;
 
   constructor(code: string, theme: Theme, settings: RoomSettings, deps: RoomDeps) {
     this.code = code;
@@ -170,6 +184,7 @@ export class Room {
     this.onImageError = deps.onImageError;
     this.abandonedMs = deps.abandonedMs ?? ROOM_LIFECYCLE.abandonedSeconds * 1000;
     this.onAbandoned = deps.onAbandoned;
+    this.stateBroadcastMs = deps.stateBroadcastMs ?? TIMING.stateBroadcastMs;
     this.createdAt = this.now();
   }
 
@@ -213,20 +228,23 @@ export class Room {
     player.disconnectTimer?.();
     player.disconnectTimer = undefined;
 
-    if (!connected) {
-      // Dá um tempo para quem só recarregou a página voltar sem perder o lugar.
-      player.disconnectTimer = this.schedule(() => {
-        player.disconnectTimer = undefined;
-        if (player.connected) return;
-        if (this.phase === "lobby") this.removePlayer(player.id);
-        else this.migrateHostIfNeeded();
-      }, this.disconnectGraceMs);
-    }
+    if (!connected) this.armDisconnectTimer(player);
 
     this.changed();
     this.watchAbandonment();
     // Se todo mundo que ainda está conectado já acertou, não precisa esperar o cronômetro.
     if (this.phase === "round") this.endRoundIfEveryoneSolved();
+  }
+
+  /** Dá um tempo para quem só recarregou a página voltar sem perder o lugar. */
+  private armDisconnectTimer(player: PlayerState): void {
+    player.disconnectTimer?.();
+    player.disconnectTimer = this.schedule(() => {
+      player.disconnectTimer = undefined;
+      if (player.connected) return;
+      if (this.phase === "lobby") this.removePlayer(player.id);
+      else this.migrateHostIfNeeded();
+    }, this.disconnectGraceMs);
   }
 
   /** A partida está andando (contagem, rodada ou intervalo)? */
@@ -450,6 +468,7 @@ export class Room {
       endsAt,
       players: new Map(),
       solveCount: 0,
+      ...(kind === "image" ? { imageSeed: randomInt(2 ** 31) } : {}),
     };
     this.round = round;
     this.phase = "round";
@@ -471,8 +490,9 @@ export class Room {
   private prepareImages(round: ActiveRound): void {
     round.imageStatus = "loading";
     const render = this.renderRoundImages;
+    round.imageSeed ??= randomInt(2 ** 31);
     const job = render
-      ? render(round.character)
+      ? render(round.character, round.imageSeed)
       : Promise.reject(new Error("Sem gerador de imagens configurado."));
     job
       .then((images) => {
@@ -588,7 +608,7 @@ export class Room {
 
     if (imageMode && this.imageLevelOf(state) !== levelBefore) this.sendRoundImage(playerId);
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
-    this.changed();
+    this.changed({ coalesce: true });
     if (correct) this.endRoundIfEveryoneSolved();
     return result;
   }
@@ -612,7 +632,7 @@ export class Room {
       this.sendRoundImage(playerId);
     }
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
-    this.changed();
+    this.changed({ coalesce: true });
     return hint;
   }
 
@@ -868,16 +888,183 @@ export class Room {
     return this.round?.character;
   }
 
+  // -------------------------------------------------------------------------
+  // Retrato (Redis) e restauração depois de um reinício
+  // -------------------------------------------------------------------------
+
+  /** Tudo o que é preciso para continuar a sala em outro servidor. Fica só no servidor e no Redis. */
+  toSnapshot(): RoomSnapshot {
+    const round = this.round;
+    return {
+      version: SNAPSHOT_VERSION,
+      code: this.code,
+      themeSlug: this.theme.slug,
+      settings: this.settings,
+      hostId: this.hostId,
+      createdAt: this.createdAt,
+      players: [...this.players.values()].map((player) => ({
+        id: player.id,
+        nickname: player.nickname,
+        avatar: player.avatar,
+        token: player.token,
+        joinedAt: player.joinedAt,
+        score: player.score,
+      })),
+      phase: this.phase,
+      round: round
+        ? {
+            number: round.number,
+            kind: round.kind,
+            characterId: round.character.id,
+            startedAt: round.startedAt,
+            endsAt: round.endsAt,
+            solveCount: round.solveCount,
+            imageSeed: round.imageSeed,
+            players: [...round.players.entries()].map(([playerId, state]) => ({
+              playerId,
+              guesses: state.guesses,
+              guessTimes: state.guessTimes,
+              hints: state.hints,
+              solvedAt: state.solvedAt,
+              solveRank: state.solveRank,
+              points: state.points,
+            })),
+          }
+        : undefined,
+      lastRound: this.lastRound,
+      standings: this.standings,
+      intermissionEndsAt: this.intermissionEndsAt,
+      countdownEndsAt: this.countdownEndsAt,
+      usedCharacterIds: [...this.usedCharacterIds],
+      history: this.history,
+      matchStartedAt: this.matchStartedAt,
+      pausedRound: this.pausedRound,
+      savedAt: this.now(),
+    };
+  }
+
+  /**
+   * Continua a sala a partir de um retrato (servidor reiniciou). Todos voltam desconectados e
+   * reconectam pelo token. Os cronômetros seguem pelo horário de término salvo: se a rodada
+   * venceu enquanto o servidor estava fora, ela termina agora. Retrato com um personagem que
+   * saiu do tema volta para o lobby (com os pontos zerados). Retratos de outra versão nem chegam
+   * aqui: o store os apaga ao ler (parseSnapshot).
+   */
+  restoreFrom(snapshot: RoomSnapshot): void {
+    this.createdAt = snapshot.createdAt;
+    this.hostId = snapshot.hostId;
+    this.players.clear();
+    for (const saved of snapshot.players) {
+      this.players.set(saved.id, {
+        id: saved.id,
+        nickname: saved.nickname,
+        avatar: saved.avatar,
+        token: saved.token,
+        joinedAt: saved.joinedAt,
+        score: saved.score ?? 0,
+        connected: false,
+      });
+    }
+    if (!this.restoreMatch(snapshot)) {
+      this.phase = "lobby";
+      this.round = undefined;
+      for (const player of this.players.values()) player.score = 0;
+    }
+    // Quem não voltar a tempo sai do lobby (como numa queda normal); na partida, vale o abandono.
+    for (const player of this.players.values()) this.armDisconnectTimer(player);
+    this.watchAbandonment();
+  }
+
+  /** Devolve false se não der para continuar a partida (e a sala volta para o lobby). */
+  private restoreMatch(snapshot: RoomSnapshot): boolean {
+    const phase = snapshot.phase;
+    const byId = new Map(this.theme.characters.map((character) => [character.id, character]));
+    let round: ActiveRound | undefined;
+    if (snapshot.round) {
+      const character = byId.get(snapshot.round.characterId);
+      if (!character) return false;
+      round = {
+        number: snapshot.round.number,
+        kind: snapshot.round.kind,
+        character,
+        startedAt: snapshot.round.startedAt,
+        endsAt: snapshot.round.endsAt,
+        solveCount: snapshot.round.solveCount,
+        imageSeed: snapshot.round.imageSeed,
+        players: new Map(
+          snapshot.round.players.map((saved) => [
+            saved.playerId,
+            {
+              guesses: saved.guesses,
+              guessTimes: saved.guessTimes,
+              hints: saved.hints,
+              solvedAt: saved.solvedAt,
+              solveRank: saved.solveRank,
+              points: saved.points,
+            },
+          ]),
+        ),
+      };
+    }
+    if (phase === "round" && !round) return false;
+
+    this.phase = phase;
+    this.round = round;
+    this.lastRound = snapshot.lastRound;
+    this.standings = snapshot.standings;
+    this.intermissionEndsAt = snapshot.intermissionEndsAt;
+    this.countdownEndsAt = snapshot.countdownEndsAt;
+    this.usedCharacterIds = new Set(snapshot.usedCharacterIds ?? []);
+    this.history = snapshot.history ?? [];
+    this.matchStartedAt = snapshot.matchStartedAt;
+    this.pausedRound = snapshot.pausedRound;
+
+    const now = this.now();
+    if (phase === "round" && round) {
+      if (round.kind === "image") this.prepareImages(round);
+      const left = round.endsAt - now;
+      if (left <= 0) this.endRound();
+      else this.cancelTimer = this.schedule(() => this.endRound(), left);
+    } else if (phase === "countdown" || phase === "intermission") {
+      const next = phase === "countdown" ? 1 : (this.lastRound?.number ?? 0) + 1;
+      if (this.pausedRound === undefined) {
+        const endsAt =
+          (phase === "countdown" ? this.countdownEndsAt : this.intermissionEndsAt) ?? now;
+        this.cancelTimer = this.schedule(
+          () => this.startRoundIfSomeoneIsHere(next),
+          Math.max(0, endsAt - now),
+        );
+      }
+    }
+    return true;
+  }
+
   dispose(): void {
     this.cancelTimer?.();
+    this.cancelStateBroadcast?.();
+    this.cancelStateBroadcast = undefined;
     this.cancelAbandonTimer?.();
     this.cancelAbandonTimer = undefined;
     for (const player of this.players.values()) player.disconnectTimer?.();
   }
 
-  private changed(): void {
-    this.emitter.broadcast("room:state", this.toPublicState());
+  /**
+   * O estado mudou: salva e avisa todo mundo. Com `coalesce` (chutes e dicas), junta os envios
+   * que chegam dentro de `stateBroadcastMs` num só; qualquer outra mudança sai na hora (e leva
+   * junto o que estava esperando).
+   */
+  private changed({ coalesce = false }: { coalesce?: boolean } = {}): void {
     this.onChange?.(this);
+    if (coalesce && this.stateBroadcastMs > 0) {
+      this.cancelStateBroadcast ??= this.schedule(() => {
+        this.cancelStateBroadcast = undefined;
+        this.emitter.broadcast("room:state", this.toPublicState());
+      }, this.stateBroadcastMs);
+      return;
+    }
+    this.cancelStateBroadcast?.();
+    this.cancelStateBroadcast = undefined;
+    this.emitter.broadcast("room:state", this.toPublicState());
   }
 
   private assertHost(playerId: string): void {

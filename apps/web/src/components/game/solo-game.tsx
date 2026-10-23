@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Eye, PartyPopper, Shuffle } from "lucide-react";
 import type { Character, CharacterOption, RoundKind, GuessResult, Theme } from "@chutai/shared";
 import {
@@ -37,6 +37,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
   const imageAvailable = supportsImageMode(theme.characters);
   const imageMode = mode === "image" && imageAvailable;
   const [zoomCenter, setZoomCenter] = useState<ZoomCenter>({ x: 0.5, y: 0.5 });
+  const imageRef = useRef<HTMLDivElement>(null);
   // No modo Imagem, o autocompletar mostra só o nome (a miniatura entregaria a resposta).
   const partial = imageMode && imageModeAvailability(theme.characters) === "partial";
   // Personagens do jogo: no modo Imagem, só quem tem imagem (no parcial, os outros ficam de fora).
@@ -142,7 +143,11 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
       ) : null}
 
       {imageMode && answer?.image && !finished ? (
-        <div className="aspect-square w-full max-w-[300px] self-center overflow-hidden rounded-3xl border-2 border-tinta bg-anil-soft shadow-carimbo">
+        <div
+          ref={imageRef}
+          data-keyboard-square
+          className="aspect-square w-full max-w-[min(300px,34dvh,var(--teclado-imagem,300px))] self-center overflow-hidden rounded-3xl border-2 border-tinta bg-anil-soft shadow-carimbo sm:max-w-[min(300px,var(--teclado-imagem,300px))]"
+        >
           <PixelatedImage
             src={answer.image}
             level={level}
@@ -192,6 +197,7 @@ export function SoloGame({ theme, options }: { theme: Theme; options: CharacterO
           guessedIds={guessedIds}
           showPictures={!imageMode}
           noun={theme.noun}
+          keepVisible={imageMode ? imageRef : undefined}
           onGuess={guess}
           disabled={!answer}
           autoFocus

@@ -63,12 +63,15 @@ export const requestHintSchema = z.object({
  * Pedido para a rota do desafio diário (POST /api/diario/[slug]).
  * `day` é o número do desafio que o navegador está jogando (para detectar a virada do dia).
  * Na dica, o navegador manda os chutes que já deu: o servidor confere de novo cada um.
+ * No chute, com corações, `previous` traz os chutes anteriores: no 8º erro o servidor revela
+ * quem era (opcional, para não quebrar quem está com a página antiga aberta).
  */
 export const dailyRequestSchema = z.discriminatedUnion("action", [
   z.object({
     action: z.literal("guess"),
     day: z.number().int().min(1),
     characterId: z.string().min(1).max(100),
+    previous: z.array(z.string().min(1).max(100)).max(200).optional(),
   }),
   z.object({
     action: z.literal("hint"),

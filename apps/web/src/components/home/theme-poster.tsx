@@ -23,7 +23,9 @@ export function ThemePoster({ theme, className }: { theme: ThemeSummary; classNa
         {theme.emoji}
       </span>
       <div className="relative flex flex-col gap-2 pr-20">
-        <h3 className="font-display text-3xl">{theme.name}</h3>
+        <h3 className="font-display text-[1.6rem] leading-tight text-balance sm:text-3xl">
+          {theme.name}
+        </h3>
         <p className="text-sm font-medium opacity-90">{theme.description}</p>
       </div>
       <div className="relative flex flex-col gap-3">
@@ -34,13 +36,13 @@ export function ThemePoster({ theme, className }: { theme: ThemeSummary; classNa
           {/* Link comum (recarrega) para o cartão inicial ler o ?tema= da URL. */}
           <a
             href={`/?tema=${theme.slug}#comecar`}
-            className="rounded-xl border-2 border-tinta bg-white px-3.5 py-2 text-sm font-bold text-tinta shadow-carimbo-sm hover:-translate-y-px"
+            className="inline-flex min-h-11 items-center rounded-xl border-2 border-tinta bg-white px-3.5 py-2 text-sm font-bold text-tinta shadow-carimbo-sm hover:-translate-y-px"
           >
             Criar sala
           </a>
           <Link
             href={`/temas/${theme.slug}`}
-            className="rounded-xl border-2 border-current px-3.5 py-2 text-sm font-bold hover:bg-white/15"
+            className="inline-flex min-h-11 items-center rounded-xl border-2 border-current px-3.5 py-2 text-sm font-bold hover:bg-white/15"
           >
             Ver personagens
           </Link>

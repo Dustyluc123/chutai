@@ -10,10 +10,11 @@ import { SITE_HOST } from "@/lib/site";
  * PNG do pódio para o botão "Compartilhar resultado". Os dados vêm do servidor de tempo real
  * enquanto a sala está no pódio; o navegador baixa a imagem assim que o pódio aparece.
  */
-export async function GET(_request: Request, { params }: { params: Promise<{ codigo: string }> }) {
+export async function GET(request: Request, { params }: { params: Promise<{ codigo: string }> }) {
   const { codigo } = await params;
   const code = roomCodeSchema.safeParse(codigo);
   const result = code.success ? await fetchRoomResult(code.data) : null;
+  const versioned = /^[0-9a-z]{1,8}$/.test(new URL(request.url).searchParams.get("v") ?? "");
   if (!result) {
     return new Response("Resultado não disponível: a partida não está no pódio.", {
       status: 404,
@@ -39,7 +40,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ cod
       ...PODIUM_SIZE,
       fonts,
       headers: {
-        "Cache-Control": "no-store",
+        // Com a versão do pódio (?v=), a CDN guarda a imagem: numa sala com 30 pessoas, ela é
+        // gerada uma vez só (poupa a CPU do plano gratuito da Vercel e o servidor de tempo real).
+        "Cache-Control": versioned ? "public, max-age=0, s-maxage=900" : "no-store",
         "Content-Disposition": `inline; filename="chutai-${result.code}.png"`,
       },
     },

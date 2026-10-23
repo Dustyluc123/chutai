@@ -47,6 +47,7 @@ export function GameView({ state, room }: GameViewProps) {
   const mixed = state.settings.mode === "mixed";
   const nextKind = mixed ? state.nextRoundKind : undefined;
   const noun = nounPhrases(state.theme.noun);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex flex-1 flex-col">
@@ -117,13 +118,14 @@ export function GameView({ state, room }: GameViewProps) {
           ) : null}
 
           {inRound && imageMode ? (
-            <MysteryImage
-              url={room.roundImage?.url ?? null}
-              level={room.roundImage?.level ?? me?.image?.level ?? 0}
-              maxLevel={room.roundImage?.maxLevel ?? me?.image?.maxLevel ?? 4}
-              status={me?.image?.status ?? "loading"}
-              className="self-center"
-            />
+            <div ref={imageRef} className="flex justify-center">
+              <MysteryImage
+                url={room.roundImage?.url ?? null}
+                level={room.roundImage?.level ?? me?.image?.level ?? 0}
+                maxLevel={room.roundImage?.maxLevel ?? me?.image?.maxLevel ?? 4}
+                status={me?.image?.status ?? "loading"}
+              />
+            </div>
           ) : null}
 
           {inRound ? (
@@ -142,6 +144,7 @@ export function GameView({ state, room }: GameViewProps) {
                   guessedIds={guessedIds}
                   showPictures={!imageMode}
                   noun={state.theme.noun}
+                  keepVisible={imageMode ? imageRef : undefined}
                   autoFocus
                   onGuess={async (id) => {
                     const result = await room.actions.guess(id);

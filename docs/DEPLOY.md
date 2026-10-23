@@ -12,7 +12,7 @@ Hoje o Chutaí está no ar assim:
 - Site: https://chutai-bay.vercel.app
 - Servidor de tempo real: https://chutairealtime-production.up.railway.app (saúde em `/health`)
 
-O banco de dados não entra agora: os temas continuam vindo dos arquivos JSON do repositório.
+O banco de dados não entra agora: os temas continuam vindo dos arquivos JSON do repositório. O **Redis** entra (Parte 5): é ele que faz as partidas sobreviverem a um deploy.
 
 **A ordem importa:**
 
@@ -67,11 +67,12 @@ Por que cada um:
 
 Abra a aba **Variables** e adicione (botão **New Variable**):
 
-| Nome          | Valor                   | Para quê                                                 |
-| ------------- | ----------------------- | -------------------------------------------------------- |
-| `PORT`        | `3001`                  | Porta em que o servidor escuta.                          |
-| `CORS_ORIGIN` | `http://localhost:3000` | Provisório. Na Parte 3 você troca pelo endereço do site. |
-| `NODE_ENV`    | `production`            | Modo de produção.                                        |
+| Nome                                  | Valor                   | Para quê                                                                                                                      |
+| ------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `PORT`                                | `3001`                  | Porta em que o servidor escuta.                                                                                               |
+| `CORS_ORIGIN`                         | `http://localhost:3000` | Provisório. Na Parte 3 você troca pelo endereço do site.                                                                      |
+| `NODE_ENV`                            | `production`            | Modo de produção.                                                                                                             |
+| `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` | `15`                    | Tempo entre o aviso de desligar (`SIGTERM`) e o desligamento forçado. Dá tempo de o servidor antigo salvar as salas no Redis. |
 
 Cada mudança de variável dispara um novo deploy automaticamente.
 
@@ -174,8 +175,116 @@ Se quiser mais de um endereço (por exemplo, um domínio próprio e o da Vercel)
 | Build da Vercel falhou                                        | Confira se o Root Directory é `apps/web`.                                                                                                 |
 | Aparece um serviço `@chutai/web` no Railway                   | Apague (Parte 1.1). O site é só na Vercel.                                                                                                |
 
+## Parte 5: Redis (partidas que sobrevivem a deploys e panes)
+
+Sem Redis, as salas ficam só na memória do servidor e **um deploy derruba todas as partidas**. Com Redis, o servidor guarda a sala inteira (rodada, chutes, pontos e o horário de término de cada cronômetro). Num deploy, o servidor antigo salva tudo e o novo continua de onde parou; os jogadores veem "Reconectando…" por alguns segundos e voltam com os mesmos pontos e chutes.
+
+### 5.1. Criar o Redis no Railway
+
+1. Abra o projeto do Chutaí no Railway (o mesmo do serviço `@chutai/realtime`).
+2. Clique em **+ Create** (ou **+ New**, no canto de cima) → **Database** → **Redis**.
+3. Espere o serviço **Redis** aparecer no painel com o status ativo (leva menos de um minuto). Não precisa mudar nada nele.
+
+### 5.2. Ligar o Redis no servidor
+
+> **Só depois que o código com Redis estiver no ar** (o merge na `main` já foi feito e o deploy do servidor terminou). Assim, um servidor de uma versão antiga nunca chega a gravar no Redis. Se, mesmo assim, aparecer um retrato de formato antigo ou de versão desconhecida, o servidor novo o ignora e apaga sozinho (e apaga as chaves antigas `chutai:room:*` ao ligar), sem cair.
+
+1. Clique no serviço **`@chutai/realtime`** → aba **Variables** → **New Variable**.
+2. Nome: `REDIS_URL`. Valor: `${{Redis.REDIS_URL}}` (digite exatamente assim; o Railway completa com o endereço interno do Redis, que não paga tráfego de saída). Se o seu serviço de Redis tiver outro nome, troque `Redis` pelo nome dele.
+3. Confira que `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` = `15` também está lá (Parte 1.3).
+4. Clique em **Deploy** (ou espere o deploy automático da mudança de variável).
+
+### 5.3. Conferir
+
+Abra o `/health`: deve aparecer `"roomStore": "redis"`. Para testar de verdade: crie uma sala, comece uma partida, e no Railway clique em **Deployments** → três pontinhos do deploy ativo → **Redeploy**. Depois de alguns segundos a partida continua, com o mesmo cronômetro.
+
+Nos **Deploy Logs** do servidor antigo aparece `Recebido SIGTERM, salvando as salas...` e `N sala(s) salva(s)`; no novo, `Sala ABC234 carregada do redis` quando cada sala volta.
+
+### 5.4. Quanto custa
+
+O Railway cobra a memória usada (US$ 10 por GB por mês) e um pouco de CPU. Um Redis com as salas do Chutaí usa uns 20 a 50 MB: **algo entre US$ 0,30 e US$ 1 por mês**. No plano Hobby (US$ 5 por mês, com US$ 5 de uso incluídos), isso costuma caber no que já está incluído junto com o servidor. Acompanhe em **Usage** no Railway na primeira semana.
+
+### Como o Chutaí evita duas rodadas da mesma sala
+
+Durante um deploy, o Railway deixa o servidor antigo e o novo ligados juntos por alguns segundos. Cada sala tem um **dono** gravado no Redis, com validade de 15 s renovada a cada 5 s. Só o dono roda os cronômetros e grava. O servidor novo só pega uma sala quando alguém entra nela, e só depois de o antigo soltar (no `SIGTERM`) ou de a posse vencer (se o antigo caiu sem avisar).
+
+## Publicar uma versão que liga Redis e Sentry (a ordem importa)
+
+Use esta ordem na primeira vez que o Redis e o Sentry entram (a versão com corações no diário, salas de 30 e a página Apoie). Faça o merge num horário sem partidas: as salas que estiverem abertas caem uma última vez, porque o servidor antigo só guarda as salas na memória.
+
+**Antes do merge**
+
+1. **Sentry:** crie os dois projetos e anote os DSN (Parte 6.1).
+2. **Vercel:** em **Settings → Environment Variables** (Production), crie `NEXT_PUBLIC_SENTRY_DSN` com o DSN do `chutai-web`. Opcional: `SENTRY_AUTH_TOKEN` (secreta), `SENTRY_ORG` e `SENTRY_PROJECT`. Não precisa de redeploy: o build do merge já usa.
+3. **Railway:** crie o serviço Redis (Parte 5.1), mas **não** crie o `REDIS_URL` ainda.
+4. Confira `DAILY.livesFromDate` em `packages/game/src/config.ts`: tem que ser o dia seguinte ao merge.
+
+**Merge**
+
+5. Faça o merge do PR na `main`. Espere os dois deploys terminarem (Vercel e Railway → **Deployments**, status ativo).
+
+**Logo depois do merge, no Railway (`@chutai/realtime` → Variables)**
+
+6. Crie as três variáveis de uma vez (o Railway junta as mudanças num deploy só):
+   - `REDIS_URL` = `${{Redis.REDIS_URL}}`
+   - `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` = `15`
+   - `SENTRY_DSN` = DSN do `chutai-realtime`
+7. Clique em **Deploy** se o Railway pedir. Esse deploy ainda derruba as salas criadas entre o merge e agora (o servidor dessa hora ainda estava sem Redis); a partir dele, não derruba mais.
+
+**Conferir**
+
+8. `/health` mostra `"roomStore": "redis"`; os **Deploy Logs** mostram `Sentry: ligado`.
+9. Teste de verdade: crie uma sala, comece uma partida e clique em **Redeploy** no Railway. A partida volta em alguns segundos com o mesmo cronômetro.
+10. Teste do Sentry no site (Parte 6.3).
+
+## Parte 6: Sentry (saber quando algo quebra)
+
+O Sentry recebe os erros do site e do servidor, para você saber que algo quebrou sem depender de print dos amigos. O Chutaí manda **só o erro**: sem usuário, sem IP, sem apelidos, sem chutes, sem cabeçalhos e sem gravação de tela (Session Replay desligado). Sem as variáveis, nada muda.
+
+### 6.1. Criar a conta e os projetos
+
+1. Entre em [sentry.io](https://sentry.io) → **Get started** (dá para entrar com o GitHub). Escolha o plano gratuito (**Developer**).
+2. Crie o primeiro projeto: **Projects** → **Create Project** → plataforma **Next.js** → nome `chutai-web` → **Create Project**. Na tela de instruções que aparece, **não rode o assistente** (o código já está pronto): só copie o **DSN** (um endereço que começa com `https://` e termina com `.ingest.sentry.io/...`). Se não aparecer, ele fica em **Settings** → **Projects** → `chutai-web` → **Client Keys (DSN)**.
+3. Crie o segundo projeto: plataforma **Node.js** → nome `chutai-realtime`. Copie o DSN dele também.
+4. Nos **dois** projetos: **Settings** → **Projects** → (projeto) → **Security & Privacy** → ligue **Prevent Storing of IP Addresses** e confira que **Data Scrubber** está ligado.
+5. (Opcional) Em **Settings** → **Organization** → **Slug**, anote o nome curto da organização (para o `SENTRY_ORG`).
+
+### 6.2. Variáveis
+
+| Onde                                      | Nome                     | Valor                                                                       | Secreta?                         |
+| ----------------------------------------- | ------------------------ | --------------------------------------------------------------------------- | -------------------------------- |
+| Vercel (Settings → Environment Variables) | `NEXT_PUBLIC_SENTRY_DSN` | DSN do projeto `chutai-web`                                                 | Não (vai no código do navegador) |
+| Railway (`@chutai/realtime` → Variables)  | `SENTRY_DSN`             | DSN do projeto `chutai-realtime` (depois do merge, junto com o `REDIS_URL`) | Não                              |
+| Vercel (opcional)                         | `SENTRY_AUTH_TOKEN`      | Token criado em **Settings** → **Auth Tokens** (organização)                | **Sim** (marque como Sensitive)  |
+| Vercel (opcional, junto com o token)      | `SENTRY_ORG`             | slug da organização                                                         | Não                              |
+| Vercel (opcional, junto com o token)      | `SENTRY_PROJECT`         | `chutai-web`                                                                | Não                              |
+
+O token é opcional: sem ele, os erros do site chegam do mesmo jeito, só que com o código minificado (nomes curtos e linhas longas) em vez do código original. Na Vercel, as variáveis `NEXT_PUBLIC_*` entram no build: depois de criar, faça um **Redeploy**.
+
+### 6.3. Conferir
+
+- Site: abra o console do navegador no site publicado e rode `setTimeout(() => { throw new Error("teste do Sentry") })`. Em um ou dois minutos o erro aparece em **Issues** do `chutai-web`.
+- Servidor: nos **Deploy Logs** do Railway aparece `Sentry: ligado`.
+
+O plano gratuito inclui 5 mil erros por mês; o Chutaí mede desempenho só em 1% das visitas no site e nunca no servidor.
+
+## Limites do plano gratuito da Vercel (Hobby)
+
+Se o projeto passar de um limite do Hobby, a Vercel pode **pausar o recurso (ou o projeto) até completar 30 dias**. Conferido em outubro de 2026 em [vercel.com/docs/plans/hobby](https://vercel.com/docs/plans/hobby):
+
+| Recurso                   | Limite por mês | O Chutaí                                                                                                                                                                                                                                                                                                                     |
+| ------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Transformações de imagem  | 5 mil          | **Zero**: as imagens dos temas (405 `.webp` de ~11 KB) vão direto, sem otimização. Antes, cada imagem gerava até 6 tamanhos (~2.400 no total), refeitos sempre que o cache vencia.                                                                                                                                           |
+| Requisições à CDN         | 1 milhão       | **O limite mais apertado.** Uma primeira visita faz ~27 requisições (scripts, fonte, pré-carregamento dos links do cabeçalho); navegar depois faz bem menos. Dá umas 30 a 40 mil visitas novas por mês. As imagens dos temas ficam 1 dia no cache do navegador e os links do rodapé não são pré-carregados, para economizar. |
+| Transferência (Fast Data) | 100 GB         | Folgado: uma visita baixa uns 300 a 500 KB.                                                                                                                                                                                                                                                                                  |
+| Execuções de função       | 1 milhão       | Folgado: cada chute do diário é uma execução; as páginas do diário ficam 60 s em cache.                                                                                                                                                                                                                                      |
+| CPU ativa                 | 4 horas        | Atenção: as imagens de prévia do link da sala e do pódio são geradas na hora (uma por link colado). A imagem padrão do site é gerada no build.                                                                                                                                                                               |
+| Eventos do Web Analytics  | 50 mil         | Cada visualização de página é um evento. Se passar, só a coleta do Analytics pausa por 7 dias; o site continua no ar.                                                                                                                                                                                                        |
+
+Acompanhe em **Usage** no painel da Vercel. Se uma live trouxer muito tráfego e algum item passar de ~70%, o próximo passo é o plano Pro (US$ 20 por mês).
+
 ## Atualizações depois do primeiro deploy
 
 - Cada `git push` no `main` faz os dois sites atualizarem sozinhos. O Railway só refaz o servidor quando mudam arquivos dos **Watch Paths**.
-- **As salas ficam na memória do servidor: um deploy no Railway derruba as partidas em andamento.** Evite fazer merge de mudanças do servidor no meio de uma partida com amigos.
+- **Com o Redis ligado (Parte 5), um deploy não derruba as partidas**: elas param por alguns segundos e continuam. Sem Redis, as salas ficam só na memória e um deploy derruba tudo.
 - Para ver o que está acontecendo no servidor, use os **Deploy Logs** do Railway.

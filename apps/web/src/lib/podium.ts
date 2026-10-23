@@ -51,3 +51,18 @@ export function shareText(themeName: string, standings: Entry[], siteUrl: string
   const extra = tiedOut ? ` e mais ${tiedOut} ${tiedOut === 1 ? "empatado" : "empatados"}` : "";
   return `Joguei Chutaí no tema ${themeName}: ${places.join(", ")}${extra}. Jogue também: ${siteUrl}`;
 }
+
+/**
+ * Versão curta de um pódio (hash FNV-1a de quem ficou com quantos pontos). Vai na URL da imagem
+ * (`/sala/CODIGO/resultado?v=...`): a CDN da Vercel guarda uma imagem por versão, então os 30
+ * jogadores de uma sala cheia recebem a mesma imagem em vez de cada um gerar a sua. Uma revanche
+ * termina com outro pódio, outra versão e outra imagem. Não revela nada (é só um hash).
+ */
+export function podiumVersion(standings: { playerId: string; score: number }[]): string {
+  let hash = 0x811c9dc5;
+  for (const char of standings.map((s) => `${s.playerId}:${s.score}`).join(",")) {
+    hash ^= char.codePointAt(0)!;
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(36);
+}

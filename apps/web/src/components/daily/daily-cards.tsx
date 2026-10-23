@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Flame } from "lucide-react";
+import { Check, Flame, HeartCrack } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { ThemeColor } from "@chutai/shared";
+import { dailyDateOf } from "@chutai/game";
 import { dailyStatus } from "@/lib/daily/storage";
 import { THEME_COLORS } from "@/lib/colors";
 import { cn } from "@/lib/cn";
@@ -25,7 +26,9 @@ export function DailyCards({ themes, day }: { themes: CardTheme[]; day: number }
   const [status, setStatus] = useState<Record<string, Status>>({});
   useEffect(() => {
     setStatus(
-      Object.fromEntries(themes.map((theme) => [theme.slug, dailyStatus(theme.slug, day)])),
+      Object.fromEntries(
+        themes.map((theme) => [theme.slug, dailyStatus(theme.slug, day, dailyDateOf(day))]),
+      ),
     );
   }, [themes, day]);
 
@@ -59,6 +62,10 @@ export function DailyCards({ themes, day }: { themes: CardTheme[]; day: number }
                   <span className="inline-flex items-center gap-1 rounded-full border-2 border-tinta bg-folha px-2.5 py-0.5 text-white">
                     <Check aria-hidden className="size-4" strokeWidth={3} /> Acertou em {s.guesses}{" "}
                     {s.guesses === 1 ? "chute" : "chutes"}
+                  </span>
+                ) : s?.lost ? (
+                  <span className="inline-flex items-center gap-1 rounded-full border-2 border-tinta bg-tinta px-2.5 py-0.5 text-white">
+                    <HeartCrack aria-hidden className="size-4" /> Não foi dessa vez
                   </span>
                 ) : s?.guesses ? (
                   <span className="rounded-full border-2 border-tinta bg-white px-2.5 py-0.5 text-tinta">

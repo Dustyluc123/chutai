@@ -120,7 +120,7 @@ export default async function HomePage() {
           </h2>
           <Link
             href="/temas"
-            className="font-semibold text-anil underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center font-semibold text-anil underline-offset-4 hover:underline"
           >
             Ver todos os {themes.length} temas
           </Link>

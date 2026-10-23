@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarDays, Copy, Flame, PartyPopper, Share2 } from "lucide-react";
+import { CalendarDays, Copy, Flame, HeartCrack, PartyPopper, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import type {
   CharacterOption,
@@ -9,7 +9,7 @@ import type {
   HintType,
   ThemeNoun,
 } from "@chutai/shared";
-import { msUntilNextDaily, nounPhrases } from "@chutai/game";
+import { DAILY, dailyDateOf, dailyLivesLeft, msUntilNextDaily, nounPhrases } from "@chutai/game";
 import { GuessBoard } from "@/components/game/guess-board";
 import { GuessInput } from "@/components/game/guess-input";
 import { HintBar } from "@/components/game/hint-bar";
@@ -22,11 +22,16 @@ import {
   EMPTY_STATS,
   loadProgress,
   loadStats,
+  progressOutcome,
+  progressRules,
+  recordLoss,
   recordWin,
   saveProgress,
   type DailyProgress,
   type DailyStats,
 } from "@/lib/daily/storage";
+import { SupportNudge } from "@/components/support/support-nudge";
+import { DailyHearts, DailyStatsPanel } from "./daily-hearts";
 import { playSound } from "@/lib/sound";
 import { guessSound } from "@/lib/sound/director";
 import { SITE_URL } from "@/lib/site";
@@ -68,8 +73,10 @@ function useTimeToNext(): string {
 }
 
 /**
- * Desafio diário: sozinho, sem tempo e sem limite de chutes. Os chutes vão para a rota
- * /api/diario/[slug], que sabe a resposta; o navegador só guarda o próprio progresso.
+ * Desafio diário: sozinho, sem tempo, com 8 corações (cada chute errado gasta um). Os chutes vão
+ * para a rota /api/diario/[slug], que sabe a resposta e só a revela no acerto ou no último
+ * coração; o navegador só guarda o próprio progresso. Desafio começado antes dos corações
+ * (DAILY.livesFromDate) termina sem limite, como era.
  */
 export function DailyGame({
   slug,
@@ -107,7 +114,13 @@ export function DailyGame({
     () => new Set(progress.guesses.map((guess) => guess.characterId)),
     [progress.guesses],
   );
-  const solved = progress.guesses.some((guess) => guess.correct);
+  const dateKey = dailyDateOf(day);
+  const rules = progressRules(progress, dateKey);
+  const withLives = rules === "coracoes";
+  const outcome = progressOutcome(progress, dateKey);
+  const solved = outcome === "won";
+  const finished = outcome !== "playing" && !!progress.answer;
+  const livesLeft = dailyLivesLeft(progress.guesses);
 
   async function send(body: Body): Promise<DailyResponse | null> {
     setBusy(true);
@@ -134,15 +147,24 @@ export function DailyGame({
   }
 
   async function guess(characterId: string) {
-    const data = await send({ action: "guess", characterId });
+    const data = await send({
+      action: "guess",
+      characterId,
+      // Com corações, o servidor confere os chutes anteriores para revelar no último coração.
+      ...(withLives ? { previous: progress.guesses.map((item) => item.characterId) } : {}),
+    });
     if (!data?.ok || !data.guess) return;
     const result = { ...data.guess, guessNumber: progress.guesses.length + 1 };
     playSound(guessSound(result.correct));
-    const next: DailyProgress = { ...progress, guesses: [...progress.guesses, result] };
-    if (result.correct) {
+    const next: DailyProgress = {
+      ...progress,
+      rules,
+      guesses: [...progress.guesses, result],
+    };
+    if (result.correct || data.lost) {
       next.answer = data.answer;
       next.yesterday = data.yesterday ?? null;
-      setStats(recordWin(slug, day));
+      setStats(result.correct ? recordWin(slug, day) : recordLoss(slug, day));
     }
     update(next);
   }
@@ -163,6 +185,7 @@ export function DailyGame({
     guesses: progress.guesses,
     hintsUsed: progress.hints.length,
     url: `${SITE_URL}/diario`,
+    lives: withLives,
   });
 
   async function share() {
@@ -193,16 +216,22 @@ export function DailyGame({
             <span aria-hidden>{themeEmoji}</span> {themeName}
           </h1>
           <p className="text-sm text-tinta-soft">
-            Um personagem por dia, o mesmo para todo mundo. Sem tempo e sem limite de chutes.
+            Um personagem por dia, o mesmo para todo mundo.{" "}
+            {withLives
+              ? `Sem tempo, com ${DAILY.lives} corações: cada chute errado gasta um.`
+              : "Sem tempo e sem limite de chutes."}
           </p>
         </div>
         <HowToPlayButton initialTab="classic" className="h-11 px-4" />
       </div>
 
-      {solved && progress.answer ? (
+      {finished && progress.answer ? (
         <section
           aria-live="polite"
-          className="flex animate-pop flex-col gap-4 rounded-3xl border-2 border-folha bg-folha-soft p-5 sm:flex-row sm:items-center sm:gap-5"
+          className={
+            "flex animate-pop flex-col gap-4 rounded-3xl border-2 p-5 sm:flex-row sm:items-center sm:gap-5 " +
+            (solved ? "border-folha bg-folha-soft" : "border-tinta bg-white")
+          }
         >
           <CharacterPicture
             name={progress.answer.name}
@@ -211,10 +240,17 @@ export function DailyGame({
             size="xl"
           />
           <div className="flex flex-1 flex-col gap-1">
-            <p className="flex items-center gap-2 font-semibold">
-              <PartyPopper aria-hidden className="size-5 text-folha" /> Acertou em{" "}
-              {progress.guesses.length} {progress.guesses.length === 1 ? "chute" : "chutes"}!
-            </p>
+            {solved ? (
+              <p className="flex items-center gap-2 font-semibold">
+                <PartyPopper aria-hidden className="size-5 text-folha" /> Acertou em{" "}
+                {progress.guesses.length} {progress.guesses.length === 1 ? "chute" : "chutes"}!
+              </p>
+            ) : (
+              <p className="flex items-center gap-2 font-semibold">
+                <HeartCrack aria-hidden className="size-5 text-pitanga" /> Acabaram os corações.
+                Era:
+              </p>
+            )}
             <p className="font-display text-3xl">{progress.answer.name}</p>
             <p className="text-sm text-tinta-soft">
               Próximo desafio em <span className="tabular font-bold text-tinta">{timeToNext}</span>
@@ -246,6 +282,7 @@ export function DailyGame({
         </section>
       ) : loaded ? (
         <div className="flex flex-col gap-3">
+          {withLives ? <DailyHearts left={livesLeft} total={DAILY.lives} /> : null}
           <GuessInput
             options={options}
             guessedIds={guessedIds}
@@ -265,7 +302,10 @@ export function DailyGame({
         </div>
       ) : null}
 
-      {solved && progress.hints.length ? (
+      {finished ? <DailyStatsPanel stats={stats} /> : null}
+      {finished ? <SupportNudge where={`diario:${slug}:${day}`} /> : null}
+
+      {finished && progress.hints.length ? (
         <ul className="flex flex-wrap gap-2">
           {progress.hints.map((item) => (
             <li

@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 /** Cabeçalho. `tone="light"` para usar sobre o fundo anil. */
 export function SiteHeader({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const link = cn(
-    "rounded-lg px-3 py-2 text-sm font-semibold transition-colors",
+    "hit-44 rounded-lg px-3 py-2 text-sm font-semibold transition-colors",
     tone === "light"
       ? "text-white/85 hover:text-white hover:bg-white/10"
       : "text-tinta-soft hover:text-tinta hover:bg-tinta/5",

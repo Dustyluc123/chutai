@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-197_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-275_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -35,7 +35,7 @@
 - [Tecnologias](#tecnologias)
 - [Estrutura de pastas](#estrutura-de-pastas)
 - [Como rodar](#como-rodar)
-- [Banco de dados e Redis (preparados para o futuro)](#banco-de-dados-e-redis-preparados-para-o-futuro)
+- [Banco de dados e Redis](#banco-de-dados-e-redis)
 - [Eventos do Socket.IO](#eventos-do-socketio)
 - [Pontuação](#pontuação)
 - [Testes](#testes)
@@ -91,6 +91,9 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Prévia bonita do link da sala no WhatsApp e nas redes: quem chamou, tema, jogadores e código (imagem gerada com `ImageResponse`)
 - [x] Entrar como convidado, só com apelido e avatar
 - [x] Lobby com lista de jogadores, vagas, regras editáveis pelo anfitrião e botão de expulsar
+- [x] Salas de até **30 jogadores** para lives (o padrão é 8): lobby, placar, revelação e pódio compactos, com "Ver todos"
+- [x] Página **Apoie o projeto** (`/apoie`) com Pix (chave, copia e cola e QR estático) e um convite discreto no fim da partida e do diário, no máximo uma vez por dia
+- [x] Partidas que sobrevivem a deploys e quedas do servidor (Redis), feito para o celular (tabuleiro, teclado, toques de 44 px)
 - [x] Rodadas com cronômetro controlado pelo servidor
 - [x] Contagem **5, 4, 3, 2, 1, Vai!** antes da primeira rodada (controlada pelo servidor: palpites recusados e nada da rodada enviado antes) e **3, 2, 1** no fim de cada intervalo
 - [x] Sala abandonada no meio da partida (ninguém conectado por 60 s) é encerrada; sem ninguém, não começa rodada nova
@@ -110,7 +113,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Anfitrião passa para outro jogador se sair; rodada termina antes se todos os conectados acertarem
 - [x] Modo treino individual e páginas públicas de cada tema (boas para o Google)
 - [x] Página **Para professores** (`/professores`): como usar o jogo numa aula, configurações sugeridas e temas que combinam com a escola
-- [x] **Desafio do dia** (`/diario`): um personagem por tema, o mesmo para todo mundo, que muda à meia-noite de Brasília. Sem tempo, com sequência de dias seguidos e resultado para compartilhar em quadradinhos, sem revelar o personagem
+- [x] **Desafio do dia** (`/diario`): um personagem por tema, o mesmo para todo mundo, que muda à meia-noite de Brasília. Sem tempo, com **8 corações** (cada chute errado gasta um; perdeu todos, a tela revela quem era), sequência de dias seguidos, vitórias e derrotas, e resultado para compartilhar em quadradinhos e corações (❤️❤️❤️❤️❤️🖤🖤🖤), sem revelar o personagem
 - [x] Imagem de cada personagem no autocompletar, no tabuleiro, na revelação, no treino e na página do tema; sem imagem, aparece o emoji
 - [x] Imagens só com licença livre (Wikimedia Commons), com autor e licença de cada uma na página [/creditos](apps/web/public/temas/CREDITOS.md)
 - [x] Sons gerados no navegador (Web Audio API, sem arquivos): chute errado e certo, alguém acertou, contagem, últimos 5 segundos, fim da rodada e pódio; música calma opcional. Botão **Som** com efeitos e música separados
@@ -173,7 +176,7 @@ Princípios que guiaram o código:
 | Tempo real       | Node.js + Socket.IO 4                            | Salas, reconexão e broadcast prontos                               |
 | Validação        | Zod 4                                            | O mesmo esquema valida formulários e eventos no servidor           |
 | Banco            | PostgreSQL + Drizzle ORM                         | Relacional, tipado, migrações em SQL legível                       |
-| Estado das salas | Memória (hoje) / Redis (futuro)                  | Redis só quando houver reinícios ou vários servidores              |
+| Estado das salas | Memória (local) / Redis (produção)               | Com Redis, as partidas sobrevivem a deploys e quedas               |
 | Monorepo         | pnpm workspaces + Turborepo                      | Site, servidor e pacotes no mesmo repositório                      |
 | Qualidade        | Vitest, PGlite, ESLint, Prettier, GitHub Actions | Testes de regras, de banco real em memória e de ponta a ponta      |
 
@@ -209,7 +212,7 @@ chutai/
 │       │   ├── rooms/
 │       │   │   ├── Room.ts          # Estado e regras de uma sala
 │       │   │   ├── RoomManager.ts   # Cria, encontra, limpa e restaura salas
-│       │   │   └── store/           # memory.ts (hoje) e redis.ts (futuro)
+│       │   │   └── store/           # memory.ts (local e testes) e redis.ts (produção)
 │       │   ├── services/            # Temas com cache, salvar partida terminada
 │       │   └── lib/                 # Erros, log, filtro de palavrões
 │       └── tests/                   # Sala com relógio falso + partida real com dois clientes
@@ -276,19 +279,23 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 
 ### Variáveis de ambiente
 
-| Variável                   | Padrão                  | Para quê                                                                                                                        |
-| -------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_REALTIME_URL` | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                                                                              |
-| `NEXT_PUBLIC_SITE_URL`     | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar                                                              |
-| `DAILY_SECRET`             | (vazio)                 | Chave do sorteio do desafio diário (só no servidor). Sem ela, o diário fica indisponível. **Nunca troque depois do lançamento** |
-| `PORT`                     | `3001`                  | Porta do servidor de tempo real                                                                                                 |
-| `CORS_ORIGIN`              | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                                                                           |
-| `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem                                                             |
-| `ASSETS_BASE_URL`          | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco                                                             |
-| `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                                                                                  |
-| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                                                                                |
+| Variável                       | Padrão                  | Para quê                                                                                                                        |
+| ------------------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_REALTIME_URL`     | `http://localhost:3001` | Onde o navegador encontra o servidor de tempo real                                                                              |
+| `NEXT_PUBLIC_SITE_URL`         | `http://localhost:3000` | Endereço público do site, para as prévias do link e o compartilhar                                                              |
+| `DAILY_SECRET`                 | (vazio)                 | Chave do sorteio do desafio diário (só no servidor). Sem ela, o diário fica indisponível. **Nunca troque depois do lançamento** |
+| `PORT`                         | `3001`                  | Porta do servidor de tempo real                                                                                                 |
+| `CORS_ORIGIN`                  | `http://localhost:3000` | Origens que podem se conectar (separadas por vírgula)                                                                           |
+| `ASSETS_DIR`                   | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem                                                             |
+| `ASSETS_BASE_URL`              | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco                                                             |
+| `DATABASE_URL`                 | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                                                                                  |
+| `REDIS_URL`                    | (vazio)                 | Liga o Redis: as salas sobrevivem a deploys e quedas. Sem ela, ficam só na memória                                              |
+| `NEXT_PUBLIC_SENTRY_DSN`       | (vazio)                 | Liga o Sentry no site (erros do navegador e do servidor da Vercel). Sem ela, nada é enviado                                     |
+| `SENTRY_DSN`                   | (vazio)                 | Liga o Sentry no servidor de tempo real                                                                                         |
+| `SENTRY_AUTH_TOKEN`            | (vazio)                 | Opcional e **secreta**: envia os mapas do código no build, para os erros do site mostrarem o código original                    |
+| `SENTRY_ORG`, `SENTRY_PROJECT` | (vazio)                 | Usadas junto com o `SENTRY_AUTH_TOKEN` (organização e projeto do site no Sentry)                                                |
 
-## Banco de dados e Redis (preparados para o futuro)
+## Banco de dados e Redis
 
 O MVP roda **sem nenhum serviço externo**. Mesmo assim, a parte de dados já está escrita e testada, esperando só uma URL:
 
@@ -311,29 +318,38 @@ pnpm dev                                               # agora tudo vem do banco
 
 **Redis** (`apps/realtime/src/rooms/store/redis.ts`)
 
-Guarda um retrato de cada sala. Se o servidor reiniciar (um deploy, por exemplo), as salas voltam para o lobby e os jogadores reconectam pelo token salvo no navegador. Para ligar: `docker compose --profile redis up -d` e `REDIS_URL=redis://localhost:6379`. O próximo passo para rodar vários servidores ao mesmo tempo está descrito no próprio arquivo.
+Guarda a sala inteira: fase, rodada (a resposta fica só no servidor e no Redis), chutes, dicas, pontos e os horários de término. Se o servidor reiniciar (um deploy ou uma pane), a partida continua de onde parou: os cronômetros seguem pelo horário salvo e os jogadores reconectam pelo token salvo no navegador, sem perder pontos nem chutes. No modo Imagem, as imagens são geradas de novo com a mesma semente do disfarce.
+
+Para um deploy não ter duas rodadas da mesma sala andando ao mesmo tempo, cada sala tem um **dono** no Redis (uma "posse" que vence em 15 s se não for renovada):
+
+1. Só o servidor dono roda os cronômetros e grava o retrato (um script Lua confere a posse antes de gravar).
+2. O servidor novo não pega salas ao ligar: carrega uma sala só quando alguém entra nela, e só depois de conseguir a posse.
+3. No `SIGTERM`, o servidor antigo para os cronômetros, grava tudo, solta as posses e fecha as conexões. Os navegadores reconectam no novo.
+4. Se o antigo cair sem avisar, a posse vence sozinha e o novo assume.
+
+Sala encerrada (todo mundo saiu, abandono) apaga o retrato; sala esquecida expira sozinha depois de `EMPTY_ROOM_MINUTES`. Para ligar localmente: `docker compose --profile redis up -d` e `REDIS_URL=redis://localhost:6379`. Os testes usam um store em memória que imita o Redis e o `ioredis-mock` (que roda os scripts Lua); com `REDIS_TEST_URL`, rodam também num Redis de verdade.
 
 ## Eventos do Socket.IO
 
 Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/src/events.ts).
 
-| Evento                                   | Direção                       | Para quê                                                                                              |
-| ---------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                                                 |
-| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                                                              |
-| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                                                               |
-| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                                                      |
-| `game:start`                             | anfitrião → servidor          | Começar a partida                                                                                     |
-| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                                                   |
-| `hint:request`                           | navegador → servidor          | Pedir dica                                                                                            |
-| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                                                       |
-| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase (`lobby`, `countdown`, `round`, `intermission`, `finished`), placar |
-| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                     |
-| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                 |
-| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                     |
-| `round:start` / `round:end` / `game:end` | servidor → todos              | Início (com o tipo da rodada: Clássica ou Imagem), revelação e fim                                    |
-| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                 |
-| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                 |
+| Evento                                   | Direção                       | Para quê                                                                                                                                                               |
+| ---------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                                                                                                                  |
+| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                                                                                                                               |
+| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                                                                                                                                |
+| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                                                                                                                       |
+| `game:start`                             | anfitrião → servidor          | Começar a partida                                                                                                                                                      |
+| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                                                                                                                    |
+| `hint:request`                           | navegador → servidor          | Pedir dica                                                                                                                                                             |
+| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                                                                                                                        |
+| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase (`lobby`, `countdown`, `round`, `intermission`, `finished`), placar. Chutes e dicas juntam os envios a cada 250 ms (salas de até 30) |
+| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                                                                                      |
+| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                                                                                  |
+| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                                                                                      |
+| `round:start` / `round:end` / `game:end` | servidor → todos              | Início (com o tipo da rodada: Clássica ou Imagem), revelação e fim                                                                                                     |
+| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                                                                                  |
+| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                                                                                  |
 
 ### Rotas HTTP do servidor de tempo real
 
@@ -346,7 +362,7 @@ Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/
 
 ## Desafio do dia
 
-- Os chutes vão para a rota do próprio site `POST /api/diario/[slug]` (na Vercel), que confere o chute e só devolve a resposta depois do acerto. Funciona mesmo com o servidor de tempo real fora do ar.
+- Os chutes vão para a rota do próprio site `POST /api/diario/[slug]` (na Vercel), que confere o chute e só devolve a resposta depois do acerto ou do último coração (o navegador manda os chutes anteriores e a rota confere cada um de novo; quem inventar chutes só engana a si mesmo). Funciona mesmo com o servidor de tempo real fora do ar.
 - O personagem do dia sai de ciclos que passam por todo o tema sem repetir. A ordem de cada ciclo vem de um HMAC com a chave `DAILY_SECRET`: sem ela, não dá para prever.
 - [`packages/db/seed/daily-roster.json`](packages/db/seed/daily-roster.json) guarda só quais personagens entram no diário e desde quando (nada sobre os dias). Personagem novo entra no próximo ciclo, então adicionar personagens não muda a resposta de hoje nem a de ontem. Depois de adicionar personagens a um tema, rode `pnpm daily:roster` (um teste avisa se esquecer).
 - O dia do Chutaí #1 fica em `DAILY.launchDate`, em [`packages/game/src/config.ts`](packages/game/src/config.ts).
@@ -384,7 +400,7 @@ O passo a passo completo, para quem nunca fez deploy, está em [`docs/DEPLOY.md`
 | Tempo real (`apps/realtime`) | Railway          | Build, start, `/health` e watch paths preenchidos à mão no painel (valores no guia). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
 | Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                                               |
 | PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                                                     |
-| Redis                        | Upstash          | Opcional                                                                                                                                                                                  |
+| Redis                        | Railway          | No mesmo projeto do servidor, ligado por `REDIS_URL`. Faz as salas sobreviverem a deploys                                                                                                 |
 
 Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site (o de **Domains**, `https://chutai-bay.vercel.app`) em `CORS_ORIGIN`. Os deploys de preview da Vercel não conectam ao servidor, porque o endereço deles não está no `CORS_ORIGIN`; é esperado.
 

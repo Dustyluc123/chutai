@@ -1,11 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import type { PublicPlayer, RoundSummary, ThemeNoun } from "@chutai/shared";
 import { nounPhrases } from "@chutai/game";
 import { Avatar } from "@/components/ui/avatar";
 import { CharacterPicture } from "@/components/ui/character-picture";
 import { useCountdown } from "@/hooks/useCountdown";
+import { ShowAllButton } from "@/components/ui/show-all";
 import { cn } from "@/lib/cn";
+import { visibleEntries } from "@/lib/long-list";
+
+/** Resultados da rodada antes do "Ver todos" (sala de live, até 30). */
+const RESULTS_LIMIT = 8;
 
 interface RoundRevealProps {
   summary: RoundSummary;
@@ -34,6 +40,12 @@ export function RoundReveal({
   const remaining = useCountdown(nextAt, serverOffset);
   const playerOf = (id: string) => players.find((player) => player.id === id);
   const isLast = summary.number >= totalRounds;
+  const [expanded, setExpanded] = useState(false);
+  const { shown, hidden } = visibleEntries(summary.results, {
+    limit: RESULTS_LIMIT,
+    isMe: (result) => result.playerId === meId,
+    expanded,
+  });
 
   return (
     <section
@@ -70,7 +82,7 @@ export function RoundReveal({
 
       <div className="flex flex-col gap-3 px-5 py-5 sm:px-8">
         <ol className="flex flex-col gap-1.5">
-          {summary.results.map((result) => {
+          {shown.map(({ item: result }) => {
             const player = playerOf(result.playerId);
             if (!player) return null;
             return (
@@ -100,6 +112,11 @@ export function RoundReveal({
             );
           })}
         </ol>
+        <ShowAllButton
+          hidden={hidden}
+          expanded={expanded}
+          onToggle={() => setExpanded(!expanded)}
+        />
         {nextAt ? (
           <p className="text-sm font-semibold text-tinta-soft">
             {isLast

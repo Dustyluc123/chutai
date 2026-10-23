@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Image as ImageIcon, LayoutGrid, Shuffle } from "lucide-react";
 import {
+  MAX_PLAYERS_OPTIONS,
   ROUND_SECONDS_OPTIONS,
   ROUNDS_OPTIONS,
   type GameMode,
@@ -20,6 +21,8 @@ interface SettingsPanelProps {
   /** Tema atual da sala (vem do servidor): diz se o modo Imagem está disponível. */
   theme: ThemeSummary;
   editable: boolean;
+  /** Quantos jogadores já estão na sala (o limite não pode ficar abaixo disso). */
+  playerCount: number;
   onChange: (changes: Partial<RoomSettings>) => void;
 }
 
@@ -50,7 +53,13 @@ const MODES: {
   },
 ];
 
-export function SettingsPanel({ settings, theme, editable, onChange }: SettingsPanelProps) {
+export function SettingsPanel({
+  settings,
+  theme,
+  editable,
+  playerCount,
+  onChange,
+}: SettingsPanelProps) {
   const [themes, setThemes] = useState<ThemeSummary[]>([]);
 
   useEffect(() => {
@@ -179,6 +188,20 @@ export function SettingsPanel({ settings, theme, editable, onChange }: SettingsP
         disabled={!editable}
         options={ROUNDS_OPTIONS.map((value) => ({ value, label: String(value) }))}
         onChange={(rounds) => onChange({ rounds })}
+      />
+
+      <OptionGroup
+        label="Máximo de jogadores"
+        value={settings.maxPlayers}
+        disabled={!editable}
+        options={MAX_PLAYERS_OPTIONS.map((value) => ({
+          value,
+          label: String(value),
+          // Não dá para baixar o limite abaixo de quem já está na sala.
+          disabled: value < playerCount,
+          title: value < playerCount ? "já tem mais gente na sala" : undefined,
+        }))}
+        onChange={(maxPlayers) => onChange({ maxPlayers })}
       />
 
       <OptionGroup

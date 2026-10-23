@@ -1,10 +1,19 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type RefObject,
+} from "react";
 import { Search } from "lucide-react";
 import type { CharacterOption, ThemeNoun } from "@chutai/shared";
 import { nounPhrases, searchCharacters } from "@chutai/game";
 import { CharacterPicture } from "@/components/ui/character-picture";
+import { useKeyboardFit } from "@/hooks/useKeyboardFit";
 import { cn } from "@/lib/cn";
 
 interface GuessInputProps {
@@ -22,6 +31,11 @@ interface GuessInputProps {
   showPictures?: boolean;
   /** Palavra do tema para o que se adivinha (padrão: personagem). */
   noun?: ThemeNoun;
+  /**
+   * Elemento acima do campo que deve continuar visível com o teclado aberto, se couber
+   * (a imagem do modo Imagem).
+   */
+  keepVisible?: RefObject<HTMLElement | null>;
 }
 
 /**
@@ -37,6 +51,7 @@ export function GuessInput({
   autoFocus,
   showPictures = true,
   noun,
+  keepVisible,
 }: GuessInputProps) {
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,6 +60,10 @@ export function GuessInput({
   const [active, setActive] = useState(0);
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // Celular: rola o campo para o topo da área visível e encaixa a lista acima do teclado.
+  const listMax = useKeyboardFit(wrapperRef, focused, keepVisible);
 
   const results = useMemo(
     () => searchCharacters(options, query, guessedIds, 7),
@@ -92,7 +111,7 @@ export function GuessInput({
   const activeId = results[active] ? `${listId}-${results[active].id}` : undefined;
 
   return (
-    <div className={cn("relative", shake && "animate-shake")}>
+    <div ref={wrapperRef} className={cn("relative", shake && "animate-shake")}>
       <Search
         aria-hidden
         className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-tinta-soft"
@@ -115,8 +134,14 @@ export function GuessInput({
           setQuery(event.target.value);
           setOpen(true);
         }}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setTimeout(() => setOpen(false), 120)}
+        onFocus={() => {
+          setOpen(true);
+          setFocused(true);
+        }}
+        onBlur={() => {
+          setFocused(false);
+          setTimeout(() => setOpen(false), 120);
+        }}
         onKeyDown={onKeyDown}
         className="h-14 w-full rounded-2xl border-2 border-tinta bg-white pr-4 pl-12 text-lg font-medium shadow-carimbo-sm placeholder:text-tinta-soft/60 focus:outline-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-chiclete disabled:cursor-not-allowed disabled:bg-papel disabled:shadow-none"
       />
@@ -126,7 +151,8 @@ export function GuessInput({
           id={listId}
           role="listbox"
           aria-label="Personagens"
-          className="absolute inset-x-0 top-full z-30 mt-2 max-h-80 overflow-auto rounded-2xl border-2 border-tinta bg-white p-1.5 shadow-carimbo"
+          style={{ maxHeight: listMax }}
+          className="absolute inset-x-0 top-full z-30 mt-2 overflow-auto overscroll-contain rounded-2xl border-2 border-tinta bg-white p-1.5 shadow-carimbo"
         >
           {results.length === 0 ? (
             <li className="px-3 py-3 text-sm text-tinta-soft">
@@ -143,7 +169,7 @@ export function GuessInput({
                 onMouseEnter={() => setActive(index)}
                 onClick={() => void choose(option)}
                 className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-xl px-2.5 py-1.5",
+                  "flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-2.5 py-1.5",
                   index === active ? "bg-gema" : "hover:bg-papel",
                 )}
               >

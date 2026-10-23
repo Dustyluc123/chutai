@@ -79,6 +79,12 @@ export const TIMING = {
   startCountdownSeconds: 5,
   /** Entre rodadas, os últimos segundos do intervalo mostram 3, 2, 1 (sem aumentar o intervalo). */
   betweenRoundsCountdownSeconds: 3,
+  /**
+   * Chutes e dicas que chegam juntos viram um envio só do estado da sala (`room:state`) a cada
+   * este tempo. Com 30 pessoas chutando, cada chute mandando o estado inteiro para todo mundo
+   * seria 30 × 30 mensagens por segundo. Mudança de fase continua saindo na hora.
+   */
+  stateBroadcastMs: 250,
 } as const;
 
 /** Ciclo de vida das salas durante a partida. */
@@ -101,4 +107,11 @@ export const DAILY = {
   launchDate: "2026-10-22",
   /** O dia vira à meia-noite deste fuso. */
   timeZone: "America/Sao_Paulo",
+  /** Corações por desafio: cada chute errado gasta um; sem corações, fim de jogo. */
+  lives: 8,
+  /**
+   * Primeiro dia (AAAA-MM-DD) com corações. Quem começou um desafio antes disso (sem corações)
+   * termina sem limite. CONFIRA ANTES DO MERGE: tem que ser o dia seguinte ao deploy.
+   */
+  livesFromDate: "2026-10-24",
 } as const;

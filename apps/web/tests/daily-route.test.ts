@@ -118,3 +118,63 @@ describe("rota do desafio diário", () => {
     expect(after.id).not.toBe(before.id);
   });
 });
+
+describe("rota do desafio diário: corações", () => {
+  const wrongs = () => {
+    const answer = dailyAnswer(theme, DATE, "segredo-de-teste");
+    return { answer, wrong: theme.characters.filter((c) => c.id !== answer.id) };
+  };
+
+  it("até o 7º erro, nada da resposta", async () => {
+    const { answer, wrong } = wrongs();
+    const { data } = await call({
+      action: "guess",
+      day: DAY,
+      characterId: wrong[6]!.id,
+      previous: wrong.slice(0, 6).map((c) => c.id),
+    });
+    expect(data.ok && data.guess?.correct).toBe(false);
+    expect(data).not.toHaveProperty("answer");
+    expect(data).not.toHaveProperty("lost");
+    expect(JSON.stringify(data)).not.toContain(`"${answer.id}"`);
+  });
+
+  it("no 8º erro, fim de jogo: revela quem era e o de ontem", async () => {
+    const { answer, wrong } = wrongs();
+    const { data } = await call({
+      action: "guess",
+      day: DAY,
+      characterId: wrong[7]!.id,
+      previous: wrong.slice(0, 7).map((c) => c.id),
+    });
+    expect(data).toMatchObject({ ok: true, lost: true, answer: { id: answer.id } });
+    expect(data.ok && data.yesterday).toBeTruthy();
+  });
+
+  it("chutes repetidos ou fora do tema não contam como erro", async () => {
+    const { wrong } = wrongs();
+    const { data } = await call({
+      action: "guess",
+      day: DAY,
+      characterId: wrong[0]!.id,
+      previous: [...Array(7).fill(wrong[0]!.id), "nao-existe", "outro-inventado"],
+    });
+    expect(data).not.toHaveProperty("lost");
+  });
+
+  it("antes do dia dos corações, nunca termina em derrota", async () => {
+    vi.setSystemTime(new Date(`${addDays(DAILY.livesFromDate, -1)}T18:00:00Z`));
+    const date = addDays(DAILY.livesFromDate, -1);
+    const answer = dailyAnswer(theme, date, "segredo-de-teste");
+    const wrong = theme.characters.filter((c) => c.id !== answer.id);
+    const { data } = await call({
+      action: "guess",
+      day: dailyNumber(date),
+      characterId: wrong[8]!.id,
+      previous: wrong.slice(0, 8).map((c) => c.id),
+    });
+    expect(data.ok).toBe(true);
+    expect(data).not.toHaveProperty("lost");
+    expect(data).not.toHaveProperty("answer");
+  });
+});

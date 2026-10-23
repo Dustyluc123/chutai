@@ -51,7 +51,7 @@ export function SoundButton({ tone = "dark" }: { tone?: "light" | "dark" }) {
         aria-label="Som"
         onClick={() => setOpen(!open)}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold",
+          "hit-44 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold",
           tone === "light"
             ? "text-white/85 hover:bg-white/10 hover:text-white"
             : "text-tinta-soft hover:bg-tinta/5 hover:text-tinta",

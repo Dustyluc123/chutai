@@ -5,7 +5,17 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { DailyGame } from "@/components/daily/daily-game";
 import { dailyStartsLater, dailyTheme, today } from "@/lib/daily/server";
 
-export const dynamic = "force-dynamic";
+/**
+ * Página guardada em cache por 60 s (em vez de gerada a cada visita): numa live com muita gente,
+ * isso poupa o processamento do plano gratuito da Vercel. Na virada do dia, quem pegar a página
+ * do dia anterior recebe "Já tem desafio novo" da rota e a página recarrega sozinha.
+ */
+export const revalidate = 60;
+
+/** Nenhum tema no build: cada um é gerado na primeira visita e depois fica no cache. */
+export function generateStaticParams() {
+  return [];
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

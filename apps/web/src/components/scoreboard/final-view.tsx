@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import type { UseRoom } from "@/hooks/useRoom";
 import { Podium } from "./podium";
 import { RoundReveal } from "./round-reveal";
+import { SupportNudge } from "@/components/support/support-nudge";
 import { ShareResult } from "./share-result";
 
 /** Fim de jogo: pódio, último personagem revelado e "jogar de novo". */
@@ -37,7 +38,10 @@ export function FinalView({
       <Podium standings={standings} meId={meId} />
 
       {standings.length ? (
-        <ShareResult code={state.code} themeName={state.theme.name} standings={standings} />
+        <div className="flex flex-col items-center gap-4">
+          <ShareResult code={state.code} themeName={state.theme.name} standings={standings} />
+          <SupportNudge where={`sala:${state.code}`} className="w-full max-w-md" />
+        </div>
       ) : null}
 
       <div className="flex flex-col items-center gap-3">
@@ -57,7 +61,7 @@ export function FinalView({
 
       {state.lastRound ? (
         <details className="group rounded-3xl">
-          <summary className="cursor-pointer text-center text-sm font-semibold text-tinta-soft hover:text-tinta">
+          <summary className="cursor-pointer py-3 text-center text-sm font-semibold text-tinta-soft hover:text-tinta">
             Ver a última rodada
           </summary>
           <div className="mt-4">

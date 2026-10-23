@@ -20,6 +20,7 @@ import {
   type Profile,
 } from "@/lib/identity";
 import { useToast } from "@/components/ui/toaster";
+import { solvedToastText, type SolvedNotice } from "@/lib/solved-toast";
 
 export type RoomStatus =
   | "connecting" // abrindo conexão / tentando voltar para a sala
@@ -110,6 +111,8 @@ export function useRoom(code: string) {
       setState(next);
     };
     const onPrivate = (next: PrivateState) => setMe(next);
+    let solvedBatch: SolvedNotice[] = [];
+    let solvedTimer: ReturnType<typeof setTimeout> | undefined;
     const onImage = (image: RoundImage) => {
       const url = URL.createObjectURL(new Blob([image.data as BlobPart], { type: image.mimeType }));
       if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
@@ -126,7 +129,13 @@ export function useRoom(code: string) {
       rank: number;
     }) => {
       if (playerId === sessionRef.current?.playerId) return;
-      toast(`${nickname} acertou${rank === 1 ? " primeiro" : ""}!`, "success");
+      // Acertos quase ao mesmo tempo viram um aviso só (sala cheia não vira pilha de avisos).
+      solvedBatch.push({ nickname, rank });
+      solvedTimer ??= setTimeout(() => {
+        toast(solvedToastText(solvedBatch), "success");
+        solvedBatch = [];
+        solvedTimer = undefined;
+      }, 1200);
     };
     const onKicked = () => {
       clearRoomSession(code);
@@ -181,6 +190,7 @@ export function useRoom(code: string) {
       imageUrlRef.current = null;
       socket.off("player:solved", onSolved);
       socket.off("room:kicked", onKicked);
+      if (solvedTimer) clearTimeout(solvedTimer);
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
     };

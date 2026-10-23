@@ -4,6 +4,7 @@ import { CircleHelp, X } from "lucide-react";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import type { Character, ThemeAttribute } from "@chutai/shared";
 import { HINTS, IMAGE_MODE, SCORING, compareCharacters } from "@chutai/game";
+import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 import { Tile } from "@/components/game/tile";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
@@ -76,7 +77,7 @@ const STEPS: Record<HelpTab, string[]> = {
 
 function ClassicExample() {
   return (
-    <div className="-mx-1 overflow-x-auto px-1">
+    <HorizontalScroll fadeFrom="white" className="-mx-1" scrollClassName="px-1">
       <div
         role="table"
         aria-label="Exemplo: três chutes até achar o Lobo-guará"
@@ -126,7 +127,7 @@ function ClassicExample() {
           </div>
         ))}
       </div>
-    </div>
+    </HorizontalScroll>
   );
 }
 
@@ -202,7 +203,7 @@ export function HowToPlayContent({ initialTab = "classic" }: { initialTab?: Help
             tabIndex={tab === item.value ? 0 : -1}
             onClick={() => setTab(item.value)}
             className={cn(
-              "flex-1 rounded-lg px-3 py-2 text-sm font-semibold",
+              "min-h-11 flex-1 rounded-lg px-3 py-2 text-sm font-semibold",
               tab === item.value
                 ? "bg-white shadow-carimbo-sm"
                 : "text-tinta-soft hover:text-tinta",
@@ -276,7 +277,7 @@ export function HowToPlayDialog({
               type="button"
               onClick={onClose}
               aria-label="Fechar"
-              className="rounded-lg p-1.5 hover:bg-tinta/5"
+              className="hit-44 rounded-lg p-1.5 hover:bg-tinta/5"
             >
               <X aria-hidden className="size-5" />
             </button>
@@ -296,10 +297,13 @@ export function HowToPlayButton({
   initialTab,
   tone = "dark",
   className,
+  compact,
 }: {
   initialTab?: HelpTab;
   tone?: "light" | "dark";
   className?: string;
+  /** No celular, só o ícone (a barra da sala cabe numa linha). O nome continua para o leitor de tela. */
+  compact?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -308,7 +312,7 @@ export function HowToPlayButton({
         type="button"
         onClick={() => setOpen(true)}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold",
+          "hit-44 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold",
           tone === "light"
             ? "text-white/85 hover:bg-white/10 hover:text-white"
             : "text-tinta hover:bg-tinta/5",
@@ -316,7 +320,7 @@ export function HowToPlayButton({
         )}
       >
         <CircleHelp aria-hidden className="size-4" />
-        Como jogar
+        <span className={compact ? "max-sm:sr-only" : undefined}>Como jogar</span>
       </button>
       <HowToPlayDialog open={open} onClose={() => setOpen(false)} initialTab={initialTab} />
     </>

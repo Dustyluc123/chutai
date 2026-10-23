@@ -29,7 +29,7 @@ export function RoomTopBar({
 }: RoomTopBarProps) {
   return (
     <header className="bg-anil text-white">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-2 gap-y-2 px-4 py-3 sm:gap-x-4 sm:px-6">
         <Logo tone="light" className="text-xl" />
         <span className="tabular rounded-lg bg-white/15 px-2.5 py-1 text-sm font-bold tracking-[0.15em]">
           {code}
@@ -39,7 +39,7 @@ export function RoomTopBar({
             <span aria-hidden>{themeEmoji}</span> {themeName}
           </span>
         ) : null}
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-0.5 sm:gap-2">
           {!connected ? (
             <span
               role="status"
@@ -49,12 +49,12 @@ export function RoomTopBar({
             </span>
           ) : null}
           <SoundButton tone="light" />
-          <HowToPlayButton tone="light" initialTab={helpTab} />
+          <HowToPlayButton tone="light" initialTab={helpTab} compact />
           {onLeave ? (
             <button
               type="button"
               onClick={onLeave}
-              className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-semibold text-white/85 hover:bg-white/10 hover:text-white"
+              className="hit-44 inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm font-semibold text-white/85 hover:bg-white/10 hover:text-white sm:px-2.5"
             >
               <LogOut aria-hidden className="size-4" /> Sair
             </button>

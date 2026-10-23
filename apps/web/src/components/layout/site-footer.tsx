@@ -25,41 +25,65 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <nav aria-label="Rodapé" className="flex flex-col gap-2 text-sm">
+        <nav aria-label="Rodapé" className="flex flex-col gap-0 text-sm sm:gap-2">
           <span className="font-semibold">Jogo</span>
-          <Link prefetch={false} href="/" className="text-tinta-soft hover:text-tinta">
+          <Link
+            prefetch={false}
+            href="/"
+            className="text-tinta-soft hover:text-tinta max-sm:inline-flex max-sm:min-h-11 max-sm:items-center"
+          >
             Criar sala
           </Link>
-          <Link prefetch={false} href="/temas" className="text-tinta-soft hover:text-tinta">
+          <Link
+            prefetch={false}
+            href="/temas"
+            className="text-tinta-soft hover:text-tinta max-sm:inline-flex max-sm:min-h-11 max-sm:items-center"
+          >
             Temas
           </Link>
-          <Link prefetch={false} href="/criar-tema" className="text-tinta-soft hover:text-tinta">
+          <Link
+            prefetch={false}
+            href="/criar-tema"
+            className="text-tinta-soft hover:text-tinta max-sm:inline-flex max-sm:min-h-11 max-sm:items-center"
+          >
             Criar um tema
           </Link>
-          <Link prefetch={false} href="/diario" className="text-tinta-soft hover:text-tinta">
+          <Link
+            prefetch={false}
+            href="/diario"
+            className="text-tinta-soft hover:text-tinta max-sm:inline-flex max-sm:min-h-11 max-sm:items-center"
+          >
             Desafio do dia
           </Link>
-          <Link prefetch={false} href="/professores" className="text-tinta-soft hover:text-tinta">
+          <Link
+            prefetch={false}
+            href="/professores"
+            className="text-tinta-soft hover:text-tinta max-sm:inline-flex max-sm:min-h-11 max-sm:items-center"
+          >
             Para professores
           </Link>
-          <Link prefetch={false} href="/creditos" className="text-tinta-soft hover:text-tinta">
+          <Link
+            prefetch={false}
+            href="/creditos"
+            className="text-tinta-soft hover:text-tinta max-sm:inline-flex max-sm:min-h-11 max-sm:items-center"
+          >
             Créditos das imagens
           </Link>
         </nav>
 
-        <div className="flex flex-col gap-2 text-sm">
+        <div className="flex flex-col gap-0 text-sm sm:gap-2">
           <span className="font-semibold">Feito por {AUTHOR.name}</span>
           <a
             href={AUTHOR.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-tinta-soft hover:text-tinta"
+            className="inline-flex items-center gap-2 text-tinta-soft hover:text-tinta max-sm:min-h-11"
           >
             <LinkedinIcon className="size-4" /> LinkedIn
           </a>
           <a
             href={`mailto:${AUTHOR.email}`}
-            className="inline-flex items-center gap-2 text-tinta-soft hover:text-tinta"
+            className="inline-flex items-center gap-2 text-tinta-soft hover:text-tinta max-sm:min-h-11"
           >
             <Mail aria-hidden className="size-4" /> {AUTHOR.email}
           </a>

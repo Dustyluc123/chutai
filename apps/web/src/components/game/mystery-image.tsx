@@ -19,8 +19,15 @@ export function MysteryImage({ url, level, maxLevel, status, className }: Myster
   const label = `Nitidez ${level + 1} de ${steps}`;
 
   return (
-    <figure className={cn("flex w-full max-w-[300px] flex-col gap-2", className)}>
-      <div className="relative aspect-square w-full overflow-hidden rounded-3xl border-2 border-tinta bg-anil-soft shadow-carimbo">
+    <figure className={cn("flex w-full max-w-[300px] flex-col items-center gap-2", className)}>
+      {/*
+        No celular, no máximo ~1/3 da altura da tela; com o teclado aberto, encolhe mais
+        (useKeyboardFit) para a imagem, o campo de chute e as sugestões caberem juntos.
+      */}
+      <div
+        data-keyboard-square
+        className="relative aspect-square w-full max-w-[min(300px,34dvh,var(--teclado-imagem,300px))] overflow-hidden rounded-3xl border-2 border-tinta bg-anil-soft shadow-carimbo sm:max-w-[min(300px,var(--teclado-imagem,300px))]"
+      >
         {url ? (
           // Imagem gerada pelo servidor (blob:): next/image não se aplica.
           <img
@@ -45,7 +52,7 @@ export function MysteryImage({ url, level, maxLevel, status, className }: Myster
           </div>
         )}
       </div>
-      <figcaption className="flex items-center justify-between gap-3 text-xs font-semibold text-tinta-soft">
+      <figcaption className="flex w-full items-center justify-between gap-3 text-xs font-semibold text-tinta-soft">
         <span>Cada chute errado ou dica deixa mais nítida</span>
         <span role="img" aria-label={label} className="flex gap-0.5">
           {Array.from({ length: steps }, (_, i) => (

@@ -1,6 +1,7 @@
 import type { Theme } from "@chutai/shared";
 import { compareCharacters } from "@chutai/game";
 import { Tile } from "@/components/game/tile";
+import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 
 /**
  * Tabuleiro de exemplo do topo da página. Os resultados são calculados com as
@@ -30,7 +31,11 @@ export function DemoBoard({
 
   return (
     <figure className="flex w-full flex-col gap-3">
-      <div className="-mx-4 overflow-x-auto px-4 pb-1 lg:mx-0 lg:px-0">
+      <HorizontalScroll
+        fadeFrom="anil"
+        className="-mx-4 lg:mx-0"
+        scrollClassName="px-4 pb-1 lg:px-0"
+      >
         <div
           role="table"
           aria-label="Exemplo de rodada"
@@ -80,7 +85,7 @@ export function DemoBoard({
             </div>
           ))}
         </div>
-      </div>
+      </HorizontalScroll>
       <figcaption className="text-sm text-white/75">
         Exemplo no tema {theme.name.toLowerCase()}: três chutes até achar {answer.name}.
       </figcaption>

@@ -154,3 +154,20 @@
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Área de toque de pelo menos 44 px sem mudar o desenho: um "halo" invisível em volta do
+ * elemento (para botões pequenos, links do rodapé, fechar dos diálogos...).
+ */
+@utility hit-44 {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}

@@ -24,6 +24,8 @@ export function LobbyView({ state, room }: LobbyViewProps) {
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[1.5fr_1fr] lg:py-10">
       <div className="flex min-w-0 flex-col gap-6">
+        {/* O código vem antes: é o que o anfitrião precisa mandar no grupo. */}
+        <RoomCodeCard code={state.code} />
         {showHelp ? (
           // Primeira vez numa sala: explicação no próprio lobby. Não é janela: não bloqueia nada.
           <section
@@ -38,7 +40,7 @@ export function LobbyView({ state, room }: LobbyViewProps) {
                 type="button"
                 onClick={dismissHelp}
                 aria-label="Fechar explicação"
-                className="rounded-lg p-1.5 hover:bg-tinta/5"
+                className="hit-44 rounded-lg p-1.5 hover:bg-tinta/5"
               >
                 <X aria-hidden className="size-5" />
               </button>
@@ -49,7 +51,6 @@ export function LobbyView({ state, room }: LobbyViewProps) {
             </Button>
           </section>
         ) : null}
-        <RoomCodeCard code={state.code} />
         <PlayerList
           players={state.players}
           maxPlayers={state.settings.maxPlayers}

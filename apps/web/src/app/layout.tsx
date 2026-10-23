@@ -33,6 +33,11 @@ export const viewport: Viewport = {
   themeColor: "#2338d6",
   width: "device-width",
   initialScale: 1,
+  // Chrome do Android: o teclado encolhe a página em vez de cobrir o campo de chute.
+  // (No Safari do iPhone isso não existe; lá quem cuida é o useKeyboardFit.)
+  // Sem `viewport-fit=cover`: o próprio navegador mantém o conteúdo longe do entalhe e da barra
+  // do iPhone. Os elementos fixos (avisos) também somam `env(safe-area-inset-*)`, por garantia.
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

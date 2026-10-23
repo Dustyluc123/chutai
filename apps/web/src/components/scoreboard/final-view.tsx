@@ -57,7 +57,7 @@ export function FinalView({
 
       {state.lastRound ? (
         <details className="group rounded-3xl">
-          <summary className="cursor-pointer text-center text-sm font-semibold text-tinta-soft hover:text-tinta">
+          <summary className="cursor-pointer py-3 text-center text-sm font-semibold text-tinta-soft hover:text-tinta">
             Ver a última rodada
           </summary>
           <div className="mt-4">

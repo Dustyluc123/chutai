@@ -12,7 +12,12 @@ interface Toast {
 
 const ToastContext = createContext<(message: string, tone?: Tone) => void>(() => {});
 
-/** Avisos curtos no canto da tela ("Bia acertou!", "Código copiado"). */
+/**
+ * Avisos curtos no pé da tela ("Bia acertou!", "Código copiado"). No celular, no máximo dois
+ * ao mesmo tempo, para não cobrir o tabuleiro; acima da barra do iPhone (safe-area). Com o campo
+ * de chute focado (teclado aberto), ficam transparentes para não cobrir as sugestões; o leitor
+ * de tela continua anunciando.
+ */
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
@@ -29,13 +34,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {children}
       <div
         aria-live="polite"
-        className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex flex-col items-center gap-2 px-4"
+        className="pointer-events-none fixed inset-x-0 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-50 flex flex-col items-center gap-2 px-4 transition-opacity max-sm:[&>*:nth-last-child(n+3)]:hidden max-sm:[body:has([role=combobox]:focus)_&]:opacity-0"
       >
         {toasts.map((toast) => (
           <div
             key={toast.id}
             className={cn(
-              "animate-pop rounded-xl border-2 border-tinta px-4 py-2.5 text-sm font-semibold shadow-carimbo-sm",
+              "max-w-full animate-pop rounded-xl border-2 border-tinta px-3 py-2 text-sm font-semibold shadow-carimbo-sm sm:px-4 sm:py-2.5",
               toast.tone === "success" && "bg-folha text-white",
               toast.tone === "error" && "bg-pitanga text-white",
               toast.tone === "info" && "bg-white text-tinta",

@@ -127,6 +127,8 @@ Add a JSON file to `packages/db/seed/` (attribute types: `text`, `list`, `number
 
 ## Conventions
 
+- Tests must not depend on luck or the wall clock: seed anything random (`seededRandom`, a fixed `random`), use `FakeClock` / `vi.useFakeTimers` for time, and for images measure with real theme files and a wide margin (sharp's own `noise` changes every run, and CI runs on Linux). `IMAGE_TEST_SEEDS=50` runs the image-detail test with more seeds.
+
 - ESLint enforces `consistent-type-imports` (use `import type`), unused vars allowed only with `_` prefix.
 - Prettier: double quotes, semicolons, trailing commas, printWidth 100.
 - The realtime server must stay deployable as a single bundle (`pnpm --filter @chutai/realtime build` → `dist/index.js` via tsup).

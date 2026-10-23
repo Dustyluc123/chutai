@@ -47,6 +47,31 @@ describe("imageEffect", () => {
     expect(effects.at(-1)!.zoom).toBe(1);
   });
 
+  it("cada nível revela mais que o anterior, qualquer que seja o sorteio do disfarce", () => {
+    const effects = Array.from({ length: MAX_ROUND_IMAGE_LEVEL + 1 }, (_, level) =>
+      imageEffect(level),
+    );
+    // Tamanho de um bloco na imagem final (fração da largura): sempre menor que o anterior.
+    const block = effects.map(({ zoom, pixels }) => 1 / (zoom * pixels));
+    for (let i = 1; i < block.length; i++) expect(block[i]!).toBeLessThan(block[i - 1]!);
+
+    // A janela de cada nível contém a do anterior: o que já apareceu nunca sai de vista.
+    let seed = 12345;
+    const random = () => (seed = (seed * 1103515245 + 12345) % 2 ** 31) / 2 ** 31;
+    for (let n = 0; n < 2000; n++) {
+      const center = drawZoomCenter(random);
+      for (let i = 1; i < effects.length; i++) {
+        const before = zoomWindow(effects[i - 1]!.zoom, center);
+        const after = zoomWindow(effects[i]!.zoom, center);
+        const eps = 1e-12;
+        expect(after.left).toBeLessThanOrEqual(before.left + eps);
+        expect(after.top).toBeLessThanOrEqual(before.top + eps);
+        expect(after.left + after.size).toBeGreaterThanOrEqual(before.left + before.size - eps);
+        expect(after.top + after.size).toBeGreaterThanOrEqual(before.top + before.size - eps);
+      }
+    }
+  });
+
   it("recusa o nível nítido e níveis inventados", () => {
     expect(() => imageEffect(MAX_ROUND_IMAGE_LEVEL + 1)).toThrow();
     expect(() => imageEffect(-1)).toThrow();

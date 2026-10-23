@@ -1,9 +1,16 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { SupportNudge } from "@/components/support/support-nudge";
 
-beforeEach(() => localStorage.clear());
-afterEach(() => cleanup());
+// Data fixa: com o relógio real, um teste rodando na virada da meia-noite mudaria o "dia".
+beforeEach(() => {
+  localStorage.clear();
+  vi.useFakeTimers({ now: new Date("2026-10-24T15:00:00"), toFake: ["Date"] });
+});
+afterEach(() => {
+  cleanup();
+  vi.useRealTimers();
+});
 
 const shown = () => screen.queryByRole("complementary", { name: "Apoie o projeto" });
 

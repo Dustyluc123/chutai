@@ -55,7 +55,7 @@ export function registerRoomHandlers(socket: IoSocket, ctx: HandlerContext) {
       if (!theme) throw new GameError("Tema não encontrado.");
 
       leaveCurrentRoom(socket, ctx);
-      const room = ctx.manager.create(theme, merged);
+      const room = await ctx.manager.create(theme, merged);
       const player = room.addPlayer(nickname, avatar);
       return attach(socket, room, player);
     }),
@@ -64,7 +64,8 @@ export function registerRoomHandlers(socket: IoSocket, ctx: HandlerContext) {
   socket.on(
     "room:join",
     withValidation(joinRoomSchema, async ({ code, nickname, avatar, token }) => {
-      const room = ctx.manager.get(code);
+      // Pode estar só no Redis (o servidor reiniciou): carrega e continua a partida.
+      const room = await ctx.manager.load(code);
       if (!room) throw new GameError("Sala não encontrada. Confira o código.");
 
       // Mesmo jogador voltando (recarregou a página, a internet caiu...)

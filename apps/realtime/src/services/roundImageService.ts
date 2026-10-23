@@ -64,6 +64,18 @@ export function diskImageLoader(dir: string, fallback: ImageLoader): ImageLoader
   };
 }
 
+/** Sorteio determinístico (mulberry32): a mesma semente dá a mesma sequência. */
+export function seededRandom(seed: number): Random {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 export class RoundImageService {
   /** Originais já baixados, por endereço (os temas mudam pouco). */
   private readonly originals = new Map<string, Promise<Buffer>>();
@@ -74,12 +86,17 @@ export class RoundImageService {
     private readonly cacheSize = 128,
   ) {}
 
-  /** Devolve um buffer por nível, do 0 (o mais borrado) até MAX_ROUND_IMAGE_LEVEL. */
-  async render(character: Character): Promise<Buffer[]> {
+  /**
+   * Devolve um buffer por nível, do 0 (o mais borrado) até MAX_ROUND_IMAGE_LEVEL.
+   * Com `seed`, o disfarce sai sempre igual para a mesma semente (a sala guarda a semente da
+   * rodada e, depois de um reinício do servidor, gera de novo exatamente as mesmas imagens).
+   */
+  async render(character: Character, seed?: number): Promise<Buffer[]> {
     if (!character.image) throw new Error(`${character.id} não tem imagem.`);
-    const base = await this.disguise(await this.original(character.image));
+    const random = seed === undefined ? this.random : seededRandom(seed);
+    const base = await this.disguise(await this.original(character.image), random);
     // O mesmo ponto em todos os níveis: dá a sensação de "afastar a câmera".
-    const center = drawZoomCenter(this.random);
+    const center = drawZoomCenter(random);
     const levels: Buffer[] = [];
     for (let level = 0; level <= MAX_ROUND_IMAGE_LEVEL; level++) {
       const { zoom, pixels, blur } = imageEffect(level);
@@ -120,21 +137,21 @@ export class RoundImageService {
   }
 
   /** Quadrado com espelho, recorte e tom sorteados, em PNG sem metadados. */
-  private async disguise(original: Buffer): Promise<Buffer> {
+  private async disguise(original: Buffer, random: Random): Promise<Buffer> {
     const size = ROUND_IMAGE_SIZE;
     const square = await sharp(original).rotate().resize(size, size, { fit: "cover" }).toBuffer();
 
-    const crop = Math.round(size * (0.82 + this.random() * 0.18));
-    const left = Math.floor(this.random() * (size - crop + 1));
-    const top = Math.floor(this.random() * (size - crop + 1));
+    const crop = Math.round(size * (0.82 + random() * 0.18));
+    const left = Math.floor(random() * (size - crop + 1));
+    const top = Math.floor(random() * (size - crop + 1));
     let pipeline = sharp(square)
       .extract({ left, top, width: crop, height: crop })
       .resize(size, size)
       .modulate({
-        hue: Math.round((this.random() - 0.5) * 40),
-        brightness: 0.92 + this.random() * 0.16,
+        hue: Math.round((random() - 0.5) * 40),
+        brightness: 0.92 + random() * 0.16,
       });
-    if (this.random() < 0.5) pipeline = pipeline.flop();
+    if (random() < 0.5) pipeline = pipeline.flop();
     return pipeline.png().toBuffer();
   }
 }

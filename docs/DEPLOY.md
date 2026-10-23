@@ -12,7 +12,7 @@ Hoje o Chutaí está no ar assim:
 - Site: https://chutai-bay.vercel.app
 - Servidor de tempo real: https://chutairealtime-production.up.railway.app (saúde em `/health`)
 
-O banco de dados não entra agora: os temas continuam vindo dos arquivos JSON do repositório.
+O banco de dados não entra agora: os temas continuam vindo dos arquivos JSON do repositório. O **Redis** entra (Parte 5): é ele que faz as partidas sobreviverem a um deploy.
 
 **A ordem importa:**
 
@@ -67,11 +67,12 @@ Por que cada um:
 
 Abra a aba **Variables** e adicione (botão **New Variable**):
 
-| Nome          | Valor                   | Para quê                                                 |
-| ------------- | ----------------------- | -------------------------------------------------------- |
-| `PORT`        | `3001`                  | Porta em que o servidor escuta.                          |
-| `CORS_ORIGIN` | `http://localhost:3000` | Provisório. Na Parte 3 você troca pelo endereço do site. |
-| `NODE_ENV`    | `production`            | Modo de produção.                                        |
+| Nome                                  | Valor                   | Para quê                                                                                                                      |
+| ------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `PORT`                                | `3001`                  | Porta em que o servidor escuta.                                                                                               |
+| `CORS_ORIGIN`                         | `http://localhost:3000` | Provisório. Na Parte 3 você troca pelo endereço do site.                                                                      |
+| `NODE_ENV`                            | `production`            | Modo de produção.                                                                                                             |
+| `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` | `15`                    | Tempo entre o aviso de desligar (`SIGTERM`) e o desligamento forçado. Dá tempo de o servidor antigo salvar as salas no Redis. |
 
 Cada mudança de variável dispara um novo deploy automaticamente.
 
@@ -174,8 +175,39 @@ Se quiser mais de um endereço (por exemplo, um domínio próprio e o da Vercel)
 | Build da Vercel falhou                                        | Confira se o Root Directory é `apps/web`.                                                                                                 |
 | Aparece um serviço `@chutai/web` no Railway                   | Apague (Parte 1.1). O site é só na Vercel.                                                                                                |
 
+## Parte 5: Redis (partidas que sobrevivem a deploys e panes)
+
+Sem Redis, as salas ficam só na memória do servidor e **um deploy derruba todas as partidas**. Com Redis, o servidor guarda a sala inteira (rodada, chutes, pontos e o horário de término de cada cronômetro). Num deploy, o servidor antigo salva tudo e o novo continua de onde parou; os jogadores veem "Reconectando…" por alguns segundos e voltam com os mesmos pontos e chutes.
+
+### 5.1. Criar o Redis no Railway
+
+1. Abra o projeto do Chutaí no Railway (o mesmo do serviço `@chutai/realtime`).
+2. Clique em **+ Create** (ou **+ New**, no canto de cima) → **Database** → **Redis**.
+3. Espere o serviço **Redis** aparecer no painel com o status ativo (leva menos de um minuto). Não precisa mudar nada nele.
+
+### 5.2. Ligar o Redis no servidor
+
+1. Clique no serviço **`@chutai/realtime`** → aba **Variables** → **New Variable**.
+2. Nome: `REDIS_URL`. Valor: `${{Redis.REDIS_URL}}` (digite exatamente assim; o Railway completa com o endereço interno do Redis, que não paga tráfego de saída). Se o seu serviço de Redis tiver outro nome, troque `Redis` pelo nome dele.
+3. Confira que `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` = `15` também está lá (Parte 1.3).
+4. Clique em **Deploy** (ou espere o deploy automático da mudança de variável).
+
+### 5.3. Conferir
+
+Abra o `/health`: deve aparecer `"roomStore": "redis"`. Para testar de verdade: crie uma sala, comece uma partida, e no Railway clique em **Deployments** → três pontinhos do deploy ativo → **Redeploy**. Depois de alguns segundos a partida continua, com o mesmo cronômetro.
+
+Nos **Deploy Logs** do servidor antigo aparece `Recebido SIGTERM, salvando as salas...` e `N sala(s) salva(s)`; no novo, `Sala ABC234 carregada do redis` quando cada sala volta.
+
+### 5.4. Quanto custa
+
+O Railway cobra a memória usada (US$ 10 por GB por mês) e um pouco de CPU. Um Redis com as salas do Chutaí usa uns 20 a 50 MB: **algo entre US$ 0,30 e US$ 1 por mês**. No plano Hobby (US$ 5 por mês, com US$ 5 de uso incluídos), isso costuma caber no que já está incluído junto com o servidor. Acompanhe em **Usage** no Railway na primeira semana.
+
+### Como o Chutaí evita duas rodadas da mesma sala
+
+Durante um deploy, o Railway deixa o servidor antigo e o novo ligados juntos por alguns segundos. Cada sala tem um **dono** gravado no Redis, com validade de 15 s renovada a cada 5 s. Só o dono roda os cronômetros e grava. O servidor novo só pega uma sala quando alguém entra nela, e só depois de o antigo soltar (no `SIGTERM`) ou de a posse vencer (se o antigo caiu sem avisar).
+
 ## Atualizações depois do primeiro deploy
 
 - Cada `git push` no `main` faz os dois sites atualizarem sozinhos. O Railway só refaz o servidor quando mudam arquivos dos **Watch Paths**.
-- **As salas ficam na memória do servidor: um deploy no Railway derruba as partidas em andamento.** Evite fazer merge de mudanças do servidor no meio de uma partida com amigos.
+- **Com o Redis ligado (Parte 5), um deploy não derruba as partidas**: elas param por alguns segundos e continuam. Sem Redis, as salas ficam só na memória e um deploy derruba tudo.
 - Para ver o que está acontecendo no servidor, use os **Deploy Logs** do Railway.

@@ -35,7 +35,7 @@
 - [Tecnologias](#tecnologias)
 - [Estrutura de pastas](#estrutura-de-pastas)
 - [Como rodar](#como-rodar)
-- [Banco de dados e Redis (preparados para o futuro)](#banco-de-dados-e-redis-preparados-para-o-futuro)
+- [Banco de dados e Redis](#banco-de-dados-e-redis)
 - [Eventos do Socket.IO](#eventos-do-socketio)
 - [Pontuação](#pontuação)
 - [Testes](#testes)
@@ -173,7 +173,7 @@ Princípios que guiaram o código:
 | Tempo real       | Node.js + Socket.IO 4                            | Salas, reconexão e broadcast prontos                               |
 | Validação        | Zod 4                                            | O mesmo esquema valida formulários e eventos no servidor           |
 | Banco            | PostgreSQL + Drizzle ORM                         | Relacional, tipado, migrações em SQL legível                       |
-| Estado das salas | Memória (hoje) / Redis (futuro)                  | Redis só quando houver reinícios ou vários servidores              |
+| Estado das salas | Memória (local) / Redis (produção)               | Com Redis, as partidas sobrevivem a deploys e quedas               |
 | Monorepo         | pnpm workspaces + Turborepo                      | Site, servidor e pacotes no mesmo repositório                      |
 | Qualidade        | Vitest, PGlite, ESLint, Prettier, GitHub Actions | Testes de regras, de banco real em memória e de ponta a ponta      |
 
@@ -209,7 +209,7 @@ chutai/
 │       │   ├── rooms/
 │       │   │   ├── Room.ts          # Estado e regras de uma sala
 │       │   │   ├── RoomManager.ts   # Cria, encontra, limpa e restaura salas
-│       │   │   └── store/           # memory.ts (hoje) e redis.ts (futuro)
+│       │   │   └── store/           # memory.ts (local e testes) e redis.ts (produção)
 │       │   ├── services/            # Temas com cache, salvar partida terminada
 │       │   └── lib/                 # Erros, log, filtro de palavrões
 │       └── tests/                   # Sala com relógio falso + partida real com dois clientes
@@ -286,9 +286,9 @@ Para testar o multiplayer sozinho, abra a sala em duas janelas (uma delas anôni
 | `ASSETS_DIR`               | `apps/web/public`       | Pasta de onde o servidor de tempo real lê as imagens do modo Imagem                                                             |
 | `ASSETS_BASE_URL`          | `http://localhost:3000` | Reserva: o servidor busca no site as imagens que não achar no disco                                                             |
 | `DATABASE_URL`             | (vazio)                 | Liga o PostgreSQL. Sem ela, temas vêm dos JSON                                                                                  |
-| `REDIS_URL`                | (vazio)                 | Liga o Redis. Sem ela, salas ficam só na memória                                                                                |
+| `REDIS_URL`                | (vazio)                 | Liga o Redis: as salas sobrevivem a deploys e quedas. Sem ela, ficam só na memória                                              |
 
-## Banco de dados e Redis (preparados para o futuro)
+## Banco de dados e Redis
 
 O MVP roda **sem nenhum serviço externo**. Mesmo assim, a parte de dados já está escrita e testada, esperando só uma URL:
 
@@ -311,7 +311,16 @@ pnpm dev                                               # agora tudo vem do banco
 
 **Redis** (`apps/realtime/src/rooms/store/redis.ts`)
 
-Guarda um retrato de cada sala. Se o servidor reiniciar (um deploy, por exemplo), as salas voltam para o lobby e os jogadores reconectam pelo token salvo no navegador. Para ligar: `docker compose --profile redis up -d` e `REDIS_URL=redis://localhost:6379`. O próximo passo para rodar vários servidores ao mesmo tempo está descrito no próprio arquivo.
+Guarda a sala inteira: fase, rodada (a resposta fica só no servidor e no Redis), chutes, dicas, pontos e os horários de término. Se o servidor reiniciar (um deploy ou uma pane), a partida continua de onde parou: os cronômetros seguem pelo horário salvo e os jogadores reconectam pelo token salvo no navegador, sem perder pontos nem chutes. No modo Imagem, as imagens são geradas de novo com a mesma semente do disfarce.
+
+Para um deploy não ter duas rodadas da mesma sala andando ao mesmo tempo, cada sala tem um **dono** no Redis (uma "posse" que vence em 15 s se não for renovada):
+
+1. Só o servidor dono roda os cronômetros e grava o retrato (um script Lua confere a posse antes de gravar).
+2. O servidor novo não pega salas ao ligar: carrega uma sala só quando alguém entra nela, e só depois de conseguir a posse.
+3. No `SIGTERM`, o servidor antigo para os cronômetros, grava tudo, solta as posses e fecha as conexões. Os navegadores reconectam no novo.
+4. Se o antigo cair sem avisar, a posse vence sozinha e o novo assume.
+
+Sala encerrada (todo mundo saiu, abandono) apaga o retrato; sala esquecida expira sozinha depois de `EMPTY_ROOM_MINUTES`. Para ligar localmente: `docker compose --profile redis up -d` e `REDIS_URL=redis://localhost:6379`. Os testes usam um store em memória que imita o Redis e o `ioredis-mock` (que roda os scripts Lua); com `REDIS_TEST_URL`, rodam também num Redis de verdade.
 
 ## Eventos do Socket.IO
 
@@ -384,7 +393,7 @@ O passo a passo completo, para quem nunca fez deploy, está em [`docs/DEPLOY.md`
 | Tempo real (`apps/realtime`) | Railway          | Build, start, `/health` e watch paths preenchidos à mão no painel (valores no guia). Lê as imagens dos temas direto de `apps/web/public`. Não vai na Vercel: precisa de conexões abertas. |
 | Site (`apps/web`)            | Vercel           | Root Directory `apps/web` e a variável `NEXT_PUBLIC_REALTIME_URL` com o endereço do Railway                                                                                               |
 | PostgreSQL                   | Neon ou Supabase | Opcional, ainda não usado em produção                                                                                                                                                     |
-| Redis                        | Upstash          | Opcional                                                                                                                                                                                  |
+| Redis                        | Railway          | No mesmo projeto do servidor, ligado por `REDIS_URL`. Faz as salas sobreviverem a deploys                                                                                                 |
 
 Ordem: primeiro o Railway, depois a Vercel, depois voltar ao Railway e colocar o endereço do site (o de **Domains**, `https://chutai-bay.vercel.app`) em `CORS_ORIGIN`. Os deploys de preview da Vercel não conectam ao servidor, porque o endereço deles não está no `CORS_ORIGIN`; é esperado.
 

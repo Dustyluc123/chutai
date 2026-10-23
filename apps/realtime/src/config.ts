@@ -11,6 +11,8 @@ export interface Config {
   corsOrigins: string[];
   databaseUrl?: string;
   redisUrl?: string;
+  /** Id deste servidor como dono das salas no Redis. Padrão: aleatório a cada inicialização. */
+  instanceId?: string;
   /** Quanto tempo um jogador desconectado continua na sala do lobby antes de sair. */
   disconnectGraceMs: number;
   /** Sala sem ninguém conectado é apagada depois deste tempo. */
@@ -43,6 +45,8 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
       .filter(Boolean),
     databaseUrl: env.DATABASE_URL || undefined,
     redisUrl: env.REDIS_URL || undefined,
+    // No Railway, cada deploy tem um id próprio (aparece nos logs e ajuda a achar quem é quem).
+    instanceId: env.INSTANCE_ID || env.RAILWAY_DEPLOYMENT_ID || undefined,
     disconnectGraceMs: number(env.DISCONNECT_GRACE_SECONDS, 20) * 1000,
     emptyRoomTtlMs: number(env.EMPTY_ROOM_MINUTES, 10) * 60_000,
     assetsBaseUrl: env.ASSETS_BASE_URL || "http://localhost:3000",

@@ -14,12 +14,20 @@ let socket: GameSocket | undefined;
  * Assim, criar a sala na página inicial e ir para /sala/CODIGO não reconecta.
  */
 export function getSocket(): GameSocket {
-  socket ??= io(REALTIME_URL, {
-    autoConnect: false,
-    transports: ["websocket", "polling"],
-    reconnectionDelay: 500,
-    reconnectionDelayMax: 4000,
-  });
+  if (!socket) {
+    const created: GameSocket = io(REALTIME_URL, {
+      autoConnect: false,
+      transports: ["websocket", "polling"],
+      reconnectionDelay: 500,
+      reconnectionDelayMax: 4000,
+    });
+    // Quando o servidor fecha a conexão de propósito (deploy, sala mudou de servidor), o
+    // Socket.IO não tenta de novo sozinho. Reconecta depois de um instante.
+    created.on("disconnect", (reason) => {
+      if (reason === "io server disconnect") setTimeout(() => created.connect(), 1000);
+    });
+    socket = created;
+  }
   if (!socket.connected && !socket.active) socket.connect();
   return socket;
 }

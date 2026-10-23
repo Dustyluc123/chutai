@@ -10,7 +10,7 @@ import { roomCodeSchema } from "@chutai/shared";
 import { HttpRateLimiter } from "./lib/httpRateLimit";
 import type { Config } from "./config";
 import { RoomManager } from "./rooms/RoomManager";
-import { createRoomStore } from "./rooms/store";
+import { createRoomStore, type RoomStore } from "./rooms/store";
 import { MatchService } from "./services/matchService";
 import {
   RoundImageService,
@@ -29,7 +29,13 @@ export interface RealtimeServer {
   manager: RoomManager;
   mode: { data: "json" | "postgres"; rooms: "memory" | "redis" };
   listen(port?: number): Promise<number>;
+  /** Fecha tudo sem salvar (testes). */
   close(): Promise<void>;
+  /**
+   * Desligamento de verdade (SIGTERM): para os cronômetros, grava as salas no store, solta a
+   * posse e fecha as conexões. Os navegadores reconectam no servidor novo.
+   */
+  shutdown(): Promise<number>;
 }
 
 export async function createRealtimeServer(
@@ -39,10 +45,13 @@ export async function createRealtimeServer(
     countdownMs?: number;
     /** Troca o jeito de buscar as imagens originais (os testes leem do disco). */
     imageLoader?: ImageLoader;
+    /** Store das salas já pronto (os testes simulam dois servidores dividindo o mesmo). */
+    store?: RoomStore;
+    instanceId?: string;
   } = {},
 ): Promise<RealtimeServer> {
   const repositories = await createRepositories(config.databaseUrl);
-  const store = await createRoomStore(config.redisUrl);
+  const store = options.store ?? (await createRoomStore(config.redisUrl));
   const themes = new ThemeService(repositories.themes);
   const matches = new MatchService(repositories.matches);
   const roundImages = new RoundImageService(
@@ -91,7 +100,10 @@ export async function createRealtimeServer(
       }
       // O código só tem letras e números: nada para decodificar (e nada de exceção com % solto).
       const code = roomCodeSchema.safeParse(roomRoute[1]);
-      const room = code.success ? ref.manager?.get(code.data) : undefined;
+      // Depois de um reinício a sala pode estar só no Redis: carrega sem esperar a posse.
+      const room = code.success
+        ? await ref.manager?.load(code.data, { wait: false }).catch(() => undefined)
+        : undefined;
       // Prévia: dados públicos da sala. Resultado: o pódio, só enquanto a sala está nele.
       const body = roomRoute[2] === "preview" ? room?.toPreview() : room?.toResult();
       if (!body) {
@@ -127,9 +139,11 @@ export async function createRealtimeServer(
     emptyRoomTtlMs: config.emptyRoomTtlMs,
     intermissionMs: options.intermissionMs,
     countdownMs: options.countdownMs,
+    instanceId: options.instanceId ?? config.instanceId,
+    // Outro servidor assumiu a sala: derruba as conexões dela aqui para elas irem para lá.
+    onEvicted: (code) => io.in(roomChannel(code)).disconnectSockets(true),
   });
   ref.manager = manager;
-  await manager.restore();
   manager.startSweeping();
 
   registerSocketHandlers({ io, manager, themes });
@@ -150,6 +164,13 @@ export async function createRealtimeServer(
     async close() {
       await manager.close();
       await new Promise<void>((resolve) => io.close(() => resolve()));
+    },
+    async shutdown() {
+      const saved = await manager.shutdown();
+      // Fecha as conexões: os navegadores tentam de novo sozinhos e caem no servidor novo.
+      await new Promise<void>((resolve) => io.close(() => resolve()));
+      await store.close().catch(() => undefined);
+      return saved;
     },
   };
 }

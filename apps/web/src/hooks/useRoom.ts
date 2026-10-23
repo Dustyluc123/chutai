@@ -39,6 +39,21 @@ export interface MysteryImageState {
 }
 
 /**
+ * Num deploy do servidor, a sala leva alguns segundos para mudar de um servidor para o outro
+ * ("mudando de servidor"). Nesse caso tenta de novo em vez de dizer que a sala não existe.
+ */
+async function rejoinWithRetry<T>(attempt: () => Promise<T>, retries = 5): Promise<T> {
+  for (let i = 0; ; i++) {
+    try {
+      return await attempt();
+    } catch (err) {
+      if (i >= retries || !(err as Error).message.includes("mudando de servidor")) throw err;
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
+}
+
+/**
  * Toda a conversa com o servidor de tempo real para uma sala.
  * O componente só lê `state`/`me` e chama as ações; o servidor decide o resto.
  */
@@ -123,7 +138,9 @@ export function useRoom(code: string) {
       // Reconectou (queda de internet, servidor reiniciou): volta para a mesma sala.
       const current = sessionRef.current;
       const who = profileRef.current;
-      if (current && who) void join(who, current.token).catch(() => setStatus("not-found"));
+      if (current && who) {
+        void rejoinWithRetry(() => join(who, current.token)).catch(() => setStatus("not-found"));
+      }
     };
     const onDisconnect = () => setConnected(false);
 
@@ -146,7 +163,7 @@ export function useRoom(code: string) {
       }
       if (saved && savedProfile) {
         try {
-          await join(savedProfile, saved.token);
+          await rejoinWithRetry(() => join(savedProfile, saved.token));
           return;
         } catch {
           clearRoomSession(code);

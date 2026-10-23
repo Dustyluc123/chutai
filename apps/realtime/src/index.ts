@@ -13,9 +13,19 @@ async function main() {
   );
   logger.info(`Origens permitidas: ${config.corsOrigins.join(", ")}`);
 
+  let stopping = false;
   const shutdown = async (signal: string) => {
-    logger.info(`Recebido ${signal}, encerrando...`);
-    await server.close();
+    if (stopping) return;
+    stopping = true;
+    logger.info(`Recebido ${signal}, salvando as salas e encerrando...`);
+    // Se algo travar, sai mesmo assim antes do Railway matar o processo.
+    setTimeout(() => process.exit(1), 10_000).unref();
+    try {
+      const saved = await server.shutdown();
+      logger.info(`${saved} sala(s) salva(s) para o próximo servidor.`);
+    } catch (error) {
+      logger.error("Falha ao encerrar", error);
+    }
     process.exit(0);
   };
   process.on("SIGINT", () => void shutdown("SIGINT"));

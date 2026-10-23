@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { Heart, Mail } from "lucide-react";
 import { LinkedinIcon } from "@/components/ui/brand-icons";
 import { Logo } from "@/components/ui/logo";
 
@@ -87,6 +87,13 @@ export function SiteFooter() {
           >
             <Mail aria-hidden className="size-4" /> {AUTHOR.email}
           </a>
+          <Link
+            prefetch={false}
+            href="/apoie"
+            className="inline-flex items-center gap-2 text-tinta-soft hover:text-tinta max-sm:min-h-11"
+          >
+            <Heart aria-hidden className="size-4" /> Apoie o projeto
+          </Link>
         </div>
       </div>
     </footer>

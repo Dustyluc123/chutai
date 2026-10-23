@@ -30,6 +30,7 @@ import {
   type DailyProgress,
   type DailyStats,
 } from "@/lib/daily/storage";
+import { SupportNudge } from "@/components/support/support-nudge";
 import { DailyHearts, DailyStatsPanel } from "./daily-hearts";
 import { playSound } from "@/lib/sound";
 import { guessSound } from "@/lib/sound/director";
@@ -302,6 +303,7 @@ export function DailyGame({
       ) : null}
 
       {finished ? <DailyStatsPanel stats={stats} /> : null}
+      {finished ? <SupportNudge where={`diario:${slug}:${day}`} /> : null}
 
       {finished && progress.hints.length ? (
         <ul className="flex flex-wrap gap-2">

@@ -16,7 +16,7 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Drizzle-4169e1?logo=postgresql&logoColor=white" />
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white" />
   <a href="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Dustyluc123/chutai/actions/workflows/ci.yml/badge.svg" /></a>
-  <img alt="Testes" src="https://img.shields.io/badge/testes-197_passando-12a85f" />
+  <img alt="Testes" src="https://img.shields.io/badge/testes-255_passando-12a85f" />
 </p>
 
 <p align="center">
@@ -92,6 +92,7 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Entrar como convidado, só com apelido e avatar
 - [x] Lobby com lista de jogadores, vagas, regras editáveis pelo anfitrião e botão de expulsar
 - [x] Salas de até **30 jogadores** para lives (o padrão é 8): lobby, placar, revelação e pódio compactos, com "Ver todos"
+- [x] Página **Apoie o projeto** (`/apoie`) com Pix (chave, copia e cola e QR estático) e um convite discreto no fim da partida e do diário, no máximo uma vez por dia
 - [x] Partidas que sobrevivem a deploys e quedas do servidor (Redis), feito para o celular (tabuleiro, teclado, toques de 44 px)
 - [x] Rodadas com cronômetro controlado pelo servidor
 - [x] Contagem **5, 4, 3, 2, 1, Vai!** antes da primeira rodada (controlada pelo servidor: palpites recusados e nada da rodada enviado antes) e **3, 2, 1** no fim de cada intervalo

@@ -30,7 +30,7 @@ const STEPS = [
   {
     Icon: Smartphone,
     title: "Os alunos entram pelo celular",
-    text: `Cada um digita o código (ou abre o link) e escolhe um apelido. Não precisa de cadastro nem de instalar nada. Cabem até ${LIMITS.maxPlayers.max} jogadores por sala: em turmas grandes, jogue em grupos, com um celular por grupo.`,
+    text: `Cada um digita o código (ou abre o link) e escolhe um apelido. Não precisa de cadastro nem de instalar nada. Cabem até ${LIMITS.maxPlayers.max} jogadores por sala (o máximo você escolhe no lobby): dá para a turma inteira jogar junta; em turmas maiores, jogue em grupos, com um celular por grupo.`,
   },
   {
     Icon: Settings2,

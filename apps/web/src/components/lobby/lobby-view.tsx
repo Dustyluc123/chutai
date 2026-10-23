@@ -65,6 +65,7 @@ export function LobbyView({ state, room }: LobbyViewProps) {
           settings={state.settings}
           theme={state.theme}
           editable={room.isHost}
+          playerCount={state.players.length}
           onChange={(changes) => void room.actions.updateSettings(changes)}
         />
         {room.isHost ? (

@@ -1,7 +1,15 @@
+"use client";
+
 import { Crown } from "lucide-react";
+import { useState } from "react";
 import type { FinalStanding } from "@chutai/shared";
 import { Avatar } from "@/components/ui/avatar";
+import { ShowAllButton } from "@/components/ui/show-all";
 import { cn } from "@/lib/cn";
+import { visibleEntries } from "@/lib/long-list";
+
+/** Depois do pódio, quantos aparecem antes do "Ver todos" (sala de live, até 30). */
+const REST_LIMIT = 7;
 
 const PLACES = [
   { position: 2, height: "h-28 sm:h-36", color: "bg-anil-soft", order: "order-1" },
@@ -13,6 +21,12 @@ const PLACES = [
 export function Podium({ standings, meId }: { standings: FinalStanding[]; meId?: string }) {
   const top = standings.slice(0, 3);
   const rest = standings.slice(3);
+  const [expanded, setExpanded] = useState(false);
+  const { shown, hidden } = visibleEntries(rest, {
+    limit: REST_LIMIT,
+    isMe: (standing) => standing.playerId === meId,
+    expanded,
+  });
 
   return (
     <div className="flex flex-col gap-8">
@@ -60,21 +74,33 @@ export function Podium({ standings, meId }: { standings: FinalStanding[]; meId?:
       </ol>
 
       {rest.length ? (
-        <ol className="mx-auto flex w-full max-w-md flex-col gap-1.5" start={4}>
-          {rest.map((standing) => (
-            <li
-              key={standing.playerId}
-              className="flex items-center gap-3 rounded-xl border-2 border-tinta bg-white px-3 py-2"
-            >
-              <span className="tabular w-7 text-center font-bold text-tinta-soft">
-                {standing.position}º
-              </span>
-              <Avatar emoji={standing.avatar} size="sm" />
-              <span className="flex-1 truncate font-semibold">{standing.nickname}</span>
-              <span className="tabular font-black">{standing.score}</span>
-            </li>
-          ))}
-        </ol>
+        <div className="mx-auto flex w-full max-w-md flex-col gap-1.5">
+          <ol className="flex w-full flex-col gap-1.5" start={4}>
+            {shown.map(({ item: standing, index }) => (
+              <li
+                key={standing.playerId}
+                className={cn(
+                  "flex items-center gap-3 rounded-xl border-2 border-tinta bg-white px-3 py-2",
+                  standing.playerId === meId && "bg-gema-soft",
+                  // Você, mostrado fora da ordem (lá embaixo): um respiro antes.
+                  index >= REST_LIMIT && !expanded && "mt-2",
+                )}
+              >
+                <span className="tabular w-7 text-center font-bold text-tinta-soft">
+                  {standing.position}º
+                </span>
+                <Avatar emoji={standing.avatar} size="sm" />
+                <span className="flex-1 truncate font-semibold">{standing.nickname}</span>
+                <span className="tabular font-black">{standing.score}</span>
+              </li>
+            ))}
+          </ol>
+          <ShowAllButton
+            hidden={hidden}
+            expanded={expanded}
+            onToggle={() => setExpanded(!expanded)}
+          />
+        </div>
       ) : null}
     </div>
   );

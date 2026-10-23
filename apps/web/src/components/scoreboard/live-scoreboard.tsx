@@ -1,7 +1,15 @@
+"use client";
+
 import { Check, Crown, WifiOff } from "lucide-react";
+import { useState } from "react";
 import type { PlayerProgress, PublicPlayer } from "@chutai/shared";
 import { Avatar } from "@/components/ui/avatar";
+import { ShowAllButton } from "@/components/ui/show-all";
 import { cn } from "@/lib/cn";
+import { visibleEntries } from "@/lib/long-list";
+
+/** Quantos aparecem antes do "Ver todos" e a partir de quando as linhas ficam compactas. */
+const LIMIT = 8;
 
 interface LiveScoreboardProps {
   players: PublicPlayer[];
@@ -28,19 +36,31 @@ export function LiveScoreboard({
 }: LiveScoreboardProps) {
   const sorted = [...players].sort((a, b) => b.score - a.score);
   const progressOf = (id: string) => progress?.find((item) => item.playerId === id);
+  // Sala cheia (live): linhas mais baixas e só os primeiros + você, com "Ver todos".
+  const compact = players.length > LIMIT;
+  const [expanded, setExpanded] = useState(false);
+  const { shown, hidden } = visibleEntries(sorted, {
+    limit: LIMIT,
+    isMe: (player) => player.id === meId,
+    expanded,
+  });
 
   return (
     <section aria-label="Placar" className={cn("flex flex-col gap-2", className)}>
-      <h2 className="text-sm font-semibold text-tinta-soft">Placar</h2>
-      <ol className="flex flex-col gap-2">
-        {sorted.map((player, index) => {
+      <h2 className="text-sm font-semibold text-tinta-soft">
+        Placar{compact ? <span className="tabular"> · {players.length} jogadores</span> : null}
+      </h2>
+      <ol className={cn("flex flex-col", compact ? "gap-1.5" : "gap-2")}>
+        {shown.map(({ item: player, index }) => {
           const p = progressOf(player.id);
           const isMe = player.id === meId;
           return (
             <li
               key={player.id}
               className={cn(
-                "flex items-center gap-3 rounded-2xl border-2 bg-white px-3 py-2.5 transition-colors",
+                "flex items-center gap-3 rounded-2xl border-2 bg-white px-3 transition-colors",
+                compact ? "py-1.5" : "py-2.5",
+                index >= LIMIT && !expanded && "mt-2",
                 p?.solved ? "border-folha" : "border-tinta",
                 isMe && "ring-2 ring-gema ring-offset-2 ring-offset-papel",
               )}
@@ -123,6 +143,7 @@ export function LiveScoreboard({
           );
         })}
       </ol>
+      <ShowAllButton hidden={hidden} expanded={expanded} onToggle={() => setExpanded(!expanded)} />
     </section>
   );
 }

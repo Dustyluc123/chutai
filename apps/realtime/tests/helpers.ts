@@ -57,6 +57,8 @@ export function createTestRoom(
     random?: () => number;
     /** Contagem antes da 1ª rodada. Por padrão 0 (a rodada começa na hora, como nos testes antigos). */
     countdownMs?: number;
+    /** Junta os envios do estado. Por padrão 0 (cada chute manda o estado na hora). */
+    stateBroadcastMs?: number;
   } = {},
 ) {
   const roomTheme = options.theme ?? theme;
@@ -88,6 +90,7 @@ export function createTestRoom(
       disconnectGraceMs: 5_000,
       intermissionMs: 3_000,
       countdownMs: options.countdownMs ?? 0,
+      stateBroadcastMs: options.stateBroadcastMs ?? 0,
       onFinished: (record) => finished.push(record),
       renderRoundImages: options.renderRoundImages,
       onAbandoned: (closed) => abandoned.push(closed),

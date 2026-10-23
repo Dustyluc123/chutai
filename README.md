@@ -91,6 +91,8 @@ Quem acerta mais rápido, com menos chutes e sem dicas, leva mais pontos.
 - [x] Prévia bonita do link da sala no WhatsApp e nas redes: quem chamou, tema, jogadores e código (imagem gerada com `ImageResponse`)
 - [x] Entrar como convidado, só com apelido e avatar
 - [x] Lobby com lista de jogadores, vagas, regras editáveis pelo anfitrião e botão de expulsar
+- [x] Salas de até **30 jogadores** para lives (o padrão é 8): lobby, placar, revelação e pódio compactos, com "Ver todos"
+- [x] Partidas que sobrevivem a deploys e quedas do servidor (Redis), feito para o celular (tabuleiro, teclado, toques de 44 px)
 - [x] Rodadas com cronômetro controlado pelo servidor
 - [x] Contagem **5, 4, 3, 2, 1, Vai!** antes da primeira rodada (controlada pelo servidor: palpites recusados e nada da rodada enviado antes) e **3, 2, 1** no fim de cada intervalo
 - [x] Sala abandonada no meio da partida (ninguém conectado por 60 s) é encerrada; sem ninguém, não começa rodada nova
@@ -330,23 +332,23 @@ Sala encerrada (todo mundo saiu, abandono) apaga o retrato; sala esquecida expir
 
 Contrato completo e tipado em [`packages/shared/src/events.ts`](packages/shared/src/events.ts).
 
-| Evento                                   | Direção                       | Para quê                                                                                              |
-| ---------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                                                 |
-| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                                                              |
-| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                                                               |
-| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                                                      |
-| `game:start`                             | anfitrião → servidor          | Começar a partida                                                                                     |
-| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                                                   |
-| `hint:request`                           | navegador → servidor          | Pedir dica                                                                                            |
-| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                                                       |
-| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase (`lobby`, `countdown`, `round`, `intermission`, `finished`), placar |
-| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                     |
-| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                 |
-| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                     |
-| `round:start` / `round:end` / `game:end` | servidor → todos              | Início (com o tipo da rodada: Clássica ou Imagem), revelação e fim                                    |
-| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                 |
-| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                 |
+| Evento                                   | Direção                       | Para quê                                                                                                                                                               |
+| ---------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `room:create`                            | navegador → servidor          | Criar sala (quem cria vira anfitrião)                                                                                                                                  |
+| `room:join`                              | navegador → servidor          | Entrar pelo código; com token, reconecta                                                                                                                               |
+| `room:update-settings`                   | anfitrião → servidor          | Mudar tema, modo, rodadas, tempo, dicas                                                                                                                                |
+| `room:kick`                              | anfitrião → servidor          | Expulsar jogador                                                                                                                                                       |
+| `game:start`                             | anfitrião → servidor          | Começar a partida                                                                                                                                                      |
+| `guess:submit`                           | navegador → servidor          | Chutar; a resposta volta com os atributos coloridos                                                                                                                    |
+| `hint:request`                           | navegador → servidor          | Pedir dica                                                                                                                                                             |
+| `game:restart`                           | anfitrião → servidor          | Voltar ao lobby depois do pódio                                                                                                                                        |
+| `room:state`                             | servidor → todos              | Fonte da verdade: jogadores, fase (`lobby`, `countdown`, `round`, `intermission`, `finished`), placar. Chutes e dicas juntam os envios a cada 250 ms (salas de até 30) |
+| `you:state`                              | servidor → um jogador         | Seus palpites e dicas (ex.: depois de reconectar)                                                                                                                      |
+| `player:progress`                        | servidor → todos              | Progresso sem spoiler                                                                                                                                                  |
+| `player:solved`                          | servidor → todos              | "Fulano acertou!"                                                                                                                                                      |
+| `round:start` / `round:end` / `game:end` | servidor → todos              | Início (com o tipo da rodada: Clássica ou Imagem), revelação e fim                                                                                                     |
+| `round:image`                            | servidor → um jogador         | Modo Imagem: os bytes do nível de nitidez que aquele jogador alcançou                                                                                                  |
+| `room:characters`                        | servidor → sala ou um jogador | Personagens da partida para o autocompletar (no modo Imagem, só nome)                                                                                                  |
 
 ### Rotas HTTP do servidor de tempo real
 

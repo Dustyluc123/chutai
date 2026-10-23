@@ -72,6 +72,11 @@ Server → client flow: `room:state` is the source of truth broadcast to everyon
 - Touch targets ≥ 44 px: use the `hit-44` utility (invisible halo, no visual change) for small buttons/links; `Button size="sm"` already has it. Toasts: max 2 on mobile, transparent while the guess field is focused, consecutive solves merged (`lib/solved-toast.ts`).
 - Screenshots for visual checks: 360×740 and 390×844 (plus desktop), with a real match driven by simulated players.
 
+## Big rooms (lives)
+
+- Up to 30 players (`LIMITS.maxPlayers.max`, options `MAX_PLAYERS_OPTIONS`, default still 8; the host picks it in the lobby). Guesses and hints coalesce `room:state` into one broadcast per `TIMING.stateBroadcastMs` (250 ms); any other change broadcasts at once and flushes the pending one (`Room.changed({ coalesce })`; tests default `stateBroadcastMs` to 0). `player:progress` still goes out per guess.
+- UI: lists of players use `visibleEntries` (`lib/long-list.ts`: first N + me, "Ver todos" via `ShowAllButton`) in the live scoreboard, round reveal and podium; the lobby switches to compact rows after 8 players. Podium PNG URL carries `?v=podiumVersion(...)` so the Vercel CDN caches one image per match (`s-maxage=900`) instead of 30 renders.
+
 ## Sound
 
 - `apps/web/src/lib/sound/`: `director.ts` (pure: which state change plays which sound; tested with a fake player), `engine.ts` (Web Audio synth: effects + generative background music; nothing plays before the first pointer/key interaction or with the tab hidden), `settings.ts` (`localStorage` key `chutai:som`, effects on / music off by default), `index.ts` (`useSoundSetup` in `Providers`, `useRoomSounds` in the room screen, `playSound`). My own guess sound comes from the guess ack (`guessSound`), not from state diffs.

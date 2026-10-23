@@ -115,6 +115,8 @@ export interface RoomDeps {
   abandonedMs?: number;
   /** Chamado quando a sala é encerrada por abandono (o gerenciador apaga a sala). */
   onAbandoned?: (room: Room) => void;
+  /** Junta os envios do estado depois de chutes e dicas (0 = envia na hora, como nos testes). */
+  stateBroadcastMs?: number;
 }
 
 const defaultSchedule = (fn: () => void, ms: number) => {
@@ -144,6 +146,8 @@ export class Room {
   private cancelAbandonTimer?: () => void;
   /** Rodada que deveria ter começado, mas ficou parada porque não havia ninguém conectado. */
   private pausedRound?: number;
+  /** Envio do estado esperando para juntar vários chutes num só. */
+  private cancelStateBroadcast?: () => void;
 
   private readonly emitter: RoomEmitter;
   private readonly now: () => number;
@@ -161,6 +165,7 @@ export class Room {
   private readonly onImageError?: (error: unknown, character: Character) => void;
   private readonly abandonedMs: number;
   private readonly onAbandoned?: (room: Room) => void;
+  private readonly stateBroadcastMs: number;
 
   constructor(code: string, theme: Theme, settings: RoomSettings, deps: RoomDeps) {
     this.code = code;
@@ -179,6 +184,7 @@ export class Room {
     this.onImageError = deps.onImageError;
     this.abandonedMs = deps.abandonedMs ?? ROOM_LIFECYCLE.abandonedSeconds * 1000;
     this.onAbandoned = deps.onAbandoned;
+    this.stateBroadcastMs = deps.stateBroadcastMs ?? TIMING.stateBroadcastMs;
     this.createdAt = this.now();
   }
 
@@ -602,7 +608,7 @@ export class Room {
 
     if (imageMode && this.imageLevelOf(state) !== levelBefore) this.sendRoundImage(playerId);
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
-    this.changed();
+    this.changed({ coalesce: true });
     if (correct) this.endRoundIfEveryoneSolved();
     return result;
   }
@@ -626,7 +632,7 @@ export class Room {
       this.sendRoundImage(playerId);
     }
     this.emitter.broadcast("player:progress", this.progressOf(playerId));
-    this.changed();
+    this.changed({ coalesce: true });
     return hint;
   }
 
@@ -1034,14 +1040,30 @@ export class Room {
 
   dispose(): void {
     this.cancelTimer?.();
+    this.cancelStateBroadcast?.();
+    this.cancelStateBroadcast = undefined;
     this.cancelAbandonTimer?.();
     this.cancelAbandonTimer = undefined;
     for (const player of this.players.values()) player.disconnectTimer?.();
   }
 
-  private changed(): void {
-    this.emitter.broadcast("room:state", this.toPublicState());
+  /**
+   * O estado mudou: salva e avisa todo mundo. Com `coalesce` (chutes e dicas), junta os envios
+   * que chegam dentro de `stateBroadcastMs` num só; qualquer outra mudança sai na hora (e leva
+   * junto o que estava esperando).
+   */
+  private changed({ coalesce = false }: { coalesce?: boolean } = {}): void {
     this.onChange?.(this);
+    if (coalesce && this.stateBroadcastMs > 0) {
+      this.cancelStateBroadcast ??= this.schedule(() => {
+        this.cancelStateBroadcast = undefined;
+        this.emitter.broadcast("room:state", this.toPublicState());
+      }, this.stateBroadcastMs);
+      return;
+    }
+    this.cancelStateBroadcast?.();
+    this.cancelStateBroadcast = undefined;
+    this.emitter.broadcast("room:state", this.toPublicState());
   }
 
   private assertHost(playerId: string): void {
